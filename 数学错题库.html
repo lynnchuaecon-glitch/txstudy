@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🧮 我的数学错题库</title>
+<!-- ============================================================
+     我的数学错题库(和 C++ 错题库分开,各存各的)
+     ★ 流程:孩子先自己讲错在哪、为什么、下次怎么办 → 把「题目 + 孩子的解法 + 孩子的总结」
+        发给 AI(点「🤖 AI 分析提示词」)→ AI 判断纠正并整理成 JSON → 点「📥 录入」粘贴入库。
+     ★ 换电脑 / 备份:点「📄 导出HTML」下载一个把题目烤进去的文件,带走它。
+        —— localStorage 不会跟着文件走,一定要用导出的文件转移!
+     ============================================================ -->
+<style>
+  :root{
+    --bg:#0a0f1e; --bg2:#111827; --bg3:#1f2937;
+    --accent:#38bdf8; --accent2:#a78bfa; --accent3:#34d399;
+    --text:#e5e7eb; --muted:#9ca3af; --danger:#f87171;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; padding:32px 20px 60px;
+    background:var(--bg); color:var(--text);
+    font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    font-size:17px; line-height:1.8;
+  }
+  .wrap{max-width:920px; margin:0 auto;}
+  .head{display:flex; align-items:flex-start; gap:14px; flex-wrap:wrap;}
+  h1{
+    font-size:30px; margin:0 0 4px; flex:1;
+    background:linear-gradient(90deg,var(--accent),var(--accent2));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .sub{color:var(--muted); font-size:15px; margin-bottom:22px;}
+  .btn{
+    cursor:pointer; border:1px solid #374151; border-radius:9px;
+    padding:9px 15px; font-size:15px; font-family:inherit;
+    background:var(--bg3); color:var(--text); white-space:nowrap;
+  }
+  .btn:hover{border-color:var(--accent);}
+  .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent2)); color:#08111f; border:none; font-weight:700;}
+  .btn.mini{padding:5px 11px; font-size:13px;}
+
+  /* ---------- 筛选工具条 ---------- */
+  .toolbar{
+    background:var(--bg2); border-radius:14px; padding:18px 20px;
+    box-shadow:0 6px 30px rgba(0,0,0,.45); margin-bottom:22px;
+  }
+  .rowf{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin:8px 0;}
+  .rowf .label{color:var(--muted); font-size:14px; min-width:64px;}
+  input[type=text], input[type=date], select, textarea{
+    background:var(--bg3); color:var(--text); border:1px solid #374151;
+    border-radius:8px; padding:8px 12px; font-size:15px; font-family:inherit;
+  }
+  #q{flex:1; min-width:180px;}
+  .chip{
+    cursor:pointer; user-select:none;
+    background:var(--bg3); color:var(--muted);
+    border:1px solid #374151; border-radius:999px;
+    padding:4px 13px; font-size:14px; transition:.15s;
+  }
+  .chip:hover{border-color:var(--accent);}
+  .chip.on{background:rgba(56,189,248,.16); color:var(--accent); border-color:var(--accent); font-weight:600;}
+  .chip.all.on{background:rgba(167,139,250,.18); color:var(--accent2); border-color:var(--accent2);}
+  .count{color:var(--muted); font-size:14px; margin-left:auto;}
+
+  /* ---------- 卡片 ---------- */
+  .card{
+    background:var(--bg2); border-radius:14px; padding:22px 26px;
+    box-shadow:0 6px 30px rgba(0,0,0,.4); margin-bottom:18px;
+    border:1px solid transparent; transition:.15s;
+  }
+  .card:hover{border-color:#374151;}
+  .card .top{display:flex; align-items:flex-start; gap:12px; cursor:pointer;}
+  .card h2{font-size:21px; margin:0; color:var(--accent); flex:1; border:none; padding:0;}
+  .badge{font-size:13px; padding:2px 10px; border-radius:6px; white-space:nowrap; border:1px solid; margin-top:3px;}
+  .b-wa{color:var(--danger); border-color:var(--danger); background:rgba(248,113,113,.12);}
+  .b-tle{color:#fbbf24; border-color:#fbbf24; background:rgba(251,191,36,.12);}
+  .b-calc{color:#fb923c; border-color:#fb923c; background:rgba(251,146,60,.12);}
+  .b-stuck{color:var(--accent); border-color:var(--accent); background:rgba(56,189,248,.12);}
+  .b-other{color:var(--accent2); border-color:var(--accent2); background:rgba(167,139,250,.12);}
+  .cmeta{color:var(--muted); font-size:14px; margin:8px 0 6px;}
+  .tags{display:flex; flex-wrap:wrap; gap:7px; margin:6px 0;}
+  .tag-s{background:var(--bg3); color:var(--accent); border:1px solid #2b3a4d; border-radius:6px; padding:1px 9px; font-size:13px;}
+  .comment{border-left:4px solid var(--accent3); background:var(--bg3); padding:10px 15px; border-radius:8px; margin:12px 0 0; color:#d1fae5; font-size:15px;}
+  .kidref{border-left:4px solid var(--accent2); background:rgba(167,139,250,.10); padding:12px 16px; border-radius:8px; margin:8px 0 4px; color:#e9d5ff;}
+  .kidref .t{color:var(--accent2); font-weight:700; display:block; margin-bottom:4px;}
+  .cardfoot{display:flex; align-items:center; gap:14px; margin-top:12px;}
+  .toggle{color:var(--accent); font-size:14px; cursor:pointer; user-select:none;}
+  .toggle:hover{text-decoration:underline;}
+  .del{color:var(--danger); font-size:13px; cursor:pointer; margin-left:auto;}
+  .del:hover{text-decoration:underline;}
+
+  /* ---------- 详情 ---------- */
+  .detail{display:none; margin-top:8px; border-top:1px solid #374151; padding-top:6px;}
+  .detail.open{display:block;}
+  .detail h3.sec{font-size:18px; margin:26px 0 10px; padding-bottom:6px; border-bottom:1px solid #374151; color:var(--accent);}
+  .detail .err h4{font-size:16px; margin:18px 0 6px; color:var(--danger);}
+  ul{margin:8px 0; padding-left:22px;} li{margin:5px 0;}
+  ol{padding-left:22px;} ol li{margin:7px 0;}
+  code,pre{font-family:"SF Mono",Consolas,Monaco,monospace; background:var(--bg3); border-radius:6px;}
+  code{padding:2px 7px; font-size:14px; color:var(--accent3);}
+  pre{padding:14px 16px; overflow-x:auto; font-size:14px; line-height:1.6; color:#e5e7eb; margin:8px 0; white-space:pre-wrap;}
+  table{width:100%; border-collapse:collapse; margin:12px 0;}
+  th,td{border:1px solid #374151; padding:9px 12px; text-align:left; font-size:15px;}
+  th{background:var(--bg3); color:var(--accent);}
+  .ok{color:var(--accent3); font-weight:600;}
+  .hl{color:var(--accent);}
+  .tag-step{display:inline-block; background:var(--bg3); color:var(--accent); border:1px solid var(--accent); border-radius:6px; padding:1px 8px; font-size:13px; margin-right:6px;}
+  .oneliner{border-left:4px solid var(--accent3); background:var(--bg3); padding:12px 16px; border-radius:8px; margin:12px 0 0; color:#d1fae5;}
+  .empty{color:var(--muted); text-align:center; padding:40px 0;}
+  .frac{display:inline-flex; flex-direction:column; text-align:center; vertical-align:middle; margin:0 2px; line-height:1.15;}
+  .frac .n{border-bottom:1.5px solid currentColor; padding:0 3px;}
+  .frac .d{padding:0 3px;}
+
+  /* ---------- 弹窗表单 ---------- */
+  .mask{display:none; position:fixed; inset:0; background:rgba(0,0,0,.6); z-index:50; padding:30px 16px; overflow:auto;}
+  .mask.open{display:block;}
+  .modal{max-width:760px; margin:0 auto; background:var(--bg2); border-radius:16px; padding:28px 30px; box-shadow:0 20px 60px rgba(0,0,0,.6);}
+  .modal h2{margin:0 0 6px; color:var(--accent2); font-size:23px;}
+  .modal .tip{color:var(--muted); font-size:14px; margin-bottom:18px;}
+  .fld{margin:14px 0;}
+  .fld label{display:block; color:var(--accent); font-size:14px; margin-bottom:5px;}
+  .fld .hint{color:var(--muted); font-size:12.5px; font-weight:400;}
+  .fld input, .fld textarea, .fld select{width:100%;}
+  .fld textarea{min-height:64px; line-height:1.6; resize:vertical;}
+  .modal .actions{display:flex; gap:12px; margin-top:22px; justify-content:flex-end;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="head">
+    <div style="flex:1;min-width:200px;">
+      <h1>🧮 我的数学错题库</h1>
+      <div class="sub">点知识点标签 / 选错因 / 搜关键词筛选;点标题看完整复盘。</div>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn primary" id="addBtn">📥 录入(粘贴 AI 结果)</button>
+      <button class="btn" id="exportBtn" title="把所有题目烤进一个新文件,带去别的电脑用">📄 导出HTML</button>
+      <button class="btn" id="importBtn" title="从导出的 HTML 或 JSON 里导入题目">⬆ 导入</button>
+      <button class="btn" id="aiBtn" title="复制一段提示词,发给 AI 让它分析错因并生成可导入的题目">🤖 AI 分析提示词</button>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <div class="rowf">
+      <span class="label">🔍 搜索</span>
+      <input type="text" id="q" placeholder="搜题名、知识点、内容…">
+      <select id="sort">
+        <option value="desc">时间:最新优先</option>
+        <option value="asc">时间:最早优先</option>
+      </select>
+      <select id="result">
+        <option value="">全部错因</option>
+        <option value="概念不清">概念不清</option>
+        <option value="审题错">审题错</option>
+        <option value="计算错">计算错</option>
+        <option value="方法不对">方法不对</option>
+        <option value="思路卡点">思路卡点</option>
+        <option value="其他">其他</option>
+      </select>
+    </div>
+    <div class="rowf">
+      <span class="label">🏷 知识点</span>
+      <div id="tagbar" style="display:flex;flex-wrap:wrap;gap:10px;flex:1;"></div>
+      <span class="count" id="count"></span>
+    </div>
+  </div>
+
+  <div id="list"></div>
+</div>
+
+<!-- 隐藏的导入文件选择器 -->
+<input type="file" id="importFile" accept=".html,.json,.txt" style="display:none;">
+
+<!-- ============================================================
+     种子题目(写死在文件里、跟着文件走的题)。
+     导出HTML 时,会把「种子 + 本地新增」一起重新烤进这里。
+     ============================================================ -->
+<script id="data">
+const SEED_PROBLEMS = [
+
+  {
+    id: "fraction_between",
+    title: "找两个分数之间的分数(分数比较 · 通分)",
+    date: "2026-08-03",
+    source: "实验班提优训练 · 五下 第四单元《分数的基本认识》",
+    result: "方法不对",
+    tags: ["分数", "分数比较", "通分", "分数的基本性质", "两数之间找数", "思维定式", "五下·第四单元"],
+    kidReflection: "(这里等孩子用自己的话讲一遍再替换)我一开始是从 2/9 出发,分子分母都加 1,写成 3/10、4/11、5/12,以为这样能得到差不多大小的分数。后来把它们通分和 2/9 比大小,才发现三个全都比 2/9 大,都错了。原来「分子分母同时加 1」只会让分数越来越接近 1、只会变大,不能用来找两个分数中间的数。要找中间的数,得先通分把分母变大,分子之间才会空出新的整数。",
+    comment: "这是一道「方法用错、但很值得记」的题。她其实动用了一个学过的<b>真结论</b>——分子分母同时加同一个数,真分数会变大——说明有迁移意识,不是乱写;错只错在<b>把它用到了不该用的场景</b>:要找的是「两数<b>之间</b>」的分数,而这个操作只会让数一路变大、趋近 1。最该带走的一条习惯是:<b>写完把答案代回去和上下界比一比大小</b>——只要比一下,「3/10 比 2/9 还大」一眼就能看穿。另外她填「无数个」是对的,方向感在。",
+    rules: [
+      "要写出 3 个<b>既比 <span class='frac'><span class='n'>1</span><span class='d'>9</span></span> 大、又比 <span class='frac'><span class='n'>2</span><span class='d'>9</span></span> 小</b>的分数——也就是夹在这两个分数<b>中间</b>的数。",
+      "<span class='frac'><span class='n'>1</span><span class='d'>9</span></span> 和 <span class='frac'><span class='n'>2</span><span class='d'>9</span></span> <b>分母相同</b>,分子是 1 和 2,<b>中间没有整数</b>——所以要想办法「腾出空间」。",
+      "这样的分数<b>有无数个</b>(分母放得越大,中间能塞的越多)。"
+    ],
+    rulesSummary: "两数之间找数,核心是「通分腾空间」:把分子分母同乘一个数,让原本挨着的分子之间冒出新的整数,再从中间挑。",
+    errors: [
+      {
+        title: "用「分子分母同时加 1」去找中间的分数",
+        phenomenon: "从 <span class='frac'><span class='n'>2</span><span class='d'>9</span></span> 出发,分子分母都 +1,写出 <code>3/10、4/11、5/12</code>。",
+        consequence: "这三个数其实都<b>比 2/9 大</b>:通分成 90 做分母,<code>3/10 = 27/90</code>,而 <code>2/9 = 20/90</code>,27 &gt; 20 → 根本不满足「比 2/9 小」,三个<b>全错</b>。",
+        cause: "把「分子分母同加 1」当成了万能操作。它的真实效果是让真分数<b>一路变大、趋近 1</b>(<code>2/9 &lt; 3/10 &lt; 4/11 &lt; …</code>),只能往上走,不能停在两个数「之间」。",
+        fix: "改用<b>通分腾空间</b>:<pre>1/9 = 10/90\n2/9 = 20/90        ← 分子 10 和 20 之间空出一大串!\n答案:11/90、12/90、13/90 … 19/90 都行\n(其中 15/90 = 1/6、18/90 = 1/5 …)</pre>想要更多,就把分母放更大(×100、×1000…),中间的数要多少有多少 → 所以是「无数个」。"
+      }
+    ],
+    reviewCase: {
+      input: "写出 3 个既比 1/9 大、又比 2/9 小的分数,并说明这样的分数有几个。",
+      key: "检验会不会用「通分把分母变大」来腾空间。用 90(或任何 9 的倍数)做公分母最直观:1/9=10/90、2/9=20/90,中间随便挑。",
+      output: "例:11/90、1/6(=15/90)、19/90;这样的分数有无数个。",
+      waBehavior: "「分子分母同加 1」的版本会写出 3/10、4/11、5/12,通分后分别是 27/90、≈32.7/90、37.5/90,全都 > 2/9,三个都不合题。"
+    },
+    shortcomings: [
+      ["套用记住的操作,不检验是否适用", "把「分子分母同加 1」直接搬来用,没回头想「这个操作到底会让数变大还是变小」。"],
+      ["写完不代入验算", "没有把答案和 1/9、2/9 比一比大小;只要比一下,「3/10 比 2/9 还大」立刻现形。"],
+      ["分母不同的比较,没先想到通分", "遇到「谁大谁小 / 谁在中间」,第一反应不是「化成同分母」这个通用工具。"]
+    ],
+    checklist: [
+      ["读题", "圈出「既比…大又比…小」,看清是要找夹在<b>两数之间</b>的数,不是随便写几个。"],
+      ["想清楚", "两数之间找数 → 先<b>通分</b>把分母变大,给分子之间「腾出」新的整数。"],
+      ["动手", "把两个分数化成<b>同分母</b>(如 1/9=10/90、2/9=20/90),在中间挑分子写答案。"],
+      ["验算", "写完每个答案都和上、下两个数比一比大小,确认真的<b>夹在中间</b>。"],
+      ["回顾", "问一句「我用的方法为什么成立?」——想明白「同加 1」为什么只会变大,下次就不会再误用。"]
+    ],
+    oneLiner: "两数之间找分数,靠「通分腾空间」——把分母一起放大,分子之间就冒出新整数;别拿「分子分母同加 1」凑,它只会让分数越变越大、趋近 1。写完一定代回去比大小。"
+  },
+
+  {
+    id: "equiv_fraction_addsub",
+    title: "等值分数填空(基本性质:同乘同除,不是同加同减)",
+    date: "2026-08-03",
+    source: "实验班提优训练 · 五下 第四单元《分数的基本认识》",
+    result: "概念不清",
+    tags: ["分数", "等值分数", "分数的基本性质", "同乘同除", "验算意识", "思维定式", "五下·第四单元"],
+    kidReflection: "(待孩子用自己的话说:6 变成 18 到底是加了 12 还是乘了几?为什么分子不能也加、也减?那个 −8 出来的时候有没有觉得不对劲?)",
+    comment: "这道题和「两数之间找分数」是同一个病根的两面 —— 都栽在<b>分数的基本性质</b>上。这次证据尤其干净:第一空 <code>17 = 5 + 12</code>、最后一空 <code>−8 = 12 − 20</code>,清清楚楚是把「分子分母同乘/同除」<b>错用成了同加、同减</b>。最该带走的两条:① 基本性质是<b>乘、除</b>同一个数,不是加减 —— 加减会改变分数大小;② <b>对怪结果要有警觉</b>:一个正的真分数怎么会填出分子 −8?这种「负数分子」就是「方法错了」的红灯,本该当场回头。方法这关一过,她填分数会稳很多。",
+    rules: [
+      "在括号里填数,使这一串分数<b>都等于 <span class='frac'><span class='n'>5</span><span class='d'>6</span></span></b>:<pre>5/6 = ( )/(6+12) = ( )/60 = ( )/(60−20)</pre>",
+      "<b>分数的基本性质</b>:分子和分母<b>同时乘</b>或<b>同时除以</b>同一个数(0 除外),分数的大小不变。",
+      "关键:是「<b>乘 / 除</b>」,<b>不是</b>「加 / 减」—— 同时加或减同一个数,分数会变大小,不再相等。",
+      "(第三空的减数请与原题核对:若 60−20=40,而 40 不是 6 的倍数,填不出整数 —— 但这不影响方法,分母乘几分子就乘几。)"
+    ],
+    rulesSummary: "看分母从 6「乘了几」变成新分母,分子就跟着乘同一个数;分母除以几,分子也除以几。绝不能用加减。",
+    errors: [
+      {
+        title: "把「同乘同除」错用成「同加同减」",
+        phenomenon: "分母 <code>6 → 6+12 = 18</code>,她把分子也「加 12」→ <code>5+12 = 17</code>;分母 <code>60 → 60−20 = 40</code>,她把分子也「减 20」→ <code>12−20 = −8</code>。",
+        consequence: "<code>17/18</code>、<code>−8/40</code> 都不等于 5/6,还冒出一个<b>负数分子</b> —— 全错。",
+        cause: "没抓住分数基本性质的核心是<b>乘、除</b>同一个数;误以为「分母做什么,分子就跟着做什么」,把加减也算进去了。加减会改变分数大小。",
+        fix: "看分母<b>乘了几</b>,分子就<b>乘几</b>:<pre>6 ×3 = 18   →  5 ×3 = 15    →  15/18\n6 ×10 = 60  →  5 ×10 = 50   →  50/60</pre>验证:15÷3=5、18÷3=6 ✓;50÷10=5、60÷10=6 ✓,都约得回 5/6。"
+      },
+      {
+        title: "填出「负数分子」却没察觉不对(验算意识)",
+        phenomenon: "5/6 是个正的真分数,最后一空却填出 <code>−8</code>,她照写没停。",
+        consequence: "错得离谱却没被自己发现,只能等老师打叉。",
+        cause: "写完没有回头看结果「合不合理」;对异常信号(负数、比 1 还大)不敏感。",
+        fix: "养成一句自问:「这个答案<b>可能吗</b>?」正的真分数不可能等于负分子的分数 —— 一见 −8 就该立刻回头查方法。"
+      }
+    ],
+    reviewCase: {
+      input: "填空:2/3 = ( )/(3+6) = ( )/12",
+      key: "3+6=9 表面是「加了 6」,但要看成 <code>3×3=9</code>;专门检验她会不会又用「同加」。",
+      output: "6/9、8/12(即 2×3=6、2×4=8)。",
+      waBehavior: "用「同加」的错法会填成 2+6=8 → 8/9(≠2/3);说明还没改过来,乘除才是对的。"
+    },
+    shortcomings: [
+      ["概念:把乘除当成加减", "分数基本性质记成了「分母做什么分子做什么」,没锁死「只能同乘或同除」。"],
+      ["对不合理结果不敏感", "填出负数分子(−8)、也没觉得奇怪,缺少「这答案可能吗」的自查。"],
+      ["写完不约分验算", "没把填好的分数约回去看是不是原来的 5/6。"]
+    ],
+    checklist: [
+      ["读题", "看清是「填数使分数<b>相等</b>」—— 那就只有分数基本性质能用。"],
+      ["想清楚", "分母从几变到几,是<b>乘</b>几还是<b>除以</b>几?(绝不是加减)"],
+      ["动手", "分母乘几,分子就乘几;分母除以几,分子就除以几 —— 上下同步。"],
+      ["验算", "把填好的分数<b>约分</b>,看能不能约回原分数;出现负数 / 比 1 大等怪结果,立刻回头。"],
+      ["回顾", "想明白「同加同减为什么不行」—— 因为它会改变分数的大小。"]
+    ],
+    oneLiner: "分数相等靠「分子分母<b>同乘或同除</b>同一个数」,绝不是同加同减 —— 分母乘几,分子就乘几。要是填出负分子那种怪结果,就是方法错了的红灯,赶紧回头。"
+  }
+
+];
+</script>
+
+<script>
+/* ============================================================
+   数据层:全部题目 = 种子(SEED) + 本地新增(localStorage)
+   —— 用独立的 key,和 C++ 错题库互不干扰
+   ============================================================ */
+const LS_KEY = 'math_cuoti_extras_v1';
+const RESULT_KINDS = ['概念不清','审题错','计算错','方法不对','思路卡点'];
+function loadExtras(){
+  try { return JSON.parse(localStorage.getItem(LS_KEY) || '[]'); }
+  catch(e){ return []; }
+}
+function saveExtras(arr){ localStorage.setItem(LS_KEY, JSON.stringify(arr)); }
+function getAll(){ return SEED_PROBLEMS.concat(loadExtras()); }
+
+/* ============================================================
+   渲染
+   ============================================================ */
+const listEl = document.getElementById('list');
+const tagbarEl = document.getElementById('tagbar');
+const countEl = document.getElementById('count');
+const qEl = document.getElementById('q');
+const sortEl = document.getElementById('sort');
+const resultEl = document.getElementById('result');
+let activeTags = new Set();
+
+function chip(text, on, extra=''){
+  const el = document.createElement('span');
+  el.className = 'chip ' + extra + (on ? ' on' : '');
+  el.textContent = text;
+  return el;
+}
+function renderTagbar(){
+  const allTags = [...new Set(getAll().flatMap(p => p.tags))].sort();
+  tagbarEl.innerHTML = '';
+  const all = chip('全部', activeTags.size === 0, 'all');
+  all.onclick = () => { activeTags.clear(); update(); };
+  tagbarEl.appendChild(all);
+  allTags.forEach(t => {
+    const c = chip(t, activeTags.has(t));
+    c.onclick = () => { activeTags.has(t) ? activeTags.delete(t) : activeTags.add(t); update(); };
+    tagbarEl.appendChild(c);
+  });
+}
+function resultClass(r){
+  if(r === '概念不清') return 'b-wa';
+  if(r === '审题错') return 'b-tle';
+  if(r === '计算错') return 'b-calc';
+  if(r === '思路卡点') return 'b-stuck';
+  return 'b-other';
+}
+function detailHTML(p){
+  let h = '<div class="detail">';
+  h += '<h3 class="sec">一、题目 / 核心考点</h3><ol>';
+  (p.rules||[]).forEach(r => h += '<li>'+r+'</li>');
+  h += '</ol>' + (p.rulesSummary ? '<p>'+p.rulesSummary+'</p>' : '');
+
+  h += '<h3 class="sec">二、错误清单(按发现顺序)</h3>';
+  (p.errors||[]).forEach((e,i) => {
+    h += '<div class="err"><h4>❌ 错误 '+(i+1)+'｜'+e.title+'</h4><ul>';
+    if(e.phenomenon)  h += '<li><b>现象</b>:'+e.phenomenon+'</li>';
+    if(e.consequence) h += '<li><b>后果</b>:'+e.consequence+'</li>';
+    if(e.cause)       h += '<li><b>根因</b>:'+e.cause+'</li>';
+    if(e.fix)         h += '<li><span class="ok">✅ 正解</span>:'+e.fix+'</li>';
+    h += '</ul></div>';
+  });
+
+  const rc = p.reviewCase || {};
+  h += '<h3 class="sec">三、变式验证题</h3>';
+  if(rc.input)      h += '<p>题目:</p><pre>'+rc.input+'</pre>';
+  if(rc.key)        h += '<p>关键点:'+rc.key+'</p>';
+  if(rc.output)     h += '<p>正确答案:</p><pre>'+rc.output+'</pre>';
+  if(rc.waBehavior) h += '<p>错误版本的表现:'+rc.waBehavior+'</p>';
+
+  if((p.shortcomings||[]).length){
+    h += '<h3 class="sec">四、暴露的思维 / 习惯短板</h3><table><tr><th>短板</th><th>这道题的表现</th></tr>';
+    p.shortcomings.forEach(s => h += '<tr><td>'+s[0]+'</td><td>'+(s[1]||'')+'</td></tr>');
+    h += '</table>';
+  }
+  if((p.checklist||[]).length){
+    h += '<h3 class="sec">五、下次做同类题的检查清单</h3><ol>';
+    p.checklist.forEach(c => h += '<li><span class="tag-step">'+c[0]+'</span>'+(c[1]||'')+'</li>');
+    h += '</ol>';
+  }
+  if(p.oneLiner) h += '<h3 class="sec">六、一句话记住这道题</h3><div class="oneliner">'+p.oneLiner+'</div>';
+  h += '</div>';
+  return h;
+}
+function cardHTML(p, isUser){
+  const tags = p.tags.map(t => '<span class="tag-s">'+t+'</span>').join('');
+  return '<div class="card" data-id="'+p.id+'">'
+    + '<div class="top"><h2>'+p.title+'</h2>'
+    +   '<span class="badge '+resultClass(p.result)+'">'+p.result+'</span></div>'
+    + '<div class="cmeta">📅 '+p.date+'　·　'+(p.source||'')+'</div>'
+    + '<div class="tags">'+tags+'</div>'
+    + (p.kidReflection ? '<div class="kidref"><span class="t">🧒 孩子的自我反思</span>'+p.kidReflection+'</div>' : '')
+    + (p.comment ? '<div class="comment"><b>🎓 教练点评:</b>'+p.comment+'</div>' : '')
+    + '<div class="cardfoot"><span class="toggle">▸ 展开详情</span>'
+    +   (isUser ? '<span class="del" data-del="'+p.id+'">🗑 删除</span>' : '')
+    + '</div>'
+    + detailHTML(p)
+    + '</div>';
+}
+function matches(p){
+  if(activeTags.size > 0 && !p.tags.some(t => activeTags.has(t))) return false;
+  const rf = resultEl.value;
+  if(rf){
+    if(rf === '其他'){ if(RESULT_KINDS.includes(p.result)) return false; }
+    else if(p.result !== rf) return false;
+  }
+  const q = qEl.value.trim().toLowerCase();
+  if(q){
+    const blob = (p.title+' '+p.tags.join(' ')+' '+(p.comment||'')+' '+(p.source||'')+' '
+      +(p.oneLiner||'')+' '+(p.errors||[]).map(e=>e.title+e.phenomenon+e.cause+e.fix).join(' ')).toLowerCase();
+    if(!blob.includes(q)) return false;
+  }
+  return true;
+}
+function update(){
+  renderTagbar();
+  const extras = loadExtras();
+  const userIds = new Set(extras.map(p => p.id));
+  let items = getAll().filter(matches);
+  items.sort((a,b) => sortEl.value === 'asc' ? a.date.localeCompare(b.date) : b.date.localeCompare(a.date));
+  countEl.textContent = '共 ' + items.length + ' / ' + getAll().length + ' 题';
+  if(items.length === 0){
+    listEl.innerHTML = '<div class="empty">没有符合条件的题目,换个筛选试试~</div>';
+    return;
+  }
+  listEl.innerHTML = items.map(p => cardHTML(p, userIds.has(p.id))).join('');
+  listEl.querySelectorAll('.card').forEach(card => {
+    const detail = card.querySelector('.detail');
+    const toggle = card.querySelector('.toggle');
+    const top = card.querySelector('.top');
+    const flip = () => {
+      const open = detail.classList.toggle('open');
+      toggle.textContent = open ? '▾ 收起详情' : '▸ 展开详情';
+    };
+    toggle.onclick = flip;
+    top.onclick = flip;
+  });
+  listEl.querySelectorAll('[data-del]').forEach(b => {
+    b.onclick = (e) => {
+      e.stopPropagation();
+      const id = b.getAttribute('data-del');
+      if(confirm('确定删除这道题?(只删本地新增的,种子题删不掉)')){
+        saveExtras(loadExtras().filter(p => p.id !== id));
+        update();
+      }
+    };
+  });
+}
+qEl.oninput = update;
+sortEl.onchange = update;
+resultEl.onchange = update;
+
+/* ============================================================
+   录入错题:粘贴 AI 生成的 JSON(孩子先反思 + AI 判断整理)
+   ============================================================ */
+const $ = id => document.getElementById(id);
+
+const mask = document.createElement('div');
+mask.className = 'mask';
+mask.innerHTML = `
+  <div class="modal">
+    <h2>📥 录入错题</h2>
+    <div class="tip">
+      正确姿势:① 让孩子<b>先自己讲</b>错在哪、为什么、下次怎么办 →
+      ② 把「题目 + 孩子的解法 + 孩子的总结」发给 AI(可点顶部「🤖 AI 分析提示词」拿现成提示词)→
+      ③ AI 会判断纠正并返回一段 JSON,把它粘到下面。
+    </div>
+    <div class="fld">
+      <label>粘贴 AI 生成的题目 JSON <span class="hint">(一道题一个 {…};也可一次粘一个数组 [ … ])</span></label>
+      <textarea id="f-json" style="min-height:300px;font-family:'SF Mono',Consolas,monospace;font-size:13px;line-height:1.5;" placeholder='{
+  "title": "题目名(考点)",
+  "result": "方法不对",
+  "tags": ["知识点1","知识点2"],
+  "kidReflection": "孩子自己的总结(原话)",
+  "comment": "教练点评",
+  ...
+}'></textarea>
+    </div>
+    <div class="actions">
+      <button class="btn" id="cancelBtn">取消</button>
+      <button class="btn primary" id="saveBtn">解析并加入错题库</button>
+    </div>
+  </div>`;
+document.body.appendChild(mask);
+
+function openModal(){ mask.classList.add('open'); $('f-json').value=''; $('f-json').focus(); }
+function closeModal(){ mask.classList.remove('open'); }
+$('cancelBtn').onclick = closeModal;
+mask.onclick = e => { if(e.target === mask) closeModal(); };
+
+$('saveBtn').onclick = () => {
+  const raw = $('f-json').value.trim();
+  if(!raw){ alert('先把 AI 生成的 JSON 粘进来'); return; }
+  let parsed;
+  try { parsed = JSON.parse(raw); }
+  catch(err){ alert('JSON 解析失败,检查是否复制完整(含首尾的 { } 或 [ ]):\n\n' + err.message); return; }
+  const arr = Array.isArray(parsed) ? parsed : [parsed];
+  const extras = loadExtras();
+  const have = new Set(getAll().map(p => p.id));
+  let added = 0, skipped = 0;
+  arr.forEach((p, k) => {
+    if(!p || !p.title){ skipped++; return; }
+    if(!p.id || have.has(p.id)) p.id = 'u' + new Date().getTime() + '_' + k;
+    if(!p.date) p.date = new Date().toISOString().slice(0,10);
+    if(!p.result) p.result = '方法不对';
+    if(!Array.isArray(p.tags)) p.tags = [];
+    extras.push(p); have.add(p.id); added++;
+  });
+  saveExtras(extras); closeModal(); activeTags.clear(); update();
+  alert('已加入 ' + added + ' 道题 ✅' + (skipped ? '(跳过 ' + skipped + ' 条没有 title 的)' : ''));
+};
+$('addBtn').onclick = openModal;
+
+/* ============================================================
+   导出 HTML(把 种子+本地新增 一起烤进新文件,可跨电脑)
+   ============================================================ */
+function download(filename, text){
+  const blob = new Blob([text], {type:'text/html;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  URL.revokeObjectURL(a.href);
+}
+$('exportBtn').onclick = () => {
+  const all = getAll();
+  const clone = document.documentElement.cloneNode(true);
+  // 用「全部题目」重写种子数据,并清掉运行时渲染的列表/弹窗
+  clone.querySelector('#data').textContent =
+    '\nconst SEED_PROBLEMS = ' + JSON.stringify(all, null, 2) + ';\n';
+  const listNode = clone.querySelector('#list'); if(listNode) listNode.innerHTML = '';
+  clone.querySelectorAll('.mask').forEach(m => m.remove());
+  const html = '<!DOCTYPE html>\n' + clone.outerHTML;
+  const stamp = new Date().toISOString().slice(0,10);
+  download('数学错题库-' + stamp + '.html', html);
+  alert('已导出:数学错题库-' + stamp + '.html\n\n这个文件里有全部 ' + all.length + ' 道题,\n拷到别的电脑打开,题目都在!');
+};
+
+/* ============================================================
+   导入(从导出的 HTML 或 JSON 合并题目到本地)
+   ============================================================ */
+$('importBtn').onclick = () => document.getElementById('importFile').click();
+document.getElementById('importFile').onchange = (e) => {
+  const file = e.target.files[0]; if(!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    let imported = [];
+    const txt = reader.result;
+    try {
+      if(file.name.endsWith('.json')){
+        imported = JSON.parse(txt);
+      } else {
+        const m = txt.match(/const SEED_PROBLEMS\s*=\s*(\[[\s\S]*?\]);/);
+        if(m) imported = eval(m[1]);
+      }
+    } catch(err){ alert('读取失败:' + err.message); return; }
+    if(!Array.isArray(imported) || !imported.length){ alert('没读到题目'); return; }
+    const seedIds = new Set(SEED_PROBLEMS.map(p=>p.id));
+    const extras = loadExtras();
+    const have = new Set(getAll().map(p=>p.id));
+    let added = 0;
+    imported.forEach(p => { if(!have.has(p.id) && !seedIds.has(p.id)){ extras.push(p); have.add(p.id); added++; } });
+    saveExtras(extras); update();
+    alert('导入完成,新增 ' + added + ' 道题(重复的已跳过)。');
+  };
+  reader.readAsText(file, 'utf-8');
+  e.target.value = '';
+};
+
+/* ============================================================
+   一键复制「给 AI 的提示词」—— 让大模型引导分析并输出可导入 JSON
+   ============================================================ */
+const AI_PROMPT = `你是一位耐心的小学/初中数学老师,面对的是一名小学生。
+
+【重要原则】错题反思必须是孩子自己思考的结果,不能由你代劳。所以:
+- 我会给你【题目】【孩子的解法/答案】,以及【孩子自己的总结】(她自己说的:错在哪、为什么错、下次怎么办)。
+- 如果孩子还没总结,请先用「引导式提问」(苏格拉底式,一步步问,不直接报答案)帮她自己想出来,
+  比如让她把自己的答案代回题目里验算一下,等她自己发现矛盾,再继续,不要替她写反思。
+
+拿到孩子的总结后,你的任务是:
+1. 判断她的总结对不对、全不全 —— 哪里想对了要肯定,哪里没看到的深层原因要补上;
+2. 指出她暴露的思维/习惯短板(如:审题、不验算、概念混淆、套公式不看条件),给出具体、可操作的改进方向;
+3. 把这道题整理成错题库条目,用下面的 JSON 输出(放代码块里,方便复制导入)。
+   注意:kidReflection 里要放【孩子自己的原话总结】(可轻微润色但保留她的视角和口吻),
+   comment / shortcomings / checklist 这些是你作为老师的点评和补充。
+
+{
+  "id": "英文唯一id",
+  "title": "题目名称(考点)",
+  "date": "YYYY-MM-DD",
+  "source": "教材/练习册/来源",
+  "result": "方法不对",          // 概念不清 / 审题错 / 计算错 / 方法不对 / 思路卡点
+  "tags": ["知识点1","知识点2"],  // 用于筛选,尽量用通用叫法(如 分数、通分、方程)
+  "kidReflection": "孩子自己的总结原话(错在哪/为什么/下次怎么办)",
+  "comment": "一句话老师点评(可点评孩子总结得如何)",
+  "rules": ["题目要求/关键条件1","2"],   // 可含 <code> <b>;分数可用文字如 1/9
+  "rulesSummary": "一句话概括这题在考什么、该怎么下手",
+  "errors": [
+    { "title":"错误标题", "phenomenon":"现象(她怎么做的)", "consequence":"后果(为什么错)", "cause":"根因(思维上哪没通)", "fix":"正解(可用 <pre>...</pre> 放算式)" }
+  ],
+  "reviewCase": { "input":"一道变式题", "key":"为什么这道能检验她", "output":"正确答案", "waBehavior":"用她的错法会得到什么" },
+  "shortcomings": [ ["短板","这道题的表现"] ],
+  "checklist": [ ["读题","做法"], ["验算","提醒点"] ],
+  "oneLiner": "一句话记住这道题"
+}
+
+【题目】:
+(在这里贴题目,可以贴图或文字)
+
+【孩子的解法/答案】:
+(在这里贴孩子写的)
+
+【孩子自己的总结】:
+(在这里贴孩子说的话;如果她还没总结,就先引导她)
+`;
+$('aiBtn').onclick = async () => {
+  try {
+    await navigator.clipboard.writeText(AI_PROMPT);
+    alert('提示词已复制!\n\n用法:\n① 先让孩子自己讲错因(可先让她把答案代回去验算)\n② 粘贴到任意大模型,补上【题目】【解法】【孩子的总结】\n③ AI 返回一段 JSON,点「📥 录入」粘进来即可。');
+  } catch(e){
+    prompt('请手动复制下面的提示词:', AI_PROMPT);
+  }
+};
+
+update();
+</script>
+</body>
+</html>

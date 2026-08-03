@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🏆 我的编程错题库</title>
+<!-- ============================================================
+     我的编程错题库
+     ★ 流程:孩子先自己总结错因 → 把「题目+代码+孩子总结」发给 AI(点「🤖 AI 分析提示词」)
+        → AI 判断纠正并整理成 JSON → 点「📥 录入」粘贴入库。
+     ★ 换电脑 / 备份:点「📄 导出HTML」下载一个把题目烤进去的文件,带走它。
+        —— localStorage 不会跟着文件走,一定要用导出的文件转移!
+     ★ 导出的文件在别的电脑打开,题目都在;可继续加、再导出。
+     ============================================================ -->
+<style>
+  :root{
+    --bg:#0a0f1e; --bg2:#111827; --bg3:#1f2937;
+    --accent:#38bdf8; --accent2:#a78bfa; --accent3:#34d399;
+    --text:#e5e7eb; --muted:#9ca3af; --danger:#f87171;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; padding:32px 20px 60px;
+    background:var(--bg); color:var(--text);
+    font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    font-size:17px; line-height:1.8;
+  }
+  .wrap{max-width:920px; margin:0 auto;}
+  .head{display:flex; align-items:flex-start; gap:14px; flex-wrap:wrap;}
+  h1{
+    font-size:30px; margin:0 0 4px; flex:1;
+    background:linear-gradient(90deg,var(--accent),var(--accent2));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .sub{color:var(--muted); font-size:15px; margin-bottom:22px;}
+  .btn{
+    cursor:pointer; border:1px solid #374151; border-radius:9px;
+    padding:9px 15px; font-size:15px; font-family:inherit;
+    background:var(--bg3); color:var(--text); white-space:nowrap;
+  }
+  .btn:hover{border-color:var(--accent);}
+  .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent2)); color:#08111f; border:none; font-weight:700;}
+  .btn.mini{padding:5px 11px; font-size:13px;}
+
+  /* ---------- 筛选工具条 ---------- */
+  .toolbar{
+    background:var(--bg2); border-radius:14px; padding:18px 20px;
+    box-shadow:0 6px 30px rgba(0,0,0,.45); margin-bottom:22px;
+  }
+  .rowf{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin:8px 0;}
+  .rowf .label{color:var(--muted); font-size:14px; min-width:64px;}
+  input[type=text], input[type=date], select, textarea{
+    background:var(--bg3); color:var(--text); border:1px solid #374151;
+    border-radius:8px; padding:8px 12px; font-size:15px; font-family:inherit;
+  }
+  #q{flex:1; min-width:180px;}
+  .chip{
+    cursor:pointer; user-select:none;
+    background:var(--bg3); color:var(--muted);
+    border:1px solid #374151; border-radius:999px;
+    padding:4px 13px; font-size:14px; transition:.15s;
+  }
+  .chip:hover{border-color:var(--accent);}
+  .chip.on{background:rgba(56,189,248,.16); color:var(--accent); border-color:var(--accent); font-weight:600;}
+  .chip.all.on{background:rgba(167,139,250,.18); color:var(--accent2); border-color:var(--accent2);}
+  .count{color:var(--muted); font-size:14px; margin-left:auto;}
+
+  /* ---------- 卡片 ---------- */
+  .card{
+    background:var(--bg2); border-radius:14px; padding:22px 26px;
+    box-shadow:0 6px 30px rgba(0,0,0,.4); margin-bottom:18px;
+    border:1px solid transparent; transition:.15s;
+  }
+  .card:hover{border-color:#374151;}
+  .card .top{display:flex; align-items:flex-start; gap:12px; cursor:pointer;}
+  .card h2{font-size:21px; margin:0; color:var(--accent); flex:1; border:none; padding:0;}
+  .badge{font-size:13px; padding:2px 10px; border-radius:6px; white-space:nowrap; border:1px solid; margin-top:3px;}
+  .b-wa{color:var(--danger); border-color:var(--danger); background:rgba(248,113,113,.12);}
+  .b-tle{color:#fbbf24; border-color:#fbbf24; background:rgba(251,191,36,.12);}
+  .b-other{color:var(--accent2); border-color:var(--accent2); background:rgba(167,139,250,.12);}
+  .cmeta{color:var(--muted); font-size:14px; margin:8px 0 6px;}
+  .tags{display:flex; flex-wrap:wrap; gap:7px; margin:6px 0;}
+  .tag-s{background:var(--bg3); color:var(--accent); border:1px solid #2b3a4d; border-radius:6px; padding:1px 9px; font-size:13px;}
+  .comment{border-left:4px solid var(--accent3); background:var(--bg3); padding:10px 15px; border-radius:8px; margin:12px 0 0; color:#d1fae5; font-size:15px;}
+  .kidref{border-left:4px solid var(--accent2); background:rgba(167,139,250,.10); padding:12px 16px; border-radius:8px; margin:8px 0 4px; color:#e9d5ff;}
+  .kidref .t{color:var(--accent2); font-weight:700; display:block; margin-bottom:4px;}
+  .cardfoot{display:flex; align-items:center; gap:14px; margin-top:12px;}
+  .toggle{color:var(--accent); font-size:14px; cursor:pointer; user-select:none;}
+  .toggle:hover{text-decoration:underline;}
+  .del{color:var(--danger); font-size:13px; cursor:pointer; margin-left:auto;}
+  .del:hover{text-decoration:underline;}
+
+  /* ---------- 详情 ---------- */
+  .detail{display:none; margin-top:8px; border-top:1px solid #374151; padding-top:6px;}
+  .detail.open{display:block;}
+  .detail h3.sec{font-size:18px; margin:26px 0 10px; padding-bottom:6px; border-bottom:1px solid #374151; color:var(--accent);}
+  .detail .err h4{font-size:16px; margin:18px 0 6px; color:var(--danger);}
+  ul{margin:8px 0; padding-left:22px;} li{margin:5px 0;}
+  ol{padding-left:22px;} ol li{margin:7px 0;}
+  code,pre{font-family:"SF Mono",Consolas,Monaco,monospace; background:var(--bg3); border-radius:6px;}
+  code{padding:2px 7px; font-size:14px; color:var(--accent3);}
+  pre{padding:14px 16px; overflow-x:auto; font-size:14px; line-height:1.6; color:#e5e7eb; margin:8px 0; white-space:pre-wrap;}
+  table{width:100%; border-collapse:collapse; margin:12px 0;}
+  th,td{border:1px solid #374151; padding:9px 12px; text-align:left; font-size:15px;}
+  th{background:var(--bg3); color:var(--accent);}
+  .ok{color:var(--accent3); font-weight:600;}
+  .hl{color:var(--accent);}
+  .tag-step{display:inline-block; background:var(--bg3); color:var(--accent); border:1px solid var(--accent); border-radius:6px; padding:1px 8px; font-size:13px; margin-right:6px;}
+  .oneliner{border-left:4px solid var(--accent3); background:var(--bg3); padding:12px 16px; border-radius:8px; margin:12px 0 0; color:#d1fae5;}
+  .empty{color:var(--muted); text-align:center; padding:40px 0;}
+
+  /* ---------- 弹窗表单 ---------- */
+  .mask{display:none; position:fixed; inset:0; background:rgba(0,0,0,.6); z-index:50; padding:30px 16px; overflow:auto;}
+  .mask.open{display:block;}
+  .modal{max-width:760px; margin:0 auto; background:var(--bg2); border-radius:16px; padding:28px 30px; box-shadow:0 20px 60px rgba(0,0,0,.6);}
+  .modal h2{margin:0 0 6px; color:var(--accent2); font-size:23px;}
+  .modal .tip{color:var(--muted); font-size:14px; margin-bottom:18px;}
+  .fld{margin:14px 0;}
+  .fld label{display:block; color:var(--accent); font-size:14px; margin-bottom:5px;}
+  .fld .hint{color:var(--muted); font-size:12.5px; font-weight:400;}
+  .fld input, .fld textarea, .fld select{width:100%;}
+  .fld textarea{min-height:64px; line-height:1.6; resize:vertical;}
+  .two{display:flex; gap:14px; flex-wrap:wrap;}
+  .two > .fld{flex:1; min-width:180px;}
+  .errblock{border:1px solid #374151; border-radius:10px; padding:14px 16px; margin:12px 0; background:var(--bg);}
+  .errblock .eh{display:flex; align-items:center; margin-bottom:8px;}
+  .errblock .eh b{color:var(--danger); flex:1;}
+  .modal .actions{display:flex; gap:12px; margin-top:22px; justify-content:flex-end;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="head">
+    <div style="flex:1;min-width:200px;">
+      <h1>🏆 我的编程错题库</h1>
+      <div class="sub">点知识点标签 / 选结果 / 搜关键词筛选;点标题看完整复盘。</div>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn primary" id="addBtn">📥 录入(粘贴 AI 结果)</button>
+      <button class="btn" id="exportBtn" title="把所有题目烤进一个新文件,带去别的电脑用">📄 导出HTML</button>
+      <button class="btn" id="importBtn" title="从导出的 HTML 或 JSON 里导入题目">⬆ 导入</button>
+      <button class="btn" id="aiBtn" title="复制一段提示词,发给 AI 让它分析错因并生成可导入的题目">🤖 AI 分析提示词</button>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <div class="rowf">
+      <span class="label">🔍 搜索</span>
+      <input type="text" id="q" placeholder="搜题名、知识点、内容…">
+      <select id="sort">
+        <option value="desc">时间:最新优先</option>
+        <option value="asc">时间:最早优先</option>
+      </select>
+      <select id="result">
+        <option value="">全部结果</option>
+        <option value="WA">WA</option>
+        <option value="TLE">TLE</option>
+        <option value="RE">RE</option>
+        <option value="其他">其他</option>
+      </select>
+    </div>
+    <div class="rowf">
+      <span class="label">🏷 知识点</span>
+      <div id="tagbar" style="display:flex;flex-wrap:wrap;gap:10px;flex:1;"></div>
+      <span class="count" id="count"></span>
+    </div>
+  </div>
+
+  <div id="list"></div>
+</div>
+
+<!-- 隐藏的导入文件选择器 -->
+<input type="file" id="importFile" accept=".html,.json,.txt" style="display:none;">
+
+<!-- ============================================================
+     种子题目(写死在文件里、跟着文件走的题)。
+     导出HTML 时,会把「种子 + 本地新增」一起重新烤进这里。
+     ============================================================ -->
+<script id="data">
+const SEED_PROBLEMS = [
+
+  {
+    id: "mountain_valley",
+    title: "山之谷(二维数组 · 八方向 · 哨兵边界)",
+    date: "2026-08-02",
+    source: "GESP 四级 编程题1 · 山之谷",
+    result: "AC(过程:边界漏数 WA → 哨兵越界 TLE → 改对下标 AC)",
+    tags: ["二维数组", "八方向枚举", "边界处理", "哨兵法", "数组越界", "UB", "TLE"],
+    kidReflection: "说实话,这次超时我自己没看出来是为什么,是提交以后系统提示「超时」我才知道错了。脚标和循环的问题也是教练提醒我的,我才知道:数组开了 110,下标其实只能到 109;要么把数组开大一点,要么把循环改成 109。我最后是把循环里的 i 改成了 109 就过了。至于为什么下标越界会变成「超时」,我还没太想明白。",
+    comment: "说句实在话:这次的超时,她<b>自己没有感知</b> —— 是靠提交反馈才知道错、靠提醒才改对的。这很正常,不用担心:数组越界会伪装成超时(UB),是连成年程序员都要吃过几次亏才长记性的东西,四级的年纪没有这个直觉一点都不奇怪。所以这道题的定位不是「她悟到了」,而是「她<b>第一次撞见了这个坑</b>」—— 见过、记下,就是收获。真正要慢慢养成的,是两条能<b>直接照做</b>的硬规矩:① 开数组循环填充时,<b>循环上界 = 数组大小 − 1</b>(开 110 就只写到 109);② <b>遇到超时、又觉得数据不大,先怀疑越界/边界,别急着改算法</b>。这次先把规矩记住,下次能自己想起来用,就是进步。另外她的哨兵法思路是对的 —— 用一圈「超大值」挡住「不存在的邻居」,省掉一堆边界 if。",
+    rules: [
+      "网格 <code>N</code> 行 <code>M</code> 列,第 i 行 j 列的海拔为 <code>h[i][j]</code>。",
+      "「相邻」= 上、下、左、右 + 左上、右上、左下、右下,<b>最多 8 个方向</b>(含斜角)。",
+      "若一个格子的海拔<b>不高于它所有相邻格子</b>(<code>≤</code>,<b>取等也算</b>),它就是<b>山谷</b>。",
+      "边缘/角落的格子邻居不足 8 个,<b>只跟真实存在的邻居比</b>。",
+      "数一共有多少个山谷,输出这个数量。"
+    ],
+    rulesSummary: "遍历每个格子,跟周围最多 8 个邻居比;若它 ≤ 所有邻居就是山谷,cnt++。真正的难点在:边界格子「不存在的邻居」该怎么处理。",
+    errors: [
+      {
+        title: "边界坑:拿全局数组默认的 0 当邻居,边缘山谷全漏",
+        phenomenon: "判断时直接比 <code>a[i-1][j]</code>、<code>a[i][j+1]</code> 等,没管会不会越界;全局数组没赋值的地方默认是 <code>0</code>。",
+        consequence: "海拔都是正数,边缘格子跟数组外面的「幽灵 0」比,<code>a[i][j]&lt;=0</code> 永远为假 → 贴边的山谷(如样例 <code>(2,5)=6</code>、<code>(3,2)=5</code>)全被漏掉,答案偏小 → WA。",
+        cause: "没处理「边界格子的邻居根本不存在」这件事,误把数组外的默认 0 当成了合法邻居。",
+        fix: "<b>哨兵法</b>:把地图外围一圈填成比任何海拔都大的值(如 <code>1e9</code>),这样「不存在的邻居」永远比自己高,不会挡住山谷判断;或者老实写越界 if,只跟存在的邻居比。"
+      },
+      {
+        title: "越界坑:填哨兵时下标冲到 110,越过了 a[110][110]",
+        phenomenon: "初始化写成 <code>for(i=0;i&lt;=110;i++) for(j=0;j&lt;=110;j++) a[i][j]=1e9;</code>,可数组 <code>a[110][110]</code> 的合法下标只到 <b>109</b>。",
+        consequence: "写到 <code>a[110][…]</code>、<code>a[…][110]</code> 就戳到了数组<b>外面的内存</b> → 未定义行为(UB),这次的表现就是<b>超时 TLE</b>。",
+        cause: "循环边界和数组大小差 1 —— 开了 110,就以为能写到 110,其实是 0~109。",
+        fix: "循环改成 <code>&lt;=109</code>(刚好填满),或把数组开大到 <code>a[115][115]</code> 留余量。记住:<b>越界不会报错,但会随机把程序搞崩 —— 算错、崩溃、甚至像这次一样超时。</b>"
+      }
+    ],
+    reviewCase: {
+      input: "3 5\n7 6 6 7 9\n6 5 6 7 6\n6 5 7 8 9",
+      key: "专治边界 —— <code>(2,5)=6</code> 在<b>最右列</b>、<code>(3,2)=5</code> 在<b>最下行</b>,两个都是山谷。只有正确处理「边界不存在的邻居」才数得到它俩,否则答案会从 3 掉下来。",
+      output: "3",
+      waBehavior: "「默认 0 当邻居」的版本会漏掉贴边的山谷,输出比 3 小(WA);「哨兵填充但下标越界」的版本逻辑对却超时(TLE);把下标改到 109 后,又对又快(AC)。"
+    },
+    shortcomings: [
+      ["边界情况没单独想", "只想着「中间格子怎么比」,忘了边缘/角落的格子邻居不足 8 个,顺手拿了数组外的 0 当邻居。"],
+      ["数组下标越界没意识", "开 a[110][110] 就以为下标能到 110,其实只到 109;循环 &lt;=110 就戳到了数组外面。"],
+      ["把「超时」只往「算法慢」上想", "这题才 1 万个格子,正确算法不可能真慢 —— 越界这种 UB 也会伪装成超时,排查时要第一个想到它。"]
+    ],
+    checklist: [
+      ["读题", "先圈方向数(8 个)和数据范围;「不高于」是 ≤,取等也算山谷,别手滑写成 <。"],
+      ["想清楚", "边界格子的邻居不足 8 个 —— 动手前先决定:用哨兵法围一圈,还是写越界 if。"],
+      ["写码", "填数组 / 遍历前默念一句「下标最大能到几?」;循环边界必须和数组大小对齐,别差 1。"],
+      ["自测", "样例答案 3;再造 1×1(只有一格,答案 1)和「全部海拔相等」(每格都是山谷)这两种边界数据。"],
+      ["调 bug", "遇到超时先别急着改算法 —— 先查有没有数组越界这种 UB;越是「小数据能过、判超时」,越要怀疑边界/越界。"]
+    ],
+    oneLiner: "填数组前先问一句「下标最大到几?」—— 开 110 的数组下标只到 109,越界不报错,却会伪装成超时。边界的坑,要么用哨兵围一圈,要么老实写越界判断。"
+  },
+
+  {
+    id: "minesweeper",
+    title: "扫雷(二维数组 · 八方向计数)",
+    date: "2026-07-29",
+    source: "10354 / GESP 202606 四级 编程题1",
+    result: "AC(过程:卡思路→WA→TLE→AC)",
+    tags: ["二维数组", "循环嵌套", "八方向枚举", "单一职责", "时间复杂度", "TLE", "标记数组"],
+    kidReflection: "一开始我用了 8 个 if、8 个 flag 去数周围的雷,写得又长又乱还不对。后来才明白,周围 8 格其实就是一个 3×3,用两层从 -1 到 1 的循环就能枚举,根本不用写 8 个 if。片段我看得懂,可就是不知道该把它塞进整个程序的哪里,后来发现它就放在「遍历每个雷」那个循环的里面,我一下子茅塞顿开。跑样例的时候我又发现,有一个雷被旁边的雷加了一下,我的 -1 被加成了 0,就变不出 * 了。我想再加一个循环去看那个位置是不是雷,结果雷一多就超时了。最后想通:标记和计数要分开,用一个数组 a 专门记哪里是雷,输出时先看 a,就又对又快了。",
+    comment: "一道题把「从想不出、到写对、再到写快」这条完整的成长路径全走了一遍,而且四个坑层层递进。最亮的两点:① 她<b>自己</b>发现了「有个雷被加回去了」这个极隐蔽的 bug —— 调试嗅觉非常好;② 修 bug 的直觉方向也对(确实需要知道某格是不是雷),只是选了「用循环找」这条慢路。先把逻辑写对、再来优化速度,这个顺序完全正确。这是一道「满分错题」。<b>最该带走的根因</b>:她开的 a[510][510] 是照答案抄的、并不知道用途 —— 其实答案早把「标记数组」这个正确工具递到了手里,可惜没读懂,才绕远路自己发明了 cnt=-1。「抄到看不懂的代码,先问一句为什么」,若当时问了,后面两个坑本可全部避免。",
+    rules: [
+      "地图 n 行 m 列,指定 q 个格子为雷,其余不是雷。",
+      "「相邻」= 两个格子至少有一个公共顶点 → 非边缘格子周围<b>一圈 8 格</b>都算相邻(含斜角)。",
+      "非雷格输出<b>周围 8 格里雷的个数</b>(0~8);雷格输出 <code>*</code>。",
+      "输出 n 行、每行 m 个字符,<b>用空格分隔</b>。",
+      "数据范围 <code>3 ≤ n,m ≤ 500</code>,雷数最多可达数万 → <b>算法必须够快</b>,不能 O(雷数²)。"
+    ],
+    rulesSummary: "对每个雷,把它周围 8 格的计数 +1(撒豆子法);输出时是雷打 *,否则打计数。",
+    errors: [
+      {
+        title: "照葫芦画瓢:抄了答案的 a[510][510],却不知道它是干嘛的",
+        phenomenon: "看到答案开了 <code>a[510][510]</code>,就跟着开了一个,但全程没用它 —— 自己另用 <code>cnt=-1</code> 去标记雷。",
+        consequence: "答案早就把「标记数组」这个正确工具递到手里了,却因为不懂用途而绕开它,自己发明了 cnt=-1,直接引出后面「相邻雷冲掉标记(WA)」和「加循环查找(TLE)」两个坑。",
+        cause: "抄代码只抄了「形」,没问「为什么这么写」—— 不知道 a 是用来当「雷的地图」的,更不知道为什么开到 510。",
+        fix: "抄到看不懂的代码,先停下来问一句「这个数组/这行是干嘛的?」。<code>a[510][510]</code> 的两个为什么:① <b>它是干嘛的</b> —— 就是「地图」,<code>a[i][j]=1</code> 表示这里是雷,正是标记数组;② <b>为什么开 510 不是 500</b> —— 下标从 1 开始、n 最大 500,数邻居时会碰到第 0 行和第 501 行,开大到 510 留余量,越界一点点也落在数组里,连边界 if 都能省掉。"
+      },
+      {
+        title: "把「8 个方向」当成 8 件事,用 8 个 if + 8 个 flag",
+        phenomenon: "数周围雷时,写了 8 个 if 分别处理左上/上/右上…8 个方向,还配了 8 个 flag,又长又乱,编完还不对。",
+        consequence: "代码冗长、边界判断每个方向都要单独写一遍,改一个漏一个,极易出错。",
+        cause: "没看出这 8 个方向是「同一种操作重复 8 次」,可以用循环枚举;把「重复结构」误当成了并列的 8 件事。",
+        fix: "周围 8 格 = 一个 3×3 小方块。用两层循环 <code>di、dj</code> 各从 -1 到 1 枚举,跳过中心,8 个 if 就收成一个循环:<pre>for(int di=-1; di&lt;=1; di++)\n  for(int dj=-1; dj&lt;=1; dj++){\n    if(di==0 &amp;&amp; dj==0) continue;  // 跳过自己\n    cnt[x+di][y+dj]++;\n  }</pre>"
+      },
+      {
+        title: "会写片段,却不知道它嵌在整个程序的哪一层",
+        phenomenon: "3×3 循环单独拎出来能看懂,但一放到完整程序里,就不知道该写在哪个位置。",
+        consequence: "片段和整体拼不起来,整道题卡住写不下去。",
+        cause: "对程序的「骨架 / 嵌套层次」缺少整体图景,只见树木不见森林。",
+        fix: "先搭骨架:<b>读入 → 遍历每个雷 { 给周围 8 格 +1 } → 输出</b>。那个 3×3 循环就嵌在「遍历每个雷」的循环体里 —— <b>外层换雷,内层计数</b>,处理一个雷就跑一整遍 3×3。"
+      },
+      {
+        title: "一个数组身兼两职:cnt 既标记雷又计数,相邻雷把标记冲掉",
+        phenomenon: "用 <code>cnt[x][y] = -1</code> 表示这里是雷。样例里 (1,3) 和 (2,4) 斜对角相邻,处理 (2,4) 时给邻居 (1,3) 加了 1,-1 被加成了 0。",
+        consequence: "相邻的那个雷输出成 0 而不是 * → WA。孩子自己观察到「有个雷被加回去了」。",
+        cause: "让 cnt 一个数组同时承担「是不是雷」和「周围几个雷」两个职责,两者一冲突就出错(一物两用)。",
+        fix: "<b>标记和计数分开</b>:另用数组 <code>a</code> 标记雷(读入时 <code>a[行][列]=1</code>),cnt 只管计数;输出时先看 a,是雷直接打 *。雷格的 cnt 值根本不看,所以它被加成几都无所谓。"
+      },
+      {
+        title: "用「循环查找」代替「查表」,雷一多就 TLE",
+        phenomenon: "为判断某位置是不是雷,加了一个内层 <code>for(l=1..p)</code> 把所有雷都翻一遍,总量约 <code>8 × p × p</code>。",
+        consequence: "逻辑对、样例能过,但雷数可达数万时,几十亿次运算 1 秒跑不完 → TLE,大数据全挂。",
+        cause: "只想到「用循环一个个找」,没想到用「标记数组下标 O(1) 直接查」;关注了「对不对」,没关注「快不快」。",
+        fix: "用标记数组 a,查 <code>a[x][y]</code> 是否为 1 一步到位。更妙的是:配合上一条的「标记与计数分离」,连「检查邻居是不是雷」都不需要 —— 直接把整个内层循环<b>删掉</b>,代码更短、更快、还正确。"
+      }
+    ],
+    reviewCase: {
+      input: "3 4 4\n1 1\n1 3\n2 4\n3 2",
+      key: "雷 (1,3) 与 (2,4) 是<b>斜对角相邻</b>的 —— 专门检验「两个相邻的雷会不会互相把标记/计数搞乱」。若用 cnt=-1 兼职标记,(1,3) 会被 (2,4) 加成 0。",
+      output: "* 2 * 2\n2 3 3 *\n1 * 2 1",
+      waBehavior: "cnt=-1 兼职版本会把 (1,3) 输出成 0,即错成「* 2 0 2 / …」;后来加内层循环查找的版本结果对,但雷一多就 TLE。只有「标记数组 a + cnt 只计数」的版本又对又快。"
+    },
+    shortcomings: [
+      ["抄代码不问为什么(照葫芦画瓢)", "照答案开了 a[510][510] 却不知道用途,结果绕开了递到手里的正确工具,自己发明了更差的 cnt=-1 —— 这是后面几个坑的总根源。"],
+      ["重复结构没抽象成循环", "把「8 个方向」当成 8 件事,用 8 个 if + 8 个 flag,而不是一个 -1~1 的双重循环。"],
+      ["局部与整体拼不起来", "片段能懂,却不知道它嵌在程序哪一层 —— 缺少「先搭骨架、再往里填」的习惯。"],
+      ["一个变量身兼两职", "让 cnt 同时「标记雷」和「计数」,两个职责一冲突就出 bug。"],
+      ["只关注对错,不关注快慢", "修 bug 第一反应是「再加个循环找一找」,没有数据范围 / 时间复杂度的意识。"]
+    ],
+    checklist: [
+      ["读题", "先圈数据范围(n,m≤500、雷可达数万)—— 范围一大,就要提前想「会不会超时」。"],
+      ["想清楚", "「周围 8 格」= 3×3 枚举;动手前先在纸上把程序骨架(读入→遍历雷→输出)画出来。"],
+      ["写码", "重复的结构用循环收起来;一个数组只干一件事 —— 标记归标记、计数归计数。"],
+      ["自测", "专造「两个雷相邻」的数据,检验标记会不会被邻居冲掉;再想想雷很多时快不快。"],
+      ["调 bug", "先手算一个相邻雷格子,追踪它的值是怎么被改的,再动手;写对之后再优化速度。"]
+    ],
+    oneLiner: "两个境界,一道题全占:① 重复的事用循环收,别写 8 个 if;② 一个数组只干一件事 —— 标记归标记、计数归计数。想通这两条,又对又快。"
+  },
+
+  {
+    id: "shop_discount",
+    title: "商店折扣(分段累进计费)",
+    date: "2026-07-27",
+    source: "10187 / GESP 4 级同类",
+    result: "没有思路",
+    tags: ["分支结构", "分段计费", "累进折扣", "if-else", "思路卡点"],
+    kidReflection: "我最疑惑的是:算每一段的时候,我怎么知道上一个杯子到底满没满?好像得专门记一下。中间我还想用一个 flag,上一段装完就判断有没有剩余,没剩就不往下走。后来经点拨才反应过来:题目里对 n 的分档判断,其实已经把这个告诉我了 —— 只要 n 超过了 4500,就说明前两个杯子一定是满的,根本不用我另外去记、去判断。",
+    comment: "这是一道「没写错但值得记」的题 —— 全程卡在思路上。她真正的疑惑是「怎么知道上一个杯子满没满」,一度想用额外的变量或 flag 去记录状态。关键的一步是自己反应过来:落到哪一档的判断条件(n 和分界点比大小)本身就蕴含了「前面几个杯子都满了」这个信息,不需要另设标志。手写的五档计算逻辑全部正确、边界不重不漏,分段累进算是彻底通关。",
+    rules: [
+      "购物金额分段累进打折,每一段只对<b>落在该段内的那一截钱</b>打折,不是整笔打一个折。",
+      "第 1 段:不超过 <code>1500</code> 的部分 ×<code>0.98</code>。",
+      "第 2 段:<code>1500~4500</code> 的部分(容量 3000)×<code>0.90</code>。",
+      "第 3 段:<code>4500~9000</code> 的部分(容量 4500)×<code>0.85</code>。",
+      "第 4 段:超过 <code>9000</code> 的部分(无上限)×<code>0.75</code>。",
+      "分界点 <code>1500 / 4500 / 9000</code> 是题目给死的常数,不用算、不用存。"
+    ],
+    rulesSummary: "先判断金额落到哪一档 → 前面的段按满额容量算、落脚那一段用减法算 → 各段「钱 × 折扣」相加。有小数保留小数,整数按整数输出。",
+    errors: [
+      {
+        title: "卡点:「算这一段时,我怎么知道上一个杯子满没满?」",
+        phenomenon: "算某一段时,总担心要先确认「前面的杯子是不是已经装满」,觉得得专门记住每个杯子的状态。",
+        consequence: "越想越觉得要堆变量来记状态,思路卡住不敢下手。",
+        cause: "没看出「满没满」这个信息,已经藏在「n 落在哪一档」的判断里了。",
+        fix: "分界点是固定常数:一旦判断出 <code>n &gt; 4500</code>,就等于确认了「前两个杯子必然是满的」。<b>档位判断本身就回答了「满没满」</b>,不用另开变量记。"
+      },
+      {
+        title: "卡点:想用 flag 控制「要不要往下走」",
+        phenomenon: "打算「上一段装完 if 判断没剩余就不往下走,否则 flag 不变」,额外开一个 flag 管流程。",
+        consequence: "flag 是多余变量 —— 还要额外操心「什么时候改、改成几」,增加出错点。",
+        cause: "没意识到「落在哪一档」这个已有的判断,本身就决定了要算几段、要不要往下走。",
+        fix: "档位判断已经框定了要算几段;若改用「剩余」思路,则 remain 大于 0 就继续、等于 0 自然停。两种写法都不需要额外的 flag。"
+      }
+    ],
+    reviewCase: {
+      input: "6000",
+      key: "6000 落在第 3 段,能同时检验「前两段按满额算 + 第 3 段用减法(6000−4500)」有没有想对。另配 1200(只落第 1 段)检验「钱不够时后面的段不用管」。",
+      output: "5445",
+      waBehavior: "常见错法对照:若误把整笔按落脚档打折,会算成 6000×0.85=5100;正确应为 1500×0.98 + 3000×0.90 + 1500×0.85 = 1470+2700+1275 = 5445。(n=1200 正确输出 1176)"
+    },
+    shortcomings: [
+      ["没看出「已知条件里已含答案」", "纠结「怎么判断上个杯子满没满」,没意识到档位判断(n 与分界点比大小)本身已经回答了。"],
+      ["变量意识偏冗余", "第一反应是「多开变量/flag 存状态」,而不是「能不能用已有信息省掉一个变量」。"],
+      ["用控制标志代替已有信息", "想额外开 flag 管流程,没看出「落在哪一档」本身就决定了流程走向。"]
+    ],
+    checklist: [
+      ["读题", "把「不超过 / 超过…的部分」这类字眼圈出来,先判断是「一刀切」还是「分段累进」。"],
+      ["想清楚", "分界点是常数不用存;真正要动脑的只有「落脚那一段用减法算多少」。"],
+      ["写码", "每加一个新变量先问:这个信息是不是已有变量能表示?(如 remain 已含「要不要继续」)"],
+      ["自测", "造 2 类数据:恰好落在中间某段的(6000)、只够第一段的(1200),验证累进和边界。"],
+      ["调 bug", "结果不对时,先手算把每一段「装多少 × 折扣」列出来,对照程序哪一段少加了前面一截。"]
+    ],
+    oneLiner: "卡住时先别急着加变量 —— 问一句「我要判断的东西,题目已知条件里是不是已经给了?」。这道题「上个杯子满没满」,答案就藏在「n 落在哪一档」的判断里。"
+  },
+
+  {
+    id: "guardman",
+    title: "警卫监视(数组越界)",
+    date: "2026-07-27",
+    source: "AtCoder Beginner Contest(比赛日 2026-07-25)",
+    result: "WA",
+    tags: ["数组越界", "边界处理", "字符串", "模拟"],
+    kidReflection: "我一开始没想到 j 会跑到 0 到 4,但字符串只有 3 个字符,下标 3、4 根本不存在。我算了一下 3 2 / ... 这个例子才发现,读了不存在的格子。下次用变量当下标之前,要先想这个位置在不在范围里。",
+    comment: "整体思路完全正确,只栽在一个「看不见」的坑上——读了字符串里根本不存在的格子。三个引导问题一问,自己就把 j 越界找出来了。能靠自己一步步爬出坑,比一次做对更有价值。",
+    rules: [
+      "M 个格子排成一行,第 i 个格子上有警卫当且仅当 <code>S[i]=='G'</code>。",
+      "格子 x 被监视:存在警卫 i,使 <code>|x-i| ≤ D</code>(左右各 D 格内)。",
+      "求「没有被任何警卫监视」的格子数量。",
+      "关键边界:<code>0 ≤ D &lt; M ≤ 100</code>,下标只在 <code>0..M-1</code>,<b>范围外没有格子</b>。"
+    ],
+    rulesSummary: "对每个格子往左右各看 D 格,一个 G 都没有就 +1,输出计数。",
+    errors: [
+      {
+        title: "内层循环 j 没做边界检查,读了越界的 s[j]",
+        phenomenon: "<code>for(int j=i-d; j&lt;=i+d; j++)</code> 里,i 靠近两端时 j 会变成负数或超过长度,却直接读 <code>s[j]</code>。",
+        consequence: "读到内存垃圾值,有时恰好等于 'G'、有时不等 → flag 被错误置 0 → 漏计,答案时对时错,所以是 WA 不是全错。",
+        cause: "把「逻辑上要看的范围 i-d~i+d」和「字符串真实存在的下标 0~l-1」混为一谈。",
+        fix: "读 s[j] 前先判断 j 合法(<code>j≥0 且 j≤l-1</code>):<pre>for(int j = i-d; j &lt;= i+d; j++){\n    if(j &gt;= 0 &amp;&amp; j &lt;= l-1){   // 先确认是真实格子\n        if(s[j] == 'G') flag = 0;\n    }\n}</pre>"
+      },
+      {
+        title: "(小)continue 无效,应改用 break",
+        phenomenon: "找到 G、flag=0 后写了 <code>continue;</code>。",
+        consequence: "不影响对错,但循环不停,已确定被监视还白看剩下的格子。",
+        cause: "把 continue(跳过本次)和 break(结束整个循环)记混。",
+        fix: "已确定被监视,用 <code>break;</code> 立刻跳出内层循环。"
+      }
+    ],
+    reviewCase: {
+      input: "3 2\n...",
+      key: "M=3、D=2,<b>一个警卫都没有</b>,而 D 大,j 会跑到 -2、-1 和 3、4 这些不存在的位置,专门触发越界。",
+      output: "3",
+      waBehavior: "三格本应全「没被监视」(答案 3),越界读到的垃圾若恰好是 'G' 就误判为被监视,输出成 2 甚至更小。错在没边界检查的 <code>if(s[j]=='G')</code>。"
+    },
+    shortcomings: [
+      ["下标边界意识弱", "只想「要看哪些格子」,没想「这些位置是否真实存在」。"],
+      ["不会主动造边界数据自测", "提交前没用「靠边+大 D+无 G」的极端数据跑一遍。"],
+      ["continue / break 记混", "想提前结束循环却用了只跳过本次的 continue。"]
+    ],
+    checklist: [
+      ["读题", "先圈出数据范围和下标范围(本题下标只在 0..M-1)。"],
+      ["想清楚", "凡是用变量当下标(s[j]),先问:会不会 &lt;0 或 ≥长度?"],
+      ["写码", "访问数组/字符串前,养成「先判断下标合法,再读值」。"],
+      ["自测", "专造 3 类数据:元素在最左、在最右、D 取最大。"],
+      ["调 bug", "WA 不要重写,先拿小例子手算,对照程序哪步开始不同。"]
+    ],
+    oneLiner: "用变量当下标读数组前,永远先问一句:<b>「这个位置真的存在吗?」</b>——越界读到的垃圾值,是最会骗人的 bug。"
+  },
+
+  {
+    id: "scholarship",
+    title: "奖学金(结构体多关键字排序)",
+    date: "2026-07-24",
+    source: "10483 / 洛谷 P1093 同类",
+    result: "WA",
+    tags: ["排序", "多关键字排序", "结构体", "冒泡排序", "交换条件"],
+    comment: "这道题一个人踩了 4 个坑,而且层层递进。能靠自己一个个爬出来,比一次做对更有价值。这是一道「满分错题」。",
+    rules: [
+      "先按 <span class='hl'>总分</span> 从高到低。",
+      "总分相同,按 <span class='hl'>语文</span> 从高到低。",
+      "总分和语文都相同,<span class='hl'>学号小的</span> 排前面。"
+    ],
+    rulesSummary: "输出前 5 名的「学号 + 总分」。",
+    errors: [
+      {
+        title: "结构体交换不完整",
+        phenomenon: "只 <code>swap(sum)</code>、<code>swap(t)</code>,漏了 yw/sx/yy。",
+        consequence: "一个同学的数据被拆散,后面比语文时「张冠李戴」。",
+        cause: "没把结构体当成一个「整体」。",
+        fix: "5 个字段全换,或直接 <code>swap(a[j], a[j+1])</code> 整体交换。"
+      },
+      {
+        title: "漏了第 3 条排序规则",
+        phenomenon: "只实现「按总分」「按语文」,忘了「总分语文都同 → 学号小的在前」。",
+        consequence: "并列情况顺序错。",
+        cause: "读题时规则没逐条落地。",
+        fix: "读题先把规则编号列清单,写完逐条打勾。"
+      },
+      {
+        title: "没理清「数组位置」和「名次」的关系",
+        phenomenon: "两人并列时以为「不用换」,但输出顺序反了,想不通。",
+        consequence: "输出名次颠倒。",
+        cause: "输出是从数组末尾往前打印的,却没意识到「想排第一名 = 要待在数组最靠后」。",
+        fix: "排序方向必须和输出方向对齐。"
+      },
+      {
+        title: "交换忘了带「条件」(无条件交换)",
+        phenomenon: "<code>else if(yw==)</code> 里直接交换,没比学号 → 2 号和 6 号顺序反了。",
+        consequence: "完全并列时顺序全靠碰运气。",
+        cause: "交换的前提是「发现顺序错了」,没判断就换。",
+        fix: "完全并列时要比学号,只有「学号小的还在前面(该往后放)」时才交换。"
+      }
+    ],
+    reviewCase: {
+      input: "8\n80 89 89\n88 98 78\n90 67 80\n87 66 91\n78 89 91\n88 99 77\n67 89 64\n78 89 98",
+      key: "学号 <span class='hl'>2</span> 和 <span class='hl'>6</span>,总分都是 264、语文都是 88 —— 完全并列。按第 3 条,学号小的 2 号应排在 6 号前。",
+      output: "8 265\n2 264   ← 2 号在前\n6 264   ← 6 号在后\n1 258\n5 258",
+      waBehavior: "WA 版本会把 2 号、6 号顺序输反(因为「无条件交换」)。"
+    },
+    shortcomings: [
+      ["需求不拆解", "3 条规则漏了 1 条。"],
+      ["不会造数据自测", "每次都靠 OJ 的 WA 才发现问题。"],
+      ["调试靠猜不靠追踪", "出错先想重写,而不是手动模拟数据流动。"],
+      ["概念停在表面", "「整体 vs 部分」「排序方向 vs 输出方向」「交换要带条件」都是被追问才想通。"]
+    ],
+    checklist: [
+      ["读题", "把所有规则/边界写成编号清单。"],
+      ["对齐方向", "先确认「输出从数组哪头读」,再定排序方向。"],
+      ["写码", "结构体整体交换;每个 swap 前都问「我判断了吗?」"],
+      ["自测", "提交前造 2~3 组卡自己的数据,专攻「相等 / 完全并列」。"],
+      ["调 bug", "WA 先拿纸笔手动模拟,追踪变量,再动手改。"]
+    ],
+    oneLiner: "多关键字排序不是「比几个字段」这么简单 —— 要想清楚从哪头输出、每次交换都得有明确条件,一个都不能少。"
+  }
+
+];
+</script>
+
+<script>
+/* ============================================================
+   数据层:全部题目 = 种子(SEED) + 本地新增(localStorage)
+   ============================================================ */
+const LS_KEY = 'cuoti_extras_v1';
+function loadExtras(){
+  try { return JSON.parse(localStorage.getItem(LS_KEY) || '[]'); }
+  catch(e){ return []; }
+}
+function saveExtras(arr){ localStorage.setItem(LS_KEY, JSON.stringify(arr)); }
+function getAll(){ return SEED_PROBLEMS.concat(loadExtras()); }
+
+/* ============================================================
+   渲染
+   ============================================================ */
+const listEl = document.getElementById('list');
+const tagbarEl = document.getElementById('tagbar');
+const countEl = document.getElementById('count');
+const qEl = document.getElementById('q');
+const sortEl = document.getElementById('sort');
+const resultEl = document.getElementById('result');
+let activeTags = new Set();
+
+function chip(text, on, extra=''){
+  const el = document.createElement('span');
+  el.className = 'chip ' + extra + (on ? ' on' : '');
+  el.textContent = text;
+  return el;
+}
+function renderTagbar(){
+  const allTags = [...new Set(getAll().flatMap(p => p.tags))].sort();
+  tagbarEl.innerHTML = '';
+  const all = chip('全部', activeTags.size === 0, 'all');
+  all.onclick = () => { activeTags.clear(); update(); };
+  tagbarEl.appendChild(all);
+  allTags.forEach(t => {
+    const c = chip(t, activeTags.has(t));
+    c.onclick = () => { activeTags.has(t) ? activeTags.delete(t) : activeTags.add(t); update(); };
+    tagbarEl.appendChild(c);
+  });
+}
+function resultClass(r){
+  if(r === 'WA') return 'b-wa';
+  if(r === 'TLE') return 'b-tle';
+  return 'b-other';
+}
+function detailHTML(p){
+  let h = '<div class="detail">';
+  h += '<h3 class="sec">一、题目规则 / 核心考点</h3><ol>';
+  (p.rules||[]).forEach(r => h += '<li>'+r+'</li>');
+  h += '</ol>' + (p.rulesSummary ? '<p>'+p.rulesSummary+'</p>' : '');
+
+  h += '<h3 class="sec">二、错误清单(按发现顺序)</h3>';
+  (p.errors||[]).forEach((e,i) => {
+    h += '<div class="err"><h4>❌ 错误 '+(i+1)+'｜'+e.title+'</h4><ul>';
+    if(e.phenomenon)  h += '<li><b>现象</b>:'+e.phenomenon+'</li>';
+    if(e.consequence) h += '<li><b>后果</b>:'+e.consequence+'</li>';
+    if(e.cause)       h += '<li><b>根因</b>:'+e.cause+'</li>';
+    if(e.fix)         h += '<li><span class="ok">✅ 正解</span>:'+e.fix+'</li>';
+    h += '</ul></div>';
+  });
+
+  const rc = p.reviewCase || {};
+  h += '<h3 class="sec">三、复盘用例</h3>';
+  if(rc.input)      h += '<p>输入:</p><pre>'+rc.input+'</pre>';
+  if(rc.key)        h += '<p>关键点:'+rc.key+'</p>';
+  if(rc.output)     h += '<p>正确输出:</p><pre>'+rc.output+'</pre>';
+  if(rc.waBehavior) h += '<p>WA 版本的表现:'+rc.waBehavior+'</p>';
+
+  if((p.shortcomings||[]).length){
+    h += '<h3 class="sec">四、暴露的思维 / 习惯短板</h3><table><tr><th>短板</th><th>这道题的表现</th></tr>';
+    p.shortcomings.forEach(s => h += '<tr><td>'+s[0]+'</td><td>'+(s[1]||'')+'</td></tr>');
+    h += '</table>';
+  }
+  if((p.checklist||[]).length){
+    h += '<h3 class="sec">五、下次做同类题的检查清单</h3><ol>';
+    p.checklist.forEach(c => h += '<li><span class="tag-step">'+c[0]+'</span>'+(c[1]||'')+'</li>');
+    h += '</ol>';
+  }
+  if(p.oneLiner) h += '<h3 class="sec">六、一句话记住这道题</h3><div class="oneliner">'+p.oneLiner+'</div>';
+  h += '</div>';
+  return h;
+}
+function cardHTML(p, isUser){
+  const tags = p.tags.map(t => '<span class="tag-s">'+t+'</span>').join('');
+  return '<div class="card" data-id="'+p.id+'">'
+    + '<div class="top"><h2>'+p.title+'</h2>'
+    +   '<span class="badge '+resultClass(p.result)+'">'+p.result+'</span></div>'
+    + '<div class="cmeta">📅 '+p.date+'　·　'+(p.source||'')+'</div>'
+    + '<div class="tags">'+tags+'</div>'
+    + (p.kidReflection ? '<div class="kidref"><span class="t">🧒 孩子的自我反思</span>'+p.kidReflection+'</div>' : '')
+    + (p.comment ? '<div class="comment"><b>🎓 教练点评:</b>'+p.comment+'</div>' : '')
+    + '<div class="cardfoot"><span class="toggle">▸ 展开详情</span>'
+    +   (isUser ? '<span class="del" data-del="'+p.id+'">🗑 删除</span>' : '')
+    + '</div>'
+    + detailHTML(p)
+    + '</div>';
+}
+function matches(p){
+  if(activeTags.size > 0 && !p.tags.some(t => activeTags.has(t))) return false;
+  const rf = resultEl.value;
+  if(rf){
+    if(rf === '其他'){ if(['WA','TLE','RE'].includes(p.result)) return false; }
+    else if(p.result !== rf) return false;
+  }
+  const q = qEl.value.trim().toLowerCase();
+  if(q){
+    const blob = (p.title+' '+p.tags.join(' ')+' '+(p.comment||'')+' '+(p.source||'')+' '
+      +(p.oneLiner||'')+' '+(p.errors||[]).map(e=>e.title+e.phenomenon+e.cause+e.fix).join(' ')).toLowerCase();
+    if(!blob.includes(q)) return false;
+  }
+  return true;
+}
+function update(){
+  renderTagbar();
+  const extras = loadExtras();
+  const userIds = new Set(extras.map(p => p.id));
+  let items = getAll().filter(matches);
+  items.sort((a,b) => sortEl.value === 'asc' ? a.date.localeCompare(b.date) : b.date.localeCompare(a.date));
+  countEl.textContent = '共 ' + items.length + ' / ' + getAll().length + ' 题';
+  if(items.length === 0){
+    listEl.innerHTML = '<div class="empty">没有符合条件的题目,换个筛选试试~</div>';
+    return;
+  }
+  listEl.innerHTML = items.map(p => cardHTML(p, userIds.has(p.id))).join('');
+  listEl.querySelectorAll('.card').forEach(card => {
+    const detail = card.querySelector('.detail');
+    const toggle = card.querySelector('.toggle');
+    const top = card.querySelector('.top');
+    const flip = () => {
+      const open = detail.classList.toggle('open');
+      toggle.textContent = open ? '▾ 收起详情' : '▸ 展开详情';
+    };
+    toggle.onclick = flip;
+    top.onclick = flip;
+  });
+  listEl.querySelectorAll('[data-del]').forEach(b => {
+    b.onclick = (e) => {
+      e.stopPropagation();
+      const id = b.getAttribute('data-del');
+      if(confirm('确定删除这道题?(只删本地新增的,种子题删不掉)')){
+        saveExtras(loadExtras().filter(p => p.id !== id));
+        update();
+      }
+    };
+  });
+}
+qEl.oninput = update;
+sortEl.onchange = update;
+resultEl.onchange = update;
+
+/* ============================================================
+   录入错题:粘贴 AI 生成的 JSON(不再手填,由孩子先反思 + AI 判断整理)
+   ============================================================ */
+const $ = id => document.getElementById(id);
+
+const mask = document.createElement('div');
+mask.className = 'mask';
+mask.innerHTML = `
+  <div class="modal">
+    <h2>📥 录入错题</h2>
+    <div class="tip">
+      正确姿势:① 让孩子<b>先自己总结</b>错在哪、为什么、下次怎么办 →
+      ② 把「题目 + 代码 + 孩子的总结」发给 AI(可点顶部「🤖 AI 分析提示词」拿现成提示词)→
+      ③ AI 会判断纠正并返回一段 JSON,把它粘到下面。
+    </div>
+    <div class="fld">
+      <label>粘贴 AI 生成的题目 JSON <span class="hint">(一道题一个 {…};也可一次粘一个数组 [ … ])</span></label>
+      <textarea id="f-json" style="min-height:300px;font-family:'SF Mono',Consolas,monospace;font-size:13px;line-height:1.5;" placeholder='{
+  "title": "题目名(考点)",
+  "tags": ["知识点1","知识点2"],
+  "kidReflection": "孩子自己的总结(原话)",
+  "comment": "教练点评",
+  ...
+}'></textarea>
+    </div>
+    <div class="actions">
+      <button class="btn" id="cancelBtn">取消</button>
+      <button class="btn primary" id="saveBtn">解析并加入错题库</button>
+    </div>
+  </div>`;
+document.body.appendChild(mask);
+
+function openModal(){ mask.classList.add('open'); $('f-json').value=''; $('f-json').focus(); }
+function closeModal(){ mask.classList.remove('open'); }
+$('cancelBtn').onclick = closeModal;
+mask.onclick = e => { if(e.target === mask) closeModal(); };
+
+$('saveBtn').onclick = () => {
+  const raw = $('f-json').value.trim();
+  if(!raw){ alert('先把 AI 生成的 JSON 粘进来'); return; }
+  let parsed;
+  try { parsed = JSON.parse(raw); }
+  catch(err){ alert('JSON 解析失败,检查是否复制完整(含首尾的 { } 或 [ ]):\n\n' + err.message); return; }
+  const arr = Array.isArray(parsed) ? parsed : [parsed];
+  const extras = loadExtras();
+  const have = new Set(getAll().map(p => p.id));
+  let added = 0, skipped = 0;
+  arr.forEach((p, k) => {
+    if(!p || !p.title){ skipped++; return; }
+    if(!p.id || have.has(p.id)) p.id = 'u' + new Date().getTime() + '_' + k;
+    if(!p.date) p.date = new Date().toISOString().slice(0,10);
+    if(!p.result) p.result = 'WA';
+    if(!Array.isArray(p.tags)) p.tags = [];
+    extras.push(p); have.add(p.id); added++;
+  });
+  saveExtras(extras); closeModal(); activeTags.clear(); update();
+  alert('已加入 ' + added + ' 道题 ✅' + (skipped ? '(跳过 ' + skipped + ' 条没有 title 的)' : ''));
+};
+$('addBtn').onclick = openModal;
+
+/* ============================================================
+   导出 HTML(把 种子+本地新增 一起烤进新文件,可跨电脑)
+   ============================================================ */
+function download(filename, text){
+  const blob = new Blob([text], {type:'text/html;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  URL.revokeObjectURL(a.href);
+}
+$('exportBtn').onclick = () => {
+  const all = getAll();
+  const clone = document.documentElement.cloneNode(true);
+  // 用「全部题目」重写种子数据,并清掉运行时渲染的列表/弹窗
+  clone.querySelector('#data').textContent =
+    '\nconst SEED_PROBLEMS = ' + JSON.stringify(all, null, 2) + ';\n';
+  const listNode = clone.querySelector('#list'); if(listNode) listNode.innerHTML = '';
+  clone.querySelectorAll('.mask').forEach(m => m.remove());
+  const html = '<!DOCTYPE html>\n' + clone.outerHTML;
+  const stamp = new Date().toISOString().slice(0,10);
+  download('编程错题库-' + stamp + '.html', html);
+  alert('已导出:编程错题库-' + stamp + '.html\n\n这个文件里有全部 ' + all.length + ' 道题,\n拷到别的电脑打开,题目都在!');
+};
+
+/* ============================================================
+   导入(从导出的 HTML 或 JSON 合并题目到本地)
+   ============================================================ */
+$('importBtn').onclick = () => document.getElementById('importFile').click();
+document.getElementById('importFile').onchange = (e) => {
+  const file = e.target.files[0]; if(!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    let imported = [];
+    const txt = reader.result;
+    try {
+      if(file.name.endsWith('.json')){
+        imported = JSON.parse(txt);
+      } else {
+        const m = txt.match(/const SEED_PROBLEMS\s*=\s*(\[[\s\S]*?\]);/);
+        if(m) imported = eval(m[1]);
+      }
+    } catch(err){ alert('读取失败:' + err.message); return; }
+    if(!Array.isArray(imported) || !imported.length){ alert('没读到题目'); return; }
+    const seedIds = new Set(SEED_PROBLEMS.map(p=>p.id));
+    const extras = loadExtras();
+    const have = new Set(getAll().map(p=>p.id));
+    let added = 0;
+    imported.forEach(p => { if(!have.has(p.id) && !seedIds.has(p.id)){ extras.push(p); have.add(p.id); added++; } });
+    saveExtras(extras); update();
+    alert('导入完成,新增 ' + added + ' 道题(重复的已跳过)。');
+  };
+  reader.readAsText(file, 'utf-8');
+  e.target.value = '';
+};
+
+/* ============================================================
+   一键复制「给 AI 的提示词」—— 让大模型引导分析并输出可导入 JSON
+   ============================================================ */
+const AI_PROMPT = `你是一位耐心的编程竞赛教练,面对的是一名小学生/初中生。
+
+【重要原则】错题反思必须是孩子自己思考的结果,不能由你代劳。所以:
+- 我会给你【题目】【孩子写的代码】,以及【孩子自己的总结】(她自己说的:错在哪、为什么错、下次怎么办)。
+- 如果孩子还没总结,请先用「引导式提问」(苏格拉底式,一步步问,不直接报答案)帮她自己想出来,等她答完再继续,不要替她写反思。
+
+拿到孩子的总结后,你的任务是:
+1. 判断她的总结对不对、全不全 —— 哪里想对了要肯定,哪里没看到的深层原因要补上;
+2. 指出她暴露的思维/习惯短板,给出具体、可操作的改进方向;
+3. 把这道题整理成错题库条目,用下面的 JSON 输出(放代码块里,方便复制导入)。
+   注意:kidReflection 里要放【孩子自己的原话总结】(可轻微润色但保留她的视角和口吻),
+   comment / shortcomings / checklist 这些是你作为教练的点评和补充。
+
+{
+  "id": "英文唯一id",
+  "title": "题目名称(考点)",
+  "date": "YYYY-MM-DD",
+  "source": "题号/来源",
+  "result": "WA",                 // WA / TLE / RE / 编译错误 / 其他
+  "tags": ["知识点1","知识点2"],   // 用于筛选,尽量用通用叫法
+  "kidReflection": "孩子自己的总结原话(错在哪/为什么/下次怎么办)",
+  "comment": "一句话教练点评(可点评孩子总结得如何)",
+  "rules": ["规则1","规则2"],      // 可含 <code> <b>
+  "rulesSummary": "一句话概括要求&输出格式",
+  "errors": [
+    { "title":"错误标题", "phenomenon":"现象", "consequence":"后果", "cause":"根因", "fix":"正解(要放代码就用 <pre>...</pre>)" }
+  ],
+  "reviewCase": { "input":"输入", "key":"为什么关键", "output":"正确输出", "waBehavior":"错误版本表现" },
+  "shortcomings": [ ["短板","表现"] ],
+  "checklist": [ ["读题","做法"], ["写码","提醒点"] ],
+  "oneLiner": "一句话记住这道题"
+}
+
+【题目】:
+(在这里贴题目)
+
+【孩子的代码】:
+(在这里贴代码)
+
+【孩子自己的总结】:
+(在这里贴孩子说的话;如果她还没总结,就先引导她)
+`;
+$('aiBtn').onclick = async () => {
+  try {
+    await navigator.clipboard.writeText(AI_PROMPT);
+    alert('提示词已复制!\n\n用法:\n① 先让孩子自己总结错因\n② 粘贴到任意大模型,补上【题目】【代码】【孩子的总结】\n③ AI 返回一段 JSON,点「📥 录入」粘进来即可。');
+  } catch(e){
+    prompt('请手动复制下面的提示词:', AI_PROMPT);
+  }
+};
+
+update();
+</script>
+</body>
+</html>
