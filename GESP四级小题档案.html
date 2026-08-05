@@ -37,6 +37,7 @@
   .card.red{border-left-color:#f87171;} .card.org{border-left-color:#fbbf24;} .card.grn{border-left-color:#34d399;}
   .card h4{margin:0 0 4px;font-size:16.5px;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;color:#fff;}
   .src{font-size:12.5px;color:var(--sub);font-weight:400;}
+  .kp{display:inline-block;font-size:11.5px;font-weight:800;padding:1px 8px;border-radius:4px;background:var(--accent2);color:#0a0f1e;margin-right:6px;vertical-align:middle;}
   .rule{background:rgba(52,211,153,.12);border-radius:5px;padding:6px 11px;margin:6px 0;}
   .trap{background:rgba(248,113,113,.12);border-radius:5px;padding:6px 11px;margin:6px 0;}
   pre{background:#0d1424;border:1px solid var(--line);border-radius:5px;padding:8px 11px;
@@ -113,81 +114,108 @@ const PAPERS = [
 // 错点表（核心资产）。status: bad=常错🔴  mid=偶错🟡  ok=已稳🟢  na=待验证⚪
 const MISTAKES = [
   { block:"指针", title:"指针可以「改指向」，*p 跟着换人",
-    src:[["2606","选5"]], status:"bad",
+    src:[["2606","选5"]], status:"bad", selfEval:"懵",
     wrong:"以为 *p 永远等于最初绑定的变量；漏看后面 p=&别的 这一步改了指向。",
     rule:"*p 是「p 现在指着的那个变量的值」。p 改指向后，*p 就换人了。做题用铅笔画箭头 p→谁。",
     memo:"p 改指向后，<b>*p 换人</b>",
-    code:"int lv=5, next_lv=6;\nint *p=&lv;   // p→lv\n*p=*p+1;      // lv=6\np=&next_lv;   // p 改指向 next_lv\n// *p = 6  （现在指的是 next_lv）"},
+    code:"int lv=5, next_lv=6;\nint *p=&lv;   // p→lv\n*p=*p+1;      // lv=6\np=&next_lv;   // p 改指向 next_lv\n// *p = 6  （现在指的是 next_lv）",
+    question:"第5题（执行后 *p 的值是？）\nint lv=5, next_lv=6;\nint *p=&lv;\n*p=*p+1;\np=&next_lv;\n// A.5  B.6  C.lv的地址  D.next_lv的地址\n→ 正确答案 B"},
 
   { block:"指针", title:"指针 ±1 = 走一个「元素格子」",
-    src:[["2606","选7"]], status:"bad",
+    src:[["2606","选7"]], status:"bad", selfEval:"懵",
     wrong:"把指针 +1 当成地址加 1 字节，或数错前后元素。",
     rule:"指针 +1 是往后跳一个元素，不是一个字节。ptr+2 就是第2个后面的元素。",
     memo:"指针 +1 跳<b>一个元素</b>，不是一字节",
-    code:"int data[]={10,20,30,40,50};\nint *ptr=data+2;      // 指向 30\n*(ptr-1)+*(ptr+1)    // 20+40 = 60"},
+    code:"int data[]={10,20,30,40,50};\nint *ptr=data+2;      // 指向 30\n*(ptr-1)+*(ptr+1)    // 20+40 = 60",
+    question:"第7题（变量 val 的值是？）\nint data[]={10,20,30,40,50};\nint *ptr=data+2;\nint val=*(ptr-1)+*(ptr+1);\n// A.50  B.60  C.70  D.80\n→ 正确答案 B"},
 
   { block:"指针", title:"&整个数组 +1 跳过一整块（难）",
-    src:[["2606","选6"]], status:"mid",
+    src:[["2606","选6"]], status:"mid", selfEval:"懵",
     wrong:"以为 &map+1 只加一个元素/一个字节。",
     rule:"&数组名 +1 会跳过整个数组的字节数 = 行×列×每格字节；再换成16进制加上去。",
     memo:"&数组+1 跳<b>整块</b>（行×列×字节）",
-    code:"int map[5][4];  // 一整块=5×4×4=80字节=0x50\n// 起始 0x2000 → &map+1 = 0x2050"},
+    code:"int map[5][4];  // 一整块=5×4×4=80字节=0x50\n// 起始 0x2000 → &map+1 = 0x2050",
+    question:"第6题（int 占4字节，map 起址 0x2000，&map+1 的地址？）\nint map[5][4];\n// A.0x204c  B.0x205c  C.0x2050  D.0x2058\n→ 正确答案 C"},
 
   { block:"结构体", title:"new 出来的是「指针」，左边必须带 *",
-    src:[["2606","选9"]], status:"mid",
-    wrong:"以为 Hero h = new Hero{...} 合法。",
+    src:[["2606","选9"]], status:"mid", selfEval:"没把握",
+    wrong:"以为 Hero h = new Hero{...} 合法。（☆自评「会」，其实栽了）",
     rule:"new 返回的一定是指针，左边必须是 Hero*。左边写成普通对象 Hero h 就编译错。",
     memo:"new 出来是<b>指针</b>，左边带 *",
-    code:"Hero h  = new Hero{...};  // ✗ 编译错\nHero *p = new Hero{...};  // ✓ 指针接指针"},
+    code:"Hero h  = new Hero{...};  // ✗ 编译错\nHero *p = new Hero{...};  // ✓ 指针接指针",
+    question:"第9题（哪种初始化会语法错误导致编译失败？）\nstruct Hero{ string name; int hp; };\nA. Hero h = {\"Arthur\",100};\nB. Hero h; h.name=\"Arthur\"; h.hp=100;\nC. Hero h = new Hero{\"Arthur\",100};\nD. Hero *p = new Hero{\"Arthur\",100};\n→ 正确答案 C"},
 
   { block:"排序", title:"冒泡稳定、插入稳定、选择排序不稳定",
-    src:[["2606","选11"],["2606","判4"]], status:"bad",
-    wrong:"以为选择排序也是稳定的。",
+    src:[["2606","选11"],["2606","判4"]], status:"bad", selfEval:"没把握",
+    wrong:"以为选择排序也是稳定的。（☆自评「会」，其实栽了）",
     rule:"选择排序把最小元素直接拎到前面，会跳过和它相等的元素，打乱相对顺序 → 不稳定。",
     memo:"<b>选择排序不稳定</b>（冒泡/插入稳定）",
-    code:"[5a, 5b, 2] → 选最小 2 换到第1位\n[2, 5b, 5a] → 5a 跑到 5b 后，顺序变了"},
+    code:"[5a, 5b, 2] → 选最小 2 换到第1位\n[2, 5b, 5a] → 5a 跑到 5b 后，顺序变了",
+    question:"第11题（关于排序稳定性，错误的说法是？）\nA. 冒泡稳定，只有左>右才交换\nB. 插入稳定，插到相等元素右侧\nC. 选择排序稳定，每次选最小放前面\nD. 稳定=排序后相等元素相对位置不变\n→ 正确答案 C（选择排序其实不稳定）\n判4：选择排序遇相等不交换则稳定 → 错（×）"},
 
   { block:"排序", title:"认代码：一轮找最小位置再交换 = 选择排序",
     src:[["2606","选14"]], status:"bad",
     wrong:"看到排序代码认不出是哪种。",
     rule:"特征：外层每一轮先找出最小值的位置 minPos，一轮只交换一次 → 选择排序。",
     memo:"找 minPos 再换一次 = <b>选择排序</b>",
-    code:"for(i..) { minPos=i;\n  for(j=i+1..) if(a[j]<a[minPos]) minPos=j;\n  swap(a[i], a[minPos]); }  // 选择排序"},
+    code:"for(i..) { minPos=i;\n  for(j=i+1..) if(a[j]<a[minPos]) minPos=j;\n  swap(a[i], a[minPos]); }  // 选择排序",
+    question:"第14题（下面代码用的是哪种排序？）\nvoid mystery_sort(double arr[], int n){\n  for(int i=0;i<n-1;i++){\n    int minPos=i;\n    for(int j=i+1;j<n;j++)\n      if(arr[j]<arr[minPos]) minPos=j;\n    swap(arr[i],arr[minPos]);\n  }\n}\n// A.冒泡 B.插入 C.选择 D.非典型\n→ 正确答案 C"},
 
   { block:"递推", title:"循环里变量互相赋值 → 一律画表格手算",
     src:[["2606","选12"]], status:"mid",
     wrong:"心算迭代过程，a/b/c 更新顺序算乱。",
     rule:"凡是循环里 c=a+b; a=b; b=c 这种，别心算，列表格一行行填到底。这是全卷通用救命技能。",
     memo:"循环迭代 <b>画表格</b>手算，不心算",
-    code:"a=1,b=2\ni=3: c=3, a=2, b=3\ni=4: c=5, a=3, b=5\ni=5: c=8   → 答案 8"},
+    code:"a=1,b=2\ni=3: c=3, a=2, b=3\ni=4: c=5, a=3, b=5\ni=5: c=8   → 答案 8",
+    question:"第12题（jump(5) 的结果？f(n)=f(n-1)+f(n-2), f(1)=1,f(2)=2）\nint jump(int n){\n  if(n<=2) return n;\n  int a=1,b=2,c=0;\n  for(int i=3;i<=n;i++){ c=a+b; a=b; b=c; }\n  return c;\n}\n// A.5  B.8  C.13  D.21\n→ 正确答案 B"},
 
   { block:"异常处理", title:"throw 的类型 决定被哪个 catch 接住",
-    src:[["2606","选13"]], status:"bad",
+    src:[["2606","选13"]], status:"bad", selfEval:"懵",
     wrong:"完全没认出这是异常处理题（考试写了「我也不知道」）——概念空白。",
     rule:"throw 抛出什么类型，就被对应类型的 catch 接住，其它 catch 跳过。\"文字\" 是字符串(const char*)，不是 int。",
     memo:"throw 什么<b>类型</b>被对应 catch 接；\"字\"≠int",
-    code:"throw \"Zero Error\";       // 抛的是字符串\ncatch(int e){...}         // 类型不符，跳过\ncatch(const char* m){...}  // 接住 → 选 C"},
+    code:"throw \"Zero Error\";       // 抛的是字符串\ncatch(int e){...}         // 类型不符，跳过\ncatch(const char* m){...}  // 接住 → 选 C",
+    question:"第13题（执行以下代码将输出？）\ntry{\n  int x=10, y=0;\n  if(y==0) throw \"Zero Error\";\n  cout<<x/y;\n} catch(int e){\n  cout<<\"Error Code: \"<<e;\n} catch(const char* msg){\n  cout<<\"Caught: \"<<msg;\n}\n// A.0  B.Error Code: 0  C.Caught: Zero Error  D.崩溃\n→ 正确答案 C"},
 
   { block:"函数·作用域·传参", title:"值传递 vs 传址/引用（送分点，务必吃透）",
-    src:[["2606","选1"],["2606","判1"],["2606","判9"]], status:"mid",
-    wrong:"分不清参数写 int x / int *p / int &x 时，能不能改到外面的变量。",
+    src:[["2606","选1"],["2606","判1"],["2606","判9"]], status:"mid", selfEval:"懵",
+    wrong:"分不清参数写 int x / int *p / int &x 时，能不能改到外面的变量。（选1△懵蒙对，别被'对了'骗了）",
     rule:"参数光是普通值 → 改不到外面；带 * 或 & → 能改到外面。这是四级最爱考的送分点。",
     memo:"参数带 <b>* 或 &</b> 才改得到外面",
-    code:"void f(int x)  {x=..}   // ✗ 改不到外面\nvoid f(int *p) {*p=..}  // ✓ 能改\nvoid f(int &x) {x=..}   // ✓ 能改"},
+    code:"void f(int x)  {x=..}   // ✗ 改不到外面\nvoid f(int *p) {*p=..}  // ✓ 能改\nvoid f(int &x) {x=..}   // ✓ 能改",
+    question:"第1题（输出？）\nvoid exchange(int *a, int &b){ int t=*a; *a=b; b=t; }\nint main(){ int x=100,y=200; exchange(&x,y); cout<<x<<\" \"<<y; }\n// A.100 200  B.200 100  C.200 200  D.编译错误 → 正确答案 B\n判1：modify(int*p){*p=*p+10} a=10,modify(&a) → a=20（√）\n判9：recharge(int money){money+=20} card=50 → 输出50不是70（×）"},
 
   { block:"函数·作用域·传参", title:"引用不能改绑；数组名不能 ++",
     src:[["2606","判2"],["2606","判10"]], status:"na",
     wrong:"判2/判10 具体判对没判对待核实。",
     rule:"引用一旦绑定不能再改绑别的变量（判2「可重新绑定」是假）。int a[5]; a++; 数组名不能自增，编译错（判10「可编译」是假）。",
     memo:"引用<b>不能改绑</b>；数组名<b>不能 ++</b>",
-    code:"int a[5];\na++;   // ✗ 编译错"},
+    code:"int a[5];\na++;   // ✗ 编译错",
+    question:"判2：引用初始化并绑定后，可用赋值语句重新绑定到另一变量 →（正确答案 ×）\n判10：int a[5]; a++; 可以通过编译 →（正确答案 ×）"},
 
   { block:"函数·作用域·传参", title:"局部变量出了函数就失效（作用域）",
-    src:[["2606","选4-已对"]], status:"ok",
-    wrong:"（本轮做对，标注也准，列在此巩固）",
+    src:[["2606","选4"]], status:"na", selfEval:"没把握",
+    wrong:"这题☆自评「会但没把握」——虽做对，仍是脆弱点，考前要再过一遍确认真会。",
     rule:"函数里定义的变量只在这个函数内有效，出了这个函数用它 → 编译错。",
     memo:"局部变量<b>出函数即失效</b>",
-    code:"void show(){ int stars=5; }\nint main(){ cout<<stars; } // ✗ 用不到 stars"},
+    code:"void show(){ int stars=5; }\nint main(){ cout<<stars; } // ✗ 用不到 stars",
+    question:"第4题（关于下面程序，说法正确的是？）\nvoid show(){ int stars=5; }\nint main(){ cout<<stars; return 0; }\n// A.输出5  B.可编译但输出随机值\n// C.不能编译，stars 只在 show 内有效\n// D.不能编译，cout 不能输出变量\n→ 正确答案 C"},
+
+  { block:"函数·作用域·传参", title:"函数返回值参与表达式计算",
+    src:[["2606","选3"]], status:"na", selfEval:"没把握",
+    wrong:"这题☆「会但没把握」——做对但心里没底，脆弱点，考前再确认。",
+    rule:"先分别算出每个函数的返回值，再代入表达式相加。addOne(6)=7，addOne(3)=4，7+4=11。",
+    memo:"先各自求函数返回值，<b>再相加</b>",
+    code:"int addOne(int x){ return x+1; }\naddOne(6)+addOne(3) = 7+4 = 11",
+    question:"第3题（输出？）\nint addOne(int x){ return x+1; }\nint main(){ int a=6; cout<<addOne(a)+addOne(3); }\n// A.9  B.10  C.11  D.12\n→ 正确答案 C"},
+
+  { block:"结构体", title:"结构体数组下标从 0 数",
+    src:[["2606","选10"]], status:"na", selfEval:"没把握",
+    wrong:"这题☆「会但没把握」——做对但没底，脆弱点，考前再确认下标。",
+    rule:"books[1] 是数组第 2 个元素（下标从0）。books[1].title 就是 Science。",
+    memo:"books[1] 是<b>第2个</b>（下标0起）",
+    code:"Book books[2]={{\"Math\",120},{\"Science\",150}};\nbooks[1].title // = \"Science\"",
+    question:"第10题（输出？）\nstruct Book{ string title; int pages; };\nint main(){\n  Book books[2]={{\"Math\",120},{\"Science\",150}};\n  cout<<books[1].title;\n}\n// A.Math  B.Science  C.120  D.150\n→ 正确答案 B"},
 ];
 
 /* ============ 渲染 ============ */
@@ -234,11 +262,13 @@ function renderLib(){
     .sort((a,b)=>(BLOCKS.indexOf(a.block)-BLOCKS.indexOf(b.block))||(order[a.status]-order[b.status]));
   const cnt=k=>MISTAKES.filter(m=>m.status===k).length;
   const fb=(k,label)=>`<button class="fbtn ${curFilter===k?"on":""}" onclick="curFilter='${k}';renderLib()">${label}</button>`;
+  const EVAL={ "懵":["🌀 当时懵·蒙的","#ef3b30"], "没把握":["〰️ 会但没把握","#f0850a"] };
   let cards=list.map(m=>{
     const st=STATUS[m.status];
+    const ev=m.selfEval?`<span class="pill" style="background:${EVAL[m.selfEval][1]};color:#fff">${EVAL[m.selfEval][0]}</span> `:"";
     return `<div class="card ${m.status==='bad'?'red':m.status==='mid'||m.status==='na'?'org':'grn'}">
-      <h4><span>【${m.block}】${m.title}</span>
-        <span><span class="pill ${st[1]}">${st[0]}</span> <span class="src">来源：${srcStr(m.src)}</span></span></h4>
+      <h4><span><span class="kp">知识点</span>【${m.block}】${m.title}</span>
+        <span>${ev}<span class="pill ${st[1]}">${st[0]}</span> <span class="src">来源：${srcStr(m.src)}</span></span></h4>
       <div class="trap">⚠️ 误区：${m.wrong}</div>
       <div class="rule">✅ 正确规则：${m.rule}</div>
       <pre>${esc(m.code)}</pre></div>`;
