@@ -6,77 +6,69 @@
 <title>GESP C++ 四级 · 小题掌握档案</title>
 <style>
   :root{
-    /* 经典深色主题（同错题库） */
-    --bg:#0a0f1e; --bg2:#111827; --bg3:#1f2937; --line:#2b3648;
-    --tx:#e5e7eb; --sub:#94a3b8;
-    --accent:#38bdf8; --accent2:#a78bfa; --accent3:#34d399;
-    --red:#f87171; --org:#fbbf24; --grn:#34d399; --blue:#38bdf8;
+    /* 浅色主题；标记色取鲜亮 */
+    --ink:#1a1a1a; --sub:#5f6b7a; --line:#dce0e6; --bg:#f4f6f9;
+    --blue:#1f6fd6; --bluebg:#e6f0fd;
+    --red:#e6362c; --redbg:#fde3e1;
+    --org:#f0850a; --orgbg:#fdecd0;
+    --grn:#12a150; --grnbg:#dcf3e6;
   }
   *{box-sizing:border-box;}
-  body{font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;color:var(--tx);
+  body{font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;color:var(--ink);
     line-height:1.65;font-size:16.5px;margin:0;background:var(--bg);}
-  header{background:var(--bg2);color:#fff;padding:16px 26px;border-bottom:1px solid var(--line);}
+  header{background:#141b2b;color:#fff;padding:16px 26px;}
   header h1{margin:0;font-size:22px;color:#fff;}
-  header .m{color:var(--sub);font-size:14px;margin-top:3px;}
-  .tabs{display:flex;gap:4px;background:var(--bg2);padding:0 20px;position:sticky;top:0;z-index:10;flex-wrap:wrap;border-bottom:1px solid var(--line);}
-  .tab{background:none;border:none;color:var(--sub);font-size:16px;padding:11px 16px;cursor:pointer;border-bottom:3px solid transparent;font-family:inherit;}
+  header .m{color:#9aa7b8;font-size:14px;margin-top:3px;}
+  .tabs{display:flex;gap:4px;background:#1f2838;padding:0 20px;position:sticky;top:0;z-index:10;flex-wrap:wrap;}
+  .tab{background:none;border:none;color:#9aa7b8;font-size:16px;padding:11px 16px;cursor:pointer;border-bottom:3px solid transparent;font-family:inherit;}
   .tab:hover{color:#fff;}
-  .tab.on{color:var(--accent);border-bottom-color:var(--accent);font-weight:700;}
+  .tab.on{color:#fff;border-bottom-color:#4aa3ff;font-weight:700;}
   main{max-width:900px;margin:0 auto;padding:22px 26px;}
   .view{display:none;} .view.on{display:block;}
   h2{font-size:20px;margin:6px 0 12px;}
-  h3{font-size:17.5px;color:var(--accent);margin:22px 0 8px;border-bottom:2px solid var(--bg3);padding-bottom:4px;}
-  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:15px;background:var(--bg2);}
+  h3{font-size:17.5px;color:var(--blue);margin:22px 0 8px;border-bottom:2px solid var(--bluebg);padding-bottom:4px;}
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:15px;background:#fff;}
   th,td{border:1px solid var(--line);padding:7px 9px;text-align:center;}
-  th{background:var(--bg3);color:#fff;} td.l{text-align:left;}
-  .goal{border:1px solid var(--accent);background:rgba(56,189,248,.1);border-radius:8px;padding:12px 16px;margin:12px 0;}
-  .goal b{font-size:21px;color:var(--accent);}
-  .pill{display:inline-block;font-size:12.5px;font-weight:700;padding:2px 9px;border-radius:11px;color:#0a0f1e;}
-  .p-red{background:#f87171;} .p-org{background:#fbbf24;} .p-grn{background:#34d399;} .p-gray{background:#94a3b8;} .p-blue{background:#38bdf8;}
-  .card{background:var(--bg2);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:7px;padding:12px 15px;margin:12px 0;page-break-inside:avoid;}
-  .card.red{border-left-color:#f87171;} .card.org{border-left-color:#fbbf24;} .card.grn{border-left-color:#34d399;}
-  .card h4{margin:0 0 4px;font-size:16.5px;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;color:#fff;}
+  th{background:#eef1f6;} td.l{text-align:left;}
+  .goal{border:2px solid var(--blue);background:var(--bluebg);border-radius:8px;padding:12px 16px;margin:12px 0;}
+  .goal b{font-size:21px;color:var(--blue);}
+  .pill{display:inline-block;font-size:12.5px;font-weight:700;padding:2px 9px;border-radius:11px;color:#fff;}
+  .p-red{background:var(--red);} .p-org{background:var(--org);} .p-grn{background:var(--grn);} .p-gray{background:#64748b;} .p-blue{background:var(--blue);}
+  .card{background:#fff;border:1px solid var(--line);border-left:5px solid var(--blue);border-radius:7px;padding:12px 15px;margin:12px 0;page-break-inside:avoid;}
+  .card.red{border-left-color:var(--red);} .card.org{border-left-color:var(--org);} .card.grn{border-left-color:var(--grn);}
+  .card h4{margin:0 0 4px;font-size:16.5px;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;}
   .src{font-size:12.5px;color:var(--sub);font-weight:400;}
-  .rule{background:rgba(52,211,153,.12);border-radius:5px;padding:6px 11px;margin:6px 0;}
-  .trap{background:rgba(248,113,113,.12);border-radius:5px;padding:6px 11px;margin:6px 0;}
-  pre{background:#0d1424;border:1px solid var(--line);border-radius:5px;padding:8px 11px;
-    font-family:"SF Mono",Consolas,monospace;font-size:13.5px;line-height:1.5;overflow-x:auto;margin:6px 0;white-space:pre-wrap;color:#cbd5e1;}
-  code{font-family:"SF Mono",Consolas,monospace;background:var(--bg3);padding:1px 5px;border-radius:4px;font-size:14px;color:#e5e7eb;}
+  .rule{background:var(--grnbg);border-radius:5px;padding:6px 11px;margin:6px 0;}
+  .trap{background:var(--redbg);border-radius:5px;padding:6px 11px;margin:6px 0;}
+  pre{background:#f5f6f8;border:1px solid var(--line);border-radius:5px;padding:8px 11px;
+    font-family:"SF Mono",Consolas,monospace;font-size:13.5px;line-height:1.5;overflow-x:auto;margin:6px 0;white-space:pre-wrap;}
+  code{font-family:"SF Mono",Consolas,monospace;background:#eef1f6;padding:1px 5px;border-radius:4px;font-size:14px;}
   .filters{margin:10px 0;display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
-  .fbtn{border:1px solid var(--line);background:var(--bg2);color:var(--tx);border-radius:16px;padding:5px 13px;cursor:pointer;font-size:14px;font-family:inherit;}
-  .fbtn.on{background:var(--accent);color:#0a0f1e;border-color:var(--accent);}
-  .matrix td{font-size:14px;padding:6px;} .matrix td.blk{text-align:left;font-weight:700;background:var(--bg3);color:#fff;}
-  .matrix tr:hover td:not(.blk){background:rgba(56,189,248,.06);}
-  .dot{display:inline-block;min-width:28px;height:28px;line-height:28px;padding:0 7px;border-radius:14px;font-weight:800;font-size:15px;}
-  .dot.bad{background:#ef4444;color:#fff;}
-  .dot.mid{background:#f59e0b;color:#141414;}
-  .none{color:#4d7c6a;font-size:17px;font-weight:700;}
+  .fbtn{border:1px solid var(--line);background:#fff;border-radius:16px;padding:5px 13px;cursor:pointer;font-size:14px;font-family:inherit;}
+  .fbtn.on{background:var(--ink);color:#fff;border-color:var(--ink);}
+  .matrix td{font-size:14px;padding:6px;} .matrix td.blk{text-align:left;font-weight:700;background:#eef1f6;}
+  .matrix tr:hover td:not(.blk){background:#f0f6ff;}
+  .dot{display:inline-block;min-width:28px;height:28px;line-height:28px;padding:0 7px;border-radius:14px;font-weight:800;font-size:15px;color:#fff;box-shadow:0 1px 2px rgba(0,0,0,.18);}
+  .dot.bad{background:#ef3b30;}
+  .dot.mid{background:#f7930a;}
+  .none{color:#12a150;font-size:19px;font-weight:800;}
   .memo{font-size:16px;margin:5px 0;padding-left:6px;}
+  .memo b{color:var(--red);}
   .note{color:var(--sub);font-size:14px;}
-  .legend{font-size:13.5px;color:var(--sub);margin:6px 0;}
+  .legend{font-size:13.5px;color:var(--sub);margin:6px 0;display:flex;gap:12px;align-items:center;flex-wrap:wrap;}
   .printbar{margin:10px 0 4px;}
-  .pbtn{background:var(--accent);color:#0a0f1e;border:none;border-radius:6px;padding:9px 18px;font-size:16px;cursor:pointer;font-family:inherit;font-weight:700;}
+  .pbtn{background:var(--blue);color:#fff;border:none;border-radius:6px;padding:9px 18px;font-size:16px;cursor:pointer;font-family:inherit;font-weight:700;}
   ul.chk{list-style:none;padding-left:2px;} ul.chk li{margin:8px 0;font-size:16px;}
-  ul.chk li::before{content:"☐ ";font-size:19px;color:var(--accent);font-weight:700;}
-
-  /* ===== 只有「考前速记」是浅色打印纸风格 ===== */
-  #sprint{background:#fff;color:#1a1a1a;border-radius:10px;padding:20px 24px;margin-top:8px;box-shadow:0 0 0 1px var(--line);}
-  #sprint h3{color:#1f5fa8;border-bottom:2px solid #e8f1fb;}
-  #sprint .goal{border:2px solid #1f5fa8;background:#e8f1fb;}
-  #sprint .goal b{color:#1f5fa8;}
-  #sprint .note{color:#666;}
-  #sprint b{color:#c0392b;}
-  #sprint ul.chk li{color:#1a1a1a;}
-  #sprint ul.chk li::before{color:#1f5fa8;}
-  #sprint .pbtn{background:#1f5fa8;color:#fff;}
+  ul.chk li::before{content:"☐ ";font-size:19px;color:var(--blue);font-weight:700;}
+  #sprint{background:#fff;border:1px solid var(--line);border-radius:10px;padding:20px 24px;margin-top:8px;}
 
   @media print{
     header,.tabs,.noprint,.filters{display:none!important;}
     body{background:#fff;font-size:14px;}
     main{max-width:100%;padding:0;}
     .view{display:none!important;} .view.on{display:block!important;}
-    #sprint{box-shadow:none;padding:0;}
-    .goal,th,.pill,ul.chk li::before{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    #sprint{border:none;padding:0;}
+    .goal,.card,.rule,.trap,th,.pill,.dot,ul.chk li::before{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
   }
 </style>
 </head>
