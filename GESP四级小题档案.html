@@ -45,11 +45,12 @@
   .filters{margin:10px 0;display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
   .fbtn{border:1px solid var(--line);background:var(--bg2);color:var(--tx);border-radius:16px;padding:5px 13px;cursor:pointer;font-size:14px;font-family:inherit;}
   .fbtn.on{background:var(--accent);color:#0a0f1e;border-color:var(--accent);}
-  .matrix td{font-size:14px;} .matrix td.blk{text-align:left;font-weight:700;background:var(--bg3);color:#fff;}
-  .cell-bad{background:rgba(248,113,113,.22);color:#fca5a5;font-weight:700;}
-  .cell-mid{background:rgba(251,191,36,.2);color:#fcd34d;font-weight:700;}
-  .cell-ok{background:rgba(52,211,153,.14);color:#6ee7b7;}
-  .cell-na{color:#64748b;}
+  .matrix td{font-size:14px;padding:6px;} .matrix td.blk{text-align:left;font-weight:700;background:var(--bg3);color:#fff;}
+  .matrix tr:hover td:not(.blk){background:rgba(56,189,248,.06);}
+  .dot{display:inline-block;min-width:28px;height:28px;line-height:28px;padding:0 7px;border-radius:14px;font-weight:800;font-size:15px;}
+  .dot.bad{background:#ef4444;color:#fff;}
+  .dot.mid{background:#f59e0b;color:#141414;}
+  .none{color:#4d7c6a;font-size:17px;font-weight:700;}
   .memo{font-size:16px;margin:5px 0;padding-left:6px;}
   .note{color:var(--sub);font-size:14px;}
   .legend{font-size:13.5px;color:var(--sub);margin:6px 0;}
@@ -204,11 +205,9 @@ function renderDash(){
   let rows=BLOCKS.map(b=>{
     let tds=PAPERS.map(p=>{
       const list=MISTAKES.filter(m=>m.block===b && m.src.some(s=>s[0]===p.id) && m.status!=="ok");
-      const bad=list.filter(m=>m.status==="bad").length;
-      const mid=list.filter(m=>m.status==="mid"||m.status==="na").length;
-      if(list.length===0) return `<td class="cell-ok">—</td>`;
-      const cls=bad?"cell-bad":"cell-mid";
-      return `<td class="${cls}">${list.length}</td>`;
+      if(list.length===0) return `<td><span class="none">—</span></td>`;
+      const bad=list.some(m=>m.status==="bad");
+      return `<td><span class="dot ${bad?'bad':'mid'}">${list.length}</span></td>`;
     }).join("");
     return `<tr><td class="blk">${b}</td>${tds}</tr>`;
   }).join("");
@@ -217,9 +216,8 @@ function renderDash(){
       目标 <b>35</b>，缺口 <b>${35-latest.score} 分 ≈ ${Math.ceil((35-latest.score)/2)} 题</b>。</div>
     <h3>掌握度矩阵（数字＝该卷该块还在漏分的错点数）</h3>
     <table class="matrix"><tr><th>知识块＼卷</th>${cols}</tr>${rows}</table>
-    <p class="legend"><span class="cell-bad" style="padding:2px 8px">红＝有常错</span>
-      <span class="cell-mid" style="padding:2px 8px">橙＝偶错/待验证</span>
-      <span class="cell-ok" style="padding:2px 8px">— ＝暂无漏分</span>　随卷增加，看哪几行迟迟不转绿，就是主攻方向。</p>
+    <p class="legend"><span class="dot bad">N</span> 有常错　<span class="dot mid">N</span> 偶错/待验证　<span class="none">—</span> 暂无漏分
+      <span style="color:var(--sub)">（数字＝该块还在漏分的错点数；随卷增加，看哪几行迟迟消不掉红点，就是主攻方向）</span></p>
     <h3>分数趋势</h3>
     <table><tr><th>卷·轮</th><th>单选对</th><th>判断对</th><th>小题分</th><th>距35</th></tr>
     ${PAPERS.flatMap(p=>p.rounds.map(r=>
