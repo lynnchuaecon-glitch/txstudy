@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GESP四级 三大硬伤·精讲复习资料</title>
+<style>
+  :root{--ink:#1a1a1a;--sub:#666;--line:#d5d5d5;--blue:#1f5fa8;--bluebg:#e8f1fb;--red:#c0392b;--redbg:#fdecea;--grn:#1e7e46;--grnbg:#e8f6ee;--org:#b9770e;--orgbg:#fdf3e3;}
+  *{box-sizing:border-box;}
+  body{font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;color:var(--ink);line-height:1.7;font-size:16.5px;max-width:820px;margin:0 auto;padding:26px 30px;background:#fff;}
+  h1{font-size:24px;text-align:center;margin:0 0 4px;}
+  .sub{text-align:center;color:var(--sub);font-size:14px;margin-bottom:16px;}
+  .goldbox{border:2px solid var(--blue);background:var(--bluebg);border-radius:8px;padding:12px 16px;margin:14px 0 22px;}
+  .goldbox b{color:var(--blue);}
+  h2{font-size:20px;margin:26px 0 6px;padding:7px 13px;background:var(--ink);color:#fff;border-radius:6px;}
+  h3{font-size:16.5px;margin:16px 0 5px;color:var(--blue);}
+  .miss{background:var(--redbg);border-left:4px solid var(--red);border-radius:5px;padding:7px 12px;margin:8px 0;}
+  .gold{background:var(--grnbg);border-left:4px solid var(--grn);border-radius:5px;padding:9px 13px;margin:10px 0;font-size:17px;}
+  .gold b{color:var(--grn);}
+  pre{background:#f5f6f8;border:1px solid var(--line);border-radius:5px;padding:8px 12px;font-family:"SF Mono",Consolas,monospace;font-size:13.5px;line-height:1.5;white-space:pre-wrap;margin:6px 0;}
+  code{font-family:"SF Mono",Consolas,monospace;background:#eef1f6;padding:0 4px;border-radius:3px;font-size:14px;}
+  table{border-collapse:collapse;margin:8px 0;font-size:14.5px;width:100%;}
+  th,td{border:1px solid var(--line);padding:5px 9px;text-align:center;}
+  th{background:#eef1f6;}
+  .trace{background:#fff8ec;border:1px solid #f0d9a8;border-radius:5px;padding:8px 12px;margin:6px 0;font-family:"SF Mono",Consolas,monospace;font-size:14px;line-height:1.7;}
+  .ex{border:1px solid var(--line);border-radius:6px;padding:9px 13px;margin:10px 0;}
+  .ex .t{font-weight:700;color:var(--org);}
+  .drill{background:var(--orgbg);border-radius:6px;padding:9px 13px;margin:10px 0;}
+  .drill .a{color:var(--sub);font-size:14px;margin-top:5px;}
+  .arrow{font-family:"SF Mono",Consolas,monospace;background:#eef6ff;border-radius:5px;padding:6px 12px;margin:5px 0;font-size:14.5px;}
+  .pb{page-break-before:always;}
+  ul{margin:5px 0 5px 2px;padding-left:22px;} li{margin:4px 0;}
+  @media print{body{padding:0;font-size:14px;}h2,.goldbox,.gold,.miss,th{-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+</style>
+</head>
+<body>
+
+<h1>GESP C++ 四级 · 三大硬伤 · 精讲</h1>
+<div class="sub">给「基本没学会」的三块从 0 讲清 · 学完配「重做卷」检验 · 2026-08-06</div>
+
+<div class="goldbox">
+<b>三句黄金法则（背下来，做题先想这三句）：</b><br>
+① 参数带 <code>&amp;</code> 或 <code>*</code> → 改得到外面；光是普通值 → 改不到。<br>
+② 指针题先<b>画箭头 p→谁</b>；<code>&amp;</code>是门牌号、<code>*</code>是顺门牌号找人。<br>
+③ 循环里变量互相赋值 → <b>画表格逐行填</b>，绝不心算。
+</div>
+
+<h2>一、值传递 vs 传址 vs 引用　（头号硬伤，两卷栽 5 题）</h2>
+
+<div class="miss">🚫 <b>她的误区：</b>默认「函数里改了参数，外面的变量不会变」——看到 <code>&amp;</code> 和 <code>*</code> 也当成普通值。</div>
+
+<h3>从 0 讲清：三种参数，就像借东西的三种方式</h3>
+<table>
+<tr><th>写法</th><th>函数拿到的是</th><th>改了影响外面吗</th></tr>
+<tr><td><code>void f(int x)</code><br>值传递</td><td>一张<b>复印件</b></td><td>❌ 改复印件，原件不动</td></tr>
+<tr><td><code>void f(int &x)</code><br>引用</td><td>原件的<b>小名/别名</b></td><td>✅ 改别名＝改原件</td></tr>
+<tr><td><code>void f(int *p)</code><br>传地址</td><td>原件的<b>门牌号</b></td><td>✅ <code>*p</code> 顺门牌号去改原件</td></tr>
+</table>
+
+<div class="gold">✅ <b>黄金法则①：参数带 <code>&amp;</code> 或 <code>*</code> 才改得到外面；光是普通 <code>int x</code>，改不到。</b></div>
+
+<div class="ex">
+<div class="t">例题精讲　2603·选4</div>
+<pre>void fun(int a, int &b, int *c){ a+=1; b+=2; *c+=3; }
+int main(){ int x=1, y=1, z=1; fun(x,y,&z); cout<<x<<" "<<y<<" "<<z; }</pre>
+逐行判断（先看每个参数是「复印件/别名/门牌号」）：
+<div class="arrow">a 是复印件 → <b>a+=1 不影响 x</b>，x 还是 1
+b 是 y 的别名 → <b>b+=2 就是 y+=2</b>，y = 3
+c 是 z 的门牌号 → <b>*c+=3 就是 z+=3</b>，z = 4</div>
+输出 <b>1 3 4</b>（选 B）。她当时选 D（1 1 1）＝以为三个都改不到。
+</div>
+
+<div class="drill">
+✏️ <b>练一练　2603·选7</b>（先自己按上面方法走一遍，再看答案）
+<pre>struct S{ int a,b; };
+void g(S s){ s.a+=10; }     // s 是复印件
+void h(S& s){ s.b+=10; }    // s 是别名
+int main(){ S s{1,2}; g(s); h(s); cout<<s.a<<" "<<s.b; }</pre>
+<div class="a">答案：g 拿复印件，a 不变=1；h 拿别名，b 变 12 → <b>1 12（B）</b></div>
+</div>
+
+<div class="pb"></div>
+<h2>二、指针整块　（最大真空区：*、&amp;、**、行指针）</h2>
+
+<div class="miss">🚫 <b>她的误区：</b>看到 <code>*</code>、<code>&amp;</code>、<code>**</code>、<code>(*p)[4]</code> 就懵，读不出在指谁。</div>
+
+<h3>从 0 讲清：两个符号 + 一个动作</h3>
+<ul>
+<li><code>&amp;a</code> ＝ 取变量 a 的<b>地址（门牌号）</b>。</li>
+<li><code>*p</code> ＝ 顺着 p 这个门牌号<b>去找到那个人（取值）</b>。</li>
+<li><b>做题唯一动作：画箭头 —— 谁指向谁。</b></li>
+</ul>
+
+<div class="gold">✅ <b>黄金法则②：先画 <code>p → 谁</code>；<code>*p</code> 永远是「p 现在指着的那个」。</b></div>
+
+<h3>七种情况，逐个看</h3>
+
+<div class="ex"><div class="t">① 基本</div>
+<div class="arrow">int a=5; int *p=&a;   画：p → a　　*p 就是 a 的值 5</div></div>
+
+<div class="ex"><div class="t">② 改指向（2606·选5）</div>
+<pre>int lv=5, next_lv=6;
+int *p=&lv;      // p → lv
+*p=*p+1;         // 改 lv，lv=6
+p=&next_lv;      // p 改指向 → 现在 p → next_lv</pre>
+<div class="arrow">问 *p？现在 p 指 next_lv → <b>*p = 6（B）</b>。（p 一改指向，*p 就换人）</div></div>
+
+<div class="ex"><div class="t">③ 指针 ±1 = 跳「一个元素」（2606·选7）</div>
+<pre>int data[]={10,20,30,40,50};
+int *ptr=data+2;   // 跳2个 → 指向 30
+*(ptr-1)+*(ptr+1)  // 前一个20 + 后一个40</pre>
+<div class="arrow">= 20 + 40 = <b>60（B）</b>。记住：+1 是跳一个<b>元素</b>，不是一个字节。</div></div>
+
+<div class="ex"><div class="t">④ &amp;整个数组 +1 = 跳「一整块」（2606·选6）</div>
+<pre>int map[5][4];   // 一整块 = 5×4 个int = 20×4字节 = 80字节 = 0x50
+// map 起址 0x2000，&map+1 跳过整块</pre>
+<div class="arrow">0x2000 + 0x50 = <b>0x2050（C）</b>。&amp;数组名+1 跳过<b>整个数组</b>。</div></div>
+
+<div class="ex"><div class="t">⑤ 二级指针 **q：拨两层（2603·选2）</div>
+<pre>int a=5; int *p=&a; int **q=&p;
+**q += 7;</pre>
+<div class="arrow">画箭头：q → p → a。**q 拨两层，最终动的是 <b>a</b> → a=12，*p 也是 12 → <b>12 12（B）</b></div></div>
+
+<div class="ex"><div class="t">⑥ 行指针 int(*p)[4]：指「一整行」（2603·选3）</div>
+<pre>int a[3][4]={ {1,2,3,4},{5,6,7,8},{9,10,11,12} };
+int (*p)[4]=a;      // p 指向"一行4个"，p → 第0行
+*(*(p+2)+1)</pre>
+<div class="arrow">p+2 → 第2行 {9,10,11,12}；*(p+2) 是这行开头；+1 到第2个；* 取值 = a[2][1] = <b>10（B）</b></div></div>
+
+<div class="ex"><div class="t">⑦ 野指针（2603·判6）</div>
+<div class="arrow">int *p;  // 没写 =nullptr → 是<b>随机门牌号（野指针）</b>，不会自动变 nullptr。判断题「自动变nullptr」→ <b>×</b></div></div>
+
+<div class="drill">✏️ <b>练一练：</b>把 ②2606·选5 和 ③2606·选7 <b>自己画一遍箭头</b>再默出答案（都是 B）。指针题只要肯画箭头，几乎不会错。</div>
+
+<div class="pb"></div>
+<h2>三、递推循环追踪　（斐波那契型，必考送分）</h2>
+
+<div class="miss">🚫 <b>她的误区：</b>心算 <code>c=a+b; a=b; b=c</code> 这串迭代，越算越乱，两卷同型题都错。</div>
+
+<h3>从 0 讲清：递推就是「用前几项推后面」，方法是画表格</h3>
+<p>递推 = 从已知的开头几项，用公式一步步往后算。<b>唯一靠谱的做法：画一张表，一行一个 i，严格按代码顺序填 c、a、b 的新值。</b></p>
+
+<div class="gold">✅ <b>黄金法则③：循环里变量互相赋值，一律画表格逐行填，绝不心算。</b></div>
+
+<div class="ex">
+<div class="t">例题精讲　2606·选12：求 jump(5)</div>
+<pre>int a=1, b=2, c=0;
+for(int i=3; i<=n; i++){ c=a+b; a=b; b=c; }   // 顺序：先c，再a，再b</pre>
+一行一行填（n=5）：
+<div class="trace">开始：     a=1  b=2
+i=3： c=a+b=3　→ a=b=2　→ b=c=3
+i=4： c=a+b=5　→ a=b=3　→ b=c=5
+i=5： c=a+b=8　→ 停　→ 返回 c = <b>8（B）</b></div>
+</div>
+
+<div class="drill">
+✏️ <b>练一练　2603·选9：climb(6)</b>（接着往下填两行）
+<div class="a">答案续：i=5→c=8, a=5, b=8；i=6→c=5+8=<b>13（B）</b></div>
+</div>
+
+<div class="goldbox" style="margin-top:24px">
+<b>复习顺序建议：</b>先把上面三块的<b>黄金法则背下来</b> → 跟着例题<b>画一遍箭头/表格</b> → 再去做《复盘重做卷》里对应的 A/B/C 组题检验。三块吃透，两卷至少多拿 15+ 分。
+</div>
+
+<p style="color:var(--sub);font-size:13.5px;margin-top:14px">三大硬伤精讲 · 生成于 2026-08-06 · 配套《复盘重做卷》《小题档案》同源使用。</p>
+
+</body>
+</html>
