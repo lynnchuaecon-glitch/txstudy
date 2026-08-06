@@ -108,6 +108,10 @@ const PAPERS = [
   { id:"2606", name:"2026年6月", rounds:[
       { r:1, date:"2026-08-03", pickRight:7, judgeRight:7, score:28,
         wrongPick:[5,6,7,9,11,12,13,14], wrongJudge:"2、4、6" }
+  ]},
+  { id:"2603", name:"2026年3月", rounds:[
+      { r:1, date:"2026-08-05", pickRight:7, judgeRight:2, score:18,
+        wrongPick:[2,3,4,7,9,11,13,15], wrongJudge:"1、2、3、6、7、8、9、10" }
   ]}
 ];
 
@@ -170,8 +174,8 @@ const MISTAKES = [
     question:"第14题（下面代码用的是哪种排序？）\nvoid mystery_sort(double arr[], int n){\n  for(int i=0;i<n-1;i++){\n    int minPos=i;\n    for(int j=i+1;j<n;j++)\n      if(arr[j]<arr[minPos]) minPos=j;\n    swap(arr[i],arr[minPos]);\n  }\n}\n// A.冒泡 B.插入 C.选择 D.非典型\n→ 正确答案 C"},
 
   { block:"递推", title:"循环里变量互相赋值 → 一律画表格手算",
-    src:[["2606","选12"]], status:"mid",
-    wrong:"心算迭代过程，a/b/c 更新顺序算乱。",
+    src:[["2606","选12"],["2603","选9"]], status:"bad",
+    wrong:"两卷同型题都错（2606 选12 jump、2603 选9 climb 都是斐波那契递推）。心算 a/b/c 迭代必乱 → 硬伤。",
     rule:"凡是循环里 c=a+b; a=b; b=c 这种，别心算，列表格一行行填到底。这是全卷通用救命技能。",
     memo:"循环迭代 <b>画表格</b>手算，不心算",
     code:"a=1,b=2\ni=3: c=3, a=2, b=3\ni=4: c=5, a=3, b=5\ni=5: c=8   → 答案 8",
@@ -186,16 +190,16 @@ const MISTAKES = [
     question:"第13题（执行以下代码将输出？）\ntry{\n  int x=10, y=0;\n  if(y==0) throw \"Zero Error\";\n  cout<<x/y;\n} catch(int e){\n  cout<<\"Error Code: \"<<e;\n} catch(const char* msg){\n  cout<<\"Caught: \"<<msg;\n}\n// A.0  B.Error Code: 0  C.Caught: Zero Error  D.崩溃\n→ 正确答案 C"},
 
   { block:"函数·作用域·传参", title:"值传递 vs 传址/引用（送分点，务必吃透）",
-    src:[["2606","选1"],["2606","判1"],["2606","判9"]], status:"mid", selfEval:"懵",
-    wrong:"判1、判9 她都答对了 → 基础值传递 OK；但选1（exchange 用 *a 和 &b 的指针+引用组合）是△懵蒙对，这种组合题才是弱点。",
+    src:[["2606","选1"],["2603","选4"],["2603","选7"],["2603","判1"]], status:"bad", selfEval:"懵",
+    wrong:"跨两卷反复栽——2603 选4/选7/判1 全错。她默认「参数改不到外面」，看到 & 或 * 也不认。这是全档案<b>头号硬伤</b>。",
     rule:"参数光是普通值 → 改不到外面；带 * 或 & → 能改到外面。这是四级最爱考的送分点。",
     memo:"参数带 <b>* 或 &</b> 才改得到外面",
     code:"void f(int x)  {x=..}   // ✗ 改不到外面\nvoid f(int *p) {*p=..}  // ✓ 能改\nvoid f(int &x) {x=..}   // ✓ 能改",
     question:"第1题（输出？）\nvoid exchange(int *a, int &b){ int t=*a; *a=b; b=t; }\nint main(){ int x=100,y=200; exchange(&x,y); cout<<x<<\" \"<<y; }\n// A.100 200  B.200 100  C.200 200  D.编译错误 → 正确答案 B\n判1：modify(int*p){*p=*p+10} a=10,modify(&a) → a=20（√）\n判9：recharge(int money){money+=20} card=50 → 输出50不是70（×）"},
 
   { block:"函数·作用域·传参", title:"引用一旦绑定，不能再改绑别的变量",
-    src:[["2606","判2"]], status:"mid",
-    wrong:"判2判成√——以为引用能像指针一样重新绑定到另一个变量。",
+    src:[["2606","判2"],["2603","判2"]], status:"bad",
+    wrong:"两卷判2都判错——顽固以为引用能像指针一样改绑。2606正着问判√、2603反着问判×，两次都栽。确认硬伤。",
     rule:"引用初始化时绑定谁，就一辈子是谁的别名；之后的赋值只是改值，不会改绑。（判2「可重新绑定」是假 → ×）",
     memo:"引用<b>不能改绑</b>（判10 数组名不能++，她已答对）",
     code:"int a=1,b=2;\nint &r=a;   // r 永远是 a 的别名\nr=b;        // 只把 b 的值给 a，不是改绑",
@@ -224,6 +228,78 @@ const MISTAKES = [
     memo:"books[1] 是<b>第2个</b>（下标0起）",
     code:"Book books[2]={{\"Math\",120},{\"Science\",150}};\nbooks[1].title // = \"Science\"",
     question:"第10题（输出？）\nstruct Book{ string title; int pages; };\nint main(){\n  Book books[2]={{\"Math\",120},{\"Science\",150}};\n  cout<<books[1].title;\n}\n// A.Math  B.Science  C.120  D.150\n→ 正确答案 B"},
+
+  { block:"指针", title:"二级指针 **q：拨两层，改到最里面的变量",
+    src:[["2603","选2"]], status:"bad", selfEval:"懵",
+    wrong:"看到 int** 就懵，不知道 **q 最终动的是 a。",
+    rule:"q 指向 p，p 指向 a。**q 先到 p 再到 a，所以 **q+=7 改的是 a。a 和 *p 都变 12。",
+    memo:"<b>**q</b> 拨两层，最终动最里面那个变量",
+    code:"int a=5; int*p=&a; int**q=&p;\n**q+=7;   // a 变 12，*p 也是 12",
+    question:"第2题 int a=5;int*p=&a;int**q=&p;**q+=7; cout<<a<<\" \"<<*p; → 12 12（B）"},
+
+  { block:"指针", title:"行指针 int(*p)[4]：+1 跳一整行",
+    src:[["2603","选3"]], status:"bad", selfEval:"懵",
+    wrong:"不认识 int(*p)[4] 这种「行指针」，*(*(p+2)+1) 算不出。",
+    rule:"int(*p)[4] 指向「一行4个int」。p+2 跳到第3行，*(p+2) 是该行首地址，+1 到该行第2个，再 * 取值。",
+    memo:"<b>行指针 (*p)[4]</b>：+1 跳一整行",
+    code:"int a[3][4]={...}; int(*p)[4]=a;\n*(*(p+2)+1) = a[2][1] = 10",
+    question:"第3题 *(*(p+2)+1) → a[2][1]=10（B）"},
+
+  { block:"指针", title:"未初始化的指针 ≠ nullptr（是野指针）",
+    src:[["2603","判6"]], status:"mid",
+    wrong:"判6判成√——以为没初始化的指针会自动变 nullptr。",
+    rule:"局部指针不初始化时是随机的「野指针」，不会自动置 nullptr。想要空指针必须自己写 =nullptr。",
+    memo:"没初始化的指针是<b>野指针</b>，不是 nullptr",
+    code:"int *p;   // 野指针（随机值），不是 nullptr",
+    question:"判6：未显式初始化的指针会自动初始化为 nullptr →（×，她判√）"},
+
+  { block:"二维数组", title:"二维数组地址相减 = 相隔几个元素",
+    src:[["2603","判3"]], status:"mid",
+    wrong:"判3判成√（以为输出5）——不会算两个元素间隔几个 int。",
+    rule:"二维数组按行铺平：a[1][2] 是第 1*3+2=5 个，a[0][1] 是第 1 个，相差 4 个 int → 输出 4，不是 5。",
+    memo:"二维地址相减＝<b>相隔几个元素</b>（按行铺平数）",
+    code:"int a[2][3];\n&a[1][2]-&a[0][1] = 5-1 = 4",
+    question:"判3：cout<<&a[1][2]-&a[0][1] 输出5 →（×，实为4）"},
+
+  { block:"排序", title:"插入排序内层条件：a[j] > key 才后移",
+    src:[["2603","选11"],["2603","选15"]], status:"bad", selfEval:"懵",
+    wrong:"插入排序的 while 条件填错（选11 应填 a[j]>key；选15 排行榜同型也错）。",
+    rule:"插入排序把 key 往前比，只要前面 a[j] 比 key 大就后移，直到找到位置。升序内层条件 = a[j] > key。",
+    memo:"插入排序内层：<b>a[j] &gt; key</b> 就后移",
+    code:"while(j>=0 && a[j]>key){ a[j+1]=a[j]; j--; }\na[j+1]=key;",
+    question:"第11题横线→a[j]>key（B）；第15题排行榜同理→i>0 && cur.score>players[i-1].score（A）"},
+
+  { block:"排序", title:"复杂度相同 ≠ 性能相同、能互换",
+    src:[["2603","判9"]], status:"mid",
+    wrong:"判9判成√——以为选择/插入都 O(n²) 就性能一样可互换。",
+    rule:"大 O 相同只说增长量级一样；插入排序在「近乎有序」时快得多、且稳定，两者不能随便互换。",
+    memo:"同 O(n²) <b>不代表</b>性能相同/可互换",
+    code:"插入排序：近乎有序时接近 O(n)，且稳定\n选择排序：始终 O(n²)，不稳定",
+    question:"判9：两者复杂度都O(n²)故性能几乎相同可互换 →（×）"},
+
+  { block:"文件操作", title:"写文件必须用 fout <<，不是 cout <<",
+    src:[["2603","选13"],["2603","判8"]], status:"bad", selfEval:"懵",
+    wrong:"选13/判8 都栽：开了 ofstream 却还用 cout<< 输出，内容进屏幕、文件是空的。",
+    rule:"ofstream fout(...) 之后必须用 fout<<... 写文件；写 cout<<... 仍打到屏幕。（除非用 freopen 或 rdbuf 做重定向）",
+    memo:"写文件用 <b>fout&lt;&lt;</b>；cout&lt;&lt; 还是打屏幕",
+    code:"ofstream fout(\"a.txt\");\nfout << \"Hi\";  // ✓ 进文件\ncout << \"Hi\";  // ✗ 进屏幕",
+    question:"选13：哪种不能重定向到文件→B（开ofstream却用cout）；判8：cout<<\"Hello\"不能写进data.txt（×）"},
+
+  { block:"结构体", title:"结构体里可以再嵌套定义结构体（合法）",
+    src:[["2603","判7"]], status:"mid",
+    wrong:"判7判成×——以为结构体里再定义 struct 是语法错误。",
+    rule:"结构体内部可以嵌套定义结构体、并声明成员/数组，这是合法的。GameCharacter 里嵌 Equipment、Skill 都没问题。",
+    memo:"结构体可<b>嵌套定义</b>结构体（合法）",
+    code:"struct A{ struct B{int x;} b;\n         struct C{int y;} c[8]; };  // ✓ 合法",
+    question:"判7：嵌套结构体那段代码没有语法错误 →（√，她判×）"},
+
+  { block:"递推", title:"循环写的递推(斐波那契) 是 O(n)，不是指数",
+    src:[["2603","判10"]], status:"mid",
+    wrong:"判10判错——以为循环递推求斐波那契是 O(2^n)。",
+    rule:"用 for 循环从前往后递推，只走 n 次 → O(n)。O(2^n) 是「递归重复计算」那种写法，别混。",
+    memo:"循环递推 = <b>O(n)</b>；O(2^n) 是递归重算那种",
+    code:"for(i=2;i<=n;i++){ cur=f0+f1; f0=f1; f1=cur; } // O(n)",
+    question:"判10：循环递推求 fib 第n项 时间复杂度 O(2^n) →（×，是O(n)）"},
 ];
 
 /* ============ 渲染 ============ */
@@ -233,7 +309,7 @@ function srcStr(src){return src.map(x=>x[0]+"·"+x[1]).join("、");}
 
 // ① 仪表盘
 function renderDash(){
-  const latest=PAPERS[0].rounds[PAPERS[0].rounds.length-1];
+  const lastP=PAPERS[PAPERS.length-1]; const latest=lastP.rounds[lastP.rounds.length-1];
   // 矩阵：块 × 卷，单元格=该卷该块的错点数
   let cols=PAPERS.map(p=>`<th>${p.id}</th>`).join("");
   let rows=BLOCKS.map(b=>{
@@ -246,7 +322,7 @@ function renderDash(){
     return `<tr><td class="blk">${b}</td>${tds}</tr>`;
   }).join("");
   document.getElementById("dash").innerHTML=`
-    <div class="goal">最近一卷（${PAPERS[0].id}）小题 <b>${latest.score} / 50</b>，
+    <div class="goal">最近一卷（${lastP.id}）小题 <b>${latest.score} / 50</b>，
       目标 <b>35</b>，缺口 <b>${35-latest.score} 分 ≈ ${Math.ceil((35-latest.score)/2)} 题</b>。</div>
     <h3>掌握度矩阵（数字＝该卷该块还在漏分的错点数）</h3>
     <table class="matrix"><tr><th>知识块＼卷</th>${cols}</tr>${rows}</table>
