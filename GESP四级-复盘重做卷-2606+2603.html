@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GESP四级 小题错题重做卷 · 2606+2603</title>
+<style>
+  :root{--ink:#1a1a1a;--sub:#666;--line:#d5d5d5;--blue:#1f5fa8;--bluebg:#e8f1fb;--red:#c0392b;--grn:#1e7e46;--org:#b9770e;}
+  *{box-sizing:border-box;}
+  body{font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;color:var(--ink);line-height:1.6;font-size:16px;max-width:820px;margin:0 auto;padding:26px 30px;background:#fff;}
+  h1{font-size:23px;text-align:center;margin:0 0 4px;}
+  .sub{text-align:center;color:var(--sub);font-size:14px;margin-bottom:14px;}
+  .howto{border:2px solid var(--blue);background:var(--bluebg);border-radius:8px;padding:10px 15px;font-size:15px;margin-bottom:18px;}
+  h2{font-size:18px;margin:22px 0 8px;padding:5px 12px;background:var(--ink);color:#fff;border-radius:5px;}
+  h2 .n{font-size:13px;font-weight:400;color:#cbd5e1;}
+  .q{border:1px solid var(--line);border-radius:6px;padding:9px 13px;margin:10px 0;page-break-inside:avoid;}
+  .qh{font-size:13px;margin-bottom:3px;}
+  .src{display:inline-block;background:var(--blue);color:#fff;border-radius:4px;padding:1px 8px;font-weight:700;margin-right:6px;}
+  .kp{display:inline-block;background:#eef1f6;color:#444;border-radius:4px;padding:1px 8px;}
+  .stem{margin:3px 0;}
+  .opts{margin:4px 0;color:#222;}
+  pre{background:#f5f6f8;border:1px solid var(--line);border-radius:5px;padding:7px 11px;font-family:"SF Mono",Consolas,monospace;font-size:13px;line-height:1.45;white-space:pre-wrap;margin:5px 0;}
+  .ans{margin-top:5px;color:var(--blue);font-weight:700;font-size:15px;}
+  code{font-family:"SF Mono",Consolas,monospace;background:#eef1f6;padding:0 4px;border-radius:3px;font-size:13.5px;}
+  .pb{page-break-before:always;}
+  .akey{font-size:14.5px;}
+  .akey .row{border-bottom:1px dashed var(--line);padding:6px 2px;}
+  .akey b{color:var(--blue);}
+  .akey .r{color:var(--grn);}
+  .tip{color:var(--sub);font-size:13.5px;}
+  @media print{body{padding:0;font-size:14px;}h2,.src{-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+</style>
+</head>
+<body>
+
+<h1>GESP C++ 四级 · 小题错题重做卷</h1>
+<div class="sub">2026年6月 + 2026年3月 两卷错题 · 共 27 题 · 按「硬伤优先」排序</div>
+
+<div class="howto">
+  <b>怎么用：</b>① <b>盖住最后一页答案</b>，把下面每题重新做一遍，答案写在「我的答案」后；
+  ② 全部做完再翻到最后对答案；③ <b>还做错的，用红笔圈出来</b>——那才是真·顽固点，告诉爸妈进下一轮。<br>
+  <span class="tip">先做 A、B 两组（三大硬伤，最容易拿分），再往下。</span>
+</div>
+
+<h2>A 组　三大硬伤 ①：值传递 vs 传址/引用 <span class="n">（两卷共栽 5 题，头号重点）</span></h2>
+
+<div class="q"><div class="qh"><span class="src">2603·选4</span><span class="kp">值/引用/指针传参</span></div>
+  <div class="stem">执行后输出为（　）。</div>
+  <pre>void fun(int a, int &b, int *c){ a+=1; b+=2; *c+=3; }
+int main(){ int x=1,y=1,z=1; fun(x,y,&z); cout<<x<<" "<<y<<" "<<z; }</pre>
+  <div class="opts">A. 2 3 4　　B. 1 3 4　　C. 2 1 4　　D. 1 1 1</div>
+  <div class="ans">我的答案：____________</div></div>
+
+<div class="q"><div class="qh"><span class="src">2603·选7</span><span class="kp">结构体做参数·值vs引用</span></div>
+  <div class="stem">执行后输出为（　）。</div>
+  <pre>struct S{ int a,b; };
+void g(S s){ s.a+=10; }
+void h(S& s){ s.b+=10; }
+int main(){ S s{1,2}; g(s); h(s); cout<<s.a<<" "<<s.b; }</pre>
+  <div class="opts">A. 11 12　　B. 1 12　　C. 11 2　　D. 1 2</div>
+  <div class="ans">我的答案：____________</div></div>
+
+<div class="q"><div class="qh"><span class="src">2603·判1</span><span class="kp">引用传参</span></div>
+  <div class="stem">判断：下面代码执行结束时，变量 a 的值变成 15。</div>
+  <pre>void add10(int &x){ x+=10; }
+int main(){ int a=5; add10(a); }</pre>
+  <div class="ans">我的判断（√/×）：__________</div></div>
+
+<div class="q"><div class="qh"><span class="src">2606·判2</span><span class="kp">引用能否改绑</span></div>
+  <div class="stem">判断：在 C++ 中，引用一旦初始化并绑定到某个变量后，可以通过赋值语句将其重新绑定到另一个变量。</div>
+  <div class="ans">我的判断（√/×）：__________</div></div>
+
+<div class="q"><div class="qh"><span class="src">2603·判2</span><span class="kp">引用能否改绑</span></div>
+  <div class="stem">判断：引用一旦绑定某个变量，就不能再绑定其他变量。</div>
+  <div class="ans">我的判断（√/×）：__________</div></div>
+
+<h2>B 组　三大硬伤 ②：递推循环追踪 <span class="n">（斐波那契型，画表格手算）</span></h2>
+
+<div class="q"><div class="qh"><span class="src">2606·选12</span><span class="kp">递推</span></div>
+  <div class="stem">f(n)=f(n-1)+f(n-2)，f(1)=1, f(2)=2，运行以下代码计算 jump(5) 的结果是（　）。</div>
+  <pre>int jump(int n){
+  if(n<=2) return n;
+  int a=1,b=2,c=0;
+  for(int i=3;i<=n;i++){ c=a+b; a=b; b=c; }
+  return c;
+}</pre>
+  <div class="opts">A. 5　　B. 8　　C. 13　　D. 21</div>
+  <div class="ans">我的答案：____________（要求：在草稿上画表格逐行填 c/a/b）</div></div>
+
+<div class="q"><div class="qh"><span class="src">2603·选9</span><span class="kp">递推</span></div>
+  <div class="stem">执行 climb(6) 的返回值为（　）。</div>
+  <pre>int climb(int n){
+  if(n<=2) return n;
+  int a=1,b=2,c=0;
+  for(int i=3;i<=n;i++){ c=a+b; a=b; b=c; }
+  return c;
+}</pre>
+  <div class="opts">A. 8　　B. 13　　C. 5　　D. 10</div>
+  <div class="ans">我的答案：____________（同样画表格）</div></div>
+
+<h2>C 组　指针真空区 <span class="n">（做题先画箭头 p→谁）</span></h2>
+
+<div class="q"><div class="qh"><span class="src">2606·选5</span><span class="kp">指针改指向</span></div>
+  <div class="stem">执行后 *p 的值是（　）。</div>
+  <pre>int lv=5, next_lv=6;
+int *p=&lv;
+*p=*p+1;
+p=&next_lv;</pre>
+  <div class="opts">A. 5　　B. 6　　C. lv 的地址　　D. next_lv 的地址</div>
+  <div class="ans">我的答案：____________</div></div>
+
+<div class="q"><div class="qh"><span class="src">2606·选6</span><span class="kp">数组地址 &数组+1</span></div>
+  <div class="stem">int 占 4 字节，map 的内存地址是 0x2000，则 &map+1 的地址值是（　）。</div>
+  <pre>int map[5][4];</pre>
+  <div class="opts">A. 0x204c　　B. 0x205c　　C. 0x2050　　D. 0x2058</div>
+  <div class="ans">我的答案：____________</div></div>
+
+<div class="q"><div class="qh"><span class="src">2606·选7</span><span class="kp">指针加减取值</span></div>
+  <div class="stem">变量 val 的值是（　）。</div>
+  <pre>int data[]={10,20,30,40,50};
+int *ptr=data+2;
+int val=*(ptr-1)+*(ptr+1);</pre>
+  <div class="opts">A. 50　　B. 60　　C. 70　　D. 80</div>
+  <div class="ans">我的答案：____________</div></div>
+
+<div class="q"><div class="qh"><span class="src">2603·选2</span><span class="kp">二级指针 **q</span></div>
+  <div class="stem">执行后输出为（　）。</div>
+  <pre>int a=5;
+int* p=&a;
+int** q=&p;
+**q += 7;
+cout<<a<<" "<<*p;</pre>
+  <div class="opts">A. 5 5　　B. 12 12　　C. 12 5　　D. 5 12</div>
+  <div class="ans">我的答案：____________</div></div>
+
+<div class="q"><div class="qh"><span class="src">2603·选3</span><span class="kp">行指针 (*p)[4]</span></div>
+  <div class="stem">表达式 <code>*(*(p+2)+1)</code> 的值为（　）。</div>
+  <pre>int a[3][4]={ {1,2,3,4},{5,6,7,8},{9,10,11,12} };
+int (*p)[4]=a;</pre>
+  <div class="opts">A. 6　　B. 10　　C. 9　　D. 11</div>
+  <div class="ans">我的答案：____________</div></div>
+
+<div class="q"><div class="qh"><span class="src">2603·判6</span><span class="kp">野指针</span></div>
+  <div class="stem">判断：在 C++ 中，如果声明了一个指针变量但没有显式初始化，该指针会自动被初始化为 nullptr。</div>
+  <div class="ans">我的判断（√/×）：__________</div></div>
+
+<h2>D 组　排序 <span class="n">（稳定性 + 认算法 + 插入条件）</span></h2>
+
+<div class="q"><div class="qh"><span class="src">2606·选11</span><span class="kp">排序稳定性</span></div>
+  <div class="stem">下列关于排序算法稳定性的说法，<b>错误的</b>是（　）。</div>
+  <div class="opts">A. 冒泡排序是稳定的<br>B. 插入排序是稳定的<br>C. 选择排序是稳定的<br>D. 稳定性＝排序后相等元素的相对位置不变</div>
+  <div class="ans">我的答案：____________</div></div>
+
+<div class="q"><div class="qh"><span class="src">2606·选14</span><span class="kp">认排序算法</span></div>
+  <div class="stem">下面代码使用的排序算法是（　）。</div>
+  <pre>for(i=0;i<n-1;i++){
+  int minPos=i;
+  for(j=i+1;j<n;j++) if(arr[j]<arr[minPos]) minPos=j;
+  swap(arr[i],arr[minPos]);
+}</pre>
+  <div class="opts">A. 冒泡　　B. 插入　　C. 选择　　D. 非典型</div>
+  <div class="ans">我的答案：____________</div></div>
+
+<div class="q"><div class="qh"><span class="src">2606·判4</span><span class="kp">选择排序稳定性</span></div>
+  <div class="stem">判断：选择排序在寻找每一轮最小值时，如果遇到相等的元素不进行交换，则选择排序是一种稳定的排序算法。</div>
+  <div class="ans">我的判断（√/×）：__________</div></div>
+
+<div class="q"><div class="qh"><span class="src">2603·选11</span><span class="kp">插入排序内层条件</span></div>
+  <div class="stem">把数组按升序进行「插入排序」，横线处应填写（　）。</div>
+  <pre>for(i=1;i<n;i++){
+  int key=a[i]; int j=i-1;
+  while(j>=0 && __________){ a[j+1]=a[j]; j--; }
+  a[j+1]=key;
+}</pre>
+  <div class="opts">A. a[j] &lt; key　　B. a[j] &gt; key　　C. a[j+1] &gt; key　　D. a[j] == key</div>
+  <div class="ans">我的答案：____________</div></div>
+
+<div class="q"><div class="qh"><span class="src">2603·选15</span><span class="kp">插入排序·排行榜前移</span></div>
+  <div class="stem">分数增加需向前移动，while 循环的条件应为（　）。</div>
+  <pre>Player cur=players[idx]; int i=idx;
+while( ____________ ){ players[i]=players[i-1]; i--; }
+players[i]=cur;</pre>
+  <div class="opts">A. i&gt;0 && cur.score &gt; players[i-1].score<br>B. i&gt;0 && cur.score &lt; players[i-1].score<br>C. i&lt;n-1 && cur.score &gt; players[i+1].score<br>D. i&lt;n-1 && cur.score &lt; players[i+1].score</div>
+  <div class="ans">我的答案：____________</div></div>
+
+<div class="q"><div class="qh"><span class="src">2603·判9</span><span class="kp">复杂度 vs 性能</span></div>
+  <div class="stem">判断：由于选择排序和插入排序的时间复杂度均为 O(n²)，在任何实际场景下两者的性能表现几乎相同，可以互相替代。</div>
+  <div class="ans">我的判断（√/×）：__________</div></div>
+
+<h2>E 组　结构体</h2>
+
+<div class="q"><div class="qh"><span class="src">2606·选9</span><span class="kp">结构体 new</span></div>
+  <div class="stem">下面哪种初始化方式会由于语法错误导致编译失败？（　）。</div>
+  <pre>struct Hero{ string name; int hp; };</pre>
+  <div class="opts">A. Hero h = {"Arthur",100};<br>B. Hero h; h.name="Arthur"; h.hp=100;<br>C. Hero h = new Hero{"Arthur",100};<br>D. Hero *p = new Hero{"Arthur",100};</div>
+  <div class="ans">我的答案：____________</div></div>
+
+<div class="q"><div class="qh"><span class="src">2603·判7</span><span class="kp">嵌套结构体</span></div>
+  <div class="stem">判断：下面代码没有语法错误。</div>
+  <pre>struct GameCharacter{
+  string name; int level;
+  struct Equipment{ string weapon; int atk; } equipment;
+  struct Skill{ string name; int dmg; } skills[8];
+  int skill_count;
+};</pre>
+  <div class="ans">我的判断（√/×）：__________</div></div>
+
+<h2>F 组　二维数组</h2>
+
+<div class="q"><div class="qh"><span class="src">2606·判6</span><span class="kp">维度省略规则</span></div>
+  <div class="stem">判断：定义二维数组并初始化时可以省略第一维但不能省略第二维，因此 int a[][2]={{1,2},{3,4}} 合法，而 int a[][]={{1,2},{3,4}} 不合法。</div>
+  <div class="ans">我的判断（√/×）：__________</div></div>
+
+<div class="q"><div class="qh"><span class="src">2603·判3</span><span class="kp">二维数组地址相减</span></div>
+  <div class="stem">判断：执行下面代码，输出结果为 5。</div>
+  <pre>int a[2][3];
+cout<<&a[1][2]-&a[0][1]<<endl;</pre>
+  <div class="ans">我的判断（√/×）：__________</div></div>
+
+<h2>G 组　异常 / 文件 / 复杂度</h2>
+
+<div class="q"><div class="qh"><span class="src">2606·选13</span><span class="kp">异常 try/catch</span></div>
+  <div class="stem">执行以下代码将输出（　）。</div>
+  <pre>try{
+  int x=10,y=0;
+  if(y==0) throw "Zero Error";
+  cout<<x/y;
+} catch(int e){ cout<<"Error Code: "<<e; }
+  catch(const char* msg){ cout<<"Caught: "<<msg; }</pre>
+  <div class="opts">A. 0　　B. Error Code: 0　　C. Caught: Zero Error　　D. 程序崩溃</div>
+  <div class="ans">我的答案：____________</div></div>
+
+<div class="q"><div class="qh"><span class="src">2603·选13</span><span class="kp">文件重定向</span></div>
+  <div class="stem"><b>不能</b>实现将字符串 Welcome to 2026! 输出重定向到文件 log.txt 的是（　）。</div>
+  <div class="opts">A. freopen("log.txt","w",stdout); cout&lt;&lt;...; fclose(stdout);<br>B. ofstream outFile("log.txt"); cout&lt;&lt;...; outFile.close();<br>C. 用 rdbuf 把 cout 重定向到 log_file 再输出<br>D. ofstream outFile("log.txt"); outFile&lt;&lt;...; outFile.close();</div>
+  <div class="ans">我的答案：____________</div></div>
+
+<div class="q"><div class="qh"><span class="src">2603·判8</span><span class="kp">写文件 fout vs cout</span></div>
+  <div class="stem">判断：下面程序能够把 Hello 写入 data.txt 文件中。</div>
+  <pre>ofstream fout("data.txt");
+cout<<"Hello";
+fout.close();</pre>
+  <div class="ans">我的判断（√/×）：__________</div></div>
+
+<div class="q"><div class="qh"><span class="src">2603·判10</span><span class="kp">循环递推复杂度</span></div>
+  <div class="stem">判断：下面用递推方式计算斐波那契数列第 n 项的程序，时间复杂度是 O(2ⁿ)。</div>
+  <pre>int fib(int n){
+  if(n<=1) return n;
+  int f0=0,f1=1,cur=0;
+  for(int i=2;i<=n;i++){ cur=f0+f1; f0=f1; f1=cur; }
+  return cur;
+}</pre>
+  <div class="ans">我的判断（√/×）：__________</div></div>
+
+<div class="pb"></div>
+<h2>✅ 答案与自查 <span class="n">（做完再看！还错的圈出来）</span></h2>
+<div class="akey">
+  <div class="row"><b>A组·值传递与引用</b>　一句话：<b>参数带 &amp; 或 * 才改得到外面，普通值改不到；引用一旦绑定不能改绑。</b></div>
+  <div class="row"><b>2603·选4</b> → <span class="r">B（1 3 4）</span>｜a 值传递不变(x=1)，b 引用+2(y=3)，c 指针+3(z=4)</div>
+  <div class="row"><b>2603·选7</b> → <span class="r">B（1 12）</span>｜g 值传递不改(a=1)，h 引用改(b=12)</div>
+  <div class="row"><b>2603·判1</b> → <span class="r">√</span>｜int&amp;x 是引用，a 从 5 变 15</div>
+  <div class="row"><b>2606·判2</b> → <span class="r">×</span>｜引用不能重新绑定</div>
+  <div class="row"><b>2603·判2</b> → <span class="r">√</span>｜「引用不能再绑定其他」正是对的</div>
+
+  <div class="row" style="margin-top:8px"><b>B组·递推</b>　一句话：<b>循环递推一律画表格逐行手算，不心算。</b></div>
+  <div class="row"><b>2606·选12</b> → <span class="r">B（8）</span>｜i3:c3 / i4:c5 / i5:c8</div>
+  <div class="row"><b>2603·选9</b> → <span class="r">B（13）</span>｜续到 i6:c13</div>
+
+  <div class="row" style="margin-top:8px"><b>C组·指针</b>　一句话：<b>*p 是 p 现在指的那个；指针+1 跳一个元素；&amp;数组+1 跳一整块；没初始化是野指针。</b></div>
+  <div class="row"><b>2606·选5</b> → <span class="r">B（6）</span>｜p 改指向 next_lv 后 *p=6</div>
+  <div class="row"><b>2606·选6</b> → <span class="r">C（0x2050）</span>｜&amp;数组+1 跳整块 5×4×4=80字节=0x50</div>
+  <div class="row"><b>2606·选7</b> → <span class="r">B（60）</span>｜ptr 指 30，前 20 后 40</div>
+  <div class="row"><b>2603·选2</b> → <span class="r">B（12 12）</span>｜**q 拨两层改到 a，a 和 *p 都 12</div>
+  <div class="row"><b>2603·选3</b> → <span class="r">B（10）</span>｜行指针 p+2 到第3行，+1 到第2个 = a[2][1]=10</div>
+  <div class="row"><b>2603·判6</b> → <span class="r">×</span>｜没初始化是野指针，不是 nullptr</div>
+
+  <div class="row" style="margin-top:8px"><b>D组·排序</b>　一句话：<b>选择排序不稳定；插入排序前面比 key 大就后移；同 O(n²) 不代表可互换。</b></div>
+  <div class="row"><b>2606·选11</b> → <span class="r">C</span>｜「选择排序稳定」这句是错的</div>
+  <div class="row"><b>2606·选14</b> → <span class="r">C（选择）</span>｜找 minPos 再交换一次 = 选择排序</div>
+  <div class="row"><b>2606·判4</b> → <span class="r">×</span>｜选择排序不稳定（遇相等不交换也不稳定）</div>
+  <div class="row"><b>2603·选11</b> → <span class="r">B（a[j]&gt;key）</span></div>
+  <div class="row"><b>2603·选15</b> → <span class="r">A</span>｜i&gt;0 && cur.score &gt; players[i-1].score</div>
+  <div class="row"><b>2603·判9</b> → <span class="r">×</span>｜复杂度同不代表性能同、可互换</div>
+
+  <div class="row" style="margin-top:8px"><b>E组·结构体</b></div>
+  <div class="row"><b>2606·选9</b> → <span class="r">C</span>｜new 出来是指针，左边必须带 *，Hero h= 就编译错</div>
+  <div class="row"><b>2603·判7</b> → <span class="r">√</span>｜结构体可嵌套定义结构体，合法</div>
+
+  <div class="row" style="margin-top:8px"><b>F组·二维数组</b></div>
+  <div class="row"><b>2606·判6</b> → <span class="r">√</span>｜能省第一维、不能省第二维，a[][2] 合法</div>
+  <div class="row"><b>2603·判3</b> → <span class="r">×</span>｜&amp;a[1][2]-&amp;a[0][1]=5-1=4，不是 5</div>
+
+  <div class="row" style="margin-top:8px"><b>G组·异常/文件/复杂度</b></div>
+  <div class="row"><b>2606·选13</b> → <span class="r">C（Caught: Zero Error）</span>｜throw 的是字符串，被 const char* 的 catch 接</div>
+  <div class="row"><b>2603·选13</b> → <span class="r">B</span>｜开了 ofstream 却用 cout&lt;&lt;，内容进屏幕不进文件</div>
+  <div class="row"><b>2603·判8</b> → <span class="r">×</span>｜同理，写文件要 fout&lt;&lt; 不是 cout&lt;&lt;</div>
+  <div class="row"><b>2603·判10</b> → <span class="r">×</span>｜循环递推是 O(n)，不是 O(2ⁿ)</div>
+</div>
+
+<p class="tip" style="margin-top:16px">重做卷生成于 2026-08-06 · 与「GESP四级小题档案.html」同源 · 还错的题请圈出，进下一轮。</p>
+
+</body>
+</html>
