@@ -112,9 +112,13 @@ int *ptr=data+2;   // 跳2个 → 指向 30
 <div class="arrow">= 20 + 40 = <b>60（B）</b>。记住：+1 是跳一个<b>元素</b>，不是一个字节。</div></div>
 
 <div class="ex"><div class="t">④ &amp;整个数组 +1 = 跳「一整块」（2606·选6）</div>
-<pre>int map[5][4];   // 一整块 = 5×4 个int = 20×4字节 = 80字节 = 0x50
-// map 起址 0x2000，&map+1 跳过整块</pre>
-<div class="arrow">0x2000 + 0x50 = <b>0x2050（C）</b>。&amp;数组名+1 跳过<b>整个数组</b>。</div></div>
+<pre>int map[5][4];   // 一张 5 行 4 列的表，起址 0x2000</pre>
+<div class="arrow">（下面的 <b>×</b> 是「乘号」，不是字母 x）
+第1步：一共几个 int？　5 × 4 = <b>20 个</b>
+第2步：一个 int 占 4 字节 → 20 × 4 = <b>80 字节</b>（这就是整块大小）
+第3步：80 换成十六进制 = <b>0x50</b>（因为 80 = 5×16）
+第4步：&amp;map+1 跳过这 80 字节 → 0x2000 + 0x50 = <b>0x2050（C）</b></div>
+<div style="margin-top:5px">一句话：<code>&amp;整个数组 + 1</code> 不是加 1，是加上<b>「整张表的总字节数」</b>。</div></div>
 
 <div class="ex"><div class="t">⑤ 二级指针 **q：拨两层（2603·选2）</div>
 <pre>int a=5; int *p=&a; int **q=&p;
