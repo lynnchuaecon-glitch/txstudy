@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🧠 我的编程计算逻辑库</title>
+<!-- ============================================================
+     我的编程计算逻辑库
+     ★ 用来保存孩子做题时亲手写下的计算逻辑、步骤和知识点分析。
+     ★ 孩子的原话和步骤顺序优先保留；整理只负责辨认、分段和轻微润色。
+     ★ 换电脑 / 备份时，请点「📄 导出 HTML」，把全部记录烤进新文件。
+     ============================================================ -->
+<style>
+  :root{
+    --bg:#0a0f1e; --bg2:#111827; --bg3:#1f2937; --line:#374151;
+    --accent:#38bdf8; --accent2:#a78bfa; --accent3:#34d399;
+    --text:#e5e7eb; --muted:#9ca3af; --warm:#fbbf24; --danger:#f87171;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; padding:32px 20px 60px; background:var(--bg); color:var(--text);
+    font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    font-size:17px; line-height:1.8;
+  }
+  button,input,select,textarea{font:inherit;}
+  .wrap{max-width:920px; margin:0 auto;}
+  .head{display:flex; align-items:flex-start; gap:14px; flex-wrap:wrap;}
+  .titlebox{flex:1; min-width:240px;}
+  h1{
+    font-size:30px; line-height:1.35; margin:0 0 4px;
+    background:linear-gradient(90deg,var(--accent),var(--accent2));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .sub{color:var(--muted); font-size:15px; margin-bottom:22px;}
+  .actions{display:flex; gap:10px; flex-wrap:wrap;}
+  .btn{
+    cursor:pointer; border:1px solid var(--line); border-radius:9px;
+    padding:9px 15px; font-size:15px; background:var(--bg3); color:var(--text);
+    white-space:nowrap;
+  }
+  .btn:hover{border-color:var(--accent);}
+  .btn.primary{
+    background:linear-gradient(90deg,var(--accent),var(--accent2));
+    color:#08111f; border:none; font-weight:700;
+  }
+
+  .toolbar{
+    background:var(--bg2); border-radius:14px; padding:18px 20px;
+    box-shadow:0 6px 30px rgba(0,0,0,.45); margin-bottom:22px;
+  }
+  .rowf{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin:8px 0;}
+  .rowf .label{color:var(--muted); font-size:14px; min-width:64px;}
+  input[type=text],select,textarea{
+    background:var(--bg3); color:var(--text); border:1px solid var(--line);
+    border-radius:8px; padding:8px 12px;
+  }
+  #q{flex:1; min-width:190px;}
+  .chip{
+    cursor:pointer; user-select:none; background:var(--bg3); color:var(--muted);
+    border:1px solid var(--line); border-radius:999px; padding:4px 13px;
+    font-size:14px; transition:.15s;
+  }
+  .chip:hover{border-color:var(--accent);}
+  .chip.on{background:rgba(56,189,248,.16); color:var(--accent); border-color:var(--accent); font-weight:600;}
+  .chip.all.on{background:rgba(167,139,250,.18); color:var(--accent2); border-color:var(--accent2);}
+  .count{color:var(--muted); font-size:14px; margin-left:auto;}
+
+  .card{
+    background:var(--bg2); border-radius:14px; padding:22px 26px;
+    box-shadow:0 6px 30px rgba(0,0,0,.4); margin-bottom:18px;
+    border:1px solid transparent; transition:.15s;
+  }
+  .card:hover{border-color:var(--line);}
+  .card .top{display:flex; align-items:flex-start; gap:12px; cursor:pointer;}
+  .number{
+    flex:none; color:#08111f; background:var(--accent); border-radius:7px;
+    padding:2px 10px; font-size:14px; font-weight:800; margin-top:3px;
+  }
+  .card h2{font-size:21px; line-height:1.55; margin:0; color:var(--accent); flex:1;}
+  .cmeta{color:var(--muted); font-size:14px; margin:8px 0 6px;}
+  .tags{display:flex; flex-wrap:wrap; gap:7px; margin:7px 0;}
+  .tag-s{background:var(--bg3); color:var(--accent); border:1px solid #2b3a4d; border-radius:6px; padding:1px 9px; font-size:13px;}
+  .preview{color:#cbd5e1; margin-top:12px; font-size:15px;}
+  .preview b{color:var(--accent3);}
+  .cardfoot{display:flex; align-items:center; gap:14px; margin-top:12px;}
+  .toggle{color:var(--accent); font-size:14px; cursor:pointer; user-select:none;}
+  .toggle:hover,.del:hover{text-decoration:underline;}
+  .del{color:var(--danger); font-size:13px; cursor:pointer; margin-left:auto;}
+
+  .detail{display:none; margin-top:10px; border-top:1px solid var(--line); padding-top:4px;}
+  .detail.open{display:block;}
+  .detail h3{font-size:18px; margin:24px 0 10px; padding-bottom:6px; border-bottom:1px solid var(--line); color:var(--accent);}
+  .steps{list-style:none; margin:10px 0; padding:0; counter-reset:logic-step;}
+  .steps li{
+    counter-increment:logic-step; position:relative; margin:12px 0; padding:12px 16px 12px 54px;
+    background:var(--bg3); border-radius:9px; min-height:50px; white-space:pre-wrap;
+  }
+  .steps li::before{
+    content:counter(logic-step); position:absolute; left:15px; top:12px;
+    width:27px; height:27px; line-height:27px; text-align:center;
+    border-radius:50%; background:rgba(56,189,248,.18); border:1px solid var(--accent);
+    color:var(--accent); font-weight:800; font-size:14px;
+  }
+  .step-label{display:block; color:var(--accent3); font-weight:700; margin-bottom:2px;}
+  .kid-knowledge{
+    border-left:4px solid var(--accent2); background:rgba(167,139,250,.10);
+    padding:13px 17px; border-radius:8px; color:#e9d5ff;
+  }
+  .kid-knowledge ul{margin:4px 0; padding-left:22px;}
+  .note{border-left:4px solid var(--warm); background:rgba(251,191,36,.08); padding:11px 16px; border-radius:8px; color:#fde68a; white-space:pre-wrap;}
+  .empty{
+    text-align:center; padding:54px 24px; background:var(--bg2); border:1px dashed var(--line);
+    border-radius:14px; color:var(--muted);
+  }
+  .empty .icon{display:block; font-size:42px; margin-bottom:8px;}
+  .empty b{display:block; color:var(--text); font-size:19px; margin-bottom:4px;}
+
+  .mask{display:none; position:fixed; inset:0; background:rgba(0,0,0,.65); z-index:50; padding:30px 16px; overflow:auto;}
+  .mask.open{display:block;}
+  .modal{max-width:760px; margin:0 auto; background:var(--bg2); border-radius:16px; padding:28px 30px; box-shadow:0 20px 60px rgba(0,0,0,.6);}
+  .modal h2{margin:0 0 6px; color:var(--accent2); font-size:23px;}
+  .modal .tip{color:var(--muted); font-size:14px; margin-bottom:18px;}
+  .fld label{display:block; color:var(--accent); font-size:14px; margin-bottom:5px;}
+  .fld textarea{width:100%; min-height:330px; resize:vertical; font-family:"SF Mono",Consolas,monospace; font-size:13px; line-height:1.55;}
+  .modal-actions{display:flex; gap:12px; margin-top:20px; justify-content:flex-end;}
+
+  @media(max-width:640px){
+    body{padding:22px 13px 44px; font-size:16px;}
+    h1{font-size:26px;}
+    .head .actions{width:100%;}
+    .head .btn{flex:1;}
+    .toolbar{padding:14px;}
+    .card{padding:18px 17px;}
+    .card .top{flex-wrap:wrap; gap:7px;}
+    .card h2{flex-basis:calc(100% - 70px);}
+    .modal{padding:22px 18px;}
+  }
+  @media print{
+    body{background:#fff; color:#111; padding:0; font-size:14px;}
+    .head .actions,.toolbar,.cardfoot{display:none!important;}
+    h1{-webkit-text-fill-color:#155e75; color:#155e75;}
+    .sub,.cmeta{color:#555;}
+    .card{box-shadow:none; border:1px solid #bbb; color:#111; page-break-inside:avoid;}
+    .card h2{color:#075985;}
+    .detail{display:block!important; border-color:#ccc;}
+    .steps li{background:#f4f4f5;}
+    .kid-knowledge{background:#f5f3ff; color:#4c1d95;}
+    .note{background:#fffbeb; color:#713f12;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="head">
+    <div class="titlebox">
+      <h1>🧠 我的编程计算逻辑库</h1>
+      <div class="sub">把纸上的思考留下来：题号、题目名称、计算步骤，以及我自己发现的知识点。</div>
+    </div>
+    <div class="actions">
+      <button class="btn primary" id="addBtn">📥 录入记录</button>
+      <button class="btn" id="exportBtn" title="把全部记录烤进一个可携带的新文件">📄 导出 HTML</button>
+      <button class="btn" id="importBtn" title="从导出的 HTML 或 JSON 中导入记录">⬆ 导入</button>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <div class="rowf">
+      <span class="label">🔍 搜索</span>
+      <input type="text" id="q" placeholder="搜题号、题名、步骤、知识点……">
+      <select id="sort">
+        <option value="desc">时间：最新优先</option>
+        <option value="asc">时间：最早优先</option>
+        <option value="number">题号：顺序排列</option>
+      </select>
+    </div>
+    <div class="rowf">
+      <span class="label">🏷 知识点</span>
+      <div id="tagbar" style="display:flex;flex-wrap:wrap;gap:10px;flex:1;"></div>
+      <span class="count" id="count"></span>
+    </div>
+  </div>
+
+  <div id="list"></div>
+</div>
+
+<input type="file" id="importFile" accept=".html,.json,.txt" style="display:none;">
+
+<script id="data">
+const SEED_LOGICS = [
+  {
+    id: "logic_10617_snake_matrix",
+    problemNo: "10617",
+    title: "蛇形矩阵",
+    date: "2026-08-18",
+    source: "孩子手写计算逻辑",
+    tags: ["二维循环", "矩阵", "计数器"],
+    steps: [
+      "输入 n。",
+      "遍历 n 行（用 i）。",
+      "遍历 i 列（j 倒着，用 j）。",
+      "cnt 初始为 1；输出 cnt，每输出一次就加 1。"
+    ],
+    kidKnowledge: [],
+    note: "按照片中的 1～4 点整理，保留孩子原本的步骤顺序。"
+  },
+  {
+    id: "logic_10847_cross_fire",
+    problemNo: "10847",
+    title: "穿越火线",
+    date: "2026-08-18",
+    source: "孩子手写计算逻辑",
+    tags: ["字符串遍历", "标记变量", "位置判断"],
+    steps: [
+      "输入字符串 s，遍历 s。",
+      "如果是 C，则 flagC=1；如果是 F，则 flagF=1，并记下它们是第几位。",
+      "如果 flagC 与 flagF 都为 1，而且 C 在 F 前面，则输出 Yes；否则输出 No。"
+    ],
+    kidKnowledge: [],
+    note: "题号按家长提供的 10847 记录。照片右侧有少量文字被截断，第三步按清晰可辨的判断条件整理。"
+  },
+  {
+    id: "logic_xw480_construction",
+    problemNo: "XW480",
+    title: "建造",
+    date: "2026-08-18",
+    source: "孩子手写计算逻辑",
+    tags: ["二维数组", "3×3区域", "最大值", "最小值"],
+    steps: [
+      "输入 n、m、h。",
+      "输入二维数组。",
+      "遍历二维数组 a。",
+      "将这一位以及它的 8 个方位传进函数 fa 里，并返回进 ma 里。",
+      "同样将这 9 个数传进函数 fi 里，并返回进 mi 里。",
+      "（fa）将 9 个数依次判断是不是比 ma 大。",
+      "（fi）将 9 个数依次判断是不是比 mi 小。",
+      "传出 a…i。（原稿中间的变量字迹待确认）",
+      "如果 ma-mi 小于等于 h，则将这 9 个数加起来，与 Max 比，谁大就把 Max 变为它。",
+      "输出 Max。"
+    ],
+    kidKnowledge: ["二维数组"],
+    note: "按照片中的 1～10 点整理。第 8 步的变量字迹不清，暂不猜写；确认后再补正。"
+  },
+  {
+    id: "logic_20255_treasure_box",
+    problemNo: "20255",
+    title: "宝箱",
+    date: "2026-08-18",
+    source: "孩子手写计算逻辑",
+    tags: ["一维数组", "数组遍历", "最大值", "条件求和"],
+    steps: [
+      "输入 n、k 与 n 个宝箱价值。",
+      "遍历 n 个宝箱，如果比 ma 大，则 ma 为这个价值。",
+      "遍历 n 个宝箱，如果 ma-这个数小于等于 k，则 sum 加上这个数（sum 开始为 0）。",
+      "输出 sum。"
+    ],
+    kidKnowledge: ["一维数组"],
+    note: "按照片上方编号 1～4 的计算逻辑整理。原稿下方另有一组候选值与差值的手推检验。"
+  },
+  {
+    id: "logic_xw166_digit_sum",
+    problemNo: "XW166",
+    title: "数位和",
+    date: "2026-08-18",
+    source: "孩子手写计算逻辑",
+    tags: ["数字拆分", "数位遍历", "累加", "最大值"],
+    steps: [
+      "输入 n 和 n 个 x。",
+      "取出 x 的每一位并相加，得到 sum。",
+      "将 sum 与 ma 比较。"
+    ],
+    kidKnowledge: ["数字拆分"],
+    note: "按照片中的 1～3 点整理。第 3 步原稿只写到“将 sum 与 ma…”，没有擅自补写后续更新或输出动作。"
+  },
+  {
+    id: "logic_20244_x_matrix",
+    problemNo: "20244",
+    title: "小杨的 X 矩阵",
+    date: "2026-08-18",
+    source: "孩子手写计算逻辑",
+    tags: ["矩阵", "二维遍历", "坐标关系", "条件输出"],
+    steps: [
+      "输入 n，用 i、j 遍历 n 行 n 列。",
+      "如果 i==j 或 i+j==n+1，则输出 +；否则输出 -。",
+      "换行。"
+    ],
+    kidKnowledge: ["矩阵"],
+    note: "按照片上半部分编号 1～3 的计算逻辑整理。照片下半部分的“20450 找素数”不在本条记录中。"
+  },
+  {
+    id: "logic_b2138_largest_prime_factor_sequence",
+    problemNo: "B2138",
+    title: "最大质因子序列",
+    date: "2026-08-18",
+    source: "孩子手写计算逻辑",
+    tags: ["判断质数", "判断因子", "区间遍历", "输出格式"],
+    steps: [
+      "输入 n、m，并用 i 遍历它们之间的数。",
+      "对每个 i，从 1 到 i 遍历 j。",
+      "如果 j 不是 i 的因子，则 continue。",
+      "否则，从 2 到 √j 遍历；有因子则 flag=0，否则将 j 放进 m 里。",
+      "cnt++；如果 cnt 为 1，则直接输出 m；否则先输出逗号，再输出 m。"
+    ],
+    kidKnowledge: ["判断质数", "判断因子"],
+    note: "按照片上半部分编号 1～5 的计算逻辑整理。第 4～5 步的结果变量按原稿记作 m。照片下半部分的“B2145 digit 函数”已另行录入。"
+  },
+  {
+    id: "logic_cd021_hollow_isosceles_triangle",
+    problemNo: "CD021",
+    title: "空心等腰三角形",
+    date: "2026-08-18",
+    source: "孩子手写计算逻辑",
+    tags: ["矩阵", "双重循环", "边界输出", "图形打印"],
+    steps: [
+      "输入 n。",
+      "将 l、r 都初始化为 n。",
+      "外循环 n 次。",
+      "内循环 2n-1 次。",
+      "如果 j==l、j==r 或 i==n，则输出 *。",
+      "否则输出空格；每轮外循环结束后换行，并执行 l--、r++。"
+    ],
+    kidKnowledge: ["矩阵"],
+    note: "按照片上半部分的计算逻辑整理。原稿把 l、r 的初始化写在第 1 步旁边，页面中拆成了独立一步。照片下半部分的“XW334 小洛的字符串分割”已另行录入。"
+  },
+  {
+    id: "logic_ll103_string_swap",
+    problemNo: "LL103",
+    title: "字符串交换",
+    date: "2026-08-18",
+    source: "孩子手写计算逻辑",
+    tags: ["字符串", "双重遍历", "交换", "标记变量"],
+    steps: [
+      "输入 s1、s2。",
+      "用 i 遍历 s1。",
+      "在 s1 中再用 j 遍历一个位置。",
+      "如果交换 s1[i] 与 s1[j] 后得到 s2，则 flag=1，并 break。",
+      "循环结束后，如果 flag 为 1，则输出 Yes；否则输出 No。"
+    ],
+    kidKnowledge: ["字符串"],
+    note: "按照片上半部分编号 1～5 的计算逻辑整理。照片下半部分的“XW404 美丽数字”已另行录入。"
+  },
+  {
+    id: "logic_fa02_letters_at_least_three_times",
+    problemNo: "FA02",
+    title: "至少出现 3 次的字母",
+    date: "2026-08-18",
+    source: "孩子手写计算逻辑",
+    tags: ["字符串", "计数思想", "ASCII码", "计数数组"],
+    steps: [
+      "输入字符串 s。",
+      "获取字符串长度并遍历 s。",
+      "把字符 s[i] 对应的 ASCII 码作为下标，对应的计数位置 a[s[i]]++。",
+      "循环结束后遍历计数数组，找出 a[i]>=3 的位置，输出对应的字母。"
+    ],
+    kidKnowledge: ["字符串", "计数思想"],
+    note: "题号按家长提供的 FA02 记录。照片上半部分的括号编号看起来像 FA025；照片下半部分的“10429 整数提取”已另行录入。"
+  },
+  {
+    id: "logic_20450_find_primes",
+    problemNo: "20450",
+    title: "找素数",
+    date: "2026-08-18",
+    source: "孩子手写计算逻辑",
+    tags: ["判断质数", "区间遍历", "因子判断", "计数器"],
+    steps: [
+      "输入 n、m。",
+      "用 i 遍历 n～m 的数。",
+      "用 j 从 2 开始遍历，判断 i 是否有因子；如果没有因子，则 cnt++。",
+      "输出 cnt。"
+    ],
+    kidKnowledge: ["判断质数"],
+    note: "按照片中的 1～4 点整理。第 3 步原稿有涂改，页面中保留其明确含义：没有因子时计数。"
+  },
+  {
+    id: "logic_xw404_beautiful_number",
+    problemNo: "XW404",
+    title: "美丽数字",
+    date: "2026-08-19",
+    source: "孩子手写计算逻辑",
+    tags: ["拆分数字", "数字遍历", "相邻数位", "计数器"],
+    steps: [
+      "输入 n，并用 i 遍历 n 个数。",
+      "用 t 代替 i，将 t 每次取出最后一位和下一位。",
+      "如果两位不一样，则 flag=0，并退出。",
+      "如果 flag 为 1，则 cnt++。",
+      "输出 cnt。"
+    ],
+    kidKnowledge: ["拆分数字"],
+    note: "按照片编号 1～5 的计算逻辑整理。"
+  },
+  {
+    id: "logic_b2145_digit_function",
+    problemNo: "B2145",
+    title: "digit 函数",
+    date: "2026-08-19",
+    source: "孩子手写计算逻辑",
+    tags: ["数字拆分", "数位提取", "循环"],
+    steps: [
+      "输入 n、k。",
+      "循环 k 次，每次将 n 的最后一位取出，并令 n 除以 10，直到最后。",
+      "输出 t。"
+    ],
+    kidKnowledge: ["数字拆分"],
+    note: "按照片编号 1～3 的计算逻辑整理。"
+  },
+  {
+    id: "logic_xw334_xiaoluo_string_split",
+    problemNo: "XW334",
+    title: "小洛的字符串分割",
+    date: "2026-08-19",
+    source: "孩子手写计算逻辑",
+    tags: ["判断字符串回文", "截取字符串", "字符串遍历", "计数器"],
+    steps: [
+      "输入字符串 s；令 l 为 s 的长度，i 为截取的长度。",
+      "只要 l 大于 i，就一直遍历。",
+      "从 s 的第 0 位开始截取 i 位，放进 t 里。",
+      "判断 t 是否回文；如果是，则 cnt++，并更新 i、l。（原稿末尾的具体更新式字迹待确认）",
+      "输出 cnt。"
+    ],
+    kidKnowledge: ["判断字符串回文", "截取字符串"],
+    note: "按照片编号 1～5 的计算逻辑整理。第 4 步末尾变量更新的字迹不完整，暂不猜写。"
+  },
+  {
+    id: "logic_10429_integer_extraction",
+    problemNo: "10429",
+    title: "整数提取",
+    date: "2026-08-19",
+    source: "孩子手写计算逻辑",
+    tags: ["字符串", "一维数组", "字符判断", "数字拼接"],
+    steps: [
+      "输入字符串 s。",
+      "获取字符串 s 的长度并遍历。",
+      "如果当前字符不是数字，则 continue。",
+      "如果当前字符是数字，则把已有的数乘 10，再加上这一位数字。",
+      "输出保存的整数及 cnt。（原稿中的数组下标字迹待确认）"
+    ],
+    kidKnowledge: ["字符串", "一维数组"],
+    note: "按照片中的有效内容整理；涂掉的旧句未录入。最后一步的数组下标字迹不清，暂不猜写。"
+  }
+];
+</script>
+
+<script>
+const LS_KEY = 'programming_logic_extras_v1';
+
+function loadExtras(){
+  try { return JSON.parse(localStorage.getItem(LS_KEY) || '[]'); }
+  catch(e){ return []; }
+}
+function saveExtras(records){ localStorage.setItem(LS_KEY, JSON.stringify(records)); }
+function getAll(){ return SEED_LOGICS.concat(loadExtras()); }
+function escapeHTML(value){
+  return String(value ?? '').replace(/[&<>"']/g, char => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  })[char]);
+}
+function textHTML(value){ return escapeHTML(value).replace(/\n/g,'<br>'); }
+function normalize(record, index=0){
+  const today = new Date().toISOString().slice(0,10);
+  return {
+    id: record.id || ('logic_' + Date.now() + '_' + index),
+    problemNo: String(record.problemNo || record.number || '未标题号'),
+    title: String(record.title || '未命名题目'),
+    date: String(record.date || today),
+    source: String(record.source || ''),
+    tags: Array.isArray(record.tags) ? record.tags.map(String) : [],
+    steps: Array.isArray(record.steps) ? record.steps : [],
+    kidKnowledge: Array.isArray(record.kidKnowledge) ? record.kidKnowledge.map(String) : [],
+    note: String(record.note || '')
+  };
+}
+
+const listEl = document.getElementById('list');
+const tagbarEl = document.getElementById('tagbar');
+const countEl = document.getElementById('count');
+const qEl = document.getElementById('q');
+const sortEl = document.getElementById('sort');
+let activeTag = '';
+
+function chip(label, active, extra=''){
+  const el = document.createElement('span');
+  el.className = 'chip ' + extra + (active ? ' on' : '');
+  el.textContent = label;
+  return el;
+}
+function renderTagbar(){
+  const counts = new Map();
+  getAll().forEach(raw => normalize(raw).tags.forEach(tag => counts.set(tag,(counts.get(tag)||0)+1)));
+  const tags = [...counts].sort((a,b) => b[1]-a[1] || a[0].localeCompare(b[0],'zh-CN')).slice(0,12);
+  tagbarEl.innerHTML = '';
+  const all = chip('全部',!activeTag,'all');
+  all.onclick = () => { activeTag=''; update(); };
+  tagbarEl.appendChild(all);
+  tags.forEach(([tag,total]) => {
+    const item = chip(tag + ' ' + total,activeTag===tag);
+    item.onclick = () => { activeTag = activeTag===tag ? '' : tag; update(); };
+    tagbarEl.appendChild(item);
+  });
+}
+function stepHTML(step){
+  if(typeof step === 'string') return '<li>'+textHTML(step)+'</li>';
+  const label = step && step.label ? '<span class="step-label">'+escapeHTML(step.label)+'</span>' : '';
+  const content = step && (step.content || step.text) ? textHTML(step.content || step.text) : '';
+  return '<li>'+label+content+'</li>';
+}
+function detailHTML(record){
+  let html = '<div class="detail">';
+  html += '<h3>一、我的计算步骤</h3>';
+  html += record.steps.length
+    ? '<ol class="steps">'+record.steps.map(stepHTML).join('')+'</ol>'
+    : '<div class="note">这张原稿暂未辨认出明确步骤，等待补充。</div>';
+  if(record.kidKnowledge.length){
+    html += '<h3>二、我自己分析的知识点</h3><div class="kid-knowledge"><ul>';
+    record.kidKnowledge.forEach(item => html += '<li>'+textHTML(item)+'</li>');
+    html += '</ul></div>';
+  }
+  if(record.note){
+    html += '<h3>'+(record.kidKnowledge.length ? '三' : '二')+'、补充说明</h3><div class="note">'+textHTML(record.note)+'</div>';
+  }
+  html += '</div>';
+  return html;
+}
+function cardHTML(record,isUser){
+  const tags = record.tags.map(tag => '<span class="tag-s">'+escapeHTML(tag)+'</span>').join('');
+  const firstStep = record.steps[0];
+  const previewText = typeof firstStep === 'string' ? firstStep : firstStep && (firstStep.content || firstStep.text || firstStep.label);
+  return '<article class="card" data-id="'+escapeHTML(record.id)+'">'
+    + '<div class="top"><span class="number">'+escapeHTML(record.problemNo)+'</span><h2>'+escapeHTML(record.title)+'</h2></div>'
+    + '<div class="cmeta">📅 '+escapeHTML(record.date)+(record.source ? '　·　'+escapeHTML(record.source) : '')+'　·　共 '+record.steps.length+' 步</div>'
+    + (tags ? '<div class="tags">'+tags+'</div>' : '')
+    + (previewText ? '<div class="preview"><b>第一步：</b>'+textHTML(previewText)+'</div>' : '')
+    + '<div class="cardfoot"><span class="toggle">▸ 展开计算逻辑</span>'
+    + (isUser ? '<span class="del" data-del="'+escapeHTML(record.id)+'">🗑 删除</span>' : '')
+    + '</div>'+detailHTML(record)+'</article>';
+}
+function searchable(record){
+  const steps = record.steps.map(step => typeof step==='string' ? step : ((step && step.label)||'')+' '+((step && (step.content||step.text))||'')).join(' ');
+  return [record.problemNo,record.title,record.source,record.tags.join(' '),steps,record.kidKnowledge.join(' '),record.note].join(' ').toLowerCase();
+}
+function problemNumber(value){
+  const matched = String(value).match(/\d+(?:\.\d+)?/);
+  return matched ? Number(matched[0]) : Number.MAX_SAFE_INTEGER;
+}
+function update(){
+  renderTagbar();
+  const extras = loadExtras();
+  const userIds = new Set(extras.map(record => record.id));
+  const query = qEl.value.trim().toLowerCase();
+  let records = getAll().map(normalize).filter(record => {
+    if(activeTag && !record.tags.includes(activeTag)) return false;
+    return !query || searchable(record).includes(query);
+  });
+  records.sort((a,b) => {
+    if(sortEl.value==='asc') return a.date.localeCompare(b.date);
+    if(sortEl.value==='number') return problemNumber(a.problemNo)-problemNumber(b.problemNo) || a.problemNo.localeCompare(b.problemNo,'zh-CN');
+    return b.date.localeCompare(a.date);
+  });
+  countEl.textContent = '共 '+records.length+' / '+getAll().length+' 题';
+  if(!records.length){
+    listEl.innerHTML = '<div class="empty"><span class="icon">✍️</span><b>'+(getAll().length ? '没有符合条件的记录' : '等第一张手写计算逻辑')+'</b>'
+      + (getAll().length ? '换一个关键词或知识点试试。' : '收到照片后，会从题号、题名和第一步开始整理。')+'</div>';
+    return;
+  }
+  listEl.innerHTML = records.map(record => cardHTML(record,userIds.has(record.id))).join('');
+  listEl.querySelectorAll('.card').forEach(card => {
+    const detail = card.querySelector('.detail');
+    const toggle = card.querySelector('.toggle');
+    const flip = () => {
+      const open = detail.classList.toggle('open');
+      toggle.textContent = open ? '▾ 收起计算逻辑' : '▸ 展开计算逻辑';
+    };
+    card.querySelector('.top').onclick = flip;
+    toggle.onclick = flip;
+  });
+  listEl.querySelectorAll('[data-del]').forEach(button => {
+    button.onclick = event => {
+      event.stopPropagation();
+      const id = button.getAttribute('data-del');
+      if(confirm('确定删除这条本地新增记录吗？')){
+        saveExtras(loadExtras().filter(record => record.id!==id));
+        update();
+      }
+    };
+  });
+}
+qEl.oninput = update;
+sortEl.onchange = update;
+
+const mask = document.createElement('div');
+mask.className = 'mask';
+mask.innerHTML = `
+  <div class="modal">
+    <h2>📥 录入计算逻辑</h2>
+    <div class="tip">粘贴整理好的 JSON。步骤按孩子纸上的先后顺序填写；孩子没有写知识点时，<code>kidKnowledge</code> 留空数组。</div>
+    <div class="fld">
+      <label>记录 JSON（可粘贴一条对象，或多条组成的数组）</label>
+      <textarea id="jsonInput" spellcheck="false" placeholder='{
+  "problemNo": "第 1 题",
+  "title": "题目名称",
+  "date": "2026-08-18",
+  "source": "题目来源（可空）",
+  "steps": [
+    "第一步的原话或计算",
+    {"label": "分类讨论", "content": "孩子写下的具体过程"}
+  ],
+  "kidKnowledge": ["孩子自己分析的知识点"],
+  "tags": ["循环", "模拟"],
+  "note": "仅放必要的辨认说明（可空）"
+}'></textarea>
+    </div>
+    <div class="modal-actions">
+      <button class="btn" id="cancelBtn">取消</button>
+      <button class="btn primary" id="saveBtn">解析并加入</button>
+    </div>
+  </div>`;
+document.body.appendChild(mask);
+
+function openModal(){ mask.classList.add('open'); document.getElementById('jsonInput').value=''; document.getElementById('jsonInput').focus(); }
+function closeModal(){ mask.classList.remove('open'); }
+document.getElementById('addBtn').onclick = openModal;
+document.getElementById('cancelBtn').onclick = closeModal;
+mask.onclick = event => { if(event.target===mask) closeModal(); };
+document.getElementById('saveBtn').onclick = () => {
+  const raw = document.getElementById('jsonInput').value.trim();
+  if(!raw){ alert('请先粘贴记录 JSON。'); return; }
+  let parsed;
+  try { parsed=JSON.parse(raw); }
+  catch(error){ alert('JSON 解析失败：\n'+error.message); return; }
+  const incoming = Array.isArray(parsed) ? parsed : [parsed];
+  const extras = loadExtras();
+  const used = new Set(getAll().map(record => record.id));
+  let added=0,skipped=0;
+  incoming.forEach((rawRecord,index) => {
+    if(!rawRecord || !rawRecord.title || !(rawRecord.problemNo || rawRecord.number)){ skipped++; return; }
+    const record=normalize(rawRecord,index);
+    if(used.has(record.id)) record.id='logic_'+Date.now()+'_'+index;
+    extras.push(record); used.add(record.id); added++;
+  });
+  saveExtras(extras); closeModal(); activeTag=''; update();
+  alert('已加入 '+added+' 条记录。'+(skipped ? '\n另有 '+skipped+' 条缺少题号或题名，已跳过。' : ''));
+};
+
+function download(filename,text){
+  const blob=new Blob([text],{type:'text/html;charset=utf-8'});
+  const link=document.createElement('a');
+  link.href=URL.createObjectURL(blob); link.download=filename;
+  document.body.appendChild(link); link.click(); link.remove();
+  URL.revokeObjectURL(link.href);
+}
+document.getElementById('exportBtn').onclick = () => {
+  const all=getAll().map(normalize);
+  const clone=document.documentElement.cloneNode(true);
+  clone.querySelector('#data').textContent='\nconst SEED_LOGICS = '+JSON.stringify(all,null,2)+';\n';
+  const list=clone.querySelector('#list'); if(list) list.innerHTML='';
+  clone.querySelectorAll('.mask').forEach(node => node.remove());
+  const stamp=new Date().toISOString().slice(0,10);
+  download('编程计算逻辑库-'+stamp+'.html','<!DOCTYPE html>\n'+clone.outerHTML);
+  alert('已导出全部 '+all.length+' 条记录。');
+};
+
+document.getElementById('importBtn').onclick = () => document.getElementById('importFile').click();
+document.getElementById('importFile').onchange = event => {
+  const file=event.target.files[0]; if(!file) return;
+  const reader=new FileReader();
+  reader.onload = () => {
+    let imported=[];
+    try {
+      if(file.name.toLowerCase().endsWith('.json')) imported=JSON.parse(reader.result);
+      else {
+        const match=reader.result.match(/const SEED_LOGICS\s*=\s*(\[[\s\S]*?\]);/);
+        if(match) imported=JSON.parse(match[1]);
+      }
+    } catch(error){ alert('读取失败：'+error.message); return; }
+    if(!Array.isArray(imported) || !imported.length){ alert('文件中没有读到计算逻辑记录。'); return; }
+    const extras=loadExtras();
+    const used=new Set(getAll().map(record => record.id));
+    let added=0;
+    imported.forEach((rawRecord,index) => {
+      const record=normalize(rawRecord,index);
+      if(!used.has(record.id)){ extras.push(record); used.add(record.id); added++; }
+    });
+    saveExtras(extras); update();
+    alert('导入完成，新增 '+added+' 条；重复记录已跳过。');
+  };
+  reader.readAsText(file,'utf-8');
+  event.target.value='';
+};
+
+update();
+</script>
+</body>
+</html>
