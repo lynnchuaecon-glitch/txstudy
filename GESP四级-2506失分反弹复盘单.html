@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GESP四级 · 2506失分反弹复盘单</title>
+<style>
+  :root{
+    --ink:#1d2430; --sub:#5f6875; --line:#cfd5dc;
+    --blue:#175b91; --blue-bg:#eaf3fa;
+    --green:#216e4a; --green-bg:#eaf6ef;
+    --red:#a63d35; --red-bg:#fbeeed;
+    --amber:#8a5a08; --amber-bg:#fff5df;
+    --paper:#fff; --soft:#f4f6f8;
+  }
+  *{box-sizing:border-box;}
+  html{background:#e9edf1;}
+  body{margin:0;color:var(--ink);background:#e9edf1;font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;line-height:1.46;font-size:14px;letter-spacing:0;}
+  .toolbar{position:sticky;top:0;z-index:5;display:flex;justify-content:center;padding:10px;background:#1d2430;}
+  .print-btn{border:0;border-radius:6px;background:#fff;color:#1d2430;font:700 15px inherit;padding:8px 18px;cursor:pointer;}
+  .page{width:210mm;min-height:297mm;margin:14px auto;background:var(--paper);padding:11mm 14mm 12mm;box-shadow:0 2px 16px rgba(24,35,48,.16);page-break-after:always;position:relative;overflow:hidden;}
+  .page:last-child{page-break-after:auto;}
+  h1{font-size:23px;text-align:center;margin:0 0 2px;line-height:1.28;}
+  .subtitle{text-align:center;color:var(--sub);font-size:13px;margin-bottom:8px;}
+  .topline{display:flex;justify-content:space-between;gap:14px;border-bottom:1px solid var(--line);padding-bottom:4px;margin-bottom:7px;font-size:12.5px;color:var(--sub);}
+  h2{font-size:18px;margin:9px 0 6px;padding:5px 9px;background:var(--ink);color:#fff;border-radius:5px;line-height:1.32;}
+  h2 .tag{font-size:12px;font-weight:500;color:#dce5ee;margin-left:6px;}
+  h3{font-size:15.5px;color:var(--blue);margin:8px 0 4px;line-height:1.35;}
+  p{margin:3px 0;}
+  code{font-family:"SF Mono",Consolas,monospace;background:#edf1f5;padding:0 4px;border-radius:3px;font-size:13px;}
+  pre{margin:4px 0;padding:6px 9px;background:var(--soft);border:1px solid var(--line);border-radius:5px;font:12px/1.35 "SF Mono",Consolas,monospace;white-space:pre-wrap;}
+  table{width:100%;border-collapse:collapse;margin:4px 0 6px;font-size:12.5px;page-break-inside:avoid;}
+  th,td{border:1px solid var(--line);padding:4px 5px;text-align:center;vertical-align:middle;height:26px;}
+  th{background:#edf1f5;font-weight:700;}
+  td.left,th.left{text-align:left;}
+  .intro{border:2px solid var(--blue);background:var(--blue-bg);border-radius:7px;padding:7px 10px;margin:6px 0 7px;}
+  .intro b{color:var(--blue);}
+  .signal{border-left:4px solid var(--red);background:var(--red-bg);padding:6px 9px;margin:5px 0;border-radius:4px;}
+  .method{border-left:4px solid var(--green);background:var(--green-bg);padding:6px 9px;margin:5px 0;border-radius:4px;}
+  .method b{color:var(--green);}
+  .task{border:1px solid var(--line);border-radius:6px;padding:6px 9px;margin:6px 0;page-break-inside:avoid;}
+  .task-title{font-weight:800;color:var(--amber);margin-bottom:3px;}
+  .optional{border-color:#e1c786;background:var(--amber-bg);}
+  .line{height:24px;border-bottom:1px solid #8d949d;margin:1px 0 3px;}
+  .lines-2{height:50px;background:repeating-linear-gradient(to bottom,transparent 0,transparent 23px,#aeb4bb 24px,#aeb4bb 25px);}
+  .lines-3{height:75px;background:repeating-linear-gradient(to bottom,transparent 0,transparent 23px,#aeb4bb 24px,#aeb4bb 25px);}
+  .blank{display:inline-block;min-width:85px;height:20px;border-bottom:1px solid #646b73;vertical-align:bottom;}
+  .blank.wide{min-width:220px;}
+  .checks{display:flex;gap:10px;flex-wrap:wrap;color:var(--sub);font-size:12.5px;margin:3px 0;}
+  .route{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin:5px 0;}
+  .route div{border:1px solid var(--line);border-radius:4px;padding:4px;text-align:center;font-size:12px;background:#fff;}
+  .route b{display:block;color:var(--blue);font-size:13px;}
+  .coach-page{border-top:8px solid var(--red);}
+  .compact-page{font-size:13.2px;line-height:1.38;}
+  .coach-page{font-size:13.8px;line-height:1.43;}
+  .coach-note{border:2px solid var(--red);background:var(--red-bg);border-radius:7px;padding:6px 9px;margin:6px 0;}
+  .coach-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:5px 0;}
+  .coach-box{border:1px solid var(--line);padding:6px 8px;border-radius:5px;page-break-inside:avoid;}
+  .coach-box b{color:var(--blue);}
+  ul,ol{margin:3px 0;padding-left:20px;} li{margin:2px 0;}
+  .footer{position:absolute;left:14mm;right:14mm;bottom:5mm;display:flex;justify-content:space-between;color:#89919a;font-size:11px;}
+  .cut{border-top:1px dashed #888;text-align:center;color:#777;font-size:12px;padding-top:5px;margin-bottom:10px;}
+  @media(max-width:860px){
+    .page{width:100%;min-height:auto;margin:0;padding:18px 14px;box-shadow:none;}
+    .toolbar{position:static;}
+    .coach-grid{grid-template-columns:1fr;}
+    .route{grid-template-columns:1fr;}
+    .footer{position:static;margin-top:18px;}
+  }
+  @page{size:A4;margin:0;}
+  @media print{
+    html,body{background:#fff;}
+    body{font-size:14px;}
+    .toolbar{display:none!important;}
+    .page{width:210mm;height:297mm;min-height:297mm;margin:0;padding:11mm 14mm 12mm;box-shadow:none;page-break-after:always;}
+    .page:last-child{page-break-after:auto;}
+    h2,.intro,.signal,.method,th,.optional,.coach-note{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  }
+</style>
+</head>
+<body>
+<div class="toolbar"><button class="print-btn" onclick="window.print()">打印 / 存为 PDF</button></div>
+
+<section class="page">
+  <h1>GESP C++ 四级 · 2506 失分反弹复盘单</h1>
+  <div class="subtitle">2025年6月真题 · 小题 32/50 · 复盘日期 2026-08-21</div>
+  <div class="topline"><span>姓名：________________</span><span>开始：________　结束：________</span><span>今天状态：□轻松 □一般 □有点累</span></div>
+
+  <div class="intro">
+    <b>今天不追分数，只练四个动作：</b>翻译类型、判断传参角色、从过程推排序、逐轮追踪代码。<br>
+    本卷 9 道错题都被你提前标了 ☆/△，说明你已经能发现“这里不稳”。今天要做的是把“不稳”变成下一次能自己使用的检查动作。
+  </div>
+
+  <div class="route">
+    <div><b>1 翻译</b>这个变量指向什么？</div>
+    <div><b>2 建模</b>副本、别名还是地址？</div>
+    <div><b>3 手推</b>算法实际做了什么？</div>
+    <div><b>4 追踪</b>先跑第一轮再判断</div>
+    <div><b>5 证明</b>用新例子说清理由</div>
+  </div>
+
+  <h2>第一关　函数与引用 <span class="tag">反弹重点 · 2506选4、选5</span></h2>
+  <div class="signal"><b>这次的信号：</b>你知道“引用能修改原变量”，但换成结构体参数后又只选了指针；还把调用前没有声明的函数当成能直接运行。</div>
+  <div class="method"><b>固定动作：</b>先说函数拿到的是“副本、别名、地址”中的哪一个，再判断能否修改原对象。遇到函数调用，再检查调用点之前是否已经看见声明。</div>
+
+  <div class="task">
+    <div class="task-title">任务1：先登记参数角色，再追踪</div>
+    <pre>struct Bag { int coins; };
+void byValue(Bag b) { b.coins += 2; }
+void byRef(Bag &amp;b)  { b.coins += 3; }
+void byPtr(Bag *b)  { b-&gt;coins += 4; }
+
+Bag x{10};
+byValue(x);  byRef(x);  byPtr(&amp;x);</pre>
+    <table>
+      <tr><th>调用</th><th>函数拿到什么？</th><th>能否改到 x？为什么？</th><th>调用后 x.coins</th></tr>
+      <tr><td>byValue(x)</td><td></td><td></td><td></td></tr>
+      <tr><td>byRef(x)</td><td></td><td></td><td></td></tr>
+      <tr><td>byPtr(&amp;x)</td><td></td><td></td><td></td></tr>
+    </table>
+    <p>不看选项总结：想通过函数修改原结构体，可以使用哪两种传递方式？</p>
+    <div class="line"></div>
+  </div>
+
+  <div class="task">
+    <div class="task-title">任务2：先分类错误发生在哪个阶段</div>
+    <pre>int main() {
+  show();
+}
+void show() { cout &lt;&lt; "Hi"; }</pre>
+    <p>编译器读到 <code>show();</code> 时，此前是否见过 show？________________</p>
+    <p>这是：□ 编译错误　□ 链接错误　□ 运行时错误</p>
+    <p>写出两种修改方向，不必补完整程序：</p>
+    <div class="lines-2"></div>
+  </div>
+  <div class="checks"><span>□ 我先判断参数角色</span><span>□ 我能解释为什么不是值传递</span><span>□ 我会检查调用前的声明</span></div>
+  <div class="footer"><span>孩子练习页 1/5</span><span>先说理由，再写结论</span></div>
+</section>
+
+<section class="page">
+  <div class="topline"><span>2506 失分反弹复盘</span><span>姓名：________________</span></div>
+  <h2>第二关　二维数组与动态内存 <span class="tag">连续三卷未稳 · 2506选2、选3</span></h2>
+  <div class="signal"><b>这次的信号：</b>把合法的行指针 <code>int (*arr)[4]</code> 当成错误写法；又混淆了“内存是否连续”和“是否自动释放”。</div>
+  <div class="method"><b>固定动作：</b>把类型翻译成一句现实话：“它指向一个什么东西？”二维数组形参必须知道每行多宽；内存题把“位置、连续性、释放方式”分三列判断。</div>
+
+  <div class="task">
+    <div class="task-title">任务1：逐个翻译，不靠外形猜</div>
+    <p>函数要接收一个每行 4 个 <code>int</code> 的二维数组。请填写：</p>
+    <table>
+      <tr><th class="left">形参写法</th><th>它指向什么？</th><th><code>arr+1</code> 跨过什么？</th><th>能否接收该二维数组？</th></tr>
+      <tr><td class="left"><code>int arr[3][4]</code></td><td></td><td></td><td></td></tr>
+      <tr><td class="left"><code>int arr[][4]</code></td><td></td><td></td><td></td></tr>
+      <tr><td class="left"><code>int (*arr)[4]</code></td><td></td><td></td><td></td></tr>
+      <tr><td class="left"><code>int **arr</code></td><td></td><td></td><td></td></tr>
+    </table>
+    <p>为什么第二维“4”很重要？函数计算 <code>arr[i][j]</code> 时，它帮助计算了什么？</p>
+    <div class="lines-2"></div>
+  </div>
+
+  <div class="task">
+    <div class="task-title">任务2：把指针式翻译回下标式</div>
+    <pre>int m[2][4] = {
+  {1,2,3,4},
+  {5,6,7,8}
+};</pre>
+    <p><code>m+1</code> 到第 ______ 行；<code>*(m+1)+2</code> 到第 ______ 行第 ______ 列的地址。</p>
+    <p><code>*(*(m+1)+2)</code> 可以翻译成 <code>m[　][　]</code>，值是 ______。</p>
+  </div>
+
+  <div class="task optional">
+    <div class="task-title">任务3：分三列判断动态内存</div>
+    <pre>int local[3][4];
+int *heap = new int[12];</pre>
+    <table>
+      <tr><th>对象</th><th>12个元素连续吗？</th><th>通常在哪里分配？</th><th>离开作用域自动释放吗？</th><th>需要怎样释放？</th></tr>
+      <tr><td>local</td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>heap</td><td></td><td></td><td></td><td></td></tr>
+    </table>
+    <p>原题真正需要比较的是“连续性”还是“释放方式”？________________</p>
+  </div>
+  <div class="checks"><span>□ 我会把 (*arr)[4] 读成一整行</span><span>□ 我知道 int** 不是同一种模型</span><span>□ 我把连续与释放分开</span></div>
+  <div class="footer"><span>孩子练习页 2/5</span><span>类型先翻译成“指向什么”</span></div>
+</section>
+
+<section class="page">
+  <div class="topline"><span>2506 失分反弹复盘</span><span>姓名：________________</span></div>
+  <h2>第三关　排序的场景与复杂度 <span class="tag">规则未迁移 · 2506选9、判7</span></h2>
+  <div class="signal"><b>这次的信号：</b>已经能认出插入排序和选择排序的代码外形，但换成“适用场景、初始顺序、比较次数”就不稳。</div>
+  <div class="method"><b>固定动作：</b>不先背复杂度。拿一个最小数组手推一轮，数“比较了几次、移动了几个”，再从过程推出结论。</div>
+
+  <div class="task">
+    <div class="task-title">任务1：比较两个几乎有序的数组</div>
+    <table>
+      <tr><th>数组</th><th>把最后一个数插入正确位置，要跨过几个元素？</th><th>你的判断</th></tr>
+      <tr><td><code>[1,2,3,4,5]</code></td><td></td><td></td></tr>
+      <tr><td><code>[1,2,3,5,4]</code></td><td></td><td></td></tr>
+      <tr><td><code>[5,4,3,2,1]</code></td><td></td><td></td></tr>
+    </table>
+    <p>插入排序最合适的一类数据是：</p>
+    <div class="line"></div>
+    <p>理由必须来自“移动次数”，不是“我记得”：</p>
+    <div class="lines-2"></div>
+  </div>
+
+  <div class="task">
+    <div class="task-title">任务2：选择排序能不能因为已有序而少比较？</div>
+    <p>对已经有序的 <code>[1,2,3,4]</code> 做选择排序：</p>
+    <table>
+      <tr><th>轮次</th><th>待确定的位置</th><th>仍需检查的候选</th><th>比较次数</th><th>能否提前知道最小值？</th></tr>
+      <tr><td>第1轮</td><td>下标0</td><td></td><td></td><td></td></tr>
+      <tr><td>第2轮</td><td>下标1</td><td></td><td></td><td></td></tr>
+      <tr><td>第3轮</td><td>下标2</td><td></td><td></td><td></td></tr>
+    </table>
+    <p>总比较次数：________。如果数组改成逆序，总比较次数会不会改变？________</p>
+    <p>所以选择排序的比较次数是否随初始顺序改变？请说明原因：</p>
+    <div class="lines-2"></div>
+  </div>
+
+  <div class="task optional">
+    <div class="task-title">有余力再做：不要把两个算法的“最好情况”混用</div>
+    <table>
+      <tr><th>算法</th><th>数据已有序时，主要动作会减少吗？</th><th>最好情况数量级</th><th>我用什么过程证明？</th></tr>
+      <tr><td>插入排序</td><td></td><td></td><td></td></tr>
+      <tr><td>选择排序</td><td></td><td></td><td></td></tr>
+    </table>
+  </div>
+  <div class="checks"><span>□ 我用小数组数动作</span><span>□ 我没有把插入的结论搬给选择</span><span>□ 我能说出适用场景</span></div>
+  <div class="footer"><span>孩子练习页 3/5</span><span>复杂度从过程里长出来</span></div>
+</section>
+
+<section class="page">
+  <div class="topline"><span>2506 失分反弹复盘</span><span>姓名：________________</span></div>
+  <h2>第四关　代码追踪：先跑第一轮 <span class="tag">看见算法名不等于算过 · 2506判6、选12</span></h2>
+  <div class="signal"><b>这次的信号：</b>阶乘代码“长得像累乘”就判断正确，漏掉第一轮乘 0；斐波那契题则记住了一个复杂度，却没有先分辨循环还是双递归。</div>
+  <div class="method"><b>固定动作：</b>判断结果前先追踪第一轮；判断复杂度前先画调用形状。复杂度属于具体实现，不属于“斐波那契”这个题目名字。</div>
+
+  <div class="task">
+    <div class="task-title">任务1：只追踪前三轮，找第一次偏差</div>
+    <pre>int product(int n) {
+  int res = 1;
+  for (int i = 0; i &lt; n; ++i) {
+    res *= i;
+  }
+  return res;
+}</pre>
+    <table>
+      <tr><th>时刻</th><th>i</th><th>执行前 res</th><th>执行 res*=i 后</th></tr>
+      <tr><td>初始</td><td>—</td><td>1</td><td>—</td></tr>
+      <tr><td>第1轮</td><td></td><td></td><td></td></tr>
+      <tr><td>第2轮</td><td></td><td></td><td></td></tr>
+      <tr><td>第3轮</td><td></td><td></td><td></td></tr>
+    </table>
+    <p>第一次与“正确阶乘过程”不一致发生在：________________</p>
+    <p>应该修改循环的哪两个边界信息？只填关键空：</p>
+    <pre>for (int i = ____; i ____ n; ++i)</pre>
+  </div>
+
+  <div class="task">
+    <div class="task-title">任务2：画出 fib(4) 的调用树</div>
+    <pre>int fib(int n) {
+  if (n == 0) return 0;
+  if (n == 1) return 1;
+  return fib(n - 1) + fib(n - 2);
+}</pre>
+    <div class="lines-3">fib(4)<br>↙　　　　　　　　　　　　　　↘</div>
+    <p>树中重复出现了哪些调用？________________________________</p>
+    <p>当 n 增加 1 时，一个非基础调用通常分成几个子调用？________</p>
+    <p>这段代码更像“一条长度 n 的链”还是“不断分叉的树”？________</p>
+    <p>我的复杂度判断：□ O(n)　□ O(n²)　□ O(2ⁿ)　理由：</p>
+    <div class="lines-2"></div>
+  </div>
+  <div class="checks"><span>□ 结果题先跑第一轮</span><span>□ 复杂度先看代码形状</span><span>□ 我没有背题目名字</span></div>
+  <div class="footer"><span>孩子练习页 4/5</span><span>先找到第一次不一致</span></div>
+</section>
+
+<section class="page compact-page">
+  <div class="topline"><span>2506 失分反弹复盘</span><span>姓名：________________</span></div>
+  <h2>第五关　文件输入 + 混合迁移检验 <span class="tag">新点补齐 · 2506选13</span></h2>
+  <div class="method"><b>文件流先看方向：</b><code>ifstream</code> 从文件输入到程序；<code>ofstream</code> 从程序输出到文件。<code>getline</code> 读取它收到的那个输入流，不只认识 <code>cin</code>。</div>
+
+  <div class="task optional">
+    <div class="task-title">任务1：把代码翻译成现实动作</div>
+    <pre>ifstream in("notes.txt");
+string line;
+while (getline(in, line)) {
+  cout &lt;&lt; line &lt;&lt; '\n';
+}</pre>
+    <table>
+      <tr><th>对象/语句</th><th>它代表什么现实动作？</th></tr>
+      <tr><td><code>in</code></td><td></td></tr>
+      <tr><td><code>getline(in,line)</code></td><td></td></tr>
+      <tr><td><code>cout&lt;&lt;line</code></td><td></td></tr>
+    </table>
+    <p>数据从哪里来？________________　最后到哪里去？________________</p>
+  </div>
+
+  <h3>混合迁移检验：不回看前四页</h3>
+  <div class="task">
+    <div class="task-title">A. 传参</div>
+    <pre>struct Counter { int value; };
+void add(Counter &amp;c) { c.value++; }
+Counter x{7}; add(x);</pre>
+    <p>add 拿到的是：□副本 □别名 □地址　　调用后 x.value：______　理由：________________</p>
+  </div>
+  <div class="task">
+    <div class="task-title">B. 二维数组形参</div>
+    <p>若 <code>int board[5][6]</code> 传给函数，下面哪个角色最能直接接住它？</p>
+    <p>□ <code>int **p</code>　□ <code>int (*p)[6]</code>　□ <code>int (*p)[5]</code></p>
+    <p>我不是猜括号，理由是 p 指向：________________________________</p>
+  </div>
+  <div class="task">
+    <div class="task-title">C. 排序</div>
+    <p>一组数据每次只新增一个元素，而且原来的部分已经排好序。优先想到哪种排序？____________</p>
+    <p>选择它的过程依据：________________________________________________</p>
+  </div>
+  <div class="task">
+    <div class="task-title">D. 第一轮检查</div>
+    <pre>int sum=0;
+for(int i=1;i&lt;=3;i++) sum+=i;</pre>
+    <p>第一轮后 sum=______；最后 sum=______；我检查的循环起点与终点是：________________</p>
+  </div>
+
+  <h3>孩子自己完成的复盘</h3>
+  <p><b>我今天真正弄懂的一条方法是：</b></p><div class="line"></div>
+  <p><b>我原来为什么会错：</b></p><div class="line"></div>
+  <p><b>下次看到相似题，我先做：</b></p><div class="line"></div>
+  <div class="footer"><span>孩子练习页 5/5</span><span>完成后再交给家长检查</span></div>
+</section>
+
+<section class="page coach-page">
+  <div class="cut">打印后请先将本页与孩子练习页分开</div>
+  <h1>家长教练页</h1>
+  <div class="subtitle">本页给家长使用 · 不在孩子动笔前展示结论</div>
+  <div class="coach-note"><b>整体判断：</b>这次不是随机粗心。9 道错题全部被孩子标了 ☆/△，8 道未标记题全部正确。她知道哪里不稳，但还没有形成可以执行的判断流程。复盘目标是“会做动作”，不是把正确答案重新记一遍。</div>
+
+  <h2>明天建议节奏 <span class="tag">总计约45至55分钟</span></h2>
+  <table>
+    <tr><th>阶段</th><th>时间</th><th class="left">做什么</th><th class="left">进入下一步的条件</th></tr>
+    <tr><td>开场</td><td>3分钟</td><td class="left">只说明“你已经准确发现了卡点”，不讨论排名与退步</td><td class="left">孩子愿意开始</td></tr>
+    <tr><td>必做1</td><td>10分钟</td><td class="left">第一关：副本/别名/地址</td><td class="left">能解释结构体为何与普通变量同理</td></tr>
+    <tr><td>必做2</td><td>12分钟</td><td class="left">第二关任务1、2：二维数组形参</td><td class="left">能说出“指向一行4个int”</td></tr>
+    <tr><td>休息</td><td>3分钟</td><td class="left">喝水、走动，不在休息时讲答案</td><td class="left">状态恢复</td></tr>
+    <tr><td>必做3</td><td>10分钟</td><td class="left">第三关：拿最小数组数动作</td><td class="left">能区分插入与选择的最好情况</td></tr>
+    <tr><td>必做4</td><td>10分钟</td><td class="left">第四关：第一轮与调用树</td><td class="left">能指出第一次偏差和复杂度依据</td></tr>
+    <tr><td>收尾</td><td>5分钟</td><td class="left">第五关反思；文件输入有余力再做</td><td class="left">孩子用自己的话写完三句</td></tr>
+  </table>
+
+  <h2>四条判断链与观察点</h2>
+  <div class="coach-grid">
+    <div class="coach-box"><b>1. 函数与引用</b><br>预期结论：值传递是副本；引用是原对象别名；指针保存原对象地址。引用和指针都能修改原结构体。函数在调用前必须已有声明或定义。<br><b>首问：</b>“先不看选项，三个函数分别拿到了 x 的什么？”</div>
+    <div class="coach-box"><b>2. 二维数组</b><br>预期结论：<code>int a[][4]</code> 与 <code>int (*a)[4]</code> 都按指向“一行4个int”处理；<code>int**</code> 指向的是 <code>int*</code>，模型不同。<br><b>首问：</b>“arr+1 到底应该跳一个int，还是跳一整行？”</div>
+    <div class="coach-box"><b>3. 排序</b><br>预期结论：插入排序在几乎有序时移动很少；选择排序无论初始顺序如何，都要扫描剩余区间，比较次数为 <code>(n-1)+...+1</code>。<br><b>首问：</b>“用4个数手推，哪一个算法真的能少做动作？”</div>
+    <div class="coach-box"><b>4. 代码追踪</b><br>预期结论：阶乘循环从0开始会让结果第一轮变0；朴素 <code>fib(n-1)+fib(n-2)</code> 是不断分叉且重复计算的调用树，约 <code>O(2ⁿ)</code>。<br><b>首问：</b>“别看函数名，只跑第一轮，res 变成多少？”</div>
+  </div>
+
+  <h3>新知识补充的正确边界</h3>
+  <ul>
+    <li><code>new int[12]</code> 申请连续堆内存，但不会随局部指针离开作用域自动释放，应使用 <code>delete[]</code>。</li>
+    <li><code>ifstream</code> 用于从文件读取，<code>getline(in,line)</code> 可以从文件输入流逐行读取，不只接受 <code>cin</code>。</li>
+  </ul>
+
+  <h3>提示阶梯</h3>
+  <ol>
+    <li>让她手推第一步，或说变量现在代表什么。</li>
+    <li>把范围缩到一行、一个变量或两个相反选项。</li>
+    <li>指出题意动作与代码变化不一致，让她自己说修改方向。</li>
+    <li>只有多次尝试仍卡住，才解释局部概念；解释后马上让她完成下一小步。</li>
+  </ol>
+  <p><b>停止条件：</b>连续两关明显烦躁、开始乱猜，或无法复述刚完成的动作时，当天只保留已经完成的页，文件输入和混合检验隔天再做。</p>
+  <p><b>入库条件：</b>孩子完成最后三句反思并能独立做混合迁移后，再把她的原话回填 <code>kidReflection</code>；当前档案继续保留“待订正后补”。</p>
+  <div class="footer"><span>家长教练页</span><span>一次只处理一个根因</span></div>
+</section>
+
+</body>
+</html>

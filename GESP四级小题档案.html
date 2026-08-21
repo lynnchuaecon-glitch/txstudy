@@ -27,6 +27,8 @@
   h2{font-size:20px;margin:6px 0 12px;}
   h3{font-size:17.5px;color:var(--accent);margin:22px 0 8px;border-bottom:2px solid var(--bg3);padding-bottom:4px;}
   table{width:100%;border-collapse:collapse;margin:10px 0;font-size:15px;background:var(--bg2);}
+  .table-scroll{overflow-x:auto;}
+  .papers-table{min-width:1180px;}
   th,td{border:1px solid var(--line);padding:7px 9px;text-align:center;}
   th{background:var(--bg3);color:#fff;} td.l{text-align:left;}
   .goal{border:1px solid var(--accent);background:rgba(56,189,248,.1);border-radius:8px;padding:12px 16px;margin:12px 0;}
@@ -35,9 +37,23 @@
   .p-red{background:#f87171;} .p-org{background:#fbbf24;} .p-grn{background:#34d399;} .p-gray{background:#94a3b8;} .p-blue{background:#38bdf8;}
   .card{background:var(--bg2);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:7px;padding:12px 15px;margin:12px 0;page-break-inside:avoid;}
   .card.red{border-left-color:#f87171;} .card.org{border-left-color:#fbbf24;} .card.grn{border-left-color:#34d399;}
-  .card h4{margin:0 0 4px;font-size:16.5px;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;color:#fff;}
-  .src{font-size:12.5px;color:var(--sub);font-weight:400;}
+  .card h4{margin:0 0 8px;font-size:16.5px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;color:#fff;}
+  .card-title{min-width:0;}
+  .card-state{display:flex;align-items:center;gap:6px;flex:0 0 auto;}
   .kp{display:inline-block;font-size:11.5px;font-weight:800;padding:1px 8px;border-radius:4px;background:var(--accent2);color:#0a0f1e;margin-right:6px;vertical-align:middle;}
+  .evidence{margin:9px 0 0;border-top:1px solid var(--line);padding-top:8px;color:var(--sub);font-size:13.5px;}
+  .evidence summary{cursor:pointer;display:flex;align-items:center;gap:7px;width:max-content;max-width:100%;color:var(--sub);list-style:none;user-select:none;}
+  .evidence summary::-webkit-details-marker{display:none;}
+  .evidence summary::before{content:"▸";color:var(--accent);font-size:12px;transition:transform .15s ease;}
+  .evidence[open] summary::before{transform:rotate(90deg);}
+  .source-groups{display:grid;gap:6px;margin-top:8px;padding-left:19px;}
+  .source-group{display:flex;align-items:flex-start;gap:10px;min-width:0;}
+  .source-paper{color:var(--tx);font-weight:700;min-width:38px;}
+  .source-questions{display:flex;gap:10px;flex-wrap:wrap;min-width:0;}
+  .source-question{white-space:nowrap;}
+  .source-question.wrong{color:#fca5a5;}
+  .source-question.right{color:#6ee7b7;}
+  .source-question.unknown{color:var(--sub);}
   .rule{background:rgba(52,211,153,.12);border-radius:5px;padding:6px 11px;margin:6px 0;}
   .trap{background:rgba(248,113,113,.12);border-radius:5px;padding:6px 11px;margin:6px 0;}
   pre{background:#0d1424;border:1px solid var(--line);border-radius:5px;padding:8px 11px;
@@ -57,6 +73,14 @@
   .pbtn{background:var(--accent);color:#0a0f1e;border:none;border-radius:6px;padding:9px 18px;font-size:16px;cursor:pointer;font-family:inherit;font-weight:700;}
   ul.chk{list-style:none;padding-left:2px;} ul.chk li{margin:8px 0;font-size:16px;}
   ul.chk li::before{content:"☐ ";font-size:19px;color:var(--accent);font-weight:700;}
+
+  @media(max-width:640px){
+    main{padding:16px 14px;}
+    .card h4{display:block;}
+    .card-state{margin-top:7px;flex-wrap:wrap;}
+    .source-group{display:block;}
+    .source-paper{display:block;margin-bottom:2px;}
+  }
 
   /* ===== 只有「考前速记」是浅色打印纸风格 ===== */
   #sprint{background:#fff;color:#1a1a1a;border-radius:10px;padding:20px 24px;margin-top:8px;box-shadow:0 0 0 1px var(--line);}
@@ -100,8 +124,8 @@
 <script>
 /* ============ 底层数据：改这里就能更新全站 ============ */
 
-// 知识块（8个官方 + 收敛口径）。order 决定矩阵/档案的排列。
-const BLOCKS = ["指针","二维数组","结构体","函数·作用域·传参","递推","排序","文件操作","异常处理"];
+// 知识块（官方考点 + 收敛口径）。order 决定矩阵/档案的排列。
+const BLOCKS = ["指针","二维数组","结构体","函数·作用域·传参","递推","排序","算法复杂度","文件操作","异常处理"];
 
 // 每份真题的元数据 + 逐轮得分（过程数据）
 const PAPERS = [
@@ -112,11 +136,54 @@ const PAPERS = [
   { id:"2603", name:"2026年3月", rounds:[
       { r:1, date:"2026-08-05", pickRight:7, judgeRight:2, score:18,
         wrongPick:[2,3,4,7,9,11,13,15], wrongJudge:"1、2、3、6、7、8、9、10" }
+  ]},
+  { id:"2512", name:"2025年12月", rounds:[
+      { r:1, date:"2026-08-18", pickRight:11, judgeRight:10, score:42,
+        wrongPick:[5,8,12,15], wrongJudge:"—",
+        pickAnswers:["C","C","B","D","C","A","C","B","B","B","B","C","B","D","D"],
+        judgeAnswers:["√","×","√","√","×","√","√","×","×","√"],
+        unsurePick:[1,11,12,14], confusedPick:[8,13,15],
+        unsureJudge:[2,5,6], confusedJudge:[3,8,9,10],
+        review:"三大硬伤复习出现明显正迁移：值传递/引用相关3题全对，基础指针与数组指针相关5题全对，递推值与循环复杂度2题全对；但☆/△说明部分仍未自动化。新漏分集中在条件遍历、结构体指针成员、降序插入调整、异常捕获。孩子正式错因反思待订正后补。" }
+  ]},
+  { id:"2509", name:"2025年9月", rounds:[
+      { r:1, date:"2026-08-19", pickRight:14, judgeRight:8, score:44,
+        wrongPick:[3], wrongJudge:"1、5",
+        pickAnswers:["B","C","C","A","D","C","B","B","C","A","A","B","B","C","D"],
+        judgeAnswers:["√","×","√","√","√","√","√","×","×","×"],
+        unsurePick:[2,4,10,11,13,14,15], confusedPick:[4,7,11,12,14],
+        unsureJudge:[2], confusedJudge:[3,5,7,9,10],
+        review:"小题44分，比2512再提高2分。传参/引用相关3题、排序稳定性、递推、文件输出与异常基础均答对，旧硬伤继续出现正迁移；插入排序条件也首次答对，但仍同时标☆△，尚未自动化。15道带标记题答对14道，自我识别较准；3个错误中选3与判1均未标记，暴露二维数组行指针和指针初始化两个“自以为会”的盲点，判5则再次说明二维数组形参第一维可省仍未掌握。孩子正式错因反思待订正后补。" }
+  ]},
+  { id:"2506", name:"2025年6月", rounds:[
+      { r:1, date:"2026-08-20", pickRight:8, judgeRight:8, score:32,
+        wrongPick:[2,3,4,5,9,12,13], wrongJudge:"6、7",
+        pickAnswers:["A","C","C","A","D","B","C","B","D","B","B","A","B","B","B"],
+        judgeAnswers:["√","×","×","√","×","√","×","√","×","√"],
+        unsurePick:[2,3,5,6,9,14,15], confusedPick:[2,4,5,6,9,12,13,14],
+        unsureJudge:[4,6,8,10], confusedJudge:[3,4,7,9,10],
+        review:"小题32分，较2509下降12分，低于35分目标3分。9道错题全部有☆/△，8道未标记题全部答对：自我监测仍然准确，主要不是随机粗心，而是她已经觉察不稳，却还调用不出可靠规则。漏分集中在四组：二维数组形参与动态内存（选2、3），声明可见性与引用传参（选4、5），插入/选择排序的适用场景与复杂度（选9、判7），递归复杂度与循环追踪（选12、判6）；文件读取是新点（选13）。异常、结构体嵌套、文件写入与排序代码识别保持正确。孩子正式错因反思待订正后补。" }
   ]}
 ];
 
 // 错点表（核心资产）。status: bad=常错🔴  mid=偶错🟡  ok=已稳🟢  na=待验证⚪
 const MISTAKES = [
+  { block:"指针", title:"声明指针并让它指向变量：* 在类型，& 取地址",
+    src:[["2512","选1"],["2509","判1"],["2506","选1"]], status:"bad", selfEval:"无标记错",
+    wrong:"2512·选1虽答对但标☆；2509·判1又在无标记的情况下把 int *p=a 当成合法初始化；2506·选1已能无标记认出 int* ptr 的声明语法。声明形式有恢复，但右侧究竟应放值还是地址仍缺一次直接验证。孩子正式错因反思待订正后补。",
+    rule:"int *p 声明 p 保存整数地址；右边必须给地址，如 &a，不能直接给整数值 a。*p 则是在 p 已经指向某处后，访问那个地址里的值。",
+    memo:"指针变量装<b>地址</b>：int *p=&a，不能写 int *p=a",
+    code:"int a=5;\nint *p=&a;  // ✓ &a 是地址\nint *q=a;   // ✗ a 是整数值，不是地址",
+    question:"先不判断整句：a 和 &a 分别是什么类型的东西？int *p 右边需要装“5”还是装“a 的地址”？"},
+
+  { block:"指针", title:"数组名像首元素地址，但数组名本身不能自增",
+    src:[["2509","选2"]], status:"na", selfEval:"没把握",
+    wrong:"2509·选2答对但标☆：知道 arr++ 错，却对“数组名在表达式中常退化成指针”和“数组名不是可修改的指针变量”之间的区别没有把握。",
+    rule:"arr 在多数表达式中会转换成首元素地址，因此能写 arr+1；但 arr 不是一个能改值的指针变量，不能写 arr++。另定义 int *p=arr 后，p++ 才合法。",
+    memo:"数组名可算 <b>arr+1</b>，但不能改成 arr++",
+    code:"int arr[3]={1,2,3};\nint *p=arr;\np++;    // ✓ p 是指针变量\narr++;  // ✗ 数组名不能被修改",
+    question:"比较 arr+1、arr++、p++：哪一个只计算新地址，哪两个试图修改自己？其中谁才是真正可修改的指针变量？"},
+
   { block:"指针", title:"指针可以「改指向」，*p 跟着换人",
     src:[["2606","选5"]], status:"bad", selfEval:"懵",
     wrong:"以为 *p 永远等于最初绑定的变量；漏看后面 p=&别的 这一步改了指向。",
@@ -126,8 +193,8 @@ const MISTAKES = [
     question:"第5题（执行后 *p 的值是？）\nint lv=5, next_lv=6;\nint *p=&lv;\n*p=*p+1;\np=&next_lv;\n// A.5  B.6  C.lv的地址  D.next_lv的地址\n→ 正确答案 B"},
 
   { block:"指针", title:"指针 ±1 = 走一个「元素格子」",
-    src:[["2606","选7"]], status:"bad", selfEval:"懵",
-    wrong:"把指针 +1 当成地址加 1 字节，或数错前后元素。",
+    src:[["2606","选7"]], status:"mid", selfEval:"懵",
+    wrong:"2606·选7曾把指针 +1 当成地址加 1 字节，或数错前后元素；2512·选4已能正确算出 *(p+5)，说明复习开始迁移，暂降为偶错继续观察。",
     rule:"指针 +1 是往后跳一个元素，不是一个字节。ptr+2 就是第2个后面的元素。",
     memo:"指针 +1 跳<b>一个元素</b>，不是一字节",
     code:"int data[]={10,20,30,40,50};\nint *ptr=data+2;      // 指向 30\n*(ptr-1)+*(ptr+1)    // 20+40 = 60",
@@ -141,61 +208,109 @@ const MISTAKES = [
     code:"int map[5][4];  // 5行×4列=20个int\n// 20个×4字节=80字节=0x50（×是乘号）\n// 0x2000 + 0x50 = 0x2050",
     question:"第6题（int 占4字节，map 起址 0x2000，&map+1 的地址？）\nint map[5][4];\n// A.0x204c  B.0x205c  C.0x2050  D.0x2058\n→ 正确答案 C"},
 
-  { block:"二维数组", title:"二维数组初始化：能省第一维，不能省第二维",
-    src:[["2606","判6"]], status:"mid",
-    wrong:"判6判成×——不知道第一维可省。她以为 a[][2] 也非法。",
-    rule:"定义二维数组并初始化时，第一维可省略（编译器数得出行数），第二维必须写。int a[][2]={{1,2},{3,4}} 合法；int a[][] 非法。",
-    memo:"二维数组<b>能省第一维，不能省第二维</b>",
-    code:"int a[][2]={{1,2},{3,4}};  // ✓ 合法\nint a[][] ={{1,2},{3,4}};  // ✗ 非法",
-    question:"判6：定义二维数组初始化时可省略第一维但不能省第二维，故 int a[][2]={{1,2},{3,4}} 合法、int a[][] 非法 →（正确答案 √，她判成 ×）"},
+  { block:"指针", title:"new[] 在堆上分配，必须 delete[] 手动释放",
+    src:[["2506","选3"]], status:"mid", selfEval:"没把握",
+    wrong:"2506·选3把“静态二维数组和 new 出来的一维数组都是连续内存”当成错误项，漏掉了真正的差别：栈上数组离开作用域会自动释放，new[] 申请的堆内存不会自动释放。孩子正式错因反思待订正后补。",
+    rule:"int arr[3][4] 的12个元素连续存放，离开作用域会自动释放；new int[12] 的12个元素也连续存放，但必须由程序执行 delete[] 才释放。",
+    memo:"new[] 得到连续堆内存，但要用 <b>delete[]</b> 手动释放",
+    code:"int local[3][4];        // 连续；离开作用域自动释放\nint *heap=new int[12]; // 连续；不会自动释放\ndelete[] heap;          // 成对释放",
+    question:"先把“是否连续”和“是否自动释放”分成两列：local 与 heap 在这两列各是什么结论？"},
+
+  { block:"二维数组", title:"二维数组形参要知道行宽：int[][4]/int(*)[4]，不是 int**",
+    src:[["2606","判6"],["2509","判5"],["2506","选2"]], status:"bad", selfEval:"懵",
+    wrong:"2606·判6不知道初始化时第一维可省，2509·判5又把合法形参 int arr[][4] 判错；2506·选2同时标☆△，仍把合法的行指针 int (*arr)[4] 当成不能填写，却没有识别 int** 与真正二维数组的内存模型不同。连续三卷说明这仍是硬伤。孩子正式错因反思待订正后补。",
+    rule:"二维数组初始化和作为函数形参时都可以省第一维，但必须知道每行宽度。函数形参 int arr[3][4]、int arr[][4]、int (*arr)[4] 最终都按“指向4个 int 的一行”处理；int** 是指向 int* 的指针，不能直接替代。",
+    memo:"二维形参要知道<b>每行多宽</b>：int[][4] = int(*)[4]，不等于 int**",
+    code:"void f(int a[][4]){}     // ✓\nvoid g(int (*a)[4]){}    // ✓，与上面等价\nvoid h(int **a){}        // 不是同一种二维数组形参",
+    question:"把每个形参翻译成“a 指向什么”：int (*a)[4] 指向一行4个 int；int** 又是指向什么？两者能否按同样跨度执行 a+1？"},
+
+  { block:"二维数组", title:"多维数组条件求和：列坐标表，不漏不重",
+    src:[["2512","选5"]], status:"bad",
+    wrong:"三维数组条件求和选 C=78，把全部12个元素都加了；没有先筛出满足 (i+j+k)%2==0 的位置。孩子正式错因反思待订正后补。",
+    rule:"三层循环不等于全部都加；if 是筛选门。先列出满足偶数条件的 (i,j,k)，每格只加一次，再用“约一半元素”估算检查。",
+    memo:"多维条件求和先列<b>坐标表</b>，if 不满足就不加",
+    code:"(0,0,0)→1  (0,1,1)→4  (0,2,0)→5\n(1,0,1)→8  (1,1,0)→9  (1,2,1)→12\n合计 39",
+    question:"先别算总和：当 i=0 时，j=0、1、2 各自应该选 k=0 还是 k=1，才能让 i+j+k 是偶数？"},
+
+  { block:"二维数组", title:"二维数组按行优先连续存放",
+    src:[["2512","判3"]], status:"na", selfEval:"懵",
+    wrong:"2512·判3答对但标△：知道结论，仍不确定一行结束后内存怎样接到下一行。",
+    rule:"C++ 二维数组在内存中按行铺平：先放完第0行，再紧接第1行；这也是用一维指针连续走元素的基础。",
+    memo:"二维数组内存：<b>先整行，再下一行</b>",
+    code:"a[0][0], a[0][1], a[0][2], a[0][3],\na[1][0], a[1][1], ...",
+    question:"a[0][3] 后面紧挨着的是 a[1][0]，还是 a[1][3]？为什么？"},
 
   { block:"结构体", title:"new 出来的是「指针」，左边必须带 *",
-    src:[["2606","选9"]], status:"mid", selfEval:"没把握",
-    wrong:"以为 Hero h = new Hero{...} 合法。（☆自评「会」，其实栽了）",
-    rule:"new 返回的一定是指针，左边必须是 Hero*。左边写成普通对象 Hero h 就编译错。",
-    memo:"new 出来是<b>指针</b>，左边带 *",
-    code:"Hero h  = new Hero{...};  // ✗ 编译错\nHero *p = new Hero{...};  // ✓ 指针接指针",
-    question:"第9题（哪种初始化会语法错误导致编译失败？）\nstruct Hero{ string name; int hp; };\nA. Hero h = {\"Arthur\",100};\nB. Hero h; h.name=\"Arthur\"; h.hp=100;\nC. Hero h = new Hero{\"Arthur\",100};\nD. Hero *p = new Hero{\"Arthur\",100};\n→ 正确答案 C"},
+    src:[["2606","选9"],["2509","判3"]], status:"mid", selfEval:"懵",
+    wrong:"2606·选9曾以为普通对象 Hero h 能接住 new 返回值；2509·判3已正确判断 Student* students=new Student[20] 合法，但标△，说明“new 返回指针”开始迁移，仍未形成确定感。",
+    rule:"new 返回的一定是指针，左边必须是对应类型的指针；new T[n] 返回 T*，指向动态数组的第一个元素。",
+    memo:"new 对象或数组都返回<b>指针</b>，左边带 *",
+    code:"Hero h  = new Hero{...};       // ✗ 普通对象接不住指针\nHero *p = new Hero{...};      // ✓\nStudent *s = new Student[20]; // ✓",
+    question:"new Student[20] 创建的是一个普通 Student，还是一片动态数组的首地址？左边应该用 Student 还是 Student* 接？"},
+
+  { block:"结构体", title:"结构体对象可按成员顺序用花括号初始化",
+    src:[["2509","选7"]], status:"na", selfEval:"懵",
+    wrong:"2509·选7答对但标△：能选出 Point p={1,2}，对结构体聚合初始化的固定语法仍不确定。",
+    rule:"没有自定义构造函数的简单结构体，可以按成员声明顺序用花括号给初值。圆括号、尖括号或省掉类型写 new {1,2} 都不是这里的合法写法。",
+    memo:"简单结构体初始化：<b>类型 对象={成员值...}</b>",
+    code:"struct Point{int x,y;};\nPoint p={1,2};  // p.x=1, p.y=2",
+    question:"Point 里成员顺序是 x、y。写 {1,2} 时，1 和 2 分别会进哪个成员？花括号前还缺不了哪两个名字？"},
+
+  { block:"结构体", title:"结构体指针用 -> 修改它所指对象的成员",
+    src:[["2512","选8"]], status:"bad", selfEval:"懵",
+    wrong:"rect.topLeft.x 已改成5，p 又指向 rect.bottomRight，p->y 会把 bottomRight.y 改成5；孩子仍选 B=30，漏追踪了两次成员修改。正式错因反思待订正后补。",
+    rule:"先画 p→哪个结构体对象，再把每条赋值落到具体成员格。p->y 等价于 (*p).y，不是修改所有 Point，也不是修改 topLeft。",
+    memo:"结构体指针先画箭头；<b>p-&gt;y = (*p).y</b>",
+    code:"p = &rect.bottomRight;  // p→右下角\np->y = 5;               // 右下角的 y 变5\nrect.topLeft.x + rect.bottomRight.y = 5+5",
+    question:"先只画一根箭头：执行 Point* p=&rect.bottomRight 后，p 指向 topLeft 还是 bottomRight？"},
 
   { block:"排序", title:"冒泡稳定、插入稳定、选择排序不稳定",
-    src:[["2606","选11"],["2606","判4"]], status:"bad", selfEval:"没把握",
-    wrong:"以为选择排序也是稳定的。选11 和 判4 两处都栽了 → 确认是硬伤。（☆自评「会」，其实错）",
+    src:[["2606","选11"],["2606","判4"],["2509","选9"]], status:"mid", selfEval:"没把握",
+    wrong:"2606·选11和判4都误以为选择排序稳定；2509·选9已在无标记情况下正确识别同一错误说法，说明复习产生了正迁移，暂降为偶错，再用下一卷确认。",
     rule:"选择排序把最小元素直接拎到前面，会跳过和它相等的元素，打乱相对顺序 → 不稳定。",
     memo:"<b>选择排序不稳定</b>（冒泡/插入稳定）",
     code:"[5a, 5b, 2] → 选最小 2 换到第1位\n[2, 5b, 5a] → 5a 跑到 5b 后，顺序变了",
     question:"第11题（关于排序稳定性，错误的说法是？）\nA. 冒泡稳定，只有左>右才交换\nB. 插入稳定，插到相等元素右侧\nC. 选择排序稳定，每次选最小放前面\nD. 稳定=排序后相等元素相对位置不变\n→ 正确答案 C（选择排序其实不稳定）\n判4：选择排序遇相等不交换则稳定 → 错（×）"},
 
-  { block:"排序", title:"认代码：一轮找最小位置再交换 = 选择排序",
-    src:[["2606","选14"]], status:"bad",
-    wrong:"看到排序代码认不出是哪种。",
-    rule:"特征：外层每一轮先找出最小值的位置 minPos，一轮只交换一次 → 选择排序。",
-    memo:"找 minPos 再换一次 = <b>选择排序</b>",
+  { block:"排序", title:"认排序代码：找极值交换 vs 逐个插入",
+    src:[["2606","选14"],["2512","选11"],["2512","判8"],["2509","选10"],["2506","选8"],["2506","判8"]], status:"mid", selfEval:"没把握",
+    wrong:"2606曾认不出选择排序；2512已能补选择范围、认出插入排序；2509·选10又正确补代码；2506·选8能无标记认出“逐张插入有序区”是插入排序，判8也正确识别选择排序代码但仍标☆。算法动作与代码外形已明显改善，保留偶错观察能否无提示稳定。",
+    rule:"一轮先找最小/最大位置、最后只交换一次 → 选择排序；从第1个元素起，暂存 x，把前面较大元素逐个后移，再把 x 填进空位 → 插入排序。",
+    memo:"找极值再换 = <b>选择</b>；逐个后移再填 = <b>插入</b>",
     code:"for(i..) { minPos=i;\n  for(j=i+1..) if(a[j]<a[minPos]) minPos=j;\n  swap(a[i], a[minPos]); }  // 选择排序",
     question:"第14题（下面代码用的是哪种排序？）\nvoid mystery_sort(double arr[], int n){\n  for(int i=0;i<n-1;i++){\n    int minPos=i;\n    for(int j=i+1;j<n;j++)\n      if(arr[j]<arr[minPos]) minPos=j;\n    swap(arr[i],arr[minPos]);\n  }\n}\n// A.冒泡 B.插入 C.选择 D.非典型\n→ 正确答案 C"},
 
+  { block:"排序", title:"冒泡提前结束：本轮先设未交换，交换后再改标志",
+    src:[["2506","选15"]], status:"na", selfEval:"没把握",
+    wrong:"2506·选15答对但标☆：能选出 flag=false / flag=true，尚不确定标志究竟记录“已经有序”还是“本轮发生过交换”。先保留待验证。",
+    rule:"每轮开始先假设没有交换，flag=false；只要发生一次交换就令 flag=true。内层结束后若 flag 仍为 false，说明整轮无需交换，数组已有序，可以 break。",
+    memo:"冒泡标志记录“本轮<b>发生过交换</b>”：先 false，交换后 true",
+    code:"bool flag=false;\nfor(...)\n  if(a[j]>a[j+1]){\n    swap(a[j],a[j+1]);\n    flag=true;\n  }\nif(!flag) break;",
+    question:"先不用代码：如果一整轮一次交换都没发生，flag 应保留什么值，才能让 if(!flag) 成立并退出？"},
+
   { block:"递推", title:"循环里变量互相赋值 → 一律画表格手算",
-    src:[["2606","选12"],["2603","选9"]], status:"bad",
-    wrong:"两卷同型题都错（2606 选12 jump、2603 选9 climb 都是斐波那契递推）。心算 a/b/c 迭代必乱 → 硬伤。",
+    src:[["2606","选12"],["2603","选9"],["2512","选9"],["2509","选13"]], status:"mid", selfEval:"没把握",
+    wrong:"2606·选12、2603·选9两次同型题都错；2512已独立算对，2509·选13又正确选择了 current、prev2、prev1 的更新顺序，但标☆，说明方法开始稳定，仍需把赋值先后练到确定。",
     rule:"凡是循环里 c=a+b; a=b; b=c 这种，别心算，列表格一行行填到底。这是全卷通用救命技能。",
     memo:"循环迭代 <b>画表格</b>手算，不心算",
     code:"a=1,b=2\ni=3: c=3, a=2, b=3\ni=4: c=5, a=3, b=5\ni=5: c=8   → 答案 8",
     question:"第12题（jump(5) 的结果？f(n)=f(n-1)+f(n-2), f(1)=1,f(2)=2）\nint jump(int n){\n  if(n<=2) return n;\n  int a=1,b=2,c=0;\n  for(int i=3;i<=n;i++){ c=a+b; a=b; b=c; }\n  return c;\n}\n// A.5  B.8  C.13  D.21\n→ 正确答案 B"},
 
   { block:"异常处理", title:"throw 的类型 决定被哪个 catch 接住",
-    src:[["2606","选13"]], status:"bad", selfEval:"懵",
-    wrong:"完全没认出这是异常处理题（考试写了「我也不知道」）——概念空白。",
-    rule:"throw 抛出什么类型，就被对应类型的 catch 接住，其它 catch 跳过。\"文字\" 是字符串(const char*)，不是 int。",
-    memo:"throw 什么<b>类型</b>被对应 catch 接；\"字\"≠int",
-    code:"throw \"Zero Error\";       // 抛的是字符串\ncatch(int e){...}         // 类型不符，跳过\ncatch(const char* m){...}  // 接住 → 选 C",
-    question:"第13题（执行以下代码将输出？）\ntry{\n  int x=10, y=0;\n  if(y==0) throw \"Zero Error\";\n  cout<<x/y;\n} catch(int e){\n  cout<<\"Error Code: \"<<e;\n} catch(const char* msg){\n  cout<<\"Caught: \"<<msg;\n}\n// A.0  B.Error Code: 0  C.Caught: Zero Error  D.崩溃\n→ 正确答案 C"},
+    src:[["2606","选13"],["2512","选15"],["2509","选15"],["2509","判9"],["2506","选14"],["2506","判9"]], status:"mid", selfEval:"没把握",
+    wrong:"2606完全没认出异常处理，2512又漏追 throw 后的跳转；2509两题已正确，2506·选14、判9又连续正确，但仍分别标☆△与△。概念已从空白转为持续答对，自信度尚未跟上，暂保留偶错。",
+    rule:"throw 抛出什么类型，就由匹配的 catch 接住；catch(...) 能接住任何类型。只有异常实际被抛出且一路没有匹配的处理器时，程序才会终止，不能笼统说“所有异常都必须捕获”。",
+    memo:"catch(...) 接<b>任何类型</b>；已抛出却无人接才终止",
+    code:"try { throw 42; }\ncatch(const char*) { } // 类型不符\ncatch(...) { }         // ✓ 接住 int 42",
+    question:"throw 42 后，catch(...) 能不能接住它？如果一段程序根本没有抛出异常，又何来“必须捕获”？"},
 
   { block:"函数·作用域·传参", title:"值传递 vs 传址/引用（送分点，务必吃透）",
-    src:[["2606","选1"],["2603","选4"],["2603","选7"],["2603","判1"]], status:"bad", selfEval:"懵",
-    wrong:"跨两卷反复栽——2603 选4/选7/判1 全错。她默认「参数改不到外面」，看到 & 或 * 也不认。这是全档案<b>头号硬伤</b>。",
+    src:[["2606","选1"],["2603","选4"],["2603","选7"],["2603","判1"],["2512","选7"],["2512","判4"],["2509","选6"],["2509","选8"],["2509","判4"],["2506","选5"],["2506","判2"],["2506","判4"]], status:"bad", selfEval:"懵",
+    wrong:"2603曾连续漏掉 * 与 & 能改到外部；2512、2509两卷一度稳定。2506·判2已无标记认出值传递改不到外部，判4也知道引用能直接修改原变量，却在选5仍选择“仅指针传递”，没有把同一条规则迁移到结构体参数。问题不是概念完全遗忘，而是换题面后调用不稳定，重新转为常错。孩子正式错因反思待订正后补。",
     rule:"参数光是普通值 → 改不到外面；带 * 或 & → 能改到外面。这是四级最爱考的送分点。",
     memo:"参数带 <b>* 或 &</b> 才改得到外面",
     code:"void f(int x)  {x=..}   // ✗ 改不到外面\nvoid f(int *p) {*p=..}  // ✓ 能改\nvoid f(int &x) {x=..}   // ✓ 能改",
-    question:"第1题（输出？）\nvoid exchange(int *a, int &b){ int t=*a; *a=b; b=t; }\nint main(){ int x=100,y=200; exchange(&x,y); cout<<x<<\" \"<<y; }\n// A.100 200  B.200 100  C.200 200  D.编译错误 → 正确答案 B\n判1：modify(int*p){*p=*p+10} a=10,modify(&a) → a=20（√）\n判9：recharge(int money){money+=20} card=50 → 输出50不是70（×）"},
+    question:"先把结构体也看成一个普通变量：值传递得到副本，引用传递得到别名，指针传递得到地址。哪两种能找到并修改原对象？"},
 
   { block:"函数·作用域·传参", title:"引用一旦绑定，不能再改绑别的变量",
     src:[["2606","判2"],["2603","判2"]], status:"bad",
@@ -212,6 +327,38 @@ const MISTAKES = [
     memo:"局部变量<b>出函数即失效</b>",
     code:"void show(){ int stars=5; }\nint main(){ cout<<stars; } // ✗ 用不到 stars",
     question:"第4题（关于下面程序，说法正确的是？）\nvoid show(){ int stars=5; }\nint main(){ cout<<stars; return 0; }\n// A.输出5  B.可编译但输出随机值\n// C.不能编译，stars 只在 show 内有效\n// D.不能编译，cout 不能输出变量\n→ 正确答案 C"},
+
+  { block:"函数·作用域·传参", title:"局部变量从声明处就遮住同名全局变量",
+    src:[["2509","判2"]], status:"na", selfEval:"没把握",
+    wrong:"2509·判2答对但标☆：知道 int x=x+1 不会稳定输出11，却还不确定右边的 x 到底指向局部还是全局。",
+    rule:"局部 x 的作用域从它的声明处开始，因此初始化式右边的 x 也是这个尚未初始化完成的局部变量，不是外面的全局 x；读取它的值会产生未定义行为。",
+    memo:"同名局部从声明处就<b>遮住全局</b>，不能拿自己未初始化的值",
+    code:"int x=10;\nvoid f(){\n  int x=x+1; // 右边也是局部 x，值未确定\n}",
+    question:"在 int x=x+1 这一行，把左、右两个 x 分别圈出来：局部 x 的名字从哪个位置开始生效？右边还能看见全局 x 吗？"},
+
+  { block:"函数·作用域·传参", title:"默认参数写在可见的声明处，定义处可省略",
+    src:[["2509","选4"]], status:"na", selfEval:"没把握",
+    wrong:"2509·选4答对但同时标☆△：能判断 add(2) 使用声明中的默认值，但对默认参数是否必须在函数定义处重复仍很不确定。",
+    rule:"调用点只要已经看见带默认参数的函数声明，就能补上缺省实参。后面的函数定义不应重复写同一个默认参数。",
+    memo:"默认参数让<b>调用点看见一次</b>即可，定义处不必重复",
+    code:"int add(int a,int b=1); // 调用前已给默认值\nint main(){ return add(2); }\nint add(int a,int b){ return a+b; } // ✓",
+    question:"编译 add(2) 这一行时，编译器已经看到了哪一条声明？那条声明里有没有告诉它缺少的 b 用多少？"},
+
+  { block:"函数·作用域·传参", title:"函数必须在调用点之前已经声明",
+    src:[["2506","选4"]], status:"mid", selfEval:"懵",
+    wrong:"2506·选4认为 main 可以直接调用写在后面的 greet，并选择会正常输出。C++ 编译到 greet() 调用处时还没有见过它的声明，因此先发生编译错误，不会走到链接或运行阶段。孩子正式错因反思待订正后补。",
+    rule:"函数定义可以放在 main 后面，但调用前必须先出现函数声明；或者直接把完整定义放到调用前。看到“错误类型”选项时，先判断名字在编译这一行时是否可见。",
+    memo:"函数定义可在后面，但调用前必须先有<b>声明</b>",
+    code:"void greet();          // 先声明\nint main(){ greet(); }  // 调用时已认识\nvoid greet(){ /*...*/ } // 后定义",
+    question:"编译器从上往下读到 greet(); 这一行时，此前是否见过 greet 的名字、参数和返回类型？"},
+
+  { block:"函数·作用域·传参", title:"形参写在函数定义里，实参写在调用处",
+    src:[["2506","选6"]], status:"na", selfEval:"懵",
+    wrong:"2506·选6答对但同时标☆△：能选出正确描述，仍没有形成确定判断。这里先记脆弱点，待她用自己的例子说明后再决定是否转稳。",
+    rule:"形参是函数定义中用来接收数据的变量，只在函数内部使用；实参是调用函数时实际传进去的表达式或值。不要靠“形式/实际”的字面互猜，要在代码中圈位置。",
+    memo:"函数定义括号里是<b>形参</b>；调用括号里是<b>实参</b>",
+    code:"int add(int x,int y); // x、y 是形参\nint a=2;\nadd(a,3);              // a、3 是实参",
+    question:"在 add(a,3) 与 int add(int x,int y) 两行分别圈括号：哪一行在定义接收角色，哪一行在送入具体数据？"},
 
   { block:"函数·作用域·传参", title:"函数返回值参与表达式计算",
     src:[["2606","选3"]], status:"na", selfEval:"没把握",
@@ -238,12 +385,12 @@ const MISTAKES = [
     question:"第2题 int a=5;int*p=&a;int**q=&p;**q+=7; cout<<a<<\" \"<<*p; → 12 12（B）"},
 
   { block:"指针", title:"行指针 int(*p)[4]：+1 跳一整行",
-    src:[["2603","选3"]], status:"bad", selfEval:"懵",
-    wrong:"不认识 int(*p)[4] 这种「行指针」，*(*(p+2)+1) 算不出。",
-    rule:"int(*p)[4] 指向「一行4个int」。p+2 跳到第3行，*(p+2) 是该行首地址，+1 到该行第2个，再 * 取值。",
-    memo:"<b>行指针 (*p)[4]</b>：+1 跳一整行",
-    code:"int a[3][4]={...}; int(*p)[4]=a;\n*(*(p+2)+1) = a[2][1] = 10",
-    question:"第3题 *(*(p+2)+1) → a[2][1]=10（B）"},
+    src:[["2603","选3"],["2509","选3"],["2506","选2"]], status:"bad", selfEval:"懵",
+    wrong:"2603·选3不认识 int(*p)[4] 行指针；2509·选3又把 *(*(arr+1)+2) 算错且无标记；2506·选2虽已标☆△，仍把合法的二维数组形参 int (*arr)[4] 当成错误写法。自我觉察有改善，行指针模型仍没有建立。孩子正式错因反思待订正后补。",
+    rule:"二维数组名 arr 在表达式中指向第0行，所以 arr+1 到第1行；*(arr+1) 得到这一行的首元素地址，再 +2 到第2列，最外层 * 才取值。",
+    memo:"二维指针式分两步：<b>先跳行，再走列</b>",
+    code:"int arr[2][3]={{1,2,3},{4,5,6}};\narr+1          // 第1行\n*(arr+1)+2     // 第1行第2列的地址\n*(*(arr+1)+2)  // arr[1][2]",
+    question:"只做“翻译”不算值：arr+1 到第几行？这一行再 +2 到第几列？最后请把整个式子改写成 arr[?][?]。"},
 
   { block:"指针", title:"未初始化的指针 ≠ nullptr（是野指针）",
     src:[["2603","判6"]], status:"mid",
@@ -253,21 +400,37 @@ const MISTAKES = [
     code:"int *p;   // 野指针（随机值），不是 nullptr",
     question:"判6：未显式初始化的指针会自动初始化为 nullptr →（×，她判√）"},
 
-  { block:"二维数组", title:"二维数组地址相减 = 相隔几个元素",
-    src:[["2603","判3"]], status:"mid",
-    wrong:"判3判成√（以为输出5）——不会算两个元素间隔几个 int。",
+  { block:"指针", title:"指针/数组地址相减 = 相隔几个元素",
+    src:[["2603","判3"],["2512","判5"]], status:"mid", selfEval:"没把握",
+    wrong:"2603·判3不会算二维数组中两个地址相隔几个 int；2512·判5已判断正确，但标☆，说明知道结果不是字节数，规则还不够稳。",
     rule:"二维数组按行铺平：a[1][2] 是第 1*3+2=5 个，a[0][1] 是第 1 个，相差 4 个 int → 输出 4，不是 5。",
     memo:"二维地址相减＝<b>相隔几个元素</b>（按行铺平数）",
     code:"int a[2][3];\n&a[1][2]-&a[0][1] = 5-1 = 4",
     question:"判3：cout<<&a[1][2]-&a[0][1] 输出5 →（×，实为4）"},
 
   { block:"排序", title:"插入排序内层条件：a[j] > key 才后移",
-    src:[["2603","选11"],["2603","选15"]], status:"bad", selfEval:"懵",
-    wrong:"插入排序的 while 条件填错（选11 应填 a[j]>key；选15 排行榜同型也错）。",
-    rule:"插入排序把 key 往前比，只要前面 a[j] 比 key 大就后移，直到找到位置。升序内层条件 = a[j] > key。",
-    memo:"插入排序内层：<b>a[j] &gt; key</b> 就后移",
-    code:"while(j>=0 && a[j]>key){ a[j+1]=a[j]; j--; }\na[j+1]=key;",
-    question:"第11题横线→a[j]>key（B）；第15题排行榜同理→i>0 && cur.score>players[i-1].score（A）"},
+    src:[["2603","选11"],["2603","选15"],["2512","选12"],["2509","选11"]], status:"bad", selfEval:"懵",
+    wrong:"2603两道升序条件都错，2512换成降序双向调整又错；2509·选11首次完整选对 arr[j]>key 与 arr[j+1]=key，但同时标☆△。这是实质进步，不过三错后一题仍很犹豫，暂不降级，等下一次无提示答对。",
+    rule:"先定目标顺序和 updatedPlayer 要往哪边走，再写边界与比较号。降序中分数变大向前移：i>0 且新分数>前一个；分数变小向后移：i<size-1 且新分数<后一个。",
+    memo:"插入调整先定<b>方向</b>，再写边界和比较号",
+    code:"// 降序，分数变大：向前挪\nwhile(i>0 && updated.score>a[i-1].score) i--;\n// 分数变小：向后挪\nwhile(i<size-1 && updated.score<a[i+1].score) i++;",
+    question:"先只看升序：如果前面的 arr[j] 比 key 大，谁应该向后腾位置？腾完后留下的空位下标是 j 还是 j+1？"},
+
+  { block:"算法复杂度", title:"插入排序最好 O(n)，最坏 O(n²)",
+    src:[["2509","选12"],["2509","判7"],["2506","选9"]], status:"bad", selfEval:"懵",
+    wrong:"2509·选12和判7都答对但标△；2506·选9再次标☆△并错过“数据几乎有序、只需少量调整”这一典型场景，选择了强调少交换的大数组。结论曾选对，但还没有从插入过程推出适用场景，确认未掌握。孩子正式错因反思待订正后补。",
+    rule:"数组已有序时，每轮比较一次就停，总体 O(n)；数组逆序时，第 i 个元素要越过前面约 i 个元素，1+2+...+(n-1) 是 O(n²)。小数据中它的常数开销较小，所以仍常用。",
+    memo:"插入排序：已有序 <b>O(n)</b>，逆序最坏 <b>O(n²)</b>",
+    code:"已有序：每轮 while 立刻停 → 约 n 次\n逆序：1+2+...+(n-1) → O(n²)",
+    question:"拿 [1,2,3,4] 和 [4,3,2,1] 比较：插入最后一个数时，各需要向前跨过几个元素？哪一种会让每轮都很快停下？"},
+
+  { block:"算法复杂度", title:"选择排序比较次数不随初始顺序改变",
+    src:[["2506","判7"]], status:"mid", selfEval:"懵",
+    wrong:"2506·判7认为数组初始顺序会改变选择排序的 O(n²) 次比较。她可能把插入/冒泡的最好情况迁移到了选择排序，却没有沿着两层循环数每轮仍要检查多少个候选。孩子正式错因反思待订正后补。",
+    rule:"选择排序第1轮比较 n-1 次，第2轮 n-2 次，一直到1次；无论原数组是否有序，都要扫描剩余区间找最小值，总数 n(n-1)/2，时间复杂度 O(n²)。",
+    memo:"选择排序无论初始顺序如何，都要扫完剩余区间：<b>O(n²)</b>",
+    code:"比较次数=(n-1)+(n-2)+...+1\n        =n*(n-1)/2\n        =O(n^2)",
+    question:"拿已经有序的 [1,2,3,4] 手推：第1轮若不检查后面的2、3、4，能否证明1一定最小？每一轮能提前停吗？"},
 
   { block:"排序", title:"复杂度相同 ≠ 性能相同、能互换",
     src:[["2603","判9"]], status:"mid",
@@ -278,38 +441,115 @@ const MISTAKES = [
     question:"判9：两者复杂度都O(n²)故性能几乎相同可互换 →（×）"},
 
   { block:"文件操作", title:"写文件必须用 fout <<，不是 cout <<",
-    src:[["2603","选13"],["2603","判8"]], status:"bad", selfEval:"懵",
-    wrong:"选13/判8 都栽：开了 ofstream 却还用 cout<< 输出，内容进屏幕、文件是空的。",
+    src:[["2603","选13"],["2603","判8"],["2512","判10"],["2509","判10"],["2506","判10"]], status:"mid", selfEval:"懵",
+    wrong:"2603·选13/判8都栽；2512、2509与2506已连续三卷判断正确。2506·判10仍同时标☆△，说明写文件规则会用但确定感尚未形成，保留偶错再观察。",
     rule:"ofstream fout(...) 之后必须用 fout<<... 写文件；写 cout<<... 仍打到屏幕。（除非用 freopen 或 rdbuf 做重定向）",
     memo:"写文件用 <b>fout&lt;&lt;</b>；cout&lt;&lt; 还是打屏幕",
     code:"ofstream fout(\"a.txt\");\nfout << \"Hi\";  // ✓ 进文件\ncout << \"Hi\";  // ✗ 进屏幕",
     question:"选13：哪种不能重定向到文件→B（开ofstream却用cout）；判8：cout<<\"Hello\"不能写进data.txt（×）"},
 
+  { block:"文件操作", title:"fin >> 后 getline 会先读走行尾换行",
+    src:[["2512","选14"]], status:"na", selfEval:"没把握",
+    wrong:"2512·选14答对但标☆：能判断 s2 为空，却对 >> 留下换行、getline 立即结束的过程没有把握。",
+    rule:"fin>>s1 读到空白前停止，行尾换行仍在输入流；紧接 getline 会把这个换行读走，得到空字符串。",
+    memo:"<b>&gt;&gt; 后接 getline</b>：先处理残留换行",
+    code:"fin >> s1;       // 读 Happy，换行还在\ngetline(fin,s2);  // 读到换行就停，s2为空\n// 输出 Happy|",
+    question:"fin>>s1 读完 Happy 后，输入流里下一个字符是 N，还是上一行末尾的换行？"},
+
+  { block:"文件操作", title:"ifstream 是输入流，getline 可以从文件逐行读取",
+    src:[["2506","选13"]], status:"mid", selfEval:"懵",
+    wrong:"2506·选13认为 getline 只能读取 cin，因此判断程序无法运行。实际 getline 的第一个参数可以是任意输入流；这里传入 ifstream in，就会逐行读取 data.txt 并用 cout 输出。孩子正式错因反思待订正后补。",
+    rule:"ifstream 负责从文件读取，ofstream 负责向文件写入。getline(stream, line) 从给定输入流读一整行，stream 可以是 cin，也可以是已打开的 ifstream。",
+    memo:"getline 读的是“给它的输入流”：既可读 cin，也可读 <b>ifstream</b>",
+    code:"ifstream in(\"data.txt\");\nstring line;\nwhile(getline(in,line))\n  cout << line << '\\n';",
+    question:"先只看 getline 的第一个参数：这里传的是 cin 还是 in？in 又是用哪种流、连接到哪个文件？"},
+
   { block:"结构体", title:"结构体里可以再嵌套定义结构体（合法）",
-    src:[["2603","判7"]], status:"mid",
-    wrong:"判7判成×——以为结构体里再定义 struct 是语法错误。",
+    src:[["2603","判7"],["2512","判2"],["2506","判3"]], status:"mid", selfEval:"没把握",
+    wrong:"2603·判7曾以为结构体里再定义 struct 是语法错误；2512·判2和2506·判3已连续答对，但后一题仍标△。结论已能调用，自信度仍不足，暂保留偶错。",
     rule:"结构体内部可以嵌套定义结构体、并声明成员/数组，这是合法的。GameCharacter 里嵌 Equipment、Skill 都没问题。",
     memo:"结构体可<b>嵌套定义</b>结构体（合法）",
     code:"struct A{ struct B{int x;} b;\n         struct C{int y;} c[8]; };  // ✓ 合法",
     question:"判7：嵌套结构体那段代码没有语法错误 →（√，她判×）"},
 
-  { block:"递推", title:"循环写的递推(斐波那契) 是 O(n)，不是指数",
-    src:[["2603","判10"]], status:"mid",
-    wrong:"判10判错——以为循环递推求斐波那契是 O(2^n)。",
-    rule:"用 for 循环从前往后递推，只走 n 次 → O(n)。O(2^n) 是「递归重复计算」那种写法，别混。",
-    memo:"循环递推 = <b>O(n)</b>；O(2^n) 是递归重算那种",
-    code:"for(i=2;i<=n;i++){ cur=f0+f1; f0=f1; f1=cur; } // O(n)",
-    question:"判10：循环递推求 fib 第n项 时间复杂度 O(2^n) →（×，是O(n)）"},
+  { block:"递推", title:"斐波那契复杂度看实现：循环 O(n)，朴素递归 O(2^n)",
+    src:[["2603","判10"],["2512","判6"],["2506","选12"]], status:"bad", selfEval:"懵",
+    wrong:"2603·判10曾把循环递推误判为 O(2^n)，2512·判6虽答对 O(n) 但标☆；2506·选12面对 fibonacci(n-1)+fibonacci(n-2) 的朴素递归，又反向选成 O(n) 并标△。她在记“斐波那契的复杂度”，而没有先辨认具体实现。孩子正式错因反思待订正后补。",
+    rule:"复杂度属于代码实现，不属于题目名字。循环从2走到 n，只做 O(n) 轮；朴素递归每个非基础调用又分成两个重叠分支，调用树指数增长，约 O(2^n)。",
+    memo:"别背“斐波那契复杂度”：循环 <b>O(n)</b>，朴素双递归 <b>O(2^n)</b>",
+    code:"// 循环：一条链 O(n)\nfor(i=2;i<=n;i++) ...\n\n// 朴素递归：不断分叉 O(2^n)\nreturn fib(n-1)+fib(n-2);",
+    question:"只看调用形状：fib(5) 会只产生 fib(4) 一条链，还是同时产生 fib(4) 与 fib(3)，而它们又继续分叉？"},
+
+  { block:"递推", title:"乘法累积要避开 0：每轮追踪 res",
+    src:[["2506","判6"]], status:"mid", selfEval:"懵",
+    wrong:"2506·判6同时标☆，仍判断循环能正确算阶乘。代码从 i=0 开始，第一轮 res*=0 后 res 永远是0；她识别了“循环累乘像阶乘”，但没有追踪首轮实际值。孩子正式错因反思待订正后补。",
+    rule:"乘法累积的单位元是1，阶乘可以从 i=1 乘到 n，或从 i=2 开始；只要任何一轮乘到0，后面再乘什么都无法恢复。先检查初值和第一轮。",
+    memo:"乘法累积先看第一轮：<b>不能乘到0</b>",
+    code:"int res=1;\nfor(int i=1;i<=n;i++)\n  res*=i;",
+    question:"只追踪第一轮：初始 res=1、i=0，执行 res*=i 后 res 是多少？下一轮乘1能把它变回来吗？"},
+
+  { block:"算法复杂度", title:"嵌套循环先看次数，不被位运算外表带跑",
+    src:[["2512","选13"],["2509","选14"],["2506","选11"]], status:"mid", selfEval:"懵",
+    wrong:"2512·选13答对两层循环 O(n²) 但标△，2509·选14又答对三层循环 O(n³) 且标☆△；2506·选11面对位运算 if 的两层循环已能无标记答对 O(n²)。开始形成稳定方法，转为偶错再用下一卷确认。",
+    rule:"时间复杂度先数主要循环层数：两层各约 n 次是 O(n²)，三层各约 n 次是 O(n³)。边界写成 i<j<k 只减少常数比例，不改变数量级；循环内的简单 if 也是 O(1)。",
+    memo:"复杂度先数主循环：两层 <b>n²</b>，三层 <b>n³</b>",
+    code:"for(i=0;i<n;i++)\n  for(j=i+1;j<n;j++)\n    for(k=j+1;k<n;k++)\n      if(...) cnt++;  // O(n³)",
+    question:"先把 if 整行遮住：外、中、内三层循环各最多跟 n 成什么关系？i<j<k 是把次数变成常数比例，还是少掉一整层？"},
+
+  { block:"函数·作用域·传参", title:"默认参数与重载同时可匹配会产生歧义",
+    src:[["2512","判9"]], status:"na", selfEval:"懵",
+    wrong:"2512·判9答对但标△：calculate(5) 既能匹配 calculate(int,int=10)，又能匹配 calculate(int)，编译器无法二选一。",
+    rule:"调用函数时，把每个候选都代入检查；若两个重载都同样可行且没有更优者，就不是任选一个，而是编译歧义。",
+    memo:"默认参数 + 重载都能接住：警惕<b>调用歧义</b>",
+    code:"int calculate(int x,int y=10);\nint calculate(int x);\ncalculate(5); // 两个都能匹配 → 编译错误",
+    question:"calculate(5) 能不能同时补默认 y=10 调用第一个，又直接调用第二个？如果都能，编译器该选谁？"},
 ];
 
 /* ============ 渲染 ============ */
 const STATUS = { bad:["🔴 常错","p-red"], mid:["🟡 偶错","p-org"], ok:["🟢 已稳","p-grn"], na:["⚪ 待验证","p-gray"] };
 function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+function rich(s){
+  return esc(s)
+    .replace(/&lt;(\/?)b&gt;/g,"<$1b>")
+    .replace(/&amp;(gt|lt|amp);/g,"&$1;");
+}
 function srcStr(src){return src.map(x=>x[0]+"·"+x[1]).join("、");}
+function sourceResult([paperId, question]){
+  const paper=PAPERS.find(p=>p.id===paperId);
+  const round=paper&&paper.rounds[paper.rounds.length-1];
+  const n=Number(question.slice(1));
+  if(!round||!n) return "unknown";
+  if(question.startsWith("选")) return round.wrongPick.includes(n)?"wrong":"right";
+  if(question.startsWith("判")){
+    const wrong=String(round.wrongJudge).match(/\d+/g)||[];
+    return wrong.map(Number).includes(n)?"wrong":"right";
+  }
+  return "unknown";
+}
+function sourceEvidence(src){
+  const groups=[];
+  src.forEach(item=>{
+    let group=groups.find(g=>g.paper===item[0]);
+    if(!group){group={paper:item[0],items:[]};groups.push(group);}
+    group.items.push({question:item[1],result:sourceResult(item)});
+  });
+  const results=groups.flatMap(g=>g.items.map(item=>item.result));
+  const wrong=results.filter(x=>x==="wrong").length;
+  const right=results.filter(x=>x==="right").length;
+  const known=wrong+right;
+  const counts=[wrong?`<span class="source-question wrong">${wrong}错</span>`:"",right?`<span class="source-question right">${right}对</span>`:""].filter(Boolean).join(" ");
+  const outcome=known?` · ${counts}`:"";
+  const rows=groups.map(group=>`<div class="source-group">
+    <span class="source-paper">${group.paper}</span>
+    <span class="source-questions">${group.items.map(item=>`<span class="source-question ${item.result}">${item.question}${item.result==="wrong"?" · 错":item.result==="right"?" · 对":""}</span>`).join("")}</span>
+  </div>`).join("");
+  return `<details class="evidence"><summary>涉及 ${groups.length} 套卷 · ${src.length} 道题${outcome}</summary><div class="source-groups">${rows}</div></details>`;
+}
 
 // ① 仪表盘
 function renderDash(){
   const lastP=PAPERS[PAPERS.length-1]; const latest=lastP.rounds[lastP.rounds.length-1];
+  const delta=latest.score-35;
   // 矩阵：块 × 卷，单元格=该卷该块的错点数
   let cols=PAPERS.map(p=>`<th>${p.id}</th>`).join("");
   let rows=BLOCKS.map(b=>{
@@ -323,7 +563,9 @@ function renderDash(){
   }).join("");
   document.getElementById("dash").innerHTML=`
     <div class="goal">最近一卷（${lastP.id}）小题 <b>${latest.score} / 50</b>，
-      目标 <b>35</b>，缺口 <b>${35-latest.score} 分 ≈ ${Math.ceil((35-latest.score)/2)} 题</b>。</div>
+      目标 <b>35</b>，${delta>=0?`已超过 <b>${delta} 分</b>`:`缺口 <b>${-delta} 分 ≈ ${Math.ceil(-delta/2)} 题</b>`}。</div>
+    <h3>最近一卷观察</h3>
+    <p>${esc(latest.review||"暂无复习观察。")}</p>
     <h3>掌握度矩阵（数字＝该卷该块还在漏分的错点数）</h3>
     <table class="matrix"><tr><th>知识块＼卷</th>${cols}</tr>${rows}</table>
     <p class="legend"><span class="cell-bad" style="padding:3px 12px;border-radius:5px">红＝有常错</span>
@@ -346,16 +588,21 @@ function renderLib(){
     .sort((a,b)=>(BLOCKS.indexOf(a.block)-BLOCKS.indexOf(b.block))||(order[a.status]-order[b.status]));
   const cnt=k=>MISTAKES.filter(m=>m.status===k).length;
   const fb=(k,label)=>`<button class="fbtn ${curFilter===k?"on":""}" onclick="curFilter='${k}';renderLib()">${label}</button>`;
-  const EVAL={ "懵":["🌀 当时懵·蒙的","#ef3b30"], "没把握":["〰️ 会但没把握","#f0850a"] };
+  const EVAL={
+    "无标记错":["⚠️ 无标记却答错","#dc2626"],
+    "懵":["🌀 当时懵·蒙的","#ef3b30"],
+    "没把握":["〰️ 会但没把握","#f0850a"]
+  };
   let cards=list.map(m=>{
     const st=STATUS[m.status];
     const ev=m.selfEval?`<span class="pill" style="background:${EVAL[m.selfEval][1]};color:#fff">${EVAL[m.selfEval][0]}</span> `:"";
     return `<div class="card ${m.status==='bad'?'red':m.status==='mid'||m.status==='na'?'org':'grn'}">
-      <h4><span><span class="kp">知识点</span>【${m.block}】${m.title}</span>
-        <span>${ev}<span class="pill ${st[1]}">${st[0]}</span> <span class="src">来源：${srcStr(m.src)}</span></span></h4>
-      <div class="trap">⚠️ 误区：${m.wrong}</div>
-      <div class="rule">✅ 正确规则：${m.rule}</div>
-      <pre>${esc(m.code)}</pre></div>`;
+      <h4><span class="card-title"><span class="kp">知识点</span>【${esc(m.block)}】${esc(m.title)}</span>
+        <span class="card-state">${ev}<span class="pill ${st[1]}">${st[0]}</span></span></h4>
+      <div class="trap">⚠️ 误区：${rich(m.wrong)}</div>
+      <div class="rule">✅ 正确规则：${rich(m.rule)}</div>
+      <pre>${esc(m.code)}</pre>
+      ${sourceEvidence(m.src)}</div>`;
   }).join("");
   document.getElementById("lib").innerHTML=`
     <div class="filters">
@@ -386,13 +633,16 @@ function renderSprint(){
 
 // ④ 各卷记录
 function renderPapers(){
+  const nums=a=>(a&&a.length?a.join("、"):"—");
   let rows=PAPERS.map(p=>p.rounds.map(r=>
     `<tr><td>${p.id} ${p.name}</td><td>R${r.r}</td><td>${r.date}</td>
      <td>${r.pickRight}/15</td><td>${r.judgeRight}/10</td><td><b>${r.score}</b></td>
-     <td class="l">错选:${r.wrongPick.join(",")}<br>错判:${r.wrongJudge}</td></tr>`).join("")).join("");
+     <td class="l">错选:${r.wrongPick.join(",")}<br>错判:${r.wrongJudge}</td>
+     <td class="l">☆ 选${nums(r.unsurePick)}／判${nums(r.unsureJudge)}<br>△ 选${nums(r.confusedPick)}／判${nums(r.confusedJudge)}</td>
+     <td class="l">${r.review||"—"}</td></tr>`).join("")).join("");
   document.getElementById("papers").innerHTML=`
     <p class="note">过程数据：每卷每轮的得分和错题号。平时不用看，用来追踪「同一卷第2轮有没有进步」。</p>
-    <table><tr><th>卷</th><th>轮</th><th>日期</th><th>单选</th><th>判断</th><th>小题分</th><th class="l">错题号</th></tr>${rows}</table>
+    <div class="table-scroll"><table class="papers-table"><tr><th>卷</th><th>轮</th><th>日期</th><th>单选</th><th>判断</th><th>小题分</th><th class="l">错题号</th><th class="l">自评标记</th><th class="l">复习观察</th></tr>${rows}</table></div>
     <p class="note">共 ${PAPERS.length} 卷已录入（计划约 11 卷 × 3~4 轮）。</p>`;
 }
 

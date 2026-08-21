@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GESP四级 · 2512四个卡点订正卡</title>
+<style>
+  :root{--ink:#1a1a1a;--sub:#666;--line:#d5d5d5;--blue:#1f5fa8;--bluebg:#e8f1fb;--red:#b8322a;--redbg:#fdecea;--grn:#1e7e46;--grnbg:#e8f6ee;--org:#a96508;--orgbg:#fff4df;}
+  *{box-sizing:border-box;}
+  body{font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;color:var(--ink);line-height:1.65;font-size:16px;max-width:820px;margin:0 auto;padding:26px 30px;background:#fff;}
+  h1{font-size:24px;text-align:center;margin:0 0 4px;}
+  .sub{text-align:center;color:var(--sub);font-size:14px;margin-bottom:14px;}
+  .howto{border:2px solid var(--blue);background:var(--bluebg);border-radius:8px;padding:10px 15px;margin:12px 0 18px;}
+  .howto b{color:var(--blue);}
+  h2{font-size:20px;margin:22px 0 8px;padding:6px 12px;background:var(--ink);color:#fff;border-radius:6px;}
+  h2 .tag{font-size:13px;font-weight:400;color:#dbe7f4;}
+  h3{font-size:16.5px;color:var(--blue);margin:14px 0 5px;}
+  .signal{background:var(--redbg);border-left:4px solid var(--red);border-radius:5px;padding:7px 12px;margin:8px 0;}
+  .method{background:var(--grnbg);border-left:4px solid var(--grn);border-radius:5px;padding:8px 12px;margin:9px 0;}
+  .method b{color:var(--grn);}
+  .step{border:1px solid var(--line);border-radius:6px;padding:9px 12px;margin:9px 0;page-break-inside:avoid;}
+  .step .t{color:var(--org);font-weight:700;}
+  pre{background:#f5f6f8;border:1px solid var(--line);border-radius:5px;padding:8px 11px;font-family:"SF Mono",Consolas,monospace;font-size:13px;line-height:1.45;white-space:pre-wrap;margin:6px 0;}
+  code{font-family:"SF Mono",Consolas,monospace;background:#eef1f6;padding:0 4px;border-radius:3px;font-size:13.5px;}
+  table{width:100%;border-collapse:collapse;margin:7px 0;font-size:14px;page-break-inside:avoid;}
+  th,td{border:1px solid var(--line);padding:6px 8px;text-align:center;height:32px;}
+  th{background:#eef1f6;}
+  td.left{text-align:left;}
+  .blank{display:inline-block;min-width:100px;height:22px;border-bottom:1px solid #555;vertical-align:bottom;}
+  .wide{min-width:230px;}
+  .work{min-height:62px;border:1px dashed #999;border-radius:5px;margin:6px 0;padding:7px 10px;color:#888;}
+  .drill{background:var(--orgbg);border:1px solid #efd39e;border-radius:6px;padding:9px 12px;margin:10px 0;page-break-inside:avoid;}
+  .check{font-size:14px;color:var(--sub);margin:6px 0;}
+  .check span{white-space:nowrap;margin-right:13px;}
+  .reflection{border:2px solid var(--blue);border-radius:8px;padding:10px 14px;margin-top:15px;page-break-inside:avoid;}
+  .reflection h3{margin-top:0;}
+  .line{height:30px;border-bottom:1px solid #aaa;margin-bottom:5px;}
+  .coach{font-size:13.5px;color:var(--sub);background:#f5f6f8;border-radius:5px;padding:7px 10px;margin-top:10px;}
+  .pb{page-break-before:always;}
+  @media print{body{padding:0;font-size:14px;}h2,.howto,.signal,.method,th,.drill{-webkit-print-color-adjust:exact;print-color-adjust:exact;}.pb{page-break-before:always;}}
+</style>
+</head>
+<body>
+<h1>GESP C++ 四级 · 2512 四个卡点订正卡</h1>
+<div class="sub">2025年12月真题 · 小题 42/50 · 只练今天真正暴露的四个卡点 · 2026-08-18</div>
+<div class="howto">
+  <b>使用方法：</b>一次只做一关。先遮住后面的内容，完成“手推区”；说清理由后再做变式。四关不要求一次做完，出现明显疲劳就收尾。<br>
+  <b>今天的目标不是背答案，而是留下四个动作：</b>列坐标、画箭头、定方向、走流程。
+</div>
+
+<h2>第一关　多维数组条件求和 <span class="tag">2512·选5 · 原选 C</span></h2>
+<div class="signal"><b>这次暴露的现象：</b>选了 78，正好是 1 到 12 全部相加。说明看见三层循环后，把每个数都加了，漏看了中间的 <code>if</code> 筛选门。</div>
+<div class="method">✅ <b>动作：先列坐标，再加数。</b>每到一个格子，先问“这个坐标能不能通过 if”，通过才把格子里的数写进求和栏。</div>
+<div class="step">
+  <div class="t">第1步：只手推 i=0，不急着算总和</div>
+  <pre>if ((i + j + k) % 2 == 0)
+    sum += arr[i][j][k];</pre>
+  <table>
+    <tr><th>i</th><th>j</th><th>要让 i+j+k 为偶数，k 选几？</th><th>通过筛选的坐标</th><th>对应的数</th></tr>
+    <tr><td>0</td><td>0</td><td></td><td>(0, 0,　)</td><td></td></tr>
+    <tr><td>0</td><td>1</td><td></td><td>(0, 1,　)</td><td></td></tr>
+    <tr><td>0</td><td>2</td><td></td><td>(0, 2,　)</td><td></td></tr>
+  </table>
+  <div>这一层选中的数相加：<span class="blank wide"></span></div>
+</div>
+<div class="step">
+  <div class="t">第2步：再手推 i=1</div>
+  <table>
+    <tr><th>i</th><th>j</th><th>k 选几？</th><th>通过筛选的坐标</th><th>对应的数</th></tr>
+    <tr><td>1</td><td>0</td><td></td><td>(1, 0,　)</td><td></td></tr>
+    <tr><td>1</td><td>1</td><td></td><td>(1, 1,　)</td><td></td></tr>
+    <tr><td>1</td><td>2</td><td></td><td>(1, 2,　)</td><td></td></tr>
+  </table>
+  <div>最终 sum：<span class="blank"></span>　我能用一句话解释为什么不是 78：<span class="blank wide"></span></div>
+</div>
+<div class="drill">
+  <b>小变式：</b>如果条件改成 <code>(i+j+k)%2==1</code>，不重新算全部数，只写出 i=0 时通过筛选的三个坐标：
+  <div class="work">我的三个坐标：</div>
+</div>
+<div class="check"><span>□ 每个坐标只看一次</span><span>□ 先判断再加数</span><span>□ 用选中数量做估算检查</span></div>
+<div class="pb"></div>
+<h2>第二关　结构体指针追踪 <span class="tag">2512·选8 · 原选 B△</span></h2>
+<div class="signal"><b>这次暴露的现象：</b>代码里有两次成员修改；原答案仍像是在使用旧值。真正卡点不是加法，而是没有把“谁的哪个成员变了”落到格子里。</div>
+<div class="method">✅ <b>动作：先画 p→谁，再改那个对象的成员。</b><code>p-&gt;y</code> 就是 <code>(*p).y</code>，只修改 p 当前指向的那个对象。</div>
+<div class="step">
+  <div class="t">第1步：建立对象格子</div>
+  <pre>Rectangle rect = {{10, 10}, {20, 20}};
+rect.topLeft.x = 5;
+Point* p = &amp;rect.bottomRight;
+p-&gt;y = 5;</pre>
+  <table>
+    <tr><th>执行时刻</th><th>topLeft.x</th><th>topLeft.y</th><th>bottomRight.x</th><th>bottomRight.y</th></tr>
+    <tr><td>刚初始化</td><td>10</td><td>10</td><td>20</td><td>20</td></tr>
+    <tr><td>执行 rect.topLeft.x=5 后</td><td></td><td></td><td></td><td></td></tr>
+    <tr><td>执行 p-&gt;y=5 后</td><td></td><td></td><td></td><td></td></tr>
+  </table>
+</div>
+<div class="step">
+  <div class="t">第2步：只画一根箭头</div>
+  <div class="work">p → ____________________　　所以 p-&gt;y 改的是 ____________________ 的 y。</div>
+  <div>最后表达式取的是哪两个格子？<br>
+    <code>rect.topLeft.x</code> = <span class="blank"></span>　
+    <code>rect.bottomRight.y</code> = <span class="blank"></span><br>
+    输出：<span class="blank"></span>
+  </div>
+</div>
+<div class="drill">
+  <b>小变式：</b>保持其他代码不变，把指针改为 <code>Point* p=&amp;rect.topLeft;</code>，再执行 <code>p-&gt;y=7;</code>。
+  <div class="work">请画箭头，并写出此时四个成员值。不要只写最后答案。</div>
+</div>
+<div class="check"><span>□ 先写 p 指向谁</span><span>□ 一行赋值只改一个格</span><span>□ 最后才代入表达式</span></div>
+<div class="pb"></div>
+<h2>第三关　降序榜单的插入调整 <span class="tag">2512·选12 · 原选 C☆</span></h2>
+<div class="signal"><b>这次暴露的现象：</b>以前记过“插入排序比较号”，换成降序榜单、又允许向前和向后调整时仍选错。说明不能只背 <code>&gt;</code> 或 <code>&lt;</code>，要先判断移动方向。</div>
+<div class="method">✅ <b>动作：先说方向，再写条件。</b>降序榜单中：分数变大，应往名次更前的位置走；分数变小，应往名次更后的位置走。</div>
+<div class="step">
+  <div class="t">第1步：用具体榜单走一步</div>
+  <table>
+    <tr><th>下标</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th></tr>
+    <tr><th>分数</th><td>100</td><td>90</td><td>80</td><td>70</td><td>60</td></tr>
+  </table>
+  <p>原来在下标 3 的玩家从 70 分变成 95 分。</p>
+  <div>她应该向：□ 前　□ 后；第一位要比较的邻居分数是：<span class="blank"></span></div>
+  <div>只要新分数比前一个更 <span class="blank"></span>，就继续向前。</div>
+</div>
+<div class="step">
+  <div class="t">第2步：自己完成两条 while 条件</div>
+  <pre>// 分数变大：向前移动
+while (i ____ 0 &amp;&amp; updatedPlayer.score ____ players[i - 1].score)
+
+// 分数变小：向后移动
+while (i ____ size - 1 &amp;&amp; updatedPlayer.score ____ players[i + 1].score)</pre>
+  <div>回到原题，我重新选择：<span class="blank"></span>　理由不是“我记得”，而是：<span class="blank wide"></span></div>
+</div>
+<div class="drill">
+  <b>反向验证：</b>还是 100、90、80、70、60，原来下标 1 的玩家从 90 分变成 65 分。
+  <div class="work">请逐步写出她和哪个邻居比较、向哪边走、最后停在哪个下标。</div>
+</div>
+<div class="check"><span>□ 先确认升序/降序</span><span>□ 再确认向前/向后</span><span>□ 边界和方向一致</span></div>
+<div class="pb"></div>
+<h2>第四关　异常处理的执行路线 <span class="tag">2512·选15 · 原选 D△</span></h2>
+<div class="signal"><b>这次暴露的现象：</b>第二次遇到异常题仍选“程序崩溃”。需要建立的不是一句定义，而是一条固定执行路线。</div>
+<div class="method">✅ <b>动作：沿代码画路线。</b>遇到 <code>throw</code> 后，立刻停止当前 try 中后续语句；寻找类型匹配的 <code>catch</code>；执行 catch；然后接着执行 try-catch 后面的代码。</div>
+<div class="step">
+  <div class="t">第1步：给每条语句标“执行 / 跳过”</div>
+  <pre>int result = 0;
+try {
+  result = divide(10, 0);
+  cout &lt;&lt; "A";
+}
+catch (const char* msg) {
+  cout &lt;&lt; "B";
+  result = -1;
+}
+cout &lt;&lt; result;</pre>
+  <table>
+    <tr><th>问题</th><th>我的判断</th><th>理由</th></tr>
+    <tr><td class="left"><code>divide(10,0)</code> 会不会 throw？</td><td></td><td></td></tr>
+    <tr><td class="left"><code>cout&lt;&lt;"A"</code> 还执行吗？</td><td></td><td></td></tr>
+    <tr><td class="left">抛出的类型和 catch 匹配吗？</td><td></td><td></td></tr>
+    <tr><td class="left">catch 之后的最后一行还执行吗？</td><td></td><td></td></tr>
+  </table>
+  <div>按执行顺序写出实际发生的输出动作：<span class="blank wide"></span></div>
+  <div>回到原题，我重新选择：<span class="blank"></span></div>
+</div>
+<div class="drill">
+  <b>小变式：</b>如果改成 <code>divide(10,2)</code>，没有发生 throw，哪些输出语句会执行？
+  <div class="work">请写执行路线，不只写最后输出。</div>
+</div>
+<div class="check"><span>□ throw 后跳出 try</span><span>□ catch 要看类型</span><span>□ catch 后继续往下</span></div>
+
+<div class="reflection">
+  <h3>孩子完成订正后自己填写</h3>
+  <b>今天四关里，我最容易再错的是：</b><div class="line"></div>
+  <b>我原来为什么会错：</b><div class="line"></div><div class="line"></div>
+  <b>下次看到这种题，我先做的动作是：</b><div class="line"></div><div class="line"></div>
+  <div class="coach"><b>给家长：</b>先只从第一关第一个问题开始。孩子能独立说清并完成表格后，再进入下一关；她写完这里的原话，再把反思回填小题档案。</div>
+</div>
+</body>
+</html>

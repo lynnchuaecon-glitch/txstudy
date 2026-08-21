@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GESP四级 · 近三卷错点系统讲义</title>
+<style>
+  :root{
+    --ink:#202833; --sub:#626b76; --line:#cbd2d9; --paper:#fff; --canvas:#e8ecef;
+    --blue:#1d5c91; --blue-bg:#eaf3fa; --green:#236d4d; --green-bg:#eaf5ee;
+    --red:#a43f38; --red-bg:#faecea; --amber:#8a5b0d; --amber-bg:#fff4dd; --soft:#f3f5f7;
+  }
+  *{box-sizing:border-box;}
+  html{background:var(--canvas);}
+  body{margin:0;color:var(--ink);background:var(--canvas);font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;font-size:13.5px;line-height:1.44;letter-spacing:0;}
+  .toolbar{position:sticky;top:0;z-index:10;display:flex;justify-content:center;gap:8px;padding:9px;background:#202833;}
+  .toolbar button{border:0;border-radius:6px;background:#fff;color:#202833;font:700 14px inherit;padding:7px 16px;cursor:pointer;}
+  .page{position:relative;width:210mm;min-height:297mm;margin:14px auto;padding:10mm 13mm 13mm;background:var(--paper);box-shadow:0 2px 16px rgba(22,33,44,.16);page-break-after:always;overflow:hidden;}
+  .page:last-child{page-break-after:auto;}
+  h1{font-size:24px;line-height:1.28;text-align:center;margin:1px 0 3px;}
+  .subtitle{text-align:center;color:var(--sub);font-size:12.5px;margin-bottom:7px;}
+  .topline{display:flex;justify-content:space-between;gap:12px;color:var(--sub);font-size:11.5px;border-bottom:1px solid var(--line);padding-bottom:4px;margin-bottom:7px;}
+  h2{font-size:18px;line-height:1.3;margin:8px 0 6px;padding:5px 9px;border-radius:5px;color:#fff;background:var(--ink);}
+  h2 .tag{font-size:11.5px;font-weight:500;color:#dbe3ea;margin-left:5px;}
+  h3{font-size:15px;line-height:1.35;color:var(--blue);margin:7px 0 3px;}
+  h4{font-size:13.5px;margin:5px 0 2px;color:var(--amber);}
+  p{margin:3px 0;}
+  ul,ol{margin:3px 0;padding-left:20px;} li{margin:2px 0;}
+  code{font-family:"SF Mono",Consolas,monospace;background:#edf1f4;padding:0 3px;border-radius:3px;font-size:12.5px;}
+  pre{margin:4px 0;padding:6px 9px;border:1px solid var(--line);border-radius:5px;background:var(--soft);font:11.7px/1.36 "SF Mono",Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere;}
+  table{width:100%;border-collapse:collapse;margin:4px 0 6px;font-size:12px;page-break-inside:avoid;}
+  th,td{border:1px solid var(--line);padding:3px 5px;text-align:center;vertical-align:middle;height:24px;}
+  th{background:#edf1f4;font-weight:700;}
+  td.left,th.left{text-align:left;}
+  .intro{border:2px solid var(--blue);background:var(--blue-bg);border-radius:7px;padding:7px 10px;margin:6px 0;}
+  .intro b{color:var(--blue);}
+  .signal{border-left:4px solid var(--red);background:var(--red-bg);border-radius:4px;padding:6px 9px;margin:5px 0;}
+  .method{border-left:4px solid var(--green);background:var(--green-bg);border-radius:4px;padding:6px 9px;margin:5px 0;}
+  .method b{color:var(--green);}
+  .example{border:1px solid var(--line);border-radius:6px;padding:6px 9px;margin:5px 0;page-break-inside:avoid;}
+  .example-title{font-weight:800;color:var(--amber);margin-bottom:2px;}
+  .try{border:1px solid #ddc27e;background:var(--amber-bg);border-radius:6px;padding:6px 9px;margin:5px 0;page-break-inside:avoid;}
+  .arrow{font-family:"SF Mono",Consolas,monospace;background:#edf5fb;border-radius:4px;padding:5px 8px;margin:3px 0;}
+  .trace{font-family:"SF Mono",Consolas,monospace;background:#fff8e9;border:1px solid #ead7aa;border-radius:4px;padding:5px 8px;margin:3px 0;line-height:1.5;}
+  .formula{text-align:center;font:700 14px "SF Mono",Consolas,monospace;background:var(--soft);border-radius:4px;padding:5px;margin:4px 0;}
+  .chips{display:flex;flex-wrap:wrap;gap:4px;margin:4px 0;}
+  .chip{border:1px solid var(--line);border-radius:4px;padding:1px 5px;font-size:11px;background:#fff;white-space:nowrap;}
+  .chip.bad{border-color:#d59a96;color:var(--red);background:var(--red-bg);font-weight:700;}
+  .priority{display:grid;grid-template-columns:1.25fr 1fr;gap:7px;margin:6px 0;}
+  .band{border:1px solid var(--line);border-radius:6px;padding:7px 9px;}
+  .band.must{border-top:4px solid var(--red);}
+  .band.later{border-top:4px solid var(--amber);}
+  .route{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin:6px 0;}
+  .route div{border:1px solid var(--line);border-radius:4px;padding:4px;text-align:center;background:#fff;font-size:11.5px;}
+  .route b{display:block;color:var(--blue);font-size:12.5px;}
+  .question{border:1px solid var(--line);border-radius:6px;padding:6px 9px;margin:6px 0;page-break-inside:avoid;}
+  .qtitle{font-weight:800;color:var(--blue);margin-bottom:2px;}
+  .line{height:21px;border-bottom:1px solid #9198a0;margin:1px 0 3px;}
+  .lines-2{height:44px;background:repeating-linear-gradient(to bottom,transparent 0,transparent 20px,#aeb4ba 21px,#aeb4ba 22px);}
+  .lines-3{height:66px;background:repeating-linear-gradient(to bottom,transparent 0,transparent 20px,#aeb4ba 21px,#aeb4ba 22px);}
+  .blank{display:inline-block;min-width:68px;height:18px;border-bottom:1px solid #69717a;vertical-align:bottom;}
+  .checks{display:flex;gap:9px;flex-wrap:wrap;color:var(--sub);font-size:11.5px;margin:4px 0;}
+  .pass{border:2px solid var(--green);background:var(--green-bg);border-radius:6px;padding:6px 9px;margin:6px 0;}
+  .warning{border:2px solid var(--red);background:var(--red-bg);border-radius:6px;padding:6px 9px;margin:6px 0;}
+  .cut{border-top:1px dashed #777;text-align:center;color:#666;padding-top:5px;margin-bottom:7px;font-size:11.5px;}
+  .parent{border-top:8px solid var(--red);}
+  .parent-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:5px 0;}
+  .parent-box{border:1px solid var(--line);border-radius:5px;padding:6px 8px;page-break-inside:avoid;}
+  .parent-box b{color:var(--blue);}
+  .source-table td{font-size:10.8px;line-height:1.34;}
+  .footer{position:absolute;left:13mm;right:13mm;bottom:5mm;display:flex;justify-content:space-between;color:#858e98;font-size:10.5px;}
+  .compact{font-size:12.8px;line-height:1.39;}
+  .compact table{font-size:11.5px;}
+  .test-page{font-size:12.2px;line-height:1.31;}
+  .test-page .question{margin:4px 0;padding:5px 8px;}
+  .tiny{font-size:11px;color:var(--sub);}
+  @media(max-width:860px){
+    .page{width:100%;min-height:auto;margin:0;padding:17px 13px;box-shadow:none;overflow:visible;}
+    .toolbar{position:static;}
+    .priority,.parent-grid{grid-template-columns:1fr;}
+    .route{grid-template-columns:1fr 1fr;}
+    .footer{position:static;margin-top:16px;}
+  }
+  @page{size:A4;margin:0;}
+  @media print{
+    html,body{background:#fff;}
+    .toolbar{display:none!important;}
+    .page{width:210mm;height:297mm;min-height:297mm;margin:0;padding:10mm 13mm 13mm;box-shadow:none;page-break-after:always;}
+    .page:last-child{page-break-after:auto;}
+    h2,.intro,.signal,.method,.try,.pass,.warning,th,.chip,.parent{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  }
+</style>
+</head>
+<body>
+<div class="toolbar"><button type="button" onclick="window.print()">打印 / 存为 PDF</button></div>
+
+<section class="page">
+  <h1>GESP C++ 四级 · 近三卷错点系统讲义</h1>
+  <div class="subtitle">2025年12月、9月、6月 · 错题 + ☆/△不确定题 · 先讲透，再用新题验证</div>
+  <div class="topline"><span>姓名：________________</span><span>开始日期：____________</span><span>每次只学 1 至 2 个模块</span></div>
+
+  <div class="intro"><b>这不是一张“再做一遍原题”的卷子。</b>三套卷里出现了 49 个需要复盘的作答信号。相同知识点已经合并，目标是学会一套能换题使用的动作：先翻译现实含义，再手推最小例子，最后独立做新题证明。</div>
+  <div class="method"><b>沿用《三大硬伤精讲》的旧口令：</b>值传递拿“复印件”，引用拿“原件的小名/别名”，指针拿“原件的门牌号”；指针题画 <code>p→谁</code>，循环互相赋值就画表格逐行填。整本讲义不再换比喻。</div>
+
+  <table>
+    <tr><th>试卷</th><th>小题分</th><th>答错</th><th>标记☆/△</th><th>本讲义覆盖</th></tr>
+    <tr><td>2025年12月</td><td>42/50</td><td>4题</td><td>14题</td><td>15题</td></tr>
+    <tr><td>2025年9月</td><td>44/50</td><td>3题</td><td>15题</td><td>17题</td></tr>
+    <tr><td>2025年6月</td><td>32/50</td><td>9题</td><td>17题</td><td>17题</td></tr>
+  </table>
+  <div class="signal"><b>最重要的诊断：</b>2506 的 9 道错题全部被你提前标成了 ☆/△，8 道没标记的题全部答对。你不是“不知道自己不会”，而是已经能发现危险，只差一套稳定的处理动作。</div>
+
+  <div class="priority">
+    <div class="band must"><b>进入下一套卷前必须通过</b><br>1. 指针、二维数组与动态内存<br>2. 函数、作用域与传参<br>3. 递推/递归与逐轮追踪<br>4. 排序识别、过程、稳定性与复杂度</div>
+    <div class="band later"><b>脆弱但可排在第二段</b><br>5. 结构体<br>6. 通用复杂度<br>7. 文件流与异常处理<br><span class="tiny">这些题多数已答对，但☆/△说明还没形成确定感。</span></div>
+  </div>
+
+  <h2>使用方法 <span class="tag">讲义不是一次做完</span></h2>
+  <div class="route">
+    <div><b>1 讲模型</b>先说现实含义</div><div><b>2 看例子</b>找第一步变化</div><div><b>3 合上讲义</b>复述固定动作</div><div><b>4 做新题</b>写过程和理由</div><div><b>5 看诊断</b>决定补哪一页</div>
+  </div>
+  <ul>
+    <li>孩子页：第 2 至 15 页。迁移测试中没有答案。</li>
+    <li>家长页：第 16 页起，打印后先拆开。只在孩子完成对应题后核对。</li>
+    <li>连续两题开始乱猜、明显烦躁或说不清刚做过的动作，当天立即收尾，不靠加题硬顶。</li>
+  </ul>
+  <div class="pass"><b>开下一套卷的标准：</b>必过模块的迁移题至少 8/10，且能说出理由；不是只把选项碰对。隔 24 小时再抽 4 题，至少答对 3 题，才算基本稳定。</div>
+  <div class="footer"><span>总览 1/19</span><span>目标：把“不确定”变成可执行动作</span></div>
+</section>
+
+<section class="page">
+  <div class="topline"><span>模块一 · 指针基础</span><span>对应三卷：声明、数组名、指针运算</span></div>
+  <h2>指针：&amp; 是门牌号，* 是顺门牌号找人 <span class="tag">必过</span></h2>
+  <div class="signal"><b>反复出现的偏差：</b>把变量的值当成地址；知道数组名“像指针”，却不确定为什么 <code>arr+1</code> 可以、<code>arr++</code> 不可以；地址相减时又按字节或格数乱猜。</div>
+  <div class="method"><b>固定动作：</b>先画箭头 <code>p→谁</code>。<code>&amp;a</code> 是 a 的地址（门牌号），<code>*p</code> 是顺 p 的门牌号找到那个人（取值）；再判断谁是可以改变的指针变量。</div>
+
+  <h3>1. 三个角色不能混</h3>
+  <table>
+    <tr><th>写法</th><th>现实含义</th><th>类型</th></tr>
+    <tr><td><code>a</code></td><td>变量 a 里的整数值</td><td><code>int</code></td></tr>
+    <tr><td><code>&amp;a</code></td><td>a 的地址（门牌号）</td><td><code>int*</code></td></tr>
+    <tr><td><code>int *p=&amp;a</code></td><td>p 保存 a 的门牌号；画 <code>p→a</code></td><td><code>p</code> 是 <code>int*</code></td></tr>
+    <tr><td><code>*p</code></td><td>顺 p 的门牌号找到 a 并取值</td><td><code>int</code></td></tr>
+  </table>
+  <div class="example"><div class="example-title">新例子：先检查等号两边是否同类</div>
+    <pre>int score=7;
+int *ok=&amp;score;  // 左边要门牌号，右边确实是地址
+int *bad=score;  // 左边要门牌号，右边却是整数值</pre>
+    判断合法性时，不要背整句。只问：<code>int*</code> 应该保存“7”，还是保存“score 的门牌号”？
+  </div>
+
+  <h3>2. 数组名会转成首元素地址，但它不是指针变量</h3>
+  <pre>int a[4]={10,20,30,40};
+int *p=a;
+p++;     // 合法：p 自己是变量，可以改成下一个地址
+a+1;     // 合法：只算出一个新地址，没有修改 a
+a++;     // 不合法：试图修改数组名</pre>
+  <div class="method"><b>区分句：</b><code>a+1</code> 是“算一下”；<code>a++</code> 是“把 a 自己改掉”。数组名不是可修改的指针变量。</div>
+
+  <h3>3. 指针加减按元素走，两个同数组地址相减得到元素距离</h3>
+  <div class="example"><div class="example-title">新例子：位置编号法</div>
+    <pre>int v[5]={4,8,12,16,20};
+int *p=v+1;               // p 指向下标1
+int x=*(p+2);             // 到下标3，x=16
+long d=&amp;v[4]-&amp;v[1];       // 4-1=3</pre>
+    <div class="arrow">指针 +1：走一个元素格；地址相减：下标相减。结果不是字节数。</div>
+  </div>
+
+  <div class="try"><b>合上本页前口头检查：</b>请用“门牌号”说清 <code>&amp;a</code>，用“顺门牌号找人”说清 <code>*p</code>；再说清 <code>arr+1</code> 与 <code>arr++</code> 的区别。</div>
+  <div class="checks"><span>□ 我先画 p→谁</span><span>□ 我会说门牌号和找人</span><span>□ 地址相减用下标差</span></div>
+  <div class="footer"><span>孩子讲义 2/19</span><span>先分类，再计算</span></div>
+</section>
+
+<section class="page compact">
+  <div class="topline"><span>模块二 · 二维/多维数组</span><span>连续三卷暴露 · 当前第一硬伤</span></div>
+  <h2>二维数组：先跳行，再走列 <span class="tag">必过</span></h2>
+  <div class="signal"><b>反复出现的偏差：</b>把 <code>int (*)[4]</code> 和 <code>int**</code> 当成同一种类型；看到三层循环就把所有元素全加；没有把二维地址按行铺平。</div>
+  <div class="method"><b>固定动作：</b>先问“这个指针指向一个什么大小的东西？”；计算元素时把二维式翻译成 <code>a[行][列]</code>；有 <code>if</code> 时先列满足条件的坐标。</div>
+
+  <h3>1. 内存顺序：一行放完，紧接下一行</h3>
+  <pre>int m[2][4]={{1,2,3,4},{5,6,7,8}};</pre>
+  <div class="arrow">m[0][0], m[0][1], m[0][2], m[0][3], m[1][0], m[1][1], ...</div>
+  <p>因此 <code>m</code> 在表达式中指向“第0行”；<code>m+1</code> 不是到下一个整数，而是跨过一整行 4 个 <code>int</code>。</p>
+
+  <h3>2. 行指针的三种等价形参</h3>
+  <table>
+    <tr><th>形参</th><th>函数眼中的角色</th><th><code>a+1</code> 跨度</th></tr>
+    <tr><td><code>int a[3][4]</code></td><td>指向一行 4 个 int</td><td>一整行</td></tr>
+    <tr><td><code>int a[][4]</code></td><td>指向一行 4 个 int</td><td>一整行</td></tr>
+    <tr><td><code>int (*a)[4]</code></td><td>指向一行 4 个 int</td><td>一整行</td></tr>
+    <tr><td><code>int **a</code></td><td>指向一个 int* 指针</td><td>一个指针格</td></tr>
+  </table>
+  <p>第一维可以省，因为函数收到的只是首行地址；第二维 4 不能省，因为编译器要靠它算“跳一行有多远”。<code>int**</code> 的内存模型不同，不能直接替代真正的二维数组。</p>
+
+  <div class="example"><div class="example-title">新例子：把星号一层层翻译回下标</div>
+    <pre>int a[3][4]={{2,4,6,8},{10,12,14,16},{18,20,22,24}};
+*(*(a+2)+1)</pre>
+    <div class="trace">a+2 → 第2行<br>*(a+2)+1 → 第2行第1列的地址<br>*(*(a+2)+1) → a[2][1] → 20</div>
+  </div>
+
+  <h3>3. 静态数组与 new[]：连续性和释放方式分开判断</h3>
+  <table>
+    <tr><th>对象</th><th>元素连续</th><th>离开作用域自动释放</th><th>正确释放</th></tr>
+    <tr><td><code>int local[3][4]</code></td><td>是</td><td>是</td><td>无需手动</td></tr>
+    <tr><td><code>int *heap=new int[12]</code></td><td>是</td><td>否</td><td><code>delete[] heap</code></td></tr>
+  </table>
+
+  <h3>4. 多维条件遍历：循环是走路，if 是门</h3>
+  <pre>for(int i=0;i&lt;2;i++)
+  for(int j=0;j&lt;2;j++)
+    if((i+j)%2==0) sum+=a[i][j];</pre>
+  <p>先列坐标：<code>(0,0)</code>、<code>(1,1)</code> 通过门；另外两个坐标不加。三层循环也同理，不可因为“每格都经过”就误以为“每格都累加”。</p>
+  <div class="try"><b>最小证明：</b>不用代码，画一张 2×3 表。说出 <code>a+1</code> 到哪一行、<code>*(a+1)+2</code> 到哪个格子的地址。</div>
+  <div class="footer"><span>孩子讲义 3/19</span><span>类型要读成“指向一行几个”</span></div>
+</section>
+
+<section class="page">
+  <div class="topline"><span>模块三 · 函数传参</span><span>换成结构体后规则曾失灵</span></div>
+  <h2>值传递、引用、指针：复印件、小名、门牌号 <span class="tag">必过</span></h2>
+  <div class="signal"><b>偏差不在“完全没学过”：</b>单独问“引用能改原变量”时会做，但换成结构体参数后又只认指针。这说明规则还依赖题面，没有迁移到“任何类型的对象”。</div>
+  <div class="method"><b>固定动作：</b>先登记参数角色：复印件、原件的小名/别名、原件的门牌号。改复印件，原件不动；改小名就是改原件；<code>*p</code> 顺门牌号也能改原件。</div>
+
+  <table>
+    <tr><th>函数形参</th><th>拿到什么</th><th>函数内怎样修改</th><th>影响实参吗</th></tr>
+    <tr><td><code>void f(int x)</code></td><td>一张复印件</td><td><code>x=...</code></td><td>改复印件，原件不动</td></tr>
+    <tr><td><code>void f(int &amp;x)</code></td><td>原件的小名/别名</td><td><code>x=...</code></td><td>改别名 = 改原件</td></tr>
+    <tr><td><code>void f(int *p)</code></td><td>原件的门牌号</td><td><code>*p=...</code></td><td>顺门牌号改原件</td></tr>
+  </table>
+
+  <div class="example"><div class="example-title">新例子：结构体也遵守同一张表</div>
+    <pre>struct Box{ int n; };
+void a(Box x)  { x.n+=1; }
+void b(Box &amp;x) { x.n+=2; }
+void c(Box *p) { p-&gt;n+=3; }
+
+Box k{10};
+a(k); b(k); c(&amp;k);</pre>
+    <div class="trace">a：拿复印件 → 改复印件，原件 k 仍是 10<br>b：拿 k 的小名/别名 → 改别名就是改 k，k 变 12<br>c：拿 k 的门牌号 → *p 顺门牌号改 k，k 变 15</div>
+    <p>关键不是参数是不是结构体，而是形参有没有 <code>&amp;</code> 或 <code>*</code>。</p>
+  </div>
+
+  <h3>形参与实参：按位置圈，不靠汉字猜</h3>
+  <pre>int add(int x,int y) { return x+y; } // x、y：定义接收角色，是形参
+int a=2;
+add(a,3);                            // a、3：调用送入数据，是实参</pre>
+
+  <h3>引用和指针还有一个重要区别</h3>
+  <pre>int a=1,b=8;
+int &amp;r=a;
+r=b;</pre>
+  <p><code>r</code> 初始化后一直是 a 的别名。<code>r=b</code> 是把 b 的值 8 赋给 a，不是让 r 改绑 b。指针变量则可以用 <code>p=&amp;b</code> 改指向。</p>
+
+  <div class="try"><b>合上本页复述：</b>“值传递拿复印件；引用拿原件的小名/别名；指针拿原件的门牌号。”再自己换成 <code>string</code> 或结构体说一遍。</div>
+  <div class="checks"><span>□ 我先登记参数角色</span><span>□ 结构体也用同一规则</span><span>□ 我分得清形参与实参</span></div>
+  <div class="footer"><span>孩子讲义 4/19</span><span>类型会换，角色不变</span></div>
+</section>
+
+<section class="page compact">
+  <div class="topline"><span>模块四 · 声明、作用域与重载</span><span>先判断能否编译，再谈输出</span></div>
+  <h2>编译器从上往下读：它此刻看得见谁 <span class="tag">必过</span></h2>
+  <div class="method"><b>统一问题：</b>“编译到这一行时，这个名字已经声明了吗？这里的名字被哪一层作用域控制？”</div>
+
+  <h3>1. 函数可以后定义，但调用前必须先声明</h3>
+  <pre>void greet();             // 声明：先告诉编译器名字、参数、返回类型
+int main(){ greet(); }    // 此时已经认识 greet
+void greet(){ /*...*/ }  // 完整定义可以在后面</pre>
+  <p>如果删掉第一行，编译器读到 <code>greet()</code> 时还不认识它，首先发生的是<b>编译错误</b>；不会进入运行阶段。</p>
+
+  <h3>2. 局部名字只在自己的作用域内有效</h3>
+  <pre>int total=20;
+void f(){ int score=5; }
+int main(){ cout&lt;&lt;score; } // score 在 f 外不可见，编译错误</pre>
+
+  <h3>3. 同名局部变量会从声明处遮住外层变量</h3>
+  <pre>int x=10;
+void f(){
+  int x=x+1;
+}</pre>
+  <p>局部 <code>x</code> 的作用域从声明处开始，所以右边的 <code>x</code> 也是正在初始化的局部变量，不是全局变量。读取它未确定的值会产生未定义行为，不能稳定认为结果是 11。</p>
+
+  <h3>4. 默认参数放在调用点可见的声明中</h3>
+  <pre>int add(int a,int b=3);
+int main(){ return add(4); }  // 已看见默认 b=3
+int add(int a,int b){ return a+b; }</pre>
+  <p>定义处不必重复默认值。做题时站在调用行，只检查此前可见的声明。</p>
+
+  <h3>5. 默认参数和重载同时匹配，会产生歧义</h3>
+  <pre>int calc(int x,int y=8);
+int calc(int x);
+int z=calc(5);</pre>
+  <table>
+    <tr><th>候选</th><th>calc(5) 能否匹配</th><th>理由</th></tr>
+    <tr><td><code>calc(int,int=8)</code></td><td>能</td><td>y 可以用默认值</td></tr>
+    <tr><td><code>calc(int)</code></td><td>能</td><td>参数个数直接匹配</td></tr>
+  </table>
+  <p>两个候选都同样可行，编译器不能随便选一个，因此是调用歧义。</p>
+
+  <div class="try"><b>四步检查：</b>① 名字是否已声明；② 当前是哪层作用域；③ 实参数量如何匹配；④ 是否有不止一个同样可行的候选。</div>
+  <div class="checks"><span>□ 先分编译/运行</span><span>□ 我从调用点往上看</span><span>□ 重载逐个代入</span></div>
+  <div class="footer"><span>孩子讲义 5/19</span><span>“看得见”比“写在文件里”更重要</span></div>
+</section>
+
+<section class="page">
+  <div class="topline"><span>模块五 · 结构体</span><span>初始化、嵌套、动态对象、成员访问</span></div>
+  <h2>结构体：先确定“哪个对象的哪个成员” <span class="tag">第二优先级</span></h2>
+  <div class="method"><b>固定动作：</b>画对象格子；如果有指针，再画箭头指向哪一个对象。每条赋值必须落到一个具体成员格。</div>
+
+  <h3>1. 聚合初始化按成员声明顺序装入</h3>
+  <pre>struct Point{ int x; int y; };
+Point p={3,7};  // p.x=3, p.y=7</pre>
+  <p>简单结构体用“类型名 + 对象名 + 花括号”。花括号里的值按成员声明顺序进入。</p>
+
+  <h3>2. 结构体可以嵌套定义结构体</h3>
+  <pre>struct Player{
+  struct Position{ int x,y; } pos;
+  struct Skill{ int power; } skills[3];
+};</pre>
+  <p>这是合法的。读成员时由外向内：<code>hero.pos.x</code> 表示 hero 的 pos 的 x。</p>
+
+  <h3>3. new 返回指针，左边要用对应类型的 *</h3>
+  <pre>Point *one = new Point{1,2};
+Point *many = new Point[5];
+delete one;
+delete[] many;</pre>
+  <p><code>new Point</code> 返回 <code>Point*</code>；<code>new Point[5]</code> 也返回 <code>Point*</code>，指向动态数组首元素。一个对象用 <code>delete</code>，数组用 <code>delete[]</code>。</p>
+
+  <h3>4. 对象用点，指针用箭头</h3>
+  <div class="example"><div class="example-title">新例子：每次只改一个格</div>
+    <pre>struct Rect{ Point leftTop, rightBottom; };
+Rect r{{1,8},{9,2}};
+Point *p=&amp;r.rightBottom;
+r.leftTop.x=4;
+p-&gt;y=6;</pre>
+    <div class="arrow">p → r.rightBottom<br>r.leftTop.x：左上角 x 变 4<br>p-&gt;y：右下角 y 变 6</div>
+    <p><code>p-&gt;y</code> 等价于 <code>(*p).y</code>，不会同时修改另一个 Point。</p>
+  </div>
+
+  <div class="try"><b>口头验证：</b>如果把 <code>p</code> 改成指向 <code>r.leftTop</code>，再执行 <code>p-&gt;y=0</code>，究竟是哪一个成员变？请说出完整名字。</div>
+  <div class="checks"><span>□ 花括号按成员顺序</span><span>□ new 返回指针</span><span>□ 箭头落到具体成员</span></div>
+  <div class="footer"><span>孩子讲义 6/19</span><span>对象格子 + 指针箭头</span></div>
+</section>
+
+<section class="page compact">
+  <div class="topline"><span>模块六 · 递推、递归与追踪</span><span>复杂度属于实现，不属于题目名字</span></div>
+  <h2>代码追踪：先跑第一轮，再看整体形状 <span class="tag">必过</span></h2>
+  <div class="signal"><b>反复出现的偏差：</b>把变量互相赋值放在脑中算；看到“阶乘”就忽略第一轮乘 0；看到“斐波那契”就背一个固定复杂度，不看是循环还是双递归。</div>
+  <div class="method"><b>固定动作：</b>循环里变量互相赋值，一律画表格逐行填，绝不心算；复杂度题再画控制流形状，看是一条循环链，还是不断分叉的调用树。</div>
+
+  <h3>1. 互相赋值必须按代码顺序填表</h3>
+  <pre>int a=2,b=3,c=0;
+for(int i=3;i&lt;=5;i++){
+  c=a+b; a=b; b=c;
+}</pre>
+  <table>
+    <tr><th>时刻</th><th>i</th><th>c=a+b 后</th><th>a=b 后</th><th>b=c 后</th></tr>
+    <tr><td>开始</td><td>—</td><td>c=0</td><td>a=2</td><td>b=3</td></tr>
+    <tr><td>第1轮</td><td>3</td><td>c=5</td><td>a=3</td><td>b=5</td></tr>
+    <tr><td>第2轮</td><td>4</td><td>c=8</td><td>a=5</td><td>b=8</td></tr>
+    <tr><td>第3轮</td><td>5</td><td>c=13</td><td>a=8</td><td>b=13</td></tr>
+  </table>
+  <p>赋值是依次发生的。不能拿“这一轮之前的 a”替代已经更新后的 a。</p>
+
+  <h3>2. 累加/累乘先检查单位元和第一轮</h3>
+  <table>
+    <tr><th>操作</th><th>不改变结果的单位元</th><th>危险初值/首轮</th></tr>
+    <tr><td>加法累积</td><td>0</td><td>初值乱设会多加</td></tr>
+    <tr><td>乘法累积</td><td>1</td><td>任何一轮乘 0 后永远是 0</td></tr>
+  </table>
+  <pre>int res=1;
+for(int i=1;i&lt;=n;i++) res*=i;  // 阶乘从1乘到n</pre>
+
+  <h3>3. 同样算 Fibonacci，两种实现是两种复杂度</h3>
+  <div class="parent-grid">
+    <div class="parent-box"><b>循环递推</b><pre>for(int i=2;i&lt;=n;i++)
+  ...</pre>循环次数与 n 成正比，是一条长度约 n 的链：<b>O(n)</b>。</div>
+    <div class="parent-box"><b>朴素双递归</b><pre>return fib(n-1)
+     + fib(n-2);</pre>一次非基础调用分成两个，又继续分叉并重复计算：约 <b>O(2<sup>n</sup>)</b>。</div>
+  </div>
+  <div class="arrow">fib(4) → fib(3) + fib(2)；fib(3) 又变成 fib(2) + fib(1)。重复的 fib(2) 是指数增长的信号。</div>
+
+  <div class="try"><b>合上本页复述：</b>为什么“斐波那契的复杂度是……”这句话本身不完整？必须补上哪一项信息？</div>
+  <div class="footer"><span>孩子讲义 7/19</span><span>结果看逐轮，复杂度看形状</span></div>
+</section>
+
+<section class="page compact">
+  <div class="topline"><span>模块七 · 排序识别与稳定性</span><span>先看每轮主线动作</span></div>
+  <h2>认排序：不要靠变量名，找“这一轮在干什么” <span class="tag">必过</span></h2>
+  <div class="method"><b>固定动作：</b>遮住函数名和变量名，只找每轮的主线：相邻交换、找极值后交换、还是把当前元素插入前面的有序区。</div>
+
+  <table>
+    <tr><th>算法</th><th>每轮主线动作</th><th>代码信号</th><th>稳定性</th></tr>
+    <tr><td>冒泡排序</td><td>比较相邻两个，逆序就交换</td><td><code>a[j]</code> 与 <code>a[j+1]</code></td><td>通常稳定</td></tr>
+    <tr><td>选择排序</td><td>扫完剩余区，记录最小位置，最后交换一次</td><td><code>minPos</code> + <code>swap</code></td><td>不稳定</td></tr>
+    <tr><td>插入排序</td><td>暂存 key，较大元素后移，把 key 填入空位</td><td><code>key</code> + 连续后移</td><td>通常稳定</td></tr>
+  </table>
+
+  <h3>1. 冒泡提前结束：flag 记录“本轮是否交换”</h3>
+  <pre>bool changed=false;       // 每轮开始：还没发生交换
+for(int j=0;j&lt;n-1-i;j++)
+  if(a[j]&gt;a[j+1]){
+    swap(a[j],a[j+1]);
+    changed=true;         // 确实交换过
+  }
+if(!changed) break;       // 一整轮没交换，已经有序</pre>
+  <p>先用自然语言定变量职责，再填 true/false。职责一旦定为“是否发生交换”，初值和更新位置就不会反。</p>
+
+  <h3>2. 稳定性只追踪相等元素的相对先后</h3>
+  <p>把相等值贴标签，例如 <code>5a</code> 和 <code>5b</code>。排序后若它们前后顺序改变，就不稳定。</p>
+  <div class="example"><div class="example-title">选择排序的最小反例</div>
+    <div class="trace">[5a, 5b, 2]<br>选最小值 2，与第一个位置交换<br>[2, 5b, 5a]</div>
+    <p><code>5a</code> 原来在 <code>5b</code> 前，现在跑到后面，所以选择排序不稳定。即使代码“相等时不交换”，远距离交换仍可能跨过相等元素。</p>
+  </div>
+
+  <h3>3. 一眼识别选择与插入</h3>
+  <pre>// 甲：先找 minPos，整轮结束只 swap 一次 → 选择
+// 乙：先保存 key，前面元素不断 a[j+1]=a[j]，最后填 key → 插入</pre>
+  <div class="try"><b>口头验证：</b>不要说算法名，先分别用一句现实动作描述冒泡、选择、插入。描述正确后再说名字。</div>
+  <div class="footer"><span>孩子讲义 8/19</span><span>算法名字要从动作里认出来</span></div>
+</section>
+
+<section class="page compact">
+  <div class="topline"><span>模块八 · 插入/选择排序过程</span><span>从动作推出场景和复杂度</span></div>
+  <h2>排序不是背结论：用 4 个数数动作 <span class="tag">必过</span></h2>
+  <div class="signal"><b>当前最容易混用的结论：</b>把插入排序“已有序时很快”的特点搬给选择排序；知道插入代码外形，却写反移动条件或最终空位。</div>
+
+  <h3>1. 升序插入：前面的数比 key 大，才向后腾位</h3>
+  <pre>int key=a[i];
+int j=i-1;
+while(j&gt;=0 &amp;&amp; a[j]&gt;key){
+  a[j+1]=a[j];
+  j--;
+}
+a[j+1]=key;</pre>
+  <div class="example"><div class="example-title">手推 [2,5,7,4]，把 4 插进前三个有序数</div>
+    <div class="trace">key=4，j=2<br>7&gt;4：7 后移 → [2,5,7,7]，j=1<br>5&gt;4：5 后移 → [2,5,5,7]，j=0<br>2&gt;4 不成立：停止<br>空位是 j+1=1，填入4 → [2,4,5,7]</div>
+  </div>
+  <p>降序或“更新一个对象后向前/向后调整”时，不背比较号。先说目标顺序和对象应该移动的方向，再写边界和比较。</p>
+
+  <h3>2. 插入排序为什么适合“几乎有序”</h3>
+  <table>
+    <tr><th>数据</th><th>每个 key 通常跨过几个元素</th><th>总动作趋势</th></tr>
+    <tr><td><code>[1,2,3,4,5]</code></td><td>几乎 0 个</td><td>每轮很快停，O(n)</td></tr>
+    <tr><td><code>[1,2,3,5,4]</code></td><td>只有少数元素跨 1 格</td><td>很少移动</td></tr>
+    <tr><td><code>[5,4,3,2,1]</code></td><td>第 i 个要跨过约 i 个</td><td>1+2+...，O(n²)</td></tr>
+  </table>
+
+  <h3>3. 选择排序为什么已有序也不能少比较</h3>
+  <p>要把第 0 位确定为最小值，仍必须看完后面 n-1 个候选；第 1 位仍要看 n-2 个。数组是否已经有序，代码本身并不知道，也没有提前结束条件。</p>
+  <div class="formula">(n-1)+(n-2)+...+1 = n(n-1)/2 = O(n²)</div>
+  <table>
+    <tr><th>算法</th><th>已有序最好情况</th><th>原因</th></tr>
+    <tr><td>有提前结束的冒泡</td><td>O(n)</td><td>一轮无交换就退出</td></tr>
+    <tr><td>插入排序</td><td>O(n)</td><td>每轮比较后立刻停止移动</td></tr>
+    <tr><td>选择排序</td><td>O(n²)</td><td>每轮仍扫描完剩余区</td></tr>
+  </table>
+
+  <div class="try"><b>最小证明：</b>对已经有序的 [1,2,3,4]，分别数插入排序和选择排序还要做多少次主要比较。不要先报复杂度。</div>
+  <div class="footer"><span>孩子讲义 9/19</span><span>复杂度从“代码会不会早停”推出</span></div>
+</section>
+
+<section class="page">
+  <div class="topline"><span>模块九 · 通用复杂度</span><span>先数规模相关的动作</span></div>
+  <h2>复杂度：看循环范围，不被 if 和题目名字带跑 <span class="tag">第二优先级</span></h2>
+  <div class="method"><b>固定动作：</b>① 找主要操作；② 数每层循环与 n 的关系；③ 判断相乘还是相加；④ 最后才写大 O。</div>
+
+  <h3>1. 规则整齐的嵌套循环通常相乘</h3>
+  <pre>for(int i=0;i&lt;n;i++)          // 约 n 次
+  for(int j=0;j&lt;n;j++)        // 每个 i 下约 n 次
+    work();                    // 总计约 n*n → O(n²)</pre>
+
+  <h3>2. i&lt;j&lt;k 只减少常数比例，不会少掉一层</h3>
+  <pre>for(int i=0;i&lt;n;i++)
+  for(int j=i+1;j&lt;n;j++)
+    for(int k=j+1;k&lt;n;k++)
+      if((i+j+k)%2==0) count++;</pre>
+  <p>满足 <code>i&lt;j&lt;k</code> 的组合数量约是 n³ 的一个常数比例；简单 <code>if</code> 每次是 O(1)，所以整体仍是 O(n³)。</p>
+
+  <h3>3. 三角形循环用求和看</h3>
+  <pre>for(int i=0;i&lt;n;i++)
+  for(int j=i+1;j&lt;n;j++)
+    work();</pre>
+  <div class="formula">(n-1)+(n-2)+...+1 = O(n²)</div>
+  <p>内层越来越短，但只是从完整正方形变成大约一半的三角形，数量级仍是 n²。</p>
+
+  <h3>4. 大 O 相同，不代表性能和用途完全相同</h3>
+  <p>插入排序和选择排序最坏都可写 O(n²)，但插入排序在近乎有序时接近 O(n)，而选择排序仍扫描完整剩余区；稳定性也不同。大 O 只描述增长量级，不包含全部行为。</p>
+
+  <div class="example"><div class="example-title">做题时的遮挡法</div>
+    <p>先把循环里的位运算、复杂条件和输出语句遮住。只看外层走几次、内层对每个外层又走几次。等数量级确定后，再检查循环体是否包含另一个规模相关操作。</p>
+  </div>
+  <div class="try"><b>口头验证：</b>两层循环中内层只走到 <code>j&lt;i</code>，为什么仍是 O(n²) 而不是 O(n)？请用求和式说明。</div>
+  <div class="footer"><span>孩子讲义 10/19</span><span>先数动作，再写符号</span></div>
+</section>
+
+<section class="page compact">
+  <div class="topline"><span>模块十 · 文件流与异常</span><span>方向、边界与控制流</span></div>
+  <h2>文件流：先画数据从哪里到哪里 <span class="tag">第二优先级</span></h2>
+  <table>
+    <tr><th>对象</th><th>方向</th><th>常见动作</th></tr>
+    <tr><td><code>ifstream in("a.txt")</code></td><td>文件 → 程序</td><td><code>in&gt;&gt;x</code>、<code>getline(in,s)</code></td></tr>
+    <tr><td><code>ofstream out("a.txt")</code></td><td>程序 → 文件</td><td><code>out&lt;&lt;x</code></td></tr>
+    <tr><td><code>cin / cout</code></td><td>键盘 → 程序 / 程序 → 屏幕</td><td>标准输入输出</td></tr>
+  </table>
+  <p><code>getline</code> 读取“传给它的那个输入流”，可以是 <code>cin</code>，也可以是 <code>ifstream</code>。打开了 <code>ofstream out</code> 后，若仍写 <code>cout&lt;&lt;</code>，内容还是到屏幕。</p>
+
+  <h3>&gt;&gt; 与 getline 连用：前者会留下分隔空白</h3>
+  <div class="example"><div class="example-title">新例子：看输入流里的下一个字符</div>
+    <pre>// 文件内容：
+Blue
+Sky
+
+string a,b;
+in &gt;&gt; a;
+getline(in,b);</pre>
+    <div class="trace">in&gt;&gt;a 读走 Blue，在换行前停止<br>流里的下一个字符仍是第一行末尾换行<br>getline 立刻读到换行，因此 b 是空字符串</div>
+    <p>需要读下一整行时，可先处理残留换行，例如 <code>getline(in &gt;&gt; ws,b)</code>；考题首先要能解释“为什么会空”。</p>
+  </div>
+
+  <h2>异常：throw 后控制流跳到匹配的 catch</h2>
+  <div class="method"><b>固定动作：</b>先写出抛出的类型，再从上到下找能接住它的 <code>catch</code>；一旦抛出，try 中后续普通语句不再执行。</div>
+  <pre>try{
+  cout&lt;&lt;"A";
+  throw 42;               // 类型是 int
+  cout&lt;&lt;"B";             // 不执行
+}catch(const char*){
+  cout&lt;&lt;"C";             // 类型不匹配
+}catch(...){
+  cout&lt;&lt;"D";             // 能接任意类型
+}
+cout&lt;&lt;"E";</pre>
+  <p>输出路径是 A → 抛出 int → <code>catch(...)</code> → D → E。只有异常实际抛出且一路没有匹配处理器时，程序才会因未处理异常终止；不能笼统说“所有程序必须捕获所有异常”。</p>
+
+  <div class="try"><b>合上本页复述：</b>文件题画哪一根方向箭头？异常题先记录哪一个类型？<code>throw</code> 后的下一条普通语句还会不会执行？</div>
+  <div class="footer"><span>孩子讲义 11/19</span><span>文件看数据方向，异常看控制流跳转</span></div>
+</section>
+
+<section class="page compact">
+  <div class="topline"><span>迁移测试 A · 必过模块</span><span>不回看讲义 · 必须写理由</span></div>
+  <h1>第一组：基本掌握验证</h1>
+  <div class="subtitle">建议 25 分钟 · 共 10 题 · 正确且理由成立才计分</div>
+
+  <div class="question"><div class="qtitle">A1 指针声明</div>
+    <pre>int age=12;
+int *p = ______;</pre>
+    <p>在空格中填一个合法表达式，让 p 指向 age。再写：<code>age</code> 是____，<code>&amp;age</code> 是____，<code>*p</code> 是____。</p><div class="line"></div>
+  </div>
+  <div class="question"><div class="qtitle">A2 数组名与指针变量</div>
+    <pre>int a[3]={6,7,8};
+int *p=a;</pre>
+    <p>分别判断是否合法并说明：<code>a+1</code>____；<code>a++</code>____；<code>p++</code>____。</p><div class="line"></div>
+  </div>
+  <div class="question"><div class="qtitle">A3 行指针翻译</div>
+    <pre>int a[2][3]={{2,4,6},{8,10,12}};
+int x=*(*(a+1)+1);</pre>
+    <p>把表达式改写成 <code>a[　][　]</code>：________；x=________。<br>若函数接收这个数组，写出一种正确形参类型：________________。</p>
+  </div>
+  <div class="question"><div class="qtitle">A4 传参角色</div>
+    <pre>struct C{int n;};
+void f(C x){x.n+=1;}  void g(C &amp;x){x.n+=2;}  void h(C *p){p-&gt;n+=3;}
+C c{4}; f(c); g(c); h(&amp;c);</pre>
+    <p>最终 c.n=______。请按“复印件 / 原件的小名（别名）/ 原件的门牌号”写三步理由：</p><div class="lines-2"></div>
+  </div>
+  <div class="question"><div class="qtitle">A5 函数可见性</div>
+    <pre>int main(){ hello(); }
+void hello(){ cout&lt;&lt;"Hi"; }</pre>
+    <p>现象属于：□编译错误 □运行错误 □正常输出。最小修改方向：________________。</p>
+  </div>
+  <div class="footer"><span>迁移测试 12/19</span><span>A1-A5：先翻译角色</span></div>
+</section>
+
+<section class="page compact">
+  <div class="topline"><span>迁移测试 A · 必过模块</span><span>继续计分</span></div>
+  <div class="question"><div class="qtitle">A6 逐轮追踪</div>
+    <pre>int a=1,b=3,c=0;
+for(int i=3;i&lt;=5;i++){ c=a+b; a=b; b=c; }
+cout&lt;&lt;c;</pre>
+    <table><tr><th>i</th><th>c</th><th>a</th><th>b</th></tr><tr><td>3</td><td></td><td></td><td></td></tr><tr><td>4</td><td></td><td></td><td></td></tr><tr><td>5</td><td></td><td></td><td></td></tr></table>
+    <p>输出：________。</p>
+  </div>
+  <div class="question"><div class="qtitle">A7 看实现判复杂度</div>
+    <pre>int f(int n){
+  if(n&lt;=1) return n;
+  return f(n-1)+f(n-2);
+}</pre>
+    <p>□ O(n)　□ O(n²)　□ 约 O(2<sup>n</sup>)。依据不是函数名，而是：________________________。</p>
+  </div>
+  <div class="question"><div class="qtitle">A8 插入过程</div>
+    <p>把 5 插入升序有序区 <code>[2,6,9]</code>。哪些元素要后移？________；5 最后放到下标________。<br>补条件：<code>while(j&gt;=0 &amp;&amp; a[j] ______ key)</code>。</p><div class="line"></div>
+  </div>
+  <div class="question"><div class="qtitle">A9 选择排序比较次数</div>
+    <p>对已经有序的 5 个数做普通选择排序，各轮比较次数是：____ + ____ + ____ + ____ = ____。<br>它能因为已有序变成 O(n) 吗？____。理由：________________________________。</p><div class="line"></div>
+  </div>
+  <div class="question"><div class="qtitle">A10 排序识别与标志</div>
+    <pre>for(int i=0;i&lt;n-1;i++){
+  int k=i;
+  for(int j=i+1;j&lt;n;j++) if(a[j]&lt;a[k]) k=j;
+  swap(a[i],a[k]);
+}</pre>
+    <p>算法：________；判断稳定性：________；最小反例或过程依据：________________________。</p>
+    <p>若是冒泡排序，记录“本轮发生过交换”的 <code>changed</code> 每轮初值应为______，发生交换后改为______。</p>
+  </div>
+  <div class="pass"><b>本组计分：</b>____ / 10。必须达到 8 分，且 A3、A4、A6、A8 四题中至少 3 题正确，才进入下一套整卷。</div>
+  <div class="footer"><span>迁移测试 13/19</span><span>答案在拆下的家长页</span></div>
+</section>
+
+<section class="page compact test-page">
+  <div class="topline"><span>迁移测试 B · 脆弱点</span><span>建议 20 分钟 · 不回看讲义</span></div>
+  <h1>第二组：换题面还能调用吗</h1>
+  <div class="question"><div class="qtitle">B1 多维条件筛选</div>
+    <pre>int a[2][3]={{1,2,3},{4,5,6}};
+int s=0;
+for(int i=0;i&lt;2;i++)
+  for(int j=0;j&lt;3;j++)
+    if((i+j)%2==1) s+=a[i][j];</pre>
+    <p>先列被选中的坐标：________________；s=______。</p>
+  </div>
+  <div class="question"><div class="qtitle">B2 动态内存</div>
+    <pre>int local[6];
+int *heap=new int[6];</pre>
+    <p>两组元素是否都连续？______。哪一个需要手动释放？______。写出释放语句：________________。</p>
+  </div>
+  <div class="question"><div class="qtitle">B3 结构体指针</div>
+    <pre>struct P{int x,y;}; struct R{P a,b;};
+R r{{1,2},{7,8}}; P *p=&amp;r.b; p-&gt;x=4;
+cout&lt;&lt;r.a.x+r.b.x;</pre>
+    <p>画 p 的箭头后，输出______。被修改成员的完整名字是________________。</p>
+  </div>
+  <div class="question"><div class="qtitle">B4 作用域与默认参数</div>
+    <pre>int calc(int x,int y=2);
+int calc(int x);
+int main(){ return calc(5); }</pre>
+    <p>□正常调用第一个 □正常调用第二个 □编译歧义。逐个候选说明：________________________。</p>
+  </div>
+  <div class="question"><div class="qtitle">B5 文件流</div>
+    <pre>ifstream in("log.txt"); string word,line;
+in&gt;&gt;word; getline(in,line);
+ofstream out("copy.txt");
+cout&lt;&lt;word; out&lt;&lt;line;</pre>
+    <p><code>getline</code> 很可能先得到什么？________；word 输出到________；line 输出到________。</p>
+  </div>
+  <div class="question"><div class="qtitle">B6 异常控制流</div>
+    <pre>try{ cout&lt;&lt;"X"; throw 3.5; cout&lt;&lt;"Y"; }
+catch(int){ cout&lt;&lt;"I"; }
+catch(...){ cout&lt;&lt;"A"; }
+cout&lt;&lt;"Z";</pre>
+    <p>输出：________。写出控制流路径：________________________________。</p>
+  </div>
+  <div class="question"><div class="qtitle">B7 嵌套循环复杂度</div>
+    <pre>for(int i=0;i&lt;n;i++)
+  for(int j=i+1;j&lt;n;j++)
+    for(int k=j+1;k&lt;n;k++) count++;</pre>
+    <p>复杂度：________。为什么越来越短仍没有少一整层？________________________。</p>
+  </div>
+  <div class="pass"><b>本组计分：</b>____ / 7。5 分及以上说明基本可用；低于 5 分不必整份重学，按家长页的题号映射只补对应模块。</div>
+  <div class="footer"><span>迁移测试 14/19</span><span>答对结论但说不出依据，暂不计分</span></div>
+</section>
+
+<section class="page">
+  <div class="topline"><span>孩子自证与复盘</span><span>必须在看家长答案前完成</span></div>
+  <h1>我怎样证明自己不是猜对的</h1>
+  <div class="subtitle">不要求一次全会，只记录今天真正能自己调用的方法</div>
+
+  <div class="intro"><b>先不对答案。</b>从 A 组挑 4 题，把你使用的方法写成一句话。只写“我选了什么”不算证明；要写你画了什么、追踪了什么或比较了什么。</div>
+  <table>
+    <tr><th>我选的题号</th><th class="left">我使用的固定动作</th><th>确定程度</th></tr>
+    <tr><td style="height:52px"></td><td class="left"></td><td>□确定 □仍犹豫</td></tr>
+    <tr><td style="height:52px"></td><td class="left"></td><td>□确定 □仍犹豫</td></tr>
+    <tr><td style="height:52px"></td><td class="left"></td><td>□确定 □仍犹豫</td></tr>
+    <tr><td style="height:52px"></td><td class="left"></td><td>□确定 □仍犹豫</td></tr>
+  </table>
+
+  <h2>孩子自己的三句反思</h2>
+  <p><b>我原来错在哪里：</b></p><div class="lines-2"></div>
+  <p><b>为什么会错：</b></p><div class="lines-2"></div>
+  <p><b>下次看到相似题，我先做：</b></p><div class="lines-2"></div>
+
+  <h2>我还拿不准的地方</h2>
+  <p>题号或知识点：</p><div class="line"></div>
+  <p>我能做到哪一步：</p><div class="line"></div>
+  <p>我想让家长只提示：□变量含义　□第一轮　□两个相反选项　□一行代码范围</p>
+
+  <div class="pass"><b>完成标准：</b>至少写出 2 条可以在新题中执行的动作，例如“行指针先跳行再走列”“参数先分复印件/小名/门牌号”“互相赋值画表格逐行填，绝不心算”。不使用“下次仔细一点”代替方法。</div>
+  <div class="footer"><span>自证复盘 15/19</span><span>写完后再交给家长核对</span></div>
+</section>
+
+<section class="page parent compact">
+  <div class="cut">打印后从这里拆开，孩子完成迁移测试前不展示</div>
+  <h1>家长答案与判断依据 · 第一组</h1>
+  <div class="subtitle">核对的重点是判断链，不只是最后数字</div>
+  <table>
+    <tr><th>题</th><th class="left">答案与最低理由</th><th>错了回看</th></tr>
+    <tr><td>A1</td><td class="left"><code>&amp;age</code>；<code>age</code> 是整数值，<code>&amp;age</code> 是 age 的地址（门牌号），<code>*p</code> 是顺 p 的门牌号找到 age 并取值。</td><td>第2页</td></tr>
+    <tr><td>A2</td><td class="left"><code>a+1</code> 合法，只计算新地址；<code>a++</code> 不合法，数组名不可修改；<code>p++</code> 合法，p 是指针变量。</td><td>第2页</td></tr>
+    <tr><td>A3</td><td class="left"><code>a[1][1]</code>，10；形参可写 <code>int a[][3]</code> 或 <code>int (*a)[3]</code>（写 <code>int a[2][3]</code> 也按行指针处理）。</td><td>第3页</td></tr>
+    <tr><td>A4</td><td class="left"><b>9</b>。f 拿复印件，改复印件不动原件；g 拿原件的小名/别名，c 从4变6；h 拿原件的门牌号，顺门牌号把 c 从6改成9。</td><td>第4页</td></tr>
+    <tr><td>A5</td><td class="left">编译错误；在 main 前加 <code>void hello();</code>，或把完整定义移到 main 前。</td><td>第5页</td></tr>
+    <tr><td>A6</td><td class="left">i=3：c=4,a=3,b=4；i=4：c=7,a=4,b=7；i=5：c=11,a=7,b=11；输出11。</td><td>第7页</td></tr>
+    <tr><td>A7</td><td class="left">约 O(2<sup>n</sup>)；每个非基础调用分成两个重叠子调用，形成不断分叉且重复计算的调用树。</td><td>第7页</td></tr>
+    <tr><td>A8</td><td class="left">9、6 后移；5 放下标1；条件为 <code>a[j]&gt;key</code>。必须能解释“升序中比 key 大的旧元素向后腾位”。</td><td>第9页</td></tr>
+    <tr><td>A9</td><td class="left">4+3+2+1=10；不能。每轮仍须扫完整个剩余区间来证明最小值。</td><td>第9页</td></tr>
+    <tr><td>A10</td><td class="left">选择排序；不稳定；可用 <code>[5a,5b,2]</code> 说明远距离交换改变相等项顺序。冒泡 changed 初值 false，交换后 true。</td><td>第8页</td></tr>
+  </table>
+  <div class="warning"><b>A4 核对提醒：</b>不要顺着代码里的三个“加号”直接算。第一步只改复印件，正确结果是 9；这正是本题要区分的模型。</div>
+  <h2>第一组诊断</h2>
+  <div class="parent-grid">
+    <div class="parent-box"><b>A1-A3 错</b><br>根因多半是没有使用“门牌号 + 画箭头”。先问“p→谁？*p 顺门牌号找到谁？”，再处理行宽。</div>
+    <div class="parent-box"><b>A4-A5 错</b><br>根因多半是参数角色或调用点可见性。首问：“函数此刻拿到复印件、原件的小名，还是原件的门牌号？”</div>
+    <div class="parent-box"><b>A6-A7 错</b><br>分别检查是否逐行填表、是否看具体实现。不要用“斐波那契复杂度”作为提示。</div>
+    <div class="parent-box"><b>A8-A10 错</b><br>让她用 4 个数手推每轮动作；先描述过程，再说算法名或复杂度。</div>
+  </div>
+  <div class="footer"><span>家长页 16/19</span><span>第一组答案</span></div>
+</section>
+
+<section class="page parent compact">
+  <div class="cut">家长页 · 第二组答案与复盘节奏</div>
+  <h1>家长答案与判断依据 · 第二组</h1>
+  <table>
+    <tr><th>题</th><th class="left">答案与最低理由</th><th>错了回看</th></tr>
+    <tr><td>B1</td><td class="left">坐标 <code>(0,1)、(1,0)、(1,2)</code>；s=2+4+6=12。必须先经过 if 筛选。</td><td>第3页</td></tr>
+    <tr><td>B2</td><td class="left">都连续；heap 需要手动释放；<code>delete[] heap;</code>。连续性与释放方式是两列。</td><td>第3页</td></tr>
+    <tr><td>B3</td><td class="left">p 指向 <code>r.b</code>；修改 <code>r.b.x</code> 为4；输出 <code>r.a.x+r.b.x=1+4=5</code>。</td><td>第6页</td></tr>
+    <tr><td>B4</td><td class="left">编译歧义。一个候选能用默认 y=2，另一个参数个数直接匹配，二者都可行。</td><td>第5页</td></tr>
+    <tr><td>B5</td><td class="left">getline 很可能先读到残留换行，得到空串；word 经 cout 到屏幕；line 经 out 到 copy.txt。</td><td>第11页</td></tr>
+    <tr><td>B6</td><td class="left"><code>XAZ</code>。先输出X，抛出 double，跳过Y；catch(int) 不匹配，catch(...) 输出A；随后输出Z。</td><td>第11页</td></tr>
+    <tr><td>B7</td><td class="left">O(n³)。<code>i&lt;j&lt;k</code> 只把 n³ 个组合减成常数比例，仍有三层随 n 增长的循环。</td><td>第10页</td></tr>
+  </table>
+
+  <h2>一次复盘建议 <span class="tag">不要一晚做完全部</span></h2>
+  <table>
+    <tr><th>阶段</th><th>建议时间</th><th class="left">做什么</th><th class="left">通过证据</th></tr>
+    <tr><td>第1次</td><td>35-45分钟</td><td class="left">第2-5页，完成后口头做 A1-A5</td><td class="left">能翻译类型与参数角色</td></tr>
+    <tr><td>第2次</td><td>35-45分钟</td><td class="left">第7-9页，完成 A6-A10</td><td class="left">A组至少8分且关键题达标</td></tr>
+    <tr><td>第3次</td><td>25-35分钟</td><td class="left">第6、10、11页，完成B组</td><td class="left">B组至少5分</td></tr>
+    <tr><td>隔日抽查</td><td>12分钟</td><td class="left">家长从A组随机换数重问4题</td><td class="left">至少3题独立说清理由</td></tr>
+  </table>
+  <div class="warning"><b>停止条件：</b>连续两题开始无依据猜选项、无法复述刚完成的方法、明显烦躁或疲劳时，当天停止。只留一张“我下次先做什么”的思路卡，不追加整卷。</div>
+  <div class="pass"><b>进入下一套卷：</b>A组达标 + 隔日抽查达标即可。B组个别脆弱点可以继续穿插复习，不必等到所有边角知识都满分才开卷。</div>
+
+  <div class="footer"><span>家长页 17/19</span><span>第二组答案与节奏</span></div>
+</section>
+
+<section class="page parent compact">
+  <div class="cut">家长页 · 三卷题号覆盖核对</div>
+  <h1>49 个作答信号覆盖表</h1>
+  <div class="subtitle">红色粗体 = 当卷答错；其余均为孩子标记 ☆/△ 但答对</div>
+  <table class="source-table">
+    <tr><th>模块</th><th>2025年12月</th><th>2025年9月</th><th>2025年6月</th><th>讲义页</th></tr>
+    <tr><td>指针与二维/多维数组</td><td><span class="chip">选1☆</span> <span class="chip bad">选5错</span> <span class="chip">判3△</span> <span class="chip">判5☆</span></td><td><span class="chip">选2☆</span> <span class="chip bad">选3错</span> <span class="chip bad">判1错</span> <span class="chip bad">判5错△</span></td><td><span class="chip bad">选2错☆△</span> <span class="chip bad">选3错☆</span></td><td>2-3</td></tr>
+    <tr><td>函数、作用域与传参</td><td><span class="chip">判9△</span></td><td><span class="chip">选4☆△</span> <span class="chip">判2☆</span></td><td><span class="chip bad">选4错△</span> <span class="chip bad">选5错☆△</span> <span class="chip">选6☆△</span> <span class="chip">判4☆△</span></td><td>4-5</td></tr>
+    <tr><td>结构体</td><td><span class="chip bad">选8错△</span> <span class="chip">判2☆</span></td><td><span class="chip">选7△</span> <span class="chip">判3△</span></td><td><span class="chip">判3△</span></td><td>6</td></tr>
+    <tr><td>递推、递归、追踪与通用复杂度</td><td><span class="chip">选13△</span> <span class="chip">判6☆</span></td><td><span class="chip">选13☆</span> <span class="chip">选14☆△</span></td><td><span class="chip bad">选12错△</span> <span class="chip bad">判6错☆</span></td><td>7、10</td></tr>
+    <tr><td>排序</td><td><span class="chip">选11☆</span> <span class="chip bad">选12错☆</span> <span class="chip">判8△</span></td><td><span class="chip">选10☆</span> <span class="chip">选11☆△</span> <span class="chip">选12△</span> <span class="chip">判7△</span></td><td><span class="chip bad">选9错☆△</span> <span class="chip">选15☆</span> <span class="chip bad">判7错△</span> <span class="chip">判8☆</span></td><td>8-9</td></tr>
+    <tr><td>文件流</td><td><span class="chip">选14☆</span> <span class="chip">判10△</span></td><td><span class="chip">判10△</span></td><td><span class="chip bad">选13错△</span> <span class="chip">判10☆△</span></td><td>11</td></tr>
+    <tr><td>异常处理</td><td><span class="chip bad">选15错△</span></td><td><span class="chip">选15☆</span> <span class="chip">判9△</span></td><td><span class="chip">选14☆△</span> <span class="chip">判9△</span></td><td>11</td></tr>
+  </table>
+
+  <h2>为什么不是按原题逐道讲</h2>
+  <p>同一个底层模型会换外衣反复出现。例如“行指针”同时出现在二维数组表达式、函数形参和地址跨度中；“过程追踪”同时决定递推值、累乘首轮和异常跳转。按题号讲容易记住题面，按模型讲才有迁移价值。</p>
+  <div class="parent-grid">
+    <div class="parent-box"><b>高优先级根因</b><br>二维数组行宽模型；复印件/小名/门牌号；插入与选择的过程差异；逐轮追踪和具体实现复杂度。</div>
+    <div class="parent-box"><b>第二优先级脆弱点</b><br>结构体箭头、文件流方向、默认参数歧义、异常类型、三层循环数量级。</div>
+  </div>
+
+  <h3>家长首问模板</h3>
+  <ul>
+    <li>指针/二维数组：“先别算值，这个指针指向一个什么大小的东西？”</li>
+    <li>函数：“这个形参拿到复印件、原件的小名，还是原件的门牌号？”</li>
+    <li>循环：“只跑第一轮，哪个变量第一次和题意不一样？”</li>
+    <li>排序：“不要说名字，这一轮实际做了什么？”</li>
+    <li>文件/异常：“数据往哪走？控制流从哪一句跳走？”</li>
+  </ul>
+  <div class="footer"><span>家长页 18/19</span><span>49 个信号均已覆盖</span></div>
+</section>
+
+<section class="page parent">
+  <div class="cut">家长页 · 复盘记录</div>
+  <h1>复盘观察记录</h1>
+  <div class="subtitle">只记录可观察的行为，不替孩子写结论</div>
+  <table>
+    <tr><th>日期</th><th>模块/题号</th><th>独立完成</th><th>用到哪级提示</th><th class="left">第一次偏差与下次动作</th></tr>
+    <tr><td style="height:42px"></td><td></td><td>□是 □否</td><td>1 / 2 / 3 / 4</td><td></td></tr>
+    <tr><td style="height:42px"></td><td></td><td>□是 □否</td><td>1 / 2 / 3 / 4</td><td></td></tr>
+    <tr><td style="height:42px"></td><td></td><td>□是 □否</td><td>1 / 2 / 3 / 4</td><td></td></tr>
+    <tr><td style="height:42px"></td><td></td><td>□是 □否</td><td>1 / 2 / 3 / 4</td><td></td></tr>
+  </table>
+
+  <h2>提示阶梯</h2>
+  <ol>
+    <li><b>一级：</b>请她手推第一步，或说出变量此刻代表什么。</li>
+    <li><b>二级：</b>把范围缩到一行、一个变量或两个相反选项。</li>
+    <li><b>三级：</b>指出题意动作与代码变化不一致，仍由她说修改方向。</li>
+    <li><b>四级：</b>给局部框架，只留当前关键空；解释后立即让她自己完成下一步。</li>
+  </ol>
+
+  <h2>隔日抽查记录</h2>
+  <table>
+    <tr><th>抽查题型</th><th>换了什么数字/题面</th><th>结论</th><th>理由完整</th><th>是否进入新卷</th></tr>
+    <tr><td>指针/二维数组</td><td></td><td>□对 □错</td><td>□是 □否</td><td rowspan="4">□进入<br>□再补一个模块</td></tr>
+    <tr><td>函数/传参</td><td></td><td>□对 □错</td><td>□是 □否</td></tr>
+    <tr><td>递推/复杂度</td><td></td><td>□对 □错</td><td>□是 □否</td></tr>
+    <tr><td>排序</td><td></td><td>□对 □错</td><td>□是 □否</td></tr>
+  </table>
+
+  <div class="intro"><b>给家长的判断边界：</b>如果孩子能独立做对新题并解释依据，就允许进入下一套卷，不追求当晚“全部讲完”。下一套卷的作用是验证迁移，不是惩罚遗漏；新卷中若同一模型再次失分，再回到对应页找第一次偏差。</div>
+  <p class="tiny">资料依据：GESP四级小题档案中 2512、2509、2506 的最新作答、☆/△标记与错因记录。生成日期：2026-08-20。</p>
+  <div class="footer"><span>家长页 19/19</span><span>记录证据，不代写反思</span></div>
+</section>
+
+</body>
+</html>
