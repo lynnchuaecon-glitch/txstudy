@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Think 2e U1–U2 classroom courseware: six colorful 45-minute lessons." />
-  <title>Think 2e · U1–U2 教室用课件</title>
+  <meta name="description" content="Think 2e U1–U12 classroom courseware: twelve units and thirty-six colorful 45-minute lessons." />
+  <title>Think 2e · U1–U12 教室用课件</title>
   <style>
     :root {
       --ink: #1c2141;
@@ -124,6 +124,9 @@
     .filter-pill.active[data-unit="all"] { color: #fff; background: var(--navy); box-shadow: 0 7px 15px rgba(34,38,83,.2); }
     .filter-pill.active[data-unit="U1"] { color: #fff; background: var(--u1); box-shadow: 0 7px 15px rgba(255,107,87,.24); }
     .filter-pill.active[data-unit="U2"] { color: #fff; background: var(--u2); box-shadow: 0 7px 15px rgba(118,88,232,.24); }
+    .filter-pill.active[data-unit="U3"], .filter-pill.active[data-unit="U6"], .filter-pill.active[data-unit="U9"] { color: #fff; background: #0e9f92; box-shadow: 0 7px 15px rgba(14,159,146,.2); }
+    .filter-pill.active[data-unit="U4"], .filter-pill.active[data-unit="U7"], .filter-pill.active[data-unit="U10"] { color: #fff; background: #e28b2f; box-shadow: 0 7px 15px rgba(226,139,47,.2); }
+    .filter-pill.active[data-unit="U5"], .filter-pill.active[data-unit="U8"], .filter-pill.active[data-unit="U11"], .filter-pill.active[data-unit="U12"] { color: #fff; background: #2381b8; box-shadow: 0 7px 15px rgba(35,129,184,.2); }
     .toolbar-divider { width: 1px; height: 24px; background: var(--line); }
     .select-wrap { position: relative; }
     .select-wrap select, .search-wrap input {
@@ -331,6 +334,9 @@
     .summary-stamp { padding: 8px 11px; border-radius: 11px; color: #fff; background: var(--navy); font-size: 12px; font-weight: 900; white-space: nowrap; }
     .unit-summary.u1 .summary-stamp { background: var(--u1); }
     .unit-summary.u2 .summary-stamp { background: var(--u2); }
+    .unit-summary.u3 .summary-stamp, .unit-summary.u6 .summary-stamp, .unit-summary.u9 .summary-stamp { background: #0e9f92; }
+    .unit-summary.u4 .summary-stamp, .unit-summary.u7 .summary-stamp, .unit-summary.u10 .summary-stamp { background: #e28b2f; }
+    .unit-summary.u5 .summary-stamp, .unit-summary.u8 .summary-stamp, .unit-summary.u11 .summary-stamp, .unit-summary.u12 .summary-stamp { background: #2381b8; }
     .summary-grid { display: grid; grid-template-columns: minmax(0, .96fr) minmax(0, 1.04fr); gap: 16px; }
     .summary-card { min-width: 0; padding: 17px; border: 1px solid var(--line); border-radius: 16px; background: #fff; }
     .summary-card h4 { margin: 0 0 3px; color: var(--ink); font-size: 16px; letter-spacing: -.02em; }
@@ -391,6 +397,8 @@
     .tree-contrast span { color: #4e5270; font-size: 12px; }
     .tree-contrast em { color: var(--ink); font-size: 13px; font-style: normal; font-weight: 850; }
     .tree-contrast small { color: var(--muted); font-size: 11px; }
+    .lesson-principle { margin-top: 15px; padding: 12px 13px; border-left: 3px solid var(--teal); border-radius: 0 12px 12px 0; color: #46506f; background: #effbf8; font-size: 13px; line-height: 1.55; }
+    .lesson-principle strong { display: block; margin-bottom: 4px; color: var(--teal); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; }
     .sentence-patterns { grid-column: auto; }
     .pattern-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
     .pattern-card { padding: 14px; border-radius: 13px; background: linear-gradient(135deg, #f7f3ff, #fff); }
@@ -449,11 +457,11 @@
   <main class="page-shell">
     <section class="hero" aria-labelledby="page-title">
       <div class="hero-eyebrow">✦ Think 2e · classroom studio</div>
-      <h1 id="page-title">U1–U2<br /><em>一起学，敢开口。</em></h1>
-      <p class="hero-subtitle">一份可以直接带进课堂、也能带回家巩固的互动式教案：6 节课、每课 45 分钟，把输入、操练、真实表达和延迟复习连成一条清晰的学习路线。</p>
+      <h1 id="page-title">U1–U12<br /><em>一起学，敢开口。</em></h1>
+      <p class="hero-subtitle">一份可以直接带进课堂、也能带回家巩固的互动式教案：12 个单元、每单元 3 节课、每课 45 分钟，把输入、操练、真实表达和延迟复习连成一条清晰的学习路线。</p>
       <div class="hero-stats" aria-label="course statistics">
-        <span class="hero-stat">2 Units</span>
-        <span class="hero-stat">6 Lessons</span>
+        <span class="hero-stat">12 Units</span>
+        <span class="hero-stat">36 Lessons</span>
         <span class="hero-stat">45 min / lesson</span>
         <span class="hero-stat">Speak · Read · Write</span>
       </div>
@@ -465,6 +473,16 @@
         <button class="filter-pill active" type="button" data-unit="all" aria-pressed="true">全部</button>
         <button class="filter-pill" type="button" data-unit="U1" aria-pressed="false">UNIT 1 · All together</button>
         <button class="filter-pill" type="button" data-unit="U2" aria-pressed="false">UNIT 2 · I’m excited</button>
+        <button class="filter-pill" type="button" data-unit="U3" aria-pressed="false">UNIT 3 · Family time</button>
+        <button class="filter-pill" type="button" data-unit="U4" aria-pressed="false">UNIT 4 · City life</button>
+        <button class="filter-pill" type="button" data-unit="U5" aria-pressed="false">UNIT 5 · Free time</button>
+        <button class="filter-pill" type="button" data-unit="U6" aria-pressed="false">UNIT 6 · Best friends</button>
+        <button class="filter-pill" type="button" data-unit="U7" aria-pressed="false">UNIT 7 · Living for sport</button>
+        <button class="filter-pill" type="button" data-unit="U8" aria-pressed="false">UNIT 8 · Feel the rhythm</button>
+        <button class="filter-pill" type="button" data-unit="U9" aria-pressed="false">UNIT 9 · Who’s hungry?</button>
+        <button class="filter-pill" type="button" data-unit="U10" aria-pressed="false">UNIT 10 · Big successes</button>
+        <button class="filter-pill" type="button" data-unit="U11" aria-pressed="false">UNIT 11 · The animal world</button>
+        <button class="filter-pill" type="button" data-unit="U12" aria-pressed="false">UNIT 12 · Moving about</button>
       </div>
       <span class="toolbar-divider" aria-hidden="true"></span>
       <div class="select-wrap">
@@ -607,7 +625,7 @@
       </article>
     </section>
 
-    <footer>Think 2e · U1–U2 classroom courseware · designed for a bright, brave classroom</footer>
+    <footer>Think 2e · U1–U12 classroom courseware · designed for a bright, brave classroom</footer>
   </main>
 
   <script>
@@ -638,6 +656,7 @@
           ['4′', 'Exit ticket', '完成：They ___ from Spain. 并口头造一个 Why 问句。']
         ],
         note: '先说意思，再纠正拼写；让完整句先站稳。',
+        principle: '介绍人物时，地点、身份和年龄都在完成同一个任务：补充说明主语是谁或是什么；be 负责把主语和这类说明连起来。',
       },
       {
         unit: 'U1', unitName: 'All together', lesson: 'Lesson 2', title: 'Music connects us', subtitle: '从音乐人物档案读信息，把语法放进真实对话。',
@@ -665,6 +684,7 @@
           ['4′', 'Exit', '改正一句 subject + to be 句子，并说出理由。']
         ],
         note: '阅读时不要求每个词都懂；先扫名字、国家、年龄、职业，再回到证据。',
+        principle: '先判断句子是在说明人物，还是在讲动作；说明人物时用 be 把主语和职业、国家、特点连起来。',
       },
       {
         unit: 'U1', unitName: 'All together', lesson: 'Lesson 3', title: 'Tell your story', subtitle: '画一面属于自己的 flag，把个人信息说出来。',
@@ -692,6 +712,7 @@
           ['2′', 'Self-check', '勾选 questions、am / is / are、nationality。']
         ],
         note: '展示时让听众记录一个国家和一个形容词，听众也有任务，注意力会更集中。',
+        principle: '个人介绍的每一句都先找“谁/什么”，再决定后面是在补充地点、身份、状态还是喜好；信息换了，主干不换。',
       },
       {
         unit: 'U2', unitName: 'I’m excited', lesson: 'Lesson 4', title: 'Feelings first', subtitle: '学会说情绪，也学会让新同学感到被欢迎。',
@@ -719,6 +740,7 @@
           ['4′', 'Exit', '补全两句 to be，并说一句友善的话。']
         ],
         note: '先把情绪词和真实场景连起来，再进入语法；价值观部分强调帮助，不做说教。',
+        principle: '否定不是另一个句型：仍然是主语 + be + 主语说明，只是在 be 后面加 not，表示这项说明不成立。',
       },
       {
         unit: 'U2', unitName: 'I’m excited', lesson: 'Lesson 5', title: 'Ask and answer', subtitle: '把 Are you…?、短回答和喜欢的对象连成一条对话线。',
@@ -746,6 +768,7 @@
           ['4′', 'Exit', '修复一个问句和一个 pronoun 句子。']
         ],
         note: '提醒孩子：Yes, she is. 不能缩写成 Yes, she’s.；先让主语—动词—宾语顺序稳定。',
+        principle: 'be 句提问时把 be 移到主语前，动作句则由 like 和宾语组成；先判断句子是哪条枝，再决定问法和代词。',
       },
       {
         unit: 'U2', unitName: 'I’m excited', lesson: 'Lesson 6', title: 'Read, write, care', subtitle: '读生日对话、写短信，并把 patience 带回真实生活。',
@@ -773,12 +796,863 @@
           ['3′', 'Reflect', '选择 wait、ask why 或 help 作为 patience 策略。']
         ],
         note: '文化讨论不做“哪个更好”的排名，重点是描述、提问和尊重差异。',
+        principle: '短信把“地点、情绪、原因和反问”组织成一条沟通链：先说明自己，再把问题交回对方，语言因此变成真实交流。',
+      },
+      {
+        unit: 'U3', unitName: 'Family time', lesson: 'Lesson 7', title: 'My family tree', subtitle: '从家庭成员开始，学会表达“谁的”以及彼此的关系。',
+        tags: ['Family', 'Possessive ’s', 'Pronunciation'],
+        keyWords: ['family', 'mother', 'father', 'sister', 'brother', 'parents', 'children', 'whose'],
+        keySentences: ['This is my sister.', 'This is Anna’s family.'],
+        motherSentence: 'This is Anna’s family.',
+        motherBranches: [
+          ['换人物', 'This is Ben’s family.', '名字 + ’s 表示“谁的”'],
+          ['换关系', 'Anna’s sister is friendly.', '所有者 + ’s + 家庭成员'],
+          ['换成复数', 'These are Anna’s parents.', 'these + are；parents 是复数']
+        ],
+        principle: '英语里要表达“谁的”，先找到拥有者，再在拥有者后面加 ’s；它把“人”和“属于这个人的东西”连成一个所属关系。',
+        transfer: '画自己的 family tree，用 4 句介绍“谁是谁的家人”。',
+        check: '易错检查：Anna family ✗ → Anna’s family ✓；注意 ’s 不是 is 的缩写。',
+        focus: 'family members · possessive ’s · my / your / his / her · this / that / these / those',
+        output: '完成一张 family tree，并向同伴介绍 4 位家人。',
+        goals: ['认读家庭成员词汇并说清关系。', '用 ’s 表达所属关系。', '根据距离和数量选择 this / that / these / those。'],
+        language: 'This is my sister.  ·  These are my parents.  ·  Whose family is this?',
+        flow: [
+          ['5′', 'Family warm-up', '用照片或简笔画猜 mother / father / sister 等家庭词。'],
+          ['8′', 'Relationship map', '把人物卡片连成 family tree，说出关系。'],
+          ['10′', 'Notice ’s', '比较 Anna’s family 与 Anna family，发现“谁的”标记。'],
+          ['10′', 'Pronunciation', '跟读 this / that / these / those，注意单复数和距离。'],
+          ['8′', 'Family detective', '根据线索找出 whose family，再用完整句回答。'],
+          ['4′', 'Exit ticket', '完成：These ___ my parents. / This is ___ brother.']
+        ],
+        note: '把 ’s 先作为“所属关系”的一个整体记忆，暂不让孩子同时处理太多缩写规则。'
+      },
+      {
+        unit: 'U3', unitName: 'Family time', lesson: 'Lesson 8', title: 'A room with a story', subtitle: '走进 Ellie 的房间，用物品和方位描述一个真实空间。',
+        tags: ['Rooms', 'Furniture', 'Possessive adjectives'],
+        keyWords: ['bedroom', 'kitchen', 'living room', 'bed', 'sofa', 'fridge', 'shower', 'garden'],
+        keySentences: ['This is my bedroom.', 'Her bed is next to the window.'],
+        motherSentence: 'This is my bedroom.',
+        motherBranches: [
+          ['换房间', 'This is our living room.', 'my → our；bedroom → living room'],
+          ['换人物', 'This is her bedroom.', 'my → her，跟着所属者变化'],
+          ['换远近/数量', 'Those are their chairs.', 'those + are；their 表示“他们的”']
+        ],
+        principle: 'my、your、his、her、our、their 不只是“背一组词”，它们都在句子里回答同一个问题：这个东西属于谁；所属者变，前面的词也跟着变。',
+        transfer: '用 5 句介绍自己最喜欢的房间，至少使用两个 possessive adjectives。',
+        check: '易错检查：She bedroom ✗ → her bedroom ✓；this 后面接单数，these 后面接复数。',
+        focus: 'house and furniture · possessive adjectives · demonstratives · describing a room',
+        output: '完成“我的房间”口头导览，准确说出至少 5 件物品。',
+        goals: ['说出主要房间和家具词汇。', '用 my / your / his / her / our / their 表达所属。', '用 this / that / these / those 指认物品。'],
+        language: 'This is my bedroom.  ·  Her bed is here.  ·  Those are our chairs.',
+        flow: [
+          ['5′', 'Retrieve', '用 family tree 复习 my / your / his / her。'],
+          ['8′', 'Room tour', '看房间图，快速标注 bedroom、bed、sofa 等。'],
+          ['10′', 'Possessive swap', '把 my room 改成 her room、their room。'],
+          ['10′', 'Point and say', '近处/远处、一个/多个交替指认家具。'],
+          ['8′', 'Pair tour', '一人介绍房间，一人用 checklist 找 3 个准确句子。'],
+          ['4′', 'Exit ticket', '看两件家具，分别造 this / those 句。']
+        ],
+        note: '空间图要让孩子先观察“一个还是多个、近还是远”，再选择指示词，不直接让她背四个词。'
+      },
+      {
+        unit: 'U3', unitName: 'Family time', lesson: 'Lesson 9', title: 'Families in the spotlight', subtitle: '读明星家庭，写一段自己的 favourite room，让描述真正落地。',
+        tags: ['Reading', 'Writing', 'Family values'],
+        keyWords: ['actor', 'friendly', 'generous', 'helpful', 'loyal', 'patient', 'strict', 'favourite'],
+        keySentences: ['Chris Hemsworth’s family is big.', 'My favourite room is the bedroom because …'],
+        motherSentence: 'My favourite room is the bedroom.',
+        motherBranches: [
+          ['换房间', 'My favourite room is the kitchen.', '替换表语 room'],
+          ['加所属', 'My sister’s favourite room is the bedroom.', '主语也可以是“某人的……”'],
+          ['加理由', 'It is bright because …', 'be + 描述 + because 理由']
+        ],
+        principle: '描述一个家庭或房间时，先确定“谁/什么”是主语，再用 be 把它和说明连起来；如果要说“谁的”，就在拥有者后面加 ’s。',
+        transfer: '写 40–50 词 favourite room：名称、两件家具、颜色/特点和 because 理由。',
+        check: '易错检查：先找主语再选 be；room 是一个，不能写 My favourite room are …。',
+        focus: 'Film stars and their families · adjectives · favourite room writing',
+        output: '完成 favourite room 短文，并做一次同伴互读修改。',
+        goals: ['从文章中找出家庭成员和性格证据。', '用形容词描述人和房间。', '写一段有主题句、细节和理由的短文。'],
+        language: 'His family is …  ·  She is friendly and helpful.  ·  My favourite room is … because …',
+        flow: [
+          ['5′', 'Word charades', '用动作猜 friendly / helpful / patient 等形容词。'],
+          ['10′', 'Read for names', '先扫 Chris、Emma、家庭成员，再回读细节。'],
+          ['8′', 'Evidence hunt', '用文章证据给人物贴 personality labels。'],
+          ['12′', 'Plan and write', '用 room card 规划主题句、家具、特点、理由。'],
+          ['7′', 'Peer edit', '同伴只检查“所属关系 + be + 句号”。'],
+          ['3′', 'Share', '读出最喜欢的一句，并说它描述了什么。']
+        ],
+        note: '写作反馈聚焦本单元两个支点：所属关系和主系表结构；不要一次改完所有语言问题。'
+      },
+      {
+        unit: 'U4', unitName: 'City life', lesson: 'Lesson 10', title: 'What is in the city?', subtitle: '用城市地图发现 there is / there are：不是在说“它是谁”，而是在说“那里有什么”。',
+        tags: ['City places', 'There is / are', 'Some / any'],
+        keyWords: ['bank', 'chemist', 'library', 'museum', 'park', 'post office', 'restaurant', 'station'],
+        keySentences: ['There is a park near the museum.', 'There are some shops in the city.'],
+        motherSentence: 'There is a park near the museum.',
+        motherBranches: [
+          ['换数量', 'There are two parks near the museum.', '一个 → is；多个 → are'],
+          ['换地点', 'There is a library next to the bank.', '替换存在的地点'],
+          ['改成问句', 'Are there any shops?', 'be 提到句首；any 用于问句']
+        ],
+        principle: 'there is / there are 用来把“某处存在什么”放进句子：先看后面的事物是一个还是多个，再决定 is 还是 are。',
+        transfer: '给同伴一张城市地图，用 there is / there are 介绍至少 5 个地点。',
+        check: '易错检查：There are a park ✗ → There is a park ✓；先数“存在的东西”。',
+        focus: 'places in town · there is / there are · some / any · prepositions of place',
+        output: '完成一轮 city map 信息差对话。',
+        goals: ['认读城市常见地点。', '区分 there is 与 there are。', '用 some / any 和方位词补充地图信息。'],
+        language: 'There is a bank.  ·  There are some shops.  ·  Are there any museums?',
+        flow: [
+          ['5′', 'City soundscape', '听城市声音，猜可能出现的地点。'],
+          ['8′', 'Map scan', '在地图上圈 bank、library、park 等地点。'],
+          ['10′', 'Notice existence', '比较 It is a park 与 There is a park 的信息重点。'],
+          ['10′', 'Some / any', '把地图上的一个/多个地点改成肯定句和问句。'],
+          ['8′', 'Information gap', 'A、B 两张地图互问，补全各自地图。'],
+          ['4′', 'Exit ticket', '写一条 there is 和一条 there are 句子。']
+        ],
+        note: '用“地图上新增一个物品”的动作理解 there be，比先讲术语更容易形成存在感。'
+      },
+      {
+        unit: 'U4', unitName: 'City life', lesson: 'Lesson 11', title: 'Find it and buy it', subtitle: '在商店和街道上使用方位、数字、价格与礼貌指令。',
+        tags: ['Directions', 'Shopping', 'Imperatives'],
+        keyWords: ['behind', 'between', 'opposite', 'next to', 'turn', 'left', 'right', 'price'],
+        keySentences: ['Go down this street and turn left.', 'How much is it? — It’s £25.'],
+        motherSentence: 'Go down this street and turn left.',
+        motherBranches: [
+          ['换方向', 'Go down this street and turn right.', '替换 left / right'],
+          ['加顺序', 'Take the second left.', '用序数说第几个转弯'],
+          ['变成否定指令', 'Don’t turn right.', 'don’t + 动词原形']
+        ],
+        principle: '指令句把“要做的动作”直接放在句首；购物问句则先确认物品，再询问价格或数量，语言目的不同，句子骨架也不同。',
+        transfer: '设计一条从 train station 到 museum 的路线，并完成一段买东西的对话。',
+        check: '易错检查：Don’t turns left ✗ → Don’t turn left ✓；指令后用动词原形。',
+        focus: 'prepositions · directions · imperatives · numbers over 100 · shopping',
+        output: '完成“问路 + 购物”双情境角色扮演。',
+        goals: ['用 behind / between / opposite / next to 说明方位。', '听懂并给出两步以上路线。', '用数字和礼貌问句完成购物对话。'],
+        language: 'Turn left.  ·  Take the second right.  ·  How much is it?  ·  Can I have …, please?',
+        flow: [
+          ['5′', 'Direction mime', '全班用身体做 left / right / straight。'],
+          ['8′', 'Preposition puzzle', '移动小棋子，口头说 behind / between / opposite。'],
+          ['10′', 'Listen and trace', '听路线，在地图上用笔走一遍。'],
+          ['10′', 'Shop language', '读商品卡、价格卡，练习数字和礼貌请求。'],
+          ['8′', 'Role-play', '一组问路，一组在 shop 里购物，交换角色。'],
+          ['4′', 'Exit ticket', '写一条肯定指令和一条 don’t 指令。']
+        ],
+        note: '把数字放回真实价格中练习，注意 100 以上数字中的 and；礼貌是功能目标的一部分。'
+      },
+      {
+        unit: 'U4', unitName: 'City life', lesson: 'Lesson 12', title: 'Build a great city guide', subtitle: '读城市宣传册，写一张让别人真的想去的 town / city brochure。',
+        tags: ['Reading', 'Writing', 'Culture'],
+        keyWords: ['city', 'visit', 'famous', 'beautiful', 'palace', 'temple', 'park', 'brochure'],
+        keySentences: ['There are many beautiful places to visit.', 'Go to the park opposite the museum.'],
+        motherSentence: 'There are many beautiful places to visit.',
+        motherBranches: [
+          ['换数量', 'There is a famous museum to visit.', 'many places → a museum'],
+          ['加方位', 'There is a park opposite the museum.', '存在句 + 地点关系'],
+          ['加建议', 'Visit the palace and take the second left.', '把信息变成路线建议']
+        ],
+        principle: '城市介绍不是把地点词堆在一起，而是用“有什么 + 在哪里 + 为什么值得去 + 怎么到达”组织信息，让听者能据此行动。',
+        transfer: '写 35–50 词 city brochure：至少 3 个地点、1 个方位、1 条路线和 1 个推荐理由。',
+        check: '易错检查：宣传册每句话都要有清楚主语或指令动作，不能只写单词清单。',
+        focus: 'Great cities to visit · parks around the world · brochure writing',
+        output: '完成一张城市宣传册并做 45 秒导览。',
+        goals: ['从 brochure 中提取地点、特色和路线信息。', '综合 there be、方位词和祈使句。', '写出结构清晰、可执行的城市介绍。'],
+        language: 'There is / are …  ·  It is opposite …  ·  Go down …  ·  Visit … because …',
+        flow: [
+          ['5′', 'Map retrieve', '快速说出 U4 地点词和两个方位词。'],
+          ['10′', 'Brochure read', '读 Istanbul / Nara 信息，找“景点—特色—路线”。'],
+          ['8′', 'Culture lens', '比较不同城市公园的功能，练习尊重表达。'],
+          ['12′', 'Brochure draft', '用模板写标题、景点、位置、路线和推荐。'],
+          ['7′', 'Gallery walk', '同伴贴一张“我最想去”的便利贴并说明原因。'],
+          ['3′', 'Unit check', '口头完成：There is … / There are … / Go …。']
+        ],
+        note: '最终作品要服务“游客能不能看懂并行动”，这会自然促使孩子检查 there is/are 和指令句。'
+      },
+      {
+        unit: 'U5', unitName: 'Free time', lesson: 'Lesson 13', title: 'What do you do?', subtitle: '从 Robotics Club 进入现在时：把习惯性动作说成稳定的规律。',
+        tags: ['Free time', 'Present simple', 'Third person'],
+        keyWords: ['robotics', 'club', 'make', 'play', 'watch', 'read', 'meet', 'competition'],
+        keySentences: ['I make robots at the club.', 'She makes robots every week.'],
+        motherSentence: 'She makes robots every week.',
+        motherBranches: [
+          ['换主语', 'I make robots every week.', 'I / you / we / they 用动词原形'],
+          ['换动作', 'She plays games every week.', '第三人称单数加 -s / -es'],
+          ['换频率', 'She often makes robots.', '习惯动作 + 频率信息']
+        ],
+        principle: '现在一般时描述“经常发生、稳定存在的习惯”；主语是 he / she / it 时，动作动词要在词尾留下第三人称单数标记。',
+        transfer: '用 4 句介绍一个人的 weekly routine，至少有两句 he / she + 动词。',
+        check: '易错检查：She make robots ✗ → She makes robots ✓；先看主语是不是一个人。',
+        focus: 'free-time activities · present simple positive · -s / -es / -ies',
+        output: '完成 Robotics Club routine 口头介绍。',
+        goals: ['说出常见 free-time activities。', '理解一般现在时表示习惯。', '准确读写第三人称单数形式。'],
+        language: 'I play …  ·  He plays …  ·  She watches …  ·  They meet …',
+        flow: [
+          ['5′', 'Action charades', '用动作猜 play、watch、read、make 等活动。'],
+          ['8′', 'Routine sort', '把一次性动作和每周习惯分开。'],
+          ['10′', 'Notice the ending', '比较 I make / She makes，归纳 -s / -es / -ies。'],
+          ['10′', 'Robotics read', '从 newsletter 找活动、时间和 competition 信息。'],
+          ['8′', 'Routine interview', '互问每周活动，再转述同伴的 routine。'],
+          ['4′', 'Exit ticket', '写 I … 与 She … 各一句，圈出动词词尾。']
+        ],
+        note: '不要把 -s 只讲成拼写附加物，要让孩子先感知“主语变成一个人后，动作形式也留下标记”。'
+      },
+      {
+        unit: 'U5', unitName: 'Free time', lesson: 'Lesson 14', title: 'How often?', subtitle: '用频率、副词、否定和问句，把“做不做、多久做一次”问清楚。',
+        tags: ['Adverbs of frequency', 'Do / does', 'Questions'],
+        keyWords: ['always', 'often', 'sometimes', 'never', 'usually', 'do', 'does', 'tech break'],
+        keySentences: ['I often use my tablet.', 'Does he play games? — No, he doesn’t.'],
+        motherSentence: 'I often use my tablet.',
+        motherBranches: [
+          ['换频率', 'I never use my tablet.', 'always / often / sometimes / never'],
+          ['换主语', 'She often uses her tablet.', 'she → uses；副词通常在实义动词前'],
+          ['变问句', 'Do you often use your tablet?', 'do / does + 主语 + 动词原形']
+        ],
+        principle: '当句子里有“做某事”的动作动词时，否定和提问需要 do / does 来帮忙；does 已经带了单数标记，后面的动作要回到原形。',
+        transfer: '做一份 tech habits survey，问 4 个人并总结最高频和最低频活动。',
+        check: '易错检查：Does she plays? ✗ → Does she play? ✓；does 负责标记，动词不再加 -s。',
+        focus: 'adverbs of frequency · present simple negative and questions · gadgets',
+        output: '完成全班 tech habits survey，并口头报告一条发现。',
+        goals: ['把频率词放到合适的位置。', '用 don’t / doesn’t 表达否定。', '用 do / does 组成一般现在时问句。'],
+        language: 'How often do you …?  ·  I often …  ·  He doesn’t …  ·  Does she …?',
+        flow: [
+          ['5′', 'Frequency line', '从 never 到 always 站位，边走边说例句。'],
+          ['8′', 'Gadget match', '把 e-reader、tablet、VR headset 与活动配对。'],
+          ['10′', 'Notice helpers', '比较 She plays / Does she play / She doesn’t play。'],
+          ['10′', 'Survey rehearsal', '先在小组内练习 How often do you …?'],
+          ['8′', 'Class survey', '记录 4 位同伴，整理 always / never 的数据。'],
+          ['4′', 'Exit ticket', '修复一句 does 问句，并解释动词为什么用原形。']
+        ],
+        note: '把 do / does 讲成“动作句的提问助手”，让孩子看见它承担了什么工作，而不是只记位置。'
+      },
+      {
+        unit: 'U5', unitName: 'Free time', lesson: 'Lesson 15', title: 'Better together, better balanced', subtitle: '读 newsletter 和 tech-break quiz，写一份真实的 Days in your life。',
+        tags: ['Reading', 'Writing', 'Life competencies'],
+        keyWords: ['newsletter', 'break', 'screen', 'balance', 'supportive', 'together', 'alone', 'routine'],
+        keySentences: ['Our club meets on Monday.', 'I sometimes take a tech break after school.'],
+        motherSentence: 'I sometimes take a tech break after school.',
+        motherBranches: [
+          ['换频率', 'I always take a tech break …', '替换 adverb of frequency'],
+          ['换主语', 'She sometimes takes a tech break …', 'she → takes'],
+          ['变否定', 'I don’t take a tech break at night.', 'do + not + 动词原形']
+        ],
+        principle: '写日常生活时，先用时间线确定“谁在什么时候做什么”，再用频率词补充规律；频率词是动作规律的说明，不是孤零零的词。',
+        transfer: '写 50–70 词 Days in your life，包含至少 3 个时间点、3 个活动和 2 个频率词。',
+        check: '易错检查：先检查主语，再检查第三人称 -s，最后检查频率副词位置。',
+        focus: 'Robotics Club newsletter · tech break quiz · Days in your life',
+        output: '完成一页个人日常时间表和短文。',
+        goals: ['从 newsletter 中提取活动与时间。', '根据 quiz 反思自己的屏幕习惯。', '写出有时间顺序、频率和动作的日常介绍。'],
+        language: 'On Monday …  ·  I usually …  ·  My club meets …  ·  I don’t …',
+        flow: [
+          ['5′', 'Routine recall', '用动作和时间词复述一条 daily routine。'],
+          ['10′', 'Read the club', '找出 Robotics Club 的活动、时间和频率。'],
+          ['8′', 'Tech break quiz', '完成选择并讨论“怎样算平衡”。'],
+          ['12′', 'Plan and write', '画 weekly timeline，再写 Days in your life。'],
+          ['7′', 'Supportive feedback', '同伴用两句具体话给建议，不只说 good。'],
+          ['3′', 'Reflect', '写一个下周可以尝试的 tech-balance 小行动。']
+        ],
+        note: '生活能力内容落在可执行的小行动上；写作评价优先检查“时间—动作—频率”是否清楚。'
+      },
+      {
+        unit: 'U6', unitName: 'Best friends', lesson: 'Lesson 16', title: 'A real friend helps', subtitle: '从 friendship story 进入 have / has got，用具体细节描述朋友。',
+        tags: ['Body parts', 'Have / has got', 'Friendship'],
+        keyWords: ['friend', 'help', 'lunch', 'money', 'body', 'face', 'eyes', 'hair'],
+        keySentences: ['Julia has got brown eyes.', 'A real friend has got a kind heart.'],
+        motherSentence: 'Julia has got brown eyes.',
+        motherBranches: [
+          ['换主语', 'I have got brown eyes.', 'I / you / we / they → have got'],
+          ['换细节', 'Julia has got long hair.', '替换身体或外貌信息'],
+          ['换成复数', 'They have got kind hearts.', 'they → have；heart → hearts']
+        ],
+        principle: 'have got / has got 用来表达“某人拥有某种特征或东西”；先看拥有者是谁，再决定 have 还是 has，后面接拥有的内容。',
+        transfer: '用 4 句描述一位真实或虚构的朋友，至少包括两个外貌细节和一个品质。',
+        check: '易错检查：He have got ✗ → He has got ✓；第三人称单数用 has。',
+        focus: 'body parts · describing people · have / has got positive',
+        output: '完成一张 friend profile，做到外貌和品质各有信息。',
+        goals: ['认读身体部位和外貌词。', '用 have / has got 说拥有的特征。', '从故事中找出“帮助朋友”的证据。'],
+        language: 'I have got …  ·  She has got …  ·  He has got brown eyes.',
+        flow: [
+          ['5′', 'Body pointer', '听词指脸部或身体部位。'],
+          ['8′', 'Story prediction', '根据 Julia、Jack 和 lunch money 预测发生了什么。'],
+          ['10′', 'Read for action', '找出谁帮助了谁，以及为什么。'],
+          ['10′', 'Have got notice', '比较 I have got / She has got，给人物补外貌。'],
+          ['8′', 'Friend profile', '小组描述人物，其他人画出听到的细节。'],
+          ['4′', 'Exit ticket', '写一条 have got 和一条 has got 句子。']
+        ],
+        note: '把“朋友”从抽象评价变成可观察的帮助行为，再把外貌描述与 have got 连接。'
+      },
+      {
+        unit: 'U6', unitName: 'Best friends', lesson: 'Lesson 17', title: 'Details make a picture', subtitle: '用否定、问句和 countable / uncountable nouns 把描述说准确。',
+        tags: ['Have got questions', 'Countable nouns', 'Detail'],
+        keyWords: ['glasses', 'beard', 'moustache', 'bike', 'chair', 'pen', 'time', 'work'],
+        keySentences: ['Has he got glasses? — Yes, he has.', 'We haven’t got much time.'],
+        motherSentence: 'Has he got glasses?',
+        motherBranches: [
+          ['肯定回答', 'Yes, he has.', 'Have / has 提到句首后，短回答保留它'],
+          ['否定回答', 'No, he hasn’t.', 'has + not 的短形式'],
+          ['换成复数主语', 'Have they got bikes?', 'they → have']
+        ],
+        principle: 'have got 句子变问句时，把 have / has 放到主语前；它既是“拥有关系”的核心，也负责在问答中保持句子骨架。',
+        transfer: '玩“猜人物”游戏：只能问 Has he/she got…?，并用证据缩小答案。',
+        check: '易错检查：Has he got glasses? ✓；不能写 Has he gets glasses?。',
+        focus: 'have / has got negative and questions · countable / uncountable nouns',
+        output: '完成一轮 yes/no clues 猜人物游戏。',
+        goals: ['用 have / has got 组成问句和短回答。', '区分可数复数与不可数名词。', '用细节线索而不是凭感觉猜人物。'],
+        language: 'Have you got …?  ·  Has she got …?  ·  Yes, she has.  ·  No, she hasn’t.',
+        flow: [
+          ['5′', 'Retrieve', '用 friend profile 快速复述两条 have got 句子。'],
+          ['8′', 'Clue game', '看眼镜、胡子、头发等线索猜人物。'],
+          ['10′', 'Question flip', '把 She has got … 改成 Has she got …?'],
+          ['8′', 'Countability sort', '把 bikes / chairs / pens 与 money / time / work 分类。'],
+          ['10′', 'Guess who', '每组选择一个人物，其他组提问并记录证据。'],
+          ['4′', 'Exit ticket', '完成一个问句和一个短回答。']
+        ],
+        note: 'countable / uncountable 只服务于“能不能数、后面能不能直接加复数”，先从具体物品经验进入。'
+      },
+      {
+        unit: 'U6', unitName: 'Best friends', lesson: 'Lesson 18', title: 'Write about a friend', subtitle: '听 friendship symbols，写一段有外貌、有品质、有行动的朋友介绍。',
+        tags: ['Listening', 'Writing', 'Supportive'],
+        keyWords: ['symbol', 'rose', 'heart', 'dolphin', 'kind', 'loyal', 'supportive', 'describe'],
+        keySentences: ['My best friend has got …', 'He / She is … and always helps …'],
+        motherSentence: 'My best friend has got brown eyes.',
+        motherBranches: [
+          ['加品质', 'My best friend is kind and loyal.', 'have got 描述外貌；be 描述品质'],
+          ['加习惯', 'She always helps me.', '一般现在时表达经常性帮助'],
+          ['换成否定', 'He hasn’t got glasses.', 'has got 的否定']
+        ],
+        principle: '一段好的人物介绍会把不同句型分工：have got 说“拥有的特征”，be 说“是什么样的人”，一般现在时说“经常做什么”。',
+        transfer: '写约 50 词 friend profile：外貌 2 句、品质 1 句、帮助行为 1 句。',
+        check: '易错检查：外貌用 have/has got，品质用 be，习惯行为用一般现在时。',
+        focus: 'friendship symbols · describing a friend · writing 50 words',
+        output: '完成一张 friend card，并向同伴介绍自己的核心证据。',
+        goals: ['听懂 friendship symbols 的含义。', '综合使用 be、have got 和一般现在时。', '写出具体而不空泛的朋友介绍。'],
+        language: 'My best friend has got …  ·  She is …  ·  She always helps me.',
+        flow: [
+          ['5′', 'Symbol guess', '看 yellow rose、heart、dolphin，猜 friendship meaning。'],
+          ['10′', 'Listen for clues', '记录人物、象征物和原因。'],
+          ['8′', 'Sentence jobs', '给句子贴标签：外貌 / 品质 / 经常行为。'],
+          ['12′', 'Write', '用 friend card 模板完成约 50 词短文。'],
+          ['7′', 'Read aloud', '同伴听后画出人物，并回指听到的证据。'],
+          ['3′', 'Reflect', '写出自己最想保留的一种朋友品质。']
+        ],
+        note: '先让孩子区分三个句型各自“负责什么”，再要求综合使用，避免所有描述都套 be。'
+      },
+      {
+        unit: 'U7', unitName: 'Living for sport', lesson: 'Lesson 19', title: 'What can you do?', subtitle: '从 Sport wonders! 认识不同运动能力，用 can 说出“能做什么”。',
+        tags: ['Sport', 'Can / can’t', 'Abilities'],
+        keyWords: ['kick', 'pull', 'stand', 'run', 'turn', 'swim', 'climb', 'snowboard'],
+        keySentences: ['She can snowboard very well.', 'He can’t climb without his hands.'],
+        motherSentence: 'She can snowboard very well.',
+        motherBranches: [
+          ['换能力', 'She can swim very well.', 'can + 动词原形'],
+          ['换主语', 'They can snowboard very well.', 'can 不随主语变化'],
+          ['变否定', 'She can’t snowboard today.', 'can + not 表示不能']
+        ],
+        principle: 'can 先表达“有能力/可以做”，后面永远接动作原形；它不像 be 或一般现在时那样随主语变化。',
+        transfer: '做一张 sport talent card：写 3 条自己或人物能/不能做的事。',
+        check: '易错检查：She can swims ✗ → She can swim ✓；can 后面的动作不加 -s。',
+        focus: 'sport actions · can / can’t for ability · Sport wonders!',
+        output: '完成 sport talent show：介绍一项能力并给出证据。',
+        goals: ['理解 kick、pull、stand、run、turn、swim 等动作。', '用 can / can’t 表达能力。', '从文章中找到运动员能力的证据。'],
+        language: 'I can …  ·  She can …  ·  He can’t …  ·  Can you …?',
+        flow: [
+          ['5′', 'Sport mime', '用动作猜运动词，建立词义而不是先翻译。'],
+          ['8′', 'Predict', '看 Sport wonders! 图片，猜人物会什么。'],
+          ['10′', 'Read for proof', '为每位运动员找一条 can / can’t 证据。'],
+          ['10′', 'Can notice', '比较 can swim、can’t climb，发现后面用原形。'],
+          ['8′', 'Talent cards', '互问 Can you …?，用 yes/no 和完整句回答。'],
+          ['4′', 'Exit ticket', '写一条 can 和一条 can’t 句子。']
+        ],
+        note: '先把能力放进运动动作里，孩子理解“can 管一类能力”，再强调动词原形。'
+      },
+      {
+        unit: 'U7', unitName: 'Living for sport', lesson: 'Lesson 20', title: 'When is it?', subtitle: '用时间、月份、季节和日期安排一次运动活动。',
+        tags: ['Time', 'Dates', 'Prepositions'],
+        keyWords: ['morning', 'afternoon', 'evening', 'Monday', 'January', 'spring', 'first', 'twenty-third'],
+        keySentences: ['The match is on Saturday at three o’clock.', 'My birthday is in July.'],
+        motherSentence: 'The match is on Saturday at three o’clock.',
+        motherBranches: [
+          ['换星期', 'The match is on Sunday at three o’clock.', '具体某天用 on'],
+          ['换时间', 'The match is at five o’clock.', '钟点用 at'],
+          ['换月份/季节', 'The match is in July.', '月份、季节用 in']
+        ],
+        principle: '时间信息也有层级：at 指一个时刻，on 指具体某天，in 指较大的时间范围；先判断时间“有多大”，再选介词。',
+        transfer: '制作一张 weekend sport timetable，包含日期、星期、时间和季节信息。',
+        check: '易错检查：at Saturday ✗ → on Saturday；in three o’clock ✗ → at three o’clock。',
+        focus: 'telling the time · months and seasons · prepositions of time · ordinal numbers',
+        output: '完成 sport event timetable，并向同伴确认安排。',
+        goals: ['准确说出整点和常见日期。', '用 at / on / in 表达不同层级的时间。', '读写序数词日期。'],
+        language: 'at three o’clock  ·  on Saturday  ·  in July  ·  on the twenty-third of …',
+        flow: [
+          ['5′', 'Clock race', '看钟面快速说时间。'],
+          ['8′', 'Calendar scan', '找月份、季节、星期和日期。'],
+          ['10′', 'Time ladder', '把 at / on / in 放到从小到大的时间格子。'],
+          ['10′', 'Listen and mark', '听运动安排，在日历和时钟上标注。'],
+          ['8′', 'Schedule gap', '两人互问缺失的 sport event 信息。'],
+          ['4′', 'Exit ticket', '写出一个 at、on、in 时间短语。']
+        ],
+        note: '用“时间大小”做理解支点，避免把 at/on/in 变成三列无意义的搭配表。'
+      },
+      {
+        unit: 'U7', unitName: 'Living for sport', lesson: 'Lesson 21', title: 'Keep the game going', subtitle: '读运动成就，练习提出建议，并用积极语言支持队友。',
+        tags: ['Reading', 'Suggestions', 'Speaking'],
+        keyWords: ['athlete', 'champion', 'practice', 'positive', 'arrangement', 'match', 'suggestion', 'team'],
+        keySentences: ['Let’s play tennis.', 'How about meeting at four?'],
+        motherSentence: 'Let’s play tennis.',
+        motherBranches: [
+          ['换活动', 'Let’s go swimming.', 'Let’s + 动词原形'],
+          ['换成 -ing', 'How about playing tennis?', 'How about + -ing'],
+          ['给理由/时间', 'Why don’t we meet at four?', 'Why don’t + 主语 + 动词原形']
+        ],
+        principle: '提出建议的共同目的，是把“我们接下来做什么”说清楚；Let’s、How about 和 Why don’t 都是在发出行动邀请，但后面的结构不同。',
+        transfer: '和同伴安排一次运动：至少提出两种建议，最后确定时间和活动。',
+        check: '易错检查：How about play? ✗ → How about playing?；Let’s playing? ✗ → Let’s play。',
+        focus: 'amazing last four minutes · making arrangements · Let’s / How about / Why don’t',
+        output: '完成“周末运动安排”对话，并给队友一句积极反馈。',
+        goals: ['从 achiever 文章中提取成就与时间线。', '用三种建议句型安排活动。', '用积极、支持性的语言回应同伴。'],
+        language: 'Let’s …  ·  How about + -ing?  ·  Why don’t we …?  ·  That’s a great idea!',
+        flow: [
+          ['5′', 'Sport retrieve', '用 can 句子复习动作和能力。'],
+          ['10′', 'Achievement read', '找运动员做了什么、什么时候、遇到什么困难。'],
+          ['8′', 'Suggestion sort', '给三种建议句型配正确的后续形式。'],
+          ['10′', 'Phone call model', '听电话对话，记录活动、时间和最终决定。'],
+          ['9′', 'Arrange a match', '两人提出、回应、修改建议，完成安排。'],
+          ['3′', 'Positive close', '每人给队友一句具体鼓励。']
+        ],
+        note: '把 suggestion 练习放进真实决策：有冲突、有调整，孩子才会真正需要听懂对方。'
+      },
+      {
+        unit: 'U8', unitName: 'Feel the rhythm', lesson: 'Lesson 22', title: 'What is happening now?', subtitle: '跟着 Lucy 的音乐之旅，用现在进行时描述此刻正在发生的画面。',
+        tags: ['Present continuous', 'Scene description', 'Music'],
+        keyWords: ['forest', 'train', 'wait', 'eat', 'dance', 'wear', 'tired', 'happy'],
+        keySentences: ['Lucy is waiting for a train.', 'They are eating hot dogs in the forest.'],
+        motherSentence: 'Lucy is waiting for a train.',
+        motherBranches: [
+          ['换主语', 'They are waiting for a train.', 'be 随主语变'],
+          ['换动作', 'Lucy is eating a hot dog.', 'V-ing 表示正在做'],
+          ['变问句', 'Is Lucy waiting for a train?', 'be 提到句首']
+        ],
+        principle: '现在进行时把“此刻正在发生的动作”看成一幅动态画面：be 负责连接主语和正在进行的动作，动词用 -ing 留下“正在发生”的标记。',
+        transfer: '看一张音乐现场图，用 5 句现在进行时描述人物、动作和地点。',
+        check: '易错检查：Lucy waiting ✗ → Lucy is waiting ✓；正在发生要有 be + -ing。',
+        focus: 'microblogs · present continuous positive / negative / questions · clothes',
+        output: '完成“音乐现场”口头画面描述。',
+        goals: ['从 microblogs 中按时间顺序提取活动。', '用 be + V-ing 描述此刻动作。', '把动作、地点和衣服信息组合起来。'],
+        language: 'I’m waiting …  ·  She’s wearing …  ·  They’re eating …  ·  Are you listening?',
+        flow: [
+          ['5′', 'Freeze frame', '教师做一个动作，孩子说此刻看到什么。'],
+          ['8′', 'Blog prediction', '根据 train、forest、concert 图片预测 Lucy 的行程。'],
+          ['10′', 'Read the timeline', '按 leaving、waiting、eating、watching 排顺序。'],
+          ['10′', 'Grammar lens', '用颜色标出 be 和 -ing，比较现在时与现在进行时。'],
+          ['8′', 'Scene describe', '两人看不同图片，互相描述并找差异。'],
+          ['4′', 'Exit ticket', '写一条正在发生的肯定句和问句。']
+        ],
+        note: '用“暂停的画面”解释 now，比直接说“进行时”更能让孩子感到动作正在流动。'
+      },
+      {
+        unit: 'U8', unitName: 'Feel the rhythm', lesson: 'Lesson 23', title: 'Music makes a mood', subtitle: '谈音乐喜好和穿着，把 like / don’t like + -ing 放回真实选择。',
+        tags: ['Likes and dislikes', 'V-ing', 'Clothes'],
+        keyWords: ['coat', 'dress', 'jeans', 'shirt', 'shoes', 'skirt', 'trainers', 'trousers'],
+        keySentences: ['I like listening to music.', 'He doesn’t like wearing trousers.'],
+        motherSentence: 'I like listening to music.',
+        motherBranches: [
+          ['换活动', 'I like dancing.', 'like + V-ing 表示喜欢做某事'],
+          ['换人物', 'She likes listening to music.', 'she → likes'],
+          ['变否定', 'I don’t like wearing a coat.', 'don’t / doesn’t + like + V-ing']
+        ],
+        principle: 'like 后面接一个活动时，活动要变成“事情的名字”——用动词 -ing；这样“我喜欢什么”与“我正在做什么”都能围绕动作表达，但功能不同。',
+        transfer: '做一份 class music survey：喜欢/不喜欢的音乐活动和穿着各至少问两人。',
+        check: '易错检查：I like listen ✗ → I like listening ✓；like 后面说活动用 -ing。',
+        focus: 'clothes · like / don’t like + -ing · interview teenage DJ',
+        output: '完成“我的音乐风格”小档案。',
+        goals: ['认读常见衣物词。', '用 like / don’t like + -ing 表达喜好。', '区分“正在做”和“喜欢做”的 -ing 作用。'],
+        language: 'I like …-ing.  ·  I don’t like …-ing.  ·  She likes …-ing.  ·  He is wearing …',
+        flow: [
+          ['5′', 'Clothes relay', '按类别接龙说 clothes，配合动作。'],
+          ['8′', 'DJ warm-up', '根据 teenage DJ 画像预测喜欢/不喜欢的活动。'],
+          ['10′', 'Function contrast', '比较 He is dancing 与 He likes dancing。'],
+          ['10′', 'Interview', '用 Do you like …-ing? 采访同伴并记录。'],
+          ['8′', 'Style profile', '写三句音乐喜好和两句穿着描述。'],
+          ['4′', 'Exit ticket', '圈出句子中 -ing 的功能：now 还是 like。']
+        ],
+        note: '本课故意并列两种 -ing：一个表示“现在正在做”，一个表示“喜欢这项活动”，让孩子比较功能而非死记形式。'
+      },
+      {
+        unit: 'U8', unitName: 'Feel the rhythm', lesson: 'Lesson 24', title: 'Microblog the moment', subtitle: '听世界各地音乐人，写一条有画面、有动作、有情绪的 microblog。',
+        tags: ['Listening', 'Writing', 'Culture'],
+        keyWords: ['microblog', 'musician', 'rhythm', 'forest', 'concert', 'wearing', 'amazing', 'midnight'],
+        keySentences: ['People are dancing and singing.', 'I’m happy because the music is amazing.'],
+        motherSentence: 'People are dancing in the forest.',
+        motherBranches: [
+          ['换地点', 'People are dancing at a concert.', '替换地点短语'],
+          ['换动作', 'People are singing and clapping.', '并列两个进行中的动作'],
+          ['加情绪', 'I’m happy because the music is amazing.', 'be + 情绪 + because 理由']
+        ],
+        principle: '描述一幅现场画面时，先说谁，再说正在做什么，再补地点、穿着和感受；信息按观察顺序排列，听者就能“看见”场景。',
+        transfer: '写 35–50 词 microblog：地点、人物、两项动作、衣物和情绪。',
+        check: '易错检查：画面描述至少有 be + -ing；情绪说明回到主系表结构。',
+        focus: '#Musicintheforest · radio musicians · microblog writing · dances around the world',
+        output: '完成一条带标签的 scene microblog，并朗读给同伴。',
+        goals: ['听懂不同音乐人的活动与地点。', '综合现在进行时、服装词和情绪词。', '写出读者能想象的动态画面。'],
+        language: 'At the moment …  ·  People are …  ·  He is wearing …  ·  I’m … because …',
+        flow: [
+          ['5′', 'Rhythm retrieve', '用拍手节奏复习动作 -ing。'],
+          ['10′', 'Listen worldwide', '听音乐人信息，记录地点和正在做的事。'],
+          ['8′', 'Scene frame', '按 who → action → place → clothes → feeling 排信息。'],
+          ['12′', 'Write microblog', '完成带 # 标签的 35–50 词短文。'],
+          ['7′', 'Post and respond', '同伴留言一句具体观察或友善回应。'],
+          ['3′', 'Culture close', '选一个舞蹈，描述动作，不评价文化高低。']
+        ],
+        note: '写作前先搭“镜头顺序”，孩子会更自然地写出完整场景，而不是堆衣物单词。'
+      },
+      {
+        unit: 'U9', unitName: 'Who’s hungry?', lesson: 'Lesson 25', title: 'Kitchen rules', subtitle: '从 Kitchen Kids 学会食物词，也学会用 must / mustn’t 保护自己和别人。',
+        tags: ['Food', 'Must / mustn’t', 'Safety'],
+        keyWords: ['beef', 'lamb', 'burger', 'banana', 'carrot', 'tomato', 'milk', 'juice'],
+        keySentences: ['You must wash your hands.', 'You mustn’t put your hands in your mouth.'],
+        motherSentence: 'You must wash your hands.',
+        motherBranches: [
+          ['换规则', 'You must wear an apron.', 'must + 动词原形'],
+          ['变禁止', 'You mustn’t touch the hot plate.', 'mustn’t 表示不可以/禁止'],
+          ['换主语', 'We must wash our hands.', 'must 不随主语变化']
+        ],
+        principle: 'must / mustn’t 把“必须做/禁止做”的规则放在动作前；must 表示规则的力量，后面的动作保持原形。',
+        transfer: '为一个安全厨房写 5 条规则，其中至少 2 条 mustn’t。',
+        check: '易错检查：You must washes ✗ → You must wash ✓；must 后面不加 -s。',
+        focus: 'food and drinks · Kitchen Kids · must / mustn’t · safety rules',
+        output: '完成 kitchen safety poster，并进行规则说明。',
+        goals: ['认读常见食物和饮料。', '用 must / mustn’t 表达义务和禁止。', '从文本中提取具体安全规则。'],
+        language: 'You must …  ·  You mustn’t …  ·  Be careful!  ·  Wash your hands.',
+        flow: [
+          ['5′', 'Food market', '按 fruit / vegetables / drinks / meat 分类词汇。'],
+          ['8′', 'Kitchen prediction', '看厨房图片，猜哪些行为安全。'],
+          ['10′', 'Read for rules', '从 Kitchen Kids 圈出 must / mustn’t 行为。'],
+          ['10′', 'Rule transform', '把图片动作变成 must 和 mustn’t 句子。'],
+          ['8′', 'Safety poster', '小组设计三条规则并向全班解释原因。'],
+          ['4′', 'Exit ticket', '写一条必须做和一条禁止做的事。']
+        ],
+        note: '把 must 与真实安全后果连起来；孩子先判断行为，再选择必须或禁止。'
+      },
+      {
+        unit: 'U9', unitName: 'Who’s hungry?', lesson: 'Lesson 26', title: 'At the café', subtitle: '在菜单、点餐和礼貌请求中使用 can、I’d like 和 Would you like。',
+        tags: ['Restaurant', 'Permission', 'Polite requests'],
+        keyWords: ['menu', 'meal', 'bread', 'butter', 'cereal', 'egg', 'toast', 'yoghurt'],
+        keySentences: ['Can I have some toast, please?', 'I’d like the chicken salad.'],
+        motherSentence: 'I’d like the chicken salad, please.',
+        motherBranches: [
+          ['换食物', 'I’d like some toast, please.', 'I’d like + 名词'],
+          ['问许可', 'Can I have some milk, please?', 'Can I …? 礼貌请求'],
+          ['主动提供', 'Would you like some fruit?', 'Would you like …? 提供选择']
+        ],
+        principle: '在餐厅里，句子的任务是“提出需要、询问许可或提供选择”；I’d like、Can I…?、Would you like…? 都在服务这个交际目的，但说话角色不同。',
+        transfer: '两人完成 café role-play：顾客点餐，服务员确认并提供一个选择。',
+        check: '易错检查：请求食物后加 please；Can I 后面接动词原形或 have + 食物。',
+        focus: 'restaurant menu · can for permission · I’d like · Would you like',
+        output: '完成一轮自然、礼貌的点餐对话。',
+        goals: ['看懂菜单中的 meal 和食物词。', '用 can 询问许可。', '用 I’d like / Would you like 完成礼貌点餐。'],
+        language: 'Can I have …, please?  ·  I’d like …  ·  Would you like …?  ·  Here you are.',
+        flow: [
+          ['5′', 'Menu memory', '看菜单 30 秒，合上后说出食物。'],
+          ['8′', 'Meal sort', '把 breakfast、lunch、dinner 食物分类。'],
+          ['10′', 'Dialogue notice', '给顾客和服务员句子贴角色标签。'],
+          ['10′', 'Polite request drill', '用菜单卡替换 food，练 Can I / I’d like。'],
+          ['8′', 'Café role-play', '完成点餐、确认、提供选择和结账。'],
+          ['4′', 'Exit ticket', '写一句请求和一句 offer。']
+        ],
+        note: '先问“这句话是谁对谁说、想完成什么事”，再选择句型，避免把三个表达混成同义句。'
+      },
+      {
+        unit: 'U9', unitName: 'Who’s hungry?', lesson: 'Lesson 27', title: 'Plan a good meal', subtitle: '从食物习惯到周末 meal plan，练习 offer 和 ask for help。',
+        tags: ['Writing', 'Meal plan', 'Speaking'],
+        keyWords: ['healthy', 'meal', 'breakfast', 'lunch', 'dinner', 'offer', 'help', 'choice'],
+        keySentences: ['For breakfast, I’d like cereal and fruit.', 'Would you like some help?'],
+        motherSentence: 'For breakfast, I’d like cereal and fruit.',
+        motherBranches: [
+          ['换餐次', 'For lunch, I’d like a salad.', '替换 breakfast / lunch / dinner'],
+          ['换食物', 'For breakfast, I’d like toast and milk.', '并列两个食物'],
+          ['提供帮助', 'Can I help you?', '把请求变成真实合作']
+        ],
+        principle: '做 meal plan 时，先确定“哪一餐”，再选择食物，最后用礼貌句表达需要或提供帮助；语言跟着生活决策走。',
+        transfer: '写 Saturday / Sunday meal plan，至少包含三餐、六种食物和一条健康理由。',
+        check: '易错检查：先检查 meal 时间，再检查 food 选择，最后检查 I’d like / Would you like 的角色。',
+        focus: 'meal plan · cooking listening · offering and asking for help',
+        output: '完成周末 meal plan，并和同伴协商一顿共同的饭。',
+        goals: ['听懂 Cooking 情境中的食物和步骤。', '写出有三餐结构的 meal plan。', '用 offer / ask for help 的句型合作完成任务。'],
+        language: 'For …  ·  I’d like …  ·  Would you like …?  ·  Can I help you?',
+        flow: [
+          ['5′', 'Food retrieve', '用图片复习 food 与 meal。'],
+          ['10′', 'Cooking listen', '听步骤，按顺序摆放食材卡。'],
+          ['8′', 'Healthy choices', '讨论哪些选择让 meal 更平衡。'],
+          ['12′', 'Meal plan write', '完成 Saturday / Sunday meal plan。'],
+          ['7′', 'Help exchange', '一人请求，一人提供/拒绝帮助，再交换。'],
+          ['3′', 'Reflect', '选一个下次吃饭时能使用的礼貌句。']
+        ],
+        note: '写作内容不追求复杂菜名，重点是三餐结构、礼貌功能和可执行的选择。'
+      },
+      {
+        unit: 'U10', unitName: 'Big successes', lesson: 'Lesson 28', title: 'She was first', subtitle: '从 Valentina Tereshkova 的故事进入过去时 be，描述过去的身份、地点和状态。',
+        tags: ['Past was / were', 'Achievements', 'Weather'],
+        keyWords: ['success', 'astronaut', 'space', 'born', 'skydiving', 'first', 'famous', 'weather'],
+        keySentences: ['She was the first woman in space.', 'There were many stars in the sky.'],
+        motherSentence: 'She was the first woman in space.',
+        motherBranches: [
+          ['换主语', 'They were the first people in space.', 'I / he / she → was；you / we / they → were'],
+          ['换时间', 'She was in space in 1963.', '过去时间让故事定位'],
+          ['改成否定', 'She wasn’t at home.', 'was / were + not']
+        ],
+        principle: '过去时 be 把“主语”和“过去的身份、地点、状态”连起来；先判断主语，再用 was / were 标记这件事发生在过去。',
+        transfer: '用 4 句介绍一位过去的 achiever：出生地、身份、成就和当时的状态。',
+        check: '易错检查：She were ✗ → She was；They was ✗ → They were。',
+        focus: 'Valentina Tereshkova · past was / were · there was / were · weather verbs',
+        output: '完成一张 first achiever fact card。',
+        goals: ['从文章中提取出生、身份和成就信息。', '用 was / were 描述过去。', '用 there was / there were 描述过去场景。'],
+        language: 'She was …  ·  They were …  ·  There was …  ·  There were …',
+        flow: [
+          ['5′', 'Success warm-up', '看成就图片猜 astronaut、champion 等身份。'],
+          ['8′', 'Timeline predict', '根据 born、1937、1963 预测人物故事。'],
+          ['10′', 'Read for facts', '找出生地、工作、Vostok 6 和三天等信息。'],
+          ['10′', 'Past be tree', '把现在的 am/is/are 句子搬到过去，选择 was/were。'],
+          ['8′', 'Space scene', '用 there was / there were 描述一张过去的天空图。'],
+          ['4′', 'Exit ticket', '写一条 was 和一条 were 句子。']
+        ],
+        note: '把过去时理解为“时间镜头向后移动”，让 was/were 先承担时间功能，再处理形式。'
+      },
+      {
+        unit: 'U10', unitName: 'Big successes', lesson: 'Lesson 29', title: 'What happened?', subtitle: '读体育 achievers，开始用规则动词讲清过去发生的动作。',
+        tags: ['Past simple', 'Regular verbs', 'Questions'],
+        keyWords: ['climb', 'cycle', 'finish', 'play', 'reach', 'travel', 'win', 'yesterday'],
+        keySentences: ['She climbed the mountain last year.', 'Did he finish the race? — Yes, he did.'],
+        motherSentence: 'She climbed the mountain last year.',
+        motherBranches: [
+          ['换动作', 'She reached the top last year.', '规则动词加 -ed'],
+          ['变问句', 'Did she climb the mountain?', 'did + 主语 + 动词原形'],
+          ['变否定', 'She didn’t climb alone.', 'didn’t + 动词原形']
+        ],
+        principle: '过去发生的动作由过去时动词来标记；肯定句把规则动词变成 -ed，问句和否定句让 did / didn’t 负责标记时间，动作回到原形。',
+        transfer: '根据一张 achiever timeline 写 4 句过去动作，并设计两个 Did 问题。',
+        check: '易错检查：Did she climbed? ✗ → Did she climb? ✓；did 已经标记过去。',
+        focus: 'sports achievers · regular past simple · past questions and short answers',
+        output: '完成“谁做了什么”时间线问答。',
+        goals: ['从人物资料中提取过去动作。', '掌握规则动词 -ed 的基本形式。', '用 Did…? 和 did / didn’t 回答。'],
+        language: 'She climbed …  ·  Did she climb …?  ·  Yes, she did.  ·  No, she didn’t.',
+        flow: [
+          ['5′', 'Yesterday actions', '用图片说昨天做过的动作。'],
+          ['8′', 'Achiever scan', '阅读人物卡，圈出动作和过去时间。'],
+          ['10′', 'Past ending', '把 play、reach、finish 等动词变成过去式并朗读。'],
+          ['10′', 'Question flip', '把肯定句变 Did 问句，再回答。'],
+          ['8′', 'Timeline interview', '互相采访人物成就，记录证据。'],
+          ['4′', 'Exit ticket', '修复一句 did + 动词错误。']
+        ],
+        note: '始终把肯定、问句、否定放在同一条时间线上比较，孩子会看到“谁在负责过去标记”。'
+      },
+      {
+        unit: 'U10', unitName: 'Big successes', lesson: 'Lesson 30', title: 'Tell the success story', subtitle: '用 sequencing 把 prize giving 和城市雕像写成一条有顺序的故事。',
+        tags: ['Sequencing', 'Listening', 'Writing'],
+        keyWords: ['award', 'prize', 'statue', 'first', 'then', 'after that', 'finally', 'achievement'],
+        keySentences: ['First, she trained hard. Then, she won the prize.', 'There is a statue in my town.'],
+        motherSentence: 'First, she trained hard. Then, she won the prize.',
+        motherBranches: [
+          ['换动作', 'First, he practised hard. Then, he won.', '替换故事动作'],
+          ['加结果', 'After that, people made a statue.', '连接下一步结果'],
+          ['回到现在', 'There is a statue in my town.', '现在的存在与过去故事相连']
+        ],
+        principle: '讲成就故事时，语言不仅要说“发生了什么”，还要说“先后关系”；First、Then、After that、Finally 把一个个动作组织成可理解的过程。',
+        transfer: '写约 80 词 town statue 介绍：人物、成就、故事顺序和雕像现在在哪里。',
+        check: '易错检查：每个过去动作都要有明确时间位置，顺序词不能代替动词。',
+        focus: 'prize giving · sequencing · statues around the world · statue writing',
+        output: '完成一段 statue / achievement story，并口头讲述。',
+        goals: ['听懂 prize giving 中的过去信息。', '用顺序词组织成就故事。', '综合过去时与 there is / are 写城市雕像。'],
+        language: 'First …  ·  Then …  ·  After that …  ·  Finally …  ·  There is …',
+        flow: [
+          ['5′', 'Sequence mime', '用四个动作演 first / then / finally。'],
+          ['10′', 'Prize listening', '听颁奖对话，按时间顺序摆卡片。'],
+          ['8′', 'Story structure', '给句子标 beginning / event / result。'],
+          ['12′', 'Write statue text', '规划人物、成就、顺序和现在的位置。'],
+          ['7′', 'Story circle', '小组接龙讲同一个 success story。'],
+          ['3′', 'Unit check', '口头说出一个过去 be、一个过去动作和一个顺序词。']
+        ],
+        note: '顺序词是“故事的路标”，先让孩子用卡片重建事件，再要求写作。'
+      },
+      {
+        unit: 'U11', unitName: 'The animal world', lesson: 'Lesson 31', title: 'Dolphins to the rescue', subtitle: '读海豚救援故事，用不规则过去时讲述真正发生过的动作。',
+        tags: ['Animals', 'Irregular past', 'Reading'],
+        keyWords: ['dolphin', 'rescue', 'swim', 'see', 'go', 'come', 'feel', 'scared'],
+        keySentences: ['The dolphins came to help him.', 'He saw ten dolphins under the water.'],
+        motherSentence: 'The dolphins came to help him.',
+        motherBranches: [
+          ['换动作', 'The dolphins swam around him.', '不规则过去式要单独记忆'],
+          ['换人物', 'He went under the water.', 'go → went；人物可替换'],
+          ['加感受', 'He felt scared but safe.', '过去动作 + 过去感受']
+        ],
+        principle: '过去动作不只有 -ed 一种外形；有些高频动作会整体变化。判断方法仍然一样：先确定动作发生在过去，再记住它自己的过去形式。',
+        transfer: '用 5 句复述 Dolphins to the rescue，至少使用 saw、went、came、felt 中的三个。',
+        check: '易错检查：He goed ✗ → He went ✓；不规则动词不能套 -ed。',
+        focus: 'Dolphins to the rescue · irregular past verbs · animal vocabulary',
+        output: '完成海豚救援故事复述，并指出三条证据。',
+        goals: ['认读常见动物。', '从文章中找出人物、地点、危险和救援过程。', '使用高频不规则过去式复述事件。'],
+        language: 'He went …  ·  He saw …  ·  They came …  ·  He felt …',
+        flow: [
+          ['5′', 'Animal sounds', '听声音或看剪影猜动物。'],
+          ['8′', 'Story prediction', '根据 sea、swimmer、dolphins 预测故事。'],
+          ['12′', 'Read the rescue', '找 scared、under water、shark、ten dolphins 等细节。'],
+          ['8′', 'Irregular verbs', '把 go / see / come / feel 与过去形式配对。'],
+          ['8′', 'Retell with cards', '按 danger → rescue → safe 顺序复述。'],
+          ['4′', 'Exit ticket', '写两个不规则过去时并造句。']
+        ],
+        note: '不规则动词先在故事中反复出现，再做小范围归类；不把整张动词表一次性压给孩子。'
+      },
+      {
+        unit: 'U11', unitName: 'The animal world', lesson: 'Lesson 32', title: 'Could you?', subtitle: '谈过去的能力和未能做到的事，学习 could / couldn’t 以及过去问句。',
+        tags: ['Could / couldn’t', 'Past questions', 'Facing fears'],
+        keyWords: ['could', 'couldn’t', 'afraid', 'brave', 'jump', 'fly', 'run', 'remember'],
+        keySentences: ['Could you swim when you were five?', 'She couldn’t fly, but she could run fast.'],
+        motherSentence: 'She could run fast when she was five.',
+        motherBranches: [
+          ['换能力', 'She could swim fast when she was five.', 'could + 动词原形'],
+          ['变否定', 'She couldn’t fly.', 'couldn’t 表示过去不能'],
+          ['变问句', 'Could she run fast?', 'could 提到句首']
+        ],
+        principle: 'could / couldn’t 把“过去的能力”整体标记出来；无论主语是谁，could 后面都接动作原形，问句只需把 could 放到前面。',
+        transfer: '做一张 then / now ability card，比较小时候和现在能做的事。',
+        check: '易错检查：She could ran ✗ → She could run ✓；could 后面永远用原形。',
+        focus: 'past ability · past negatives and questions · facing fears',
+        output: '完成 then / now ability interview。',
+        goals: ['用 could / couldn’t 描述过去能力。', '用 Could…? 提问并简短回答。', '把面对害怕的经历转成可表达的语言。'],
+        language: 'I could …  ·  I couldn’t …  ·  Could you …?  ·  Yes, I could. / No, I couldn’t.',
+        flow: [
+          ['5′', 'Then / now mime', '做一个动作，猜小时候能不能做。'],
+          ['8′', 'Ability sort', '把 could 与 couldn’t 卡片放入过去能力图。'],
+          ['10′', 'Question model', '把陈述句变成 Could 问句，练短回答。'],
+          ['10′', 'Holiday link', '用 Josh’s holiday 图片猜人物遇到的能力挑战。'],
+          ['8′', 'Interview', '互问小时候能做什么，尊重不同经历。'],
+          ['4′', 'Exit ticket', '写一条 could 和一条 couldn’t。']
+        ],
+        note: '面对恐惧的讨论允许孩子选择虚构人物，重点是语言表达和支持，不强迫分享私人经历。'
+      },
+      {
+        unit: 'U11', unitName: 'The animal world', lesson: 'Lesson 33', title: 'Animals and us', subtitle: '读 extinct animals，写一段有事实、有顺序、有保护行动的动物短文。',
+        tags: ['Writing', 'Extinct animals', 'Story sequence'],
+        keyWords: ['extinct', 'protect', 'habitat', 'animal', 'past', 'today', 'because', 'future'],
+        keySentences: ['The animal lived in …', 'People must protect animals because …'],
+        motherSentence: 'People must protect animals because they are important.',
+        motherBranches: [
+          ['换对象', 'People must protect dolphins.', '替换动物'],
+          ['回到过去', 'The animal lived in forests.', '过去动作说明历史'],
+          ['加原因/行动', 'We can help by protecting habitats.', '现在的行动连接未来']
+        ],
+        principle: '介绍动物时，把“过去发生的事实”和“现在应该做的行动”分开：过去时讲它曾经怎样，must / can 讲我们现在能做什么。',
+        transfer: '写 60–80 词 extinct animal text：名称、生活地点、过去事实、消失原因和保护行动。',
+        check: '易错检查：历史事实用过去时，今天的建议用 must / can，不要把两个时间混在一起。',
+        focus: 'Extinct animals · writing · animals and us · facing fears',
+        output: '完成一张 extinct animal information card。',
+        goals: ['从文本提取动物过去与现在的信息。', '用不规则/规则过去时表达历史事实。', '用 must / can 提出保护行动。'],
+        language: 'It lived …  ·  It became extinct …  ·  We must …  ·  We can … because …',
+        flow: [
+          ['5′', 'Animal retrieve', '动物词接龙，加入一个 habitat。'],
+          ['10′', 'Read facts', '区分过去事实、现在情况和未来行动。'],
+          ['8′', 'Sequence story', '把 animal story 卡片按时间顺序排列。'],
+          ['12′', 'Write', '完成 extinct animal 短文和保护建议。'],
+          ['7′', 'Museum walk', '互读信息卡，找一条准确过去时。'],
+          ['3′', 'Reflect', '写一个今天能做的小保护行动。']
+        ],
+        note: '用“过去—现在—未来”三格组织文本，帮助孩子同时保持时间和句型的边界。'
+      },
+      {
+        unit: 'U12', unitName: 'Moving about', lesson: 'Lesson 34', title: 'Which is faster?', subtitle: '从不同交通工具进入比较级，学会比较速度、距离和体验。',
+        tags: ['Transport', 'Comparatives', 'Reading'],
+        keyWords: ['bus', 'bike', 'train', 'ferry', 'car', 'fast', 'slow', 'comfortable'],
+        keySentences: ['A train is faster than a bus.', 'Walking is slower but healthier.'],
+        motherSentence: 'A train is faster than a bus.',
+        motherBranches: [
+          ['换形容词', 'A train is more comfortable than a bus.', '长形容词用 more'],
+          ['换对象', 'A bike is slower than a train.', 'than 后接比较对象'],
+          ['加理由', 'It is slower but healthier.', '比较两个特点']
+        ],
+        principle: '比较级不是给物品贴“快/慢”标签，而是把同一个特点放到两个对象之间；先确定比较的特点，再用 -er 或 more…than 表达差异。',
+        transfer: '比较三种交通方式，写出速度、舒适度和环保性各一条结论。',
+        check: '易错检查：fast than ✗ → faster than；比较时要有 than 和比较对象。',
+        focus: 'transport · comparative adjectives · Great race · environment',
+        output: '完成 transport comparison chart，并口头推荐一种交通方式。',
+        goals: ['认读交通工具和地理地点。', '用 -er / more 组成比较级。', '从 Great race 中找出比较依据。'],
+        language: 'faster than …  ·  slower than …  ·  more comfortable than …  ·  better for the environment',
+        flow: [
+          ['5′', 'Transport mime', '用动作猜 bike、ferry、train 等交通工具。'],
+          ['8′', 'Race prediction', '看 Great race 图片，预测谁更快。'],
+          ['10′', 'Compare the same feature', '把 fast、comfortable、healthy 放到两种交通方式之间。'],
+          ['10′', 'Form sort', '短形容词用 -er，长形容词用 more，听读例句。'],
+          ['8′', 'Comparison chart', '小组比较三种交通并给推荐。'],
+          ['4′', 'Exit ticket', '完成一句 faster than 和一句 more … than。']
+        ],
+        note: '先让孩子明确“比较什么”，再选择比较级形式；没有比较标准，比较句就失去意义。'
+      },
+      {
+        unit: 'U12', unitName: 'Moving about', lesson: 'Lesson 35', title: 'My favourite journey', subtitle: '读四段 journey，学会用 one / ones 避免重复并表达偏好。',
+        tags: ['Journeys', 'One / ones', 'Preferences'],
+        keyWords: ['journey', 'ferry', 'steam train', 'mountain', 'river', 'walk', 'ride', 'favourite'],
+        keySentences: ['I like the red bus. The blue one is faster.', 'These trains are comfortable ones.'],
+        motherSentence: 'I like the red bus. The blue one is faster.',
+        motherBranches: [
+          ['换单数', 'The green one is cheaper.', 'one 替代一个同类名词'],
+          ['换复数', 'The blue ones are faster.', 'ones 替代多个同类名词'],
+          ['加偏好', 'The mountain journey is my favourite one.', 'one 回指 journey']
+        ],
+        principle: 'one / ones 是“替代同类名词”的小工具：前面已经说过 bus 或 trains，后面不想重复时，用 one 表示一个，用 ones 表示多个。',
+        transfer: '介绍自己喜欢的 journey，比较两个交通选择并至少使用 one / ones 一次。',
+        check: '易错检查：一个对象用 one，多个对象用 ones；它们不能替代完全不同的事物。',
+        focus: 'favourite journeys · one / ones · transport around the world',
+        output: '完成 favourite journey postcard。',
+        goals: ['从 journey texts 中提取路线、时间和感受。', '准确使用 one / ones 代替重复名词。', '用比较级表达交通选择。'],
+        language: 'The red one …  ·  The blue ones …  ·  My favourite journey is …',
+        flow: [
+          ['5′', 'Journey recall', '用地图和图片复述 ferry、train、walk、bike journey。'],
+          ['10′', 'Read four journeys', '找每个人的交通、路线和喜欢的原因。'],
+          ['8′', 'Replace the noun', '把重复的 bus / trains 换成 one / ones。'],
+          ['10′', 'Preference talk', '比较两种 journey，说明 favourite。'],
+          ['8′', 'Postcard draft', '写一张 journey postcard 给朋友。'],
+          ['4′', 'Exit ticket', '补全一个 one 和一个 ones 句子。']
+        ],
+        note: '让孩子先用同色卡片看见“同类名词被替代”，再讲 one / ones 的形式差异。'
+      },
+      {
+        unit: 'U12', unitName: 'Moving about', lesson: 'Lesson 36', title: 'Travel smart', subtitle: '听车站信息、了解世界交通，写一段 unusual transport 介绍完成全书收束。',
+        tags: ['Listening', 'Writing', 'Culture'],
+        keyWords: ['station', 'platform', 'ticket', 'arrive', 'leave', 'unusual', 'cable car', 'submarine'],
+        keySentences: ['The train leaves from platform three.', 'This is an unusual way to travel.'],
+        motherSentence: 'This is an unusual way to travel.',
+        motherBranches: [
+          ['换交通', 'This is an unusual cable car.', 'be + 身份/类别说明'],
+          ['加比较', 'It is faster than a bus.', '说明特征并比较'],
+          ['加行动', 'You can travel across the river.', 'can + 动作说明用途']
+        ],
+        principle: '介绍一种交通工具时，可以把前面学过的句型分工组合：be 说明它是什么，比较级说明它有什么特点，can 说明它能带人做什么。',
+        transfer: '写 60–100 词 unusual transport：地点、外形/用途、比较特点和环保或旅行理由。',
+        check: '易错检查：作品至少包含一种“说明句”、一种“比较句”和一种“能力/用途句”。',
+        focus: 'train station · unusual transport · culture · final writing task',
+        output: '完成 unusual transport mini guide，展示全书句型迁移。',
+        goals: ['听懂 train station 中的时间、站台和行动信息。', '了解不同国家的 unusual transport。', '综合 be、比较级、can 和 one/ones 完成介绍。'],
+        language: 'The train leaves …  ·  It is more … than …  ·  You can …  ·  This is …',
+        flow: [
+          ['5′', 'Station sounds', '听广播，猜 platform、train、ticket 等信息。'],
+          ['10′', 'Listen and map', '记录 train leaves / arrives 的时间和站台。'],
+          ['8′', 'World transport', '看 Rotterdam、Ankara、Hong Kong 等交通图片。'],
+          ['12′', 'Write mini guide', '完成 60–100 词 unusual transport 介绍。'],
+          ['7′', 'Travel fair', '小组展示，听众选择最想体验的交通。'],
+          ['3′', 'Final tree check', '指出作品里 be、动作、比较级和 can 各自负责什么。']
+        ],
+        note: '最后一课不追求把所有语法挤在一段里，而是让孩子能说清不同句型各自承担的工作。'
       }
     ];
 
     const unitCopy = {
       U1: { title: 'UNIT 1 · ALL TOGETHER', desc: '从“我是谁、我来自哪里”开始，用音乐人物和个人 flag 把语言变成真实的自我介绍。' },
-      U2: { title: 'UNIT 2 · I’M EXCITED', desc: '从 feelings 走向 questions、likes and dislikes，再用短信、文化和 patience 完成表达闭环。' }
+      U2: { title: 'UNIT 2 · I’M EXCITED', desc: '从 feelings 走向 questions、likes and dislikes，再用短信、文化和 patience 完成表达闭环。' },
+      U3: { title: 'UNIT 3 · FAMILY TIME', desc: '从家庭成员和房间出发，学会表达所属关系、指示物品，并写出自己的 favourite room。' },
+      U4: { title: 'UNIT 4 · CITY LIFE', desc: '读城市宣传册、问路和购物，把 there is/are、方位和指令放进真实地图。' },
+      U5: { title: 'UNIT 5 · FREE TIME', desc: '围绕 Robotics Club 和 tech habits，建立一般现在时的习惯、频率、否定与提问。' },
+      U6: { title: 'UNIT 6 · BEST FRIENDS', desc: '用 have/has got 描述外貌，用 be 描述品质，用一般现在时说朋友经常做什么。' },
+      U7: { title: 'UNIT 7 · LIVING FOR SPORT', desc: '从运动能力到运动安排，学习 can、时间介词和三种提出建议的方式。' },
+      U8: { title: 'UNIT 8 · FEEL THE RHYTHM', desc: '用音乐现场和 microblog 学会描述正在发生的动作，也表达自己的喜好。' },
+      U9: { title: 'UNIT 9 · WHO’S HUNGRY?', desc: '在厨房、菜单和 meal plan 中使用 must、can、I’d like 和 Would you like。' },
+      U10: { title: 'UNIT 10 · BIG SUCCESSES', desc: '用过去时 be、过去动作和顺序词，把人物成就讲成一条清楚的故事。' },
+      U11: { title: 'UNIT 11 · THE ANIMAL WORLD', desc: '从海豚救援和灭绝动物出发，继续扩展不规则过去时与过去能力 could。' },
+      U12: { title: 'UNIT 12 · MOVING ABOUT', desc: '比较交通方式、复用名词、听懂车站信息，并用一篇 unusual transport 介绍完成全书迁移。' }
     };
 
     const unitSummaries = {
@@ -876,6 +1750,396 @@
           { label: '喜欢的对象', seed: 'I like her.', steps: ['I like him.', 'I like it.', 'I like them.'] },
           { label: '一问一答', seed: 'Are you OK? — Yes, I am.', steps: ['Is she tired? — No, she isn’t.', 'Are they hungry? — Yes, they are.', '把人物和 feelings 换掉，自己再造两轮。'] }
         ]
+      },
+      U3: {
+        eyebrow: 'unit 3 · knowledge garden', title: 'FAMILY TIME · 谁的家？', intro: '保留前两单元的主系表主干，新增所属关系、指示词和家庭空间，让描述从“谁”长到“谁的什么”。',
+        vocabulary: [
+          ['family', '/ˈfæməli/', 'n.', '家庭；家人', 'This is my family.'],
+          ['parents', '/ˈpeərənts/', 'n.', '父母', 'These are my parents.'],
+          ['sister', '/ˈsɪstə/', 'n.', '姐妹', 'Anna is my sister.'],
+          ['friendly', '/ˈfrendli/', 'adj.', '友好的', 'She is friendly and helpful.'],
+          ['bedroom', '/ˈbedruːm/', 'n.', '卧室', 'My bedroom is small.'],
+          ['sofa', '/ˈsəʊfə/', 'n.', '沙发', 'The sofa is in the living room.'],
+          ['favourite', '/ˈfeɪvərɪt/', 'adj.', '最喜欢的', 'My favourite room is the bedroom.'],
+          ['whose', '/huːz/', 'pron.', '谁的', 'Whose family is this?']
+        ],
+        treeModel: {
+          rootHint: '保留 U1–U2 主系表主干；本单元新增：所属关系与指示词',
+          stage: 'U3 · 在主系表上长出“谁的”枝条',
+          formula: 'Subject + be + Complement  ｜  owner + ’s + thing  ｜  this / that / these / those',
+          message: 'U3 不推倒原来的树：be 继续连接主语和说明；现在新增一个关系枝——先找到拥有者，再说明属于谁。',
+          ruleLabel: '孩子版总规律 · 关系也要有连接方式',
+          rule: '要说“谁的”，先找拥有者：名字或人后加 ’s，再接属于他的东西；my / her / their 也是同一类所属关系。',
+          ruleHint: 'this / that / these / those 先看距离和数量；’s 要和 is 的缩写分开判断。',
+          branches: [
+            { title: '主语与指代 · Subject', leaves: [['I / you / he / she', '复用 U1–U2', 'carry'], ['this / that', '一个，近/远', 'fresh'], ['these / those', '多个，近/远', 'fresh']] },
+            { title: '主语的说明 · be + C', leaves: [['地点/身份/状态', '保留主系表', 'carry'], ['family is big', '描述家庭', 'fresh'], ['room is favourite', '描述房间', 'fresh']] },
+            { title: '所属关系 · Possession', leaves: [['Anna’s family', '谁的家庭', 'fresh'], ['my / his / her room', '所属者 + 名词', 'fresh'], ['Whose …?', '问“谁的”', 'fresh']] }
+          ],
+          forms: [
+            ['主系表·地点', 'Her family is in Australia.', 'S + be + place', 'carry'],
+            ['名字所属', 'Anna’s family', 'owner + ’s + thing', 'fresh'],
+            ['代词所属', 'This is her bedroom.', 'possessive adjective + noun', 'fresh'],
+            ['指示词', 'Those are our chairs.', 'those + are + plural', 'fresh']
+          ],
+          contrast: { title: '看清 ’s 的两个身份', formula: 'Anna’s family = Anna 的；Anna’s happy = Anna is happy。', example: 'Emma’s room.  ✓   ·   Emma’s happy.  ✓', note: '先看 ’s 后面有没有名词：有时表示所属，有时是 is 的缩写。' }
+        },
+        patterns: [
+          { label: '谁的家庭', seed: 'This is [name]’s family.', steps: ['This is Anna’s family.', 'These are Anna’s parents.', 'Whose family is this? — It’s Anna’s.'] },
+          { label: '我的房间', seed: 'This is my bedroom.', steps: ['This is her bedroom.', 'Those are our chairs.', 'My favourite room is … because …'] },
+          { label: '人物描述', seed: '[Name]’s family is big.', steps: ['His family is friendly.', 'Her sister is helpful.', '用 be + 形容词说明家人特点。'] }
+        ]
+      },
+      U4: {
+        eyebrow: 'unit 4 · knowledge garden', title: 'CITY LIFE · 城市里有什么？', intro: '在“谁/什么的说明”之外，句子树新增存在句和行动指令，让孩子能读地图、问路、购物。',
+        vocabulary: [
+          ['library', '/ˈlaɪbrəri/', 'n.', '图书馆', 'There is a library near the park.'],
+          ['museum', '/mjuˈziːəm/', 'n.', '博物馆', 'The museum is opposite the bank.'],
+          ['park', '/pɑːk/', 'n.', '公园', 'There are two parks in the city.'],
+          ['station', '/ˈsteɪʃən/', 'n.', '车站', 'Go to the train station.'],
+          ['opposite', '/ˈɒpəzɪt/', 'prep.', '在……对面', 'The café is opposite the museum.'],
+          ['between', '/bɪˈtwiːn/', 'prep.', '在……之间', 'The bank is between the shops.'],
+          ['turn', '/tɜːn/', 'v.', '转弯', 'Turn left at the library.'],
+          ['price', '/praɪs/', 'n.', '价格', 'What is the price?']
+        ],
+        treeModel: {
+          rootHint: '保留主系表与所属枝；本单元新增：某处存在什么、下一步做什么',
+          stage: 'U4 · 新增“地图上的存在”和“行动”',
+          formula: 'There is / are + thing + place  ｜  imperative: V / Don’t + V',
+          message: '主系表回答“它是什么/怎么样”；there be 回答“某处有什么”；指令句则直接告诉别人下一步做什么。',
+          ruleLabel: '孩子版总规律 · 先问句子的任务',
+          rule: '说“那里有什么”用 there is / there are；说“请做什么”把动作直接放在句首。',
+          ruleHint: 'there is / are 看后面的东西是一个还是多个；指令后用动词原形。',
+          branches: [
+            { title: '主系表 · What is it?', leaves: [['It is a museum.', '说明身份', 'carry'], ['The museum is opposite …', '说明位置', 'carry'], ['This / that / these / those', '复用 U3', 'carry']] },
+            { title: '存在句 · There be', leaves: [['There is a park.', '一个存在物', 'fresh'], ['There are some shops.', '多个存在物', 'fresh'], ['Are there any …?', '存在问句', 'fresh']] },
+            { title: '动作与指令 · Do', leaves: [['Go down …', '路线动作', 'fresh'], ['Turn left / right.', '方向动作', 'fresh'], ['Don’t turn …', '禁止动作', 'fresh']] }
+          ],
+          forms: [
+            ['一个存在物', 'There is a bank near the park.', 'there is + a/an + singular', 'fresh'],
+            ['多个存在物', 'There are some shops.', 'there are + plural', 'fresh'],
+            ['方位说明', 'The bank is opposite the museum.', 'S + be + preposition', 'carry'],
+            ['行动指令', 'Take the second left.', 'base verb + route', 'fresh']
+          ],
+          contrast: { title: 'It is 还是 There is?', formula: 'It is a park = 说明“它是什么”；There is a park = 说明“那里有一个公园”。', example: 'It is a museum.  ·  There is a museum near the bank.', note: '两句都可能正确，但说话者要传递的信息不同。' }
+        },
+        patterns: [
+          { label: '地图存在', seed: 'There is a [place] near the [place].', steps: ['There are some shops in the city.', 'Are there any museums?', 'No, there aren’t.'] },
+          { label: '问路指路', seed: 'Where is the [place]?', steps: ['Go down this street.', 'Turn left at the bank.', 'Take the second right.'] },
+          { label: '购物功能', seed: 'How much is it?', steps: ['It’s £25.', 'Can I have it, please?', 'Thank you. — You’re welcome.'] }
+        ]
+      },
+      U5: {
+        eyebrow: 'unit 5 · knowledge garden', title: 'FREE TIME · 习惯如何发生？', intro: '句子树第一次长出清晰的主谓宾动作枝：用一般现在时说习惯，用 do / does 提问和否定。',
+        vocabulary: [
+          ['robotics', '/rəʊˈbɒtɪks/', 'n.', '机器人技术', 'I like robotics.'],
+          ['competition', '/ˌkɒmpəˈtɪʃən/', 'n.', '比赛', 'The club has a competition every year.'],
+          ['make', '/meɪk/', 'v.', '制作', 'We make robots.'],
+          ['meet', '/miːt/', 'v.', '见面；集合', 'The club meets on Monday.'],
+          ['always', '/ˈɔːlweɪz/', 'adv.', '总是', 'She always reads.'],
+          ['often', '/ˈɒfən/', 'adv.', '经常', 'I often use my tablet.'],
+          ['sometimes', '/ˈsʌmtaɪmz/', 'adv.', '有时', 'He sometimes plays games.'],
+          ['gadget', '/ˈɡædʒɪt/', 'n.', '小电子设备', 'A tablet is a useful gadget.']
+        ],
+        treeModel: {
+          rootHint: '主系表与存在枝继续保留；本单元新增：主语做什么（主谓宾）',
+          stage: 'U5 · 第二条主干：主语做什么',
+          formula: 'Subject + verb + object  ｜  do / does + subject + base verb?',
+          message: '现在一般时描述稳定习惯；句子从“主语是什么/怎么样”扩展到“主语做什么、对什么做”。',
+          ruleLabel: '孩子版总规律 · 动作句要看三件事',
+          rule: '先找谁在做，再找做什么，最后看动作指向谁/什么；he / she / it 的肯定动作留下 -s，问句和否定由 do / does 帮忙。',
+          ruleHint: 'does 已经带单数标记，后面的动作回到原形；频率词说明动作多久发生。',
+          branches: [
+            { title: '主系表 · 是什么/怎样', leaves: [['She is helpful.', '复用 U1–U4', 'carry'], ['There is a club.', '复用存在句', 'carry'], ['所属与指示', '复用 U3', 'carry']] },
+            { title: '主谓宾 · 做什么', leaves: [['I make robots.', '主语 + 动作 + 对象', 'fresh'], ['She makes robots.', '第三人称 -s', 'fresh'], ['They play games.', '复数 + 原形', 'fresh']] },
+            { title: '频率/问否 · How often?', leaves: [['always / often / sometimes / never', '动作规律', 'fresh'], ['She doesn’t play.', 'doesn’t + 原形', 'fresh'], ['Does she play?', 'does + S + 原形', 'fresh']] }
+          ],
+          forms: [
+            ['习惯肯定', 'I make robots every week.', 'S + base verb + O', 'fresh'],
+            ['第三人称', 'She makes robots every week.', 'he/she/it + V-s', 'fresh'],
+            ['否定', 'She doesn’t make robots.', 'S + doesn’t + base verb', 'fresh'],
+            ['问句', 'Does she make robots?', 'Does + S + base verb?', 'fresh']
+          ],
+          contrast: { title: 'be 句与动作句', formula: 'She is a member. = 身份说明；She makes robots. = 她做什么。', example: 'She is busy.  ·  She makes robots.', note: '先判断句子是在“说明主语”还是在“讲主语的动作”，再选择 be 或实义动词。' }
+        },
+        patterns: [
+          { label: '日常活动', seed: 'I [verb] [object] every week.', steps: ['She makes robots every week.', 'They play games after school.', '把活动和时间换成自己的。'] },
+          { label: '频率表达', seed: 'I often [verb] …', steps: ['She always reads.', 'He sometimes plays games.', 'They never use a VR headset.'] },
+          { label: '动作问答', seed: 'Does she [verb] …?', steps: ['Yes, she does.', 'No, she doesn’t.', 'How often do you …? — I often …'] }
+        ]
+      },
+      U6: {
+        eyebrow: 'unit 6 · knowledge garden', title: 'BEST FRIENDS · 拥有什么特征？', intro: '在 be 描述品质、一般现在时描述行为的基础上，新增 have / has got 这条“拥有特征”枝。',
+        vocabulary: [
+          ['friend', '/frend/', 'n.', '朋友', 'A real friend helps you.'],
+          ['body', '/ˈbɒdi/', 'n.', '身体', 'This is the human body.'],
+          ['eyes', '/aɪz/', 'n.', '眼睛', 'She has got brown eyes.'],
+          ['hair', '/heə/', 'n.', '头发', 'He has got short hair.'],
+          ['glasses', '/ˈɡlɑːsɪz/', 'n.', '眼镜', 'Has he got glasses?'],
+          ['kind', '/kaɪnd/', 'adj.', '友善的', 'She is kind and loyal.'],
+          ['loyal', '/ˈlɔɪəl/', 'adj.', '忠诚的', 'A loyal friend stays with you.'],
+          ['symbol', '/ˈsɪmbəl/', 'n.', '象征', 'A heart is a friendship symbol.']
+        ],
+        treeModel: {
+          rootHint: '保留主系表、主谓宾、存在与所属枝；本单元新增：拥有的外貌与特征',
+          stage: 'U6 · 把“拥有”独立成一条枝',
+          formula: 'Subject + have / has got + thing / feature',
+          message: 'be 描述“是什么样”，一般现在时描述“经常做什么”，have / has got 则回答“拥有怎样的外貌或东西”。',
+          ruleLabel: '孩子版总规律 · 每条枝负责一种意思',
+          rule: '要说某人拥有的特征，先看拥有者：I / you / we / they 用 have got，he / she / it 用 has got。',
+          ruleHint: '问句把 have / has 放到前面；品质仍然用 be，习惯行为仍然用一般现在时。',
+          branches: [
+            { title: '主系表 · 品质说明', leaves: [['She is kind.', '人物品质', 'carry'], ['He is loyal.', '复用 be + adj', 'carry'], ['I / he / they', '主语变化', 'carry']] },
+            { title: '拥有特征 · Have got', leaves: [['I have got brown eyes.', 'have got', 'fresh'], ['She has got long hair.', 'has got', 'fresh'], ['Has he got glasses?', '问句与短答', 'fresh']] },
+            { title: '行为与数量 · Details', leaves: [['She always helps me.', '习惯行为', 'carry'], ['bikes / chairs / pens', '可数复数', 'fresh'], ['money / time / work', '不可数名词', 'fresh']] }
+          ],
+          forms: [
+            ['拥有·复数主语', 'They have got kind hearts.', 'S + have got + noun', 'fresh'],
+            ['拥有·单数主语', 'She has got brown eyes.', 'S + has got + noun', 'fresh'],
+            ['问句', 'Has she got glasses?', 'Has + S + got …?', 'fresh'],
+            ['品质/行为', 'She is kind and helps me.', 'be + adj；V + O', 'carry']
+          ],
+          contrast: { title: '三种描述不混用', formula: 'She is kind = 品质；She has got brown eyes = 拥有特征；She helps me = 经常行为。', example: 'She is helpful.  ·  She has got glasses.  ·  She helps me.', note: '同一个人物可以同时长出三种句型，每种句型负责不同信息。' }
+        },
+        patterns: [
+          { label: '外貌画像', seed: '[Name] has got [feature].', steps: ['She has got brown eyes.', 'He has got short hair.', 'Has he got glasses? — Yes, he has.'] },
+          { label: '朋友品质', seed: 'My friend is [adjective].', steps: ['She is kind and loyal.', 'He is helpful.', '给品质配一个真实行为证据。'] },
+          { label: '猜人物', seed: 'Has he / she got …?', steps: ['Has she got long hair?', 'No, she hasn’t.', 'Have they got bikes? — Yes, they have.'] }
+        ]
+      },
+      U7: {
+        eyebrow: 'unit 7 · knowledge garden', title: 'LIVING FOR SPORT · 能做什么？', intro: '在主谓宾动作枝上新增 can 能力枝，并把时间和建议接入真实的运动安排。',
+        vocabulary: [
+          ['sport', '/spɔːt/', 'n.', '运动', 'Sport is important.'],
+          ['kick', '/kɪk/', 'v.', '踢', 'He can kick the ball.'],
+          ['climb', '/klaɪm/', 'v.', '攀爬', 'She can climb very well.'],
+          ['swim', '/swɪm/', 'v.', '游泳', 'Can you swim?'],
+          ['athlete', '/ˈæθliːt/', 'n.', '运动员', 'She is a great athlete.'],
+          ['practice', '/ˈpræktɪs/', 'v. / n.', '练习', 'They practise every day.'],
+          ['season', '/ˈsiːzən/', 'n.', '季节', 'Winter is a good season for snowboarding.'],
+          ['suggestion', '/səˈdʒestʃən/', 'n.', '建议', 'That is a good suggestion.']
+        ],
+        treeModel: {
+          rootHint: '保留 be、主谓宾、have got 等枝；本单元新增：能力、时间与建议',
+          stage: 'U7 · 让动作前出现“能力开关”',
+          formula: 'Subject + can / can’t + base verb  ｜  at / on / in + time',
+          message: 'can 不是新的动作，而是给动作加上“能不能做到”的信息；时间介词则把动作放到准确的时间位置。',
+          ruleLabel: '孩子版总规律 · 情态词不替动作工作',
+          rule: 'can / can’t 负责表达能力，后面的动作负责说明做什么；can 不随主语变化，动作保持原形。',
+          ruleHint: '安排活动时再用 at / on / in 标记时间大小；提建议要看后面接原形还是 -ing。',
+          branches: [
+            { title: '已有句型 · 说明/动作', leaves: [['She is a great athlete.', 'be + 品质', 'carry'], ['She practises every day.', '一般现在时动作', 'carry'], ['She has got …', '拥有特征', 'carry']] },
+            { title: '能力开关 · can', leaves: [['She can swim.', 'can + 原形', 'fresh'], ['He can’t climb.', '不能做到', 'fresh'], ['Can you kick?', '能力问句', 'fresh']] },
+            { title: '时间与建议 · Plan', leaves: [['at three o’clock', '时刻', 'fresh'], ['on Saturday / in July', '日期/月份', 'fresh'], ['Let’s play / How about playing?', '建议行动', 'fresh']] }
+          ],
+          forms: [
+            ['能力肯定', 'She can snowboard well.', 'S + can + base verb', 'fresh'],
+            ['能力否定', 'He can’t climb without hands.', 'S + can’t + base verb', 'fresh'],
+            ['能力问句', 'Can you swim?', 'Can + S + base verb?', 'fresh'],
+            ['时间', 'The match is on Saturday at three.', 'on + day；at + clock', 'fresh']
+          ],
+          contrast: { title: 'can 不是一般现在时的 -s', formula: 'She swims. = 她游泳；She can swim. = 她会/能游泳。', example: 'She can swim.  ✓   ·   She can swims.  ✗', note: 'can 已经承担了能力信息，后面的动作回到原形。' }
+        },
+        patterns: [
+          { label: '能力画像', seed: '[Name] can [verb] well.', steps: ['She can swim well.', 'He can’t climb without hands.', 'Can you kick the ball?'] },
+          { label: '运动安排', seed: 'The match is on [day] at [time].', steps: ['My birthday is in July.', 'We meet on Saturday.', '确认日期、时间和地点。'] },
+          { label: '提出建议', seed: 'Let’s [verb].', steps: ['How about playing tennis?', 'Why don’t we meet at four?', 'That’s a great idea!'] }
+        ]
+      },
+      U8: {
+        eyebrow: 'unit 8 · knowledge garden', title: 'FEEL THE RHYTHM · 此刻正在发生什么？', intro: 'be 在原有主系表中继续保留，同时长出“助动词”功能，连接正在发生的动作。',
+        vocabulary: [
+          ['forest', '/ˈfɒrɪst/', 'n.', '森林', 'They are dancing in the forest.'],
+          ['concert', '/ˈkɒnsət/', 'n.', '音乐会', 'The concert is amazing.'],
+          ['coat', '/kəʊt/', 'n.', '外套', 'She is wearing a coat.'],
+          ['jeans', '/dʒiːnz/', 'n.', '牛仔裤', 'He is wearing jeans.'],
+          ['dance', '/dɑːns/', 'v.', '跳舞', 'People are dancing.'],
+          ['wear', '/weə/', 'v.', '穿着', 'I am wearing a shirt.'],
+          ['rhythm', '/ˈrɪðəm/', 'n.', '节奏', 'I like the rhythm.'],
+          ['microblog', '/ˈmaɪkrəʊblɒɡ/', 'n.', '短博客', 'Write a microblog about the scene.']
+        ],
+        treeModel: {
+          rootHint: 'be 仍是主系表的连接桥；本单元新增：be + V-ing 表示正在发生',
+          stage: 'U8 · 同一个 be，长出“现在进行”功能',
+          formula: 'Subject + be + V-ing  ｜  like / don’t like + V-ing',
+          message: 'be 仍然随主语变化，但现在不只连接“主语的说明”，还可以和 -ing 一起把动作固定在“此刻正在发生”。',
+          ruleLabel: '孩子版总规律 · 先判断 -ing 在做什么',
+          rule: 'be + -ing 是“现在正在做”；like + -ing 是“喜欢这项活动”。形式相似，句子的任务不同。',
+          ruleHint: '描述现场按 who → action → place → feeling 组织；be 不能省略。',
+          branches: [
+            { title: 'be · 两种工作', leaves: [['She is happy.', '主系表：状态说明', 'carry'], ['She is dancing.', '现在进行：动作', 'fresh'], ['is / are / am', '仍随主语变化', 'carry']] },
+            { title: '正在发生 · V-ing', leaves: [['I’m waiting.', '此刻动作', 'fresh'], ['They’re eating.', '复数主语', 'fresh'], ['Are you listening?', '进行时问句', 'fresh']] },
+            { title: '喜好活动 · like + -ing', leaves: [['I like dancing.', '喜欢做某事', 'fresh'], ['She likes singing.', '第三人称 -s', 'fresh'], ['I don’t like wearing …', '否定喜好', 'fresh']] }
+          ],
+          forms: [
+            ['状态说明', 'She is happy.', 'S + be + adjective', 'carry'],
+            ['正在做', 'She is waiting for a train.', 'S + be + V-ing', 'fresh'],
+            ['进行时问句', 'Are they eating?', 'Be + S + V-ing?', 'fresh'],
+            ['喜欢活动', 'I like listening to music.', 'like + V-ing', 'fresh']
+          ],
+          contrast: { title: '两个 -ing 的任务', formula: 'She is dancing = 现在正在跳；She likes dancing = 喜欢跳舞。', example: 'He is wearing jeans.  ·  He likes wearing jeans.', note: '先问“现在正在发生吗”，还是“这是喜好吗”，再决定 be + -ing 或 like + -ing。' }
+        },
+        patterns: [
+          { label: '现场画面', seed: '[Person] is / are [V-ing] …', steps: ['Lucy is waiting for a train.', 'They are eating in the forest.', 'People are dancing at a concert.'] },
+          { label: '音乐喜好', seed: 'I like [V-ing].', steps: ['I like listening to music.', 'She likes dancing.', 'He doesn’t like wearing a coat.'] },
+          { label: '镜头描述', seed: 'At the moment, …', steps: ['People are singing.', 'He is wearing jeans.', 'I’m happy because the music is amazing.'] }
+        ]
+      },
+      U9: {
+        eyebrow: 'unit 9 · knowledge garden', title: 'WHO’S HUNGRY? · 规则、许可与请求', intro: '把情态动词枝继续分开：must 负责规则，can 负责许可，I’d like / Would you like 负责礼貌需要与提供。',
+        vocabulary: [
+          ['kitchen', '/ˈkɪtʃɪn/', 'n.', '厨房', 'The children are in the kitchen.'],
+          ['wash', '/wɒʃ/', 'v.', '洗', 'You must wash your hands.'],
+          ['careful', '/ˈkeəfəl/', 'adj.', '小心的', 'Be careful with the hot plate.'],
+          ['breakfast', '/ˈbrekfəst/', 'n.', '早餐', 'I have fruit for breakfast.'],
+          ['toast', '/təʊst/', 'n.', '烤面包', 'I’d like some toast.'],
+          ['healthy', '/ˈhelθi/', 'adj.', '健康的', 'This is a healthy meal.'],
+          ['permission', '/pəˈmɪʃən/', 'n.', '许可', 'Can I have some milk?'],
+          ['offer', '/ˈɒfə/', 'v. / n.', '提供；主动帮助', 'Would you like some help?']
+        ],
+        treeModel: {
+          rootHint: 'can 能力枝继续保留；本单元新增：规则、许可、礼貌请求与提供',
+          stage: 'U9 · 情态枝按交际任务分叉',
+          formula: 'must / mustn’t + base verb  ｜  Can I …?  ｜  I’d like … / Would you like …?',
+          message: 'must、can、would like 都可以站在动作前面，但它们传递的力量和角色不同：规则、许可、需要或提供。',
+          ruleLabel: '孩子版总规律 · 先确定你要完成的功能',
+          rule: '必须/禁止用 must；请求许可用 Can I…?；表达需要用 I’d like…；主动提供选择用 Would you like…?。',
+          ruleHint: '这些词后面都要接清楚的动作或东西；must / can 后面用原形。',
+          branches: [
+            { title: '说明与动作 · 旧枝', leaves: [['The meal is healthy.', 'be + 品质', 'carry'], ['I eat fruit.', '一般现在时习惯', 'carry'], ['I can cook.', '能力/许可枝', 'carry']] },
+            { title: '规则 · must', leaves: [['You must wash hands.', '必须', 'fresh'], ['You mustn’t touch it.', '禁止', 'fresh'], ['Be careful!', '安全指令', 'fresh']] },
+            { title: '许可与礼貌 · Ask/offer', leaves: [['Can I have …?', '请求许可', 'fresh'], ['I’d like …', '表达需要', 'fresh'], ['Would you like …?', '提供选择', 'fresh']] }
+          ],
+          forms: [
+            ['规则', 'You must wash your hands.', 'S + must + base verb', 'fresh'],
+            ['禁止', 'You mustn’t put hands in mouth.', 'S + mustn’t + base verb', 'fresh'],
+            ['许可', 'Can I have some toast?', 'Can I + base verb …?', 'fresh'],
+            ['礼貌需要', 'I’d like the salad, please.', 'I’d like + noun', 'fresh']
+          ],
+          contrast: { title: '同样是问句，功能不同', formula: 'Can I…? 问“允许不允许”；Would you like…? 问“你想不想要”。', example: 'Can I have some milk?  ·  Would you like some milk?', note: '先判断说话者是在请求，还是在主动给别人选择。' }
+        },
+        patterns: [
+          { label: '厨房规则', seed: 'You must [verb].', steps: ['You must wash your hands.', 'You mustn’t touch the hot plate.', 'Be careful!'] },
+          { label: '礼貌点餐', seed: 'I’d like [food], please.', steps: ['Can I have some toast, please?', 'I’d like the chicken salad.', 'Thank you. — You’re welcome.'] },
+          { label: '提供帮助', seed: 'Would you like [food / help]?', steps: ['Would you like some fruit?', 'Can I help you?', 'Yes, please. / No, thank you.'] }
+        ]
+      },
+      U10: {
+        eyebrow: 'unit 10 · knowledge garden', title: 'BIG SUCCESSES · 把过去讲成故事', intro: '把过去 be、过去动作和顺序词接在同一条时间线上，孩子能看见“故事怎样一步步发生”。',
+        vocabulary: [
+          ['astronaut', '/ˈæstrənɔːt/', 'n.', '宇航员', 'She was an astronaut.'],
+          ['space', '/speɪs/', 'n.', '太空', 'She was the first woman in space.'],
+          ['achievement', '/əˈtʃiːvmənt/', 'n.', '成就', 'This is a great achievement.'],
+          ['born', '/bɔːn/', 'adj.', '出生的', 'She was born in Russia.'],
+          ['yesterday', '/ˈjestədeɪ/', 'adv.', '昨天', 'We practised yesterday.'],
+          ['climb', '/klaɪm/', 'v.', '攀登', 'She climbed the mountain.'],
+          ['prize', '/praɪz/', 'n.', '奖项；奖品', 'He won a prize.'],
+          ['statue', '/ˈstætʃuː/', 'n.', '雕像', 'There is a statue in our town.']
+        ],
+        treeModel: {
+          rootHint: '现在的主干全部保留；本单元新增：过去的 be、过去动作与故事顺序',
+          stage: 'U10 · 给句子加上“过去时间镜头”',
+          formula: 'was / were + C  ｜  regular verb + -ed  ｜  did + base verb?',
+          message: '过去时不是一棵孤立的新树：过去的身份/状态仍用 be，过去的动作走动作枝；时间和顺序词把它们串成故事。',
+          ruleLabel: '孩子版总规律 · 谁负责过去？',
+          rule: '过去的状态用 was / were，过去的规则动作通常用 -ed；问句和否定让 did / didn’t 负责过去，动作回到原形。',
+          ruleHint: '先确定事情发生在过去，再看句子是在说明状态、存在，还是讲动作。',
+          branches: [
+            { title: '过去说明 · was/were', leaves: [['She was an astronaut.', '过去身份', 'fresh'], ['They were in space.', '过去地点', 'fresh'], ['There were stars.', '过去存在', 'fresh']] },
+            { title: '过去动作 · did', leaves: [['She climbed the mountain.', '规则过去 -ed', 'fresh'], ['Did she climb?', '问句用 did', 'fresh'], ['She didn’t climb alone.', '否定用 didn’t', 'fresh']] },
+            { title: '故事结构 · Sequence', leaves: [['First …', '开始', 'fresh'], ['Then / After that …', '过程', 'fresh'], ['Finally …', '结果', 'fresh']] }
+          ],
+          forms: [
+            ['过去身份', 'She was the first woman in space.', 'S + was/were + C', 'fresh'],
+            ['过去动作', 'She practised hard.', 'S + V-ed + O', 'fresh'],
+            ['过去问句', 'Did she win a prize?', 'Did + S + base verb?', 'fresh'],
+            ['过去否定', 'She didn’t stop.', 'S + didn’t + base verb', 'fresh']
+          ],
+          contrast: { title: 'was/were 与 did 分工', formula: 'She was tired. = 过去状态；She practised. = 过去动作。', example: 'Was she tired?  ·  Did she practise?', note: '提问时先看原句的核心是 be 还是动作动词，不能把两套问句混在一起。' }
+        },
+        patterns: [
+          { label: '过去身份/地点', seed: '[Name] was / were …', steps: ['She was an astronaut.', 'They were in space.', 'There were many stars.'] },
+          { label: '过去动作', seed: '[Name] [V-ed] …', steps: ['She climbed the mountain.', 'He practised hard.', 'Did he finish? — Yes, he did.'] },
+          { label: '成就故事', seed: 'First, … Then, … Finally, …', steps: ['First, she trained hard.', 'Then, she won the prize.', 'Finally, people made a statue.'] }
+        ]
+      },
+      U11: {
+        eyebrow: 'unit 11 · knowledge garden', title: 'THE ANIMAL WORLD · 过去的动作与能力', intro: '在过去时动作枝上继续新增不规则过去式和 could / couldn’t，让故事更丰富、更准确。',
+        vocabulary: [
+          ['dolphin', '/ˈdɒlfɪn/', 'n.', '海豚', 'The dolphins came to help.'],
+          ['rescue', '/ˈreskjuː/', 'v. / n.', '营救；救援', 'The dolphins rescued him.'],
+          ['scared', '/skeəd/', 'adj.', '害怕的', 'He felt scared.'],
+          ['brave', '/breɪv/', 'adj.', '勇敢的', 'She was brave.'],
+          ['extinct', '/ɪkˈstɪŋkt/', 'adj.', '灭绝的', 'The animal is extinct.'],
+          ['habitat', '/ˈhæbɪtæt/', 'n.', '栖息地', 'We must protect its habitat.'],
+          ['could', '/kʊd/', 'modal v.', '能够（过去）', 'She could swim.'],
+          ['protect', '/prəˈtekt/', 'v.', '保护', 'People must protect animals.']
+        ],
+        treeModel: {
+          rootHint: '过去 be、过去规则动作与顺序枝保留；本单元新增：不规则过去与过去能力',
+          stage: 'U11 · 过去动作枝长出不规则叶子',
+          formula: 'irregular past verb  ｜  could / couldn’t + base verb  ｜  past question',
+          message: '过去故事仍然沿用 U10 的时间主干；只是有些动作不加 -ed，而是整体变化，过去能力则由 could / couldn’t 负责。',
+          ruleLabel: '孩子版总规律 · 先确定时间，再辨认动作类型',
+          rule: '过去动作先看是不是规则变化；如果不是，就调用它自己的过去形式。过去能力统一用 could / couldn’t + 动词原形。',
+          ruleHint: 'could 后面不加 -s、不加 -ed；过去事实和今天的保护行动要分开。',
+          branches: [
+            { title: '过去故事 · Past', leaves: [['was / were', '过去状态/地点', 'carry'], ['V-ed', '规则过去动作', 'carry'], ['First → Finally', '事件顺序', 'carry']] },
+            { title: '不规则动作 · Irregular', leaves: [['go → went', '去', 'fresh'], ['see → saw', '看见', 'fresh'], ['come → came / feel → felt', '到来/感受', 'fresh']] },
+            { title: '过去能力 · could', leaves: [['She could swim.', '过去能', 'fresh'], ['She couldn’t fly.', '过去不能', 'fresh'], ['Could she run?', '能力问句', 'fresh']] }
+          ],
+          forms: [
+            ['不规则过去', 'He went under the water.', 'S + irregular past verb', 'fresh'],
+            ['过去感受', 'He felt scared but safe.', 'past action + adjective', 'fresh'],
+            ['过去能力', 'She could run fast.', 'S + could + base verb', 'fresh'],
+            ['能力问句', 'Could you swim?', 'Could + S + base verb?', 'fresh']
+          ],
+          contrast: { title: '过去动作与过去能力', formula: 'He swam. = 他游了；He could swim. = 他会/能游泳。', example: 'He went under the water.  ·  He could swim.', note: '一个讲实际发生的动作，一个讲当时具备的能力。' }
+        },
+        patterns: [
+          { label: '救援故事', seed: '[Animal] came to help …', steps: ['The dolphins came to help him.', 'He saw ten dolphins.', 'He felt scared but safe.'] },
+          { label: '过去能力', seed: '[Name] could / couldn’t [verb].', steps: ['She could swim.', 'She couldn’t fly.', 'Could she run fast? — Yes, she could.'] },
+          { label: '动物保护', seed: 'We must protect [animal / habitat].', steps: ['The animal lived in forests.', 'It became extinct.', 'We can help by protecting habitats.'] }
+        ]
+      },
+      U12: {
+        eyebrow: 'unit 12 · knowledge garden', title: 'MOVING ABOUT · 比较与复用', intro: '在全书句型树上新增比较级和 one / ones，让孩子能做选择、避免重复，并完成一次综合表达。',
+        vocabulary: [
+          ['transport', '/ˈtrænspɔːt/', 'n.', '交通；运输', 'Public transport is useful.'],
+          ['journey', '/ˈdʒɜːni/', 'n.', '旅程', 'This is my favourite journey.'],
+          ['ferry', '/ˈferi/', 'n.', '渡船', 'The ferry crosses the river.'],
+          ['platform', '/ˈplætfɔːm/', 'n.', '站台', 'The train leaves from platform three.'],
+          ['faster', '/ˈfɑːstə/', 'adj.', '更快的', 'A train is faster than a bus.'],
+          ['comfortable', '/ˈkʌmftəbəl/', 'adj.', '舒适的', 'The train is more comfortable.'],
+          ['unusual', '/ʌnˈjuːʒuəl/', 'adj.', '不寻常的', 'This is an unusual way to travel.'],
+          ['environment', '/ɪnˈvaɪərənmənt/', 'n.', '环境', 'Bikes are better for the environment.']
+        ],
+        treeModel: {
+          rootHint: '前 11 单元的主系表、主谓宾、情态与过去枝全部保留；本单元新增：比较与名词替代',
+          stage: 'U12 · 让句子可以比较、可以不重复',
+          formula: 'comparative adjective + than  ｜  one / ones = replace a noun',
+          message: '比较级把同一个特点放到两个对象之间；one / ones 让同类名词不必重复。它们都是为了让表达更精确、更自然。',
+          ruleLabel: '孩子版总规律 · 比较要有标准，复用要有指向',
+          rule: '比较时先确定共同特点，再说谁更怎么样；重复名词时看数量，用 one 代替一个，用 ones 代替多个。',
+          ruleHint: '比较级后通常要有 than 和比较对象；one / ones 必须能回指前面同类名词。',
+          branches: [
+            { title: '全书旧枝 · 句子任务', leaves: [['be + C', '说明是什么/怎样', 'carry'], ['V + O', '说明做什么', 'carry'], ['can / must / past', '能力/规则/时间', 'carry']] },
+            { title: '比较 · Compare', leaves: [['faster than', '短形容词 + -er', 'fresh'], ['more comfortable than', '长形容词 + more', 'fresh'], ['better for …', '价值/环保比较', 'fresh']] },
+            { title: '替代 · one / ones', leaves: [['the red one', '一个同类名词', 'fresh'], ['the blue ones', '多个同类名词', 'fresh'], ['my favourite one', '回指 journey', 'fresh']] }
+          ],
+          forms: [
+            ['短形容词比较', 'A train is faster than a bus.', 'adj-er + than', 'fresh'],
+            ['长形容词比较', 'A train is more comfortable than a bus.', 'more + adjective + than', 'fresh'],
+            ['替代一个', 'The blue one is faster.', 'one = singular noun', 'fresh'],
+            ['替代多个', 'The blue ones are faster.', 'ones = plural noun', 'fresh']
+          ],
+          contrast: { title: '比较句必须有“共同标准”', formula: 'faster 只能比较速度，more comfortable 只能比较舒适度。', example: 'A train is faster than a bus.  ·  The blue one is faster.', note: '先说清比较的特点和对象，比较级才不是孤零零的形容词。' }
+        },
+        patterns: [
+          { label: '交通比较', seed: 'A [transport] is [comparative] than a [transport].', steps: ['A train is faster than a bus.', 'A bike is healthier than a car.', 'It is better for the environment.'] },
+          { label: 'one / ones', seed: 'I like the [colour] one(s).', steps: ['The blue one is faster.', 'The red ones are cheaper.', 'My favourite one is the ferry.'] },
+          { label: '旅行介绍', seed: 'This is an unusual way to travel.', steps: ['It is more comfortable than …', 'You can travel across …', 'The train leaves from platform …'] }
+        ]
       }
     };
 
@@ -890,7 +2154,7 @@
     function unitClass(unit) { return unit.toLowerCase(); }
 
     function searchable(lesson) {
-      return [lesson.unit, lesson.unitName, lesson.lesson, lesson.title, lesson.subtitle, lesson.tags.join(' '), lesson.focus, lesson.output, lesson.goals.join(' '), lesson.language, lesson.note, lesson.flow.flat().join(' '), lesson.keyWords.join(' '), lesson.keySentences.join(' '), lesson.motherSentence, lesson.motherBranches.flat().join(' '), lesson.transfer, lesson.check].join(' ').toLowerCase();
+      return [lesson.unit, lesson.unitName, lesson.lesson, lesson.title, lesson.subtitle, lesson.tags.join(' '), lesson.focus, lesson.output, lesson.goals.join(' '), lesson.language, lesson.note, lesson.principle, lesson.flow.flat().join(' '), lesson.keyWords.join(' '), lesson.keySentences.join(' '), lesson.motherSentence, lesson.motherBranches.flat().join(' '), lesson.transfer, lesson.check].join(' ').toLowerCase();
     }
 
     function filteredLessons() {
@@ -955,7 +2219,7 @@
               <div class="tree-intro"><div><h4>核心语法点 · 一棵持续生长的句子树</h4><p>${tree.message}</p></div><div class="tree-legend"><span><i class="legend-dot"></i>本单元新叶子</span><span><i class="legend-dot carry"></i>已长好的叶子</span><span><i class="legend-dot later"></i>下一阶段</span></div></div>
               <div class="grammar-tree">
                 <div class="tree-stage">${tree.stage}</div>
-                <div class="tree-root">英语句子 · English sentence<small>本单元先长出：主系表句 · Subject + be + Complement</small></div>
+                <div class="tree-root">英语句子 · English sentence<small>${tree.rootHint || '本单元先长出：主系表句 · Subject + be + Complement'}</small></div>
                 <div class="tree-trunk"></div>
                 <div class="tree-rule"><strong>${tree.ruleLabel}</strong><span>${tree.rule}</span><small>${tree.ruleHint}</small></div>
                 <div class="tree-trunk"></div>
@@ -984,6 +2248,7 @@
             <div class="label">今天能做到</div>
             <ul class="goal-list">${item.goals.map(goal => `<li>${goal}</li>`).join('')}</ul>
             <div class="language-box"><strong>Key language</strong>${item.language}</div>
+            <div class="lesson-principle"><strong>本课总规律 · Principle</strong>${item.principle}</div>
             <div class="lesson-core">
               <div class="core-field"><div class="method-label">关键词 · Key words</div><div class="word-list">${item.keyWords.map(word => `<span>${word}</span>`).join('')}</div></div>
               <div class="core-field key-sentence"><div class="method-label">关键句 · Key sentences</div><p>${item.keySentences.join('<br />')}</p></div>
@@ -1001,7 +2266,7 @@
     }
 
     function renderLessonArea(items) {
-      const visibleUnits = ['U1', 'U2'].filter(unit => items.some(item => item.unit === unit));
+      const visibleUnits = [...new Set(items.map(item => item.unit))].sort((a, b) => Number(a.slice(1)) - Number(b.slice(1)));
       lessonArea.innerHTML = visibleUnits.map(unit => {
         const unitItems = items.filter(item => item.unit === unit);
         const copy = unitCopy[unit];
