@@ -307,6 +307,77 @@
     .note-card p { margin: 0; color: var(--muted); font-size: 14px; }
     .note-card ul { margin: 10px 0 0; padding-left: 18px; color: var(--muted); font-size: 14px; }
 
+    .book-summary { margin: 52px 0 34px; }
+    .book-summary-hero { position: relative; overflow: hidden; padding: 31px 32px 28px; border-radius: var(--radius-lg); color: #fff; background: linear-gradient(120deg, #202552 0%, #267f90 54%, #e49a3b 100%); box-shadow: 0 22px 52px rgba(31,34,81,.18); }
+    .book-summary-hero::before, .book-summary-hero::after { content: ""; position: absolute; border-radius: 999px; background: rgba(255,255,255,.12); }
+    .book-summary-hero::before { width: 230px; height: 230px; right: -34px; top: -108px; box-shadow: -170px 170px 0 rgba(255,214,107,.16); }
+    .book-summary-hero::after { width: 95px; height: 95px; right: 23%; bottom: -52px; background: rgba(255,107,87,.26); }
+    .book-summary-hero > * { position: relative; z-index: 1; }
+    .book-summary-hero h2 { max-width: 850px; margin: 0; color: #fff; font-size: clamp(25px, 3vw, 38px); line-height: 1.12; letter-spacing: -.04em; }
+    .book-summary-hero p { max-width: 850px; margin: 12px 0 0; color: rgba(255,255,255,.88); font-size: 15px; line-height: 1.7; }
+    .book-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 9px; max-width: 780px; margin-top: 22px; }
+    .book-stat { padding: 12px 13px; border: 1px solid rgba(255,255,255,.22); border-radius: 13px; background: rgba(255,255,255,.11); }
+    .book-stat strong { display: block; color: #fff; font-size: 16px; }
+    .book-stat span { display: block; margin-top: 2px; color: rgba(255,255,255,.72); font-size: 11px; }
+    .book-summary-grid { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr); gap: 18px; margin-top: 18px; }
+    .book-card { min-width: 0; padding: 22px 23px; border: 1px solid var(--line); border-radius: var(--radius-md); background: #fff; box-shadow: 0 12px 30px rgba(31,34,81,.06); }
+    .book-card.wide { grid-column: 1 / -1; }
+    .book-card h3 { margin: 0 0 5px; color: var(--ink); font-size: 19px; letter-spacing: -.025em; }
+    .book-card > p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
+    .book-journey { display: grid; gap: 9px; margin-top: 16px; }
+    .book-stage { display: grid; grid-template-columns: 88px 1fr; gap: 13px; align-items: start; padding: 12px 13px; border-left: 4px solid var(--teal); border-radius: 0 12px 12px 0; background: #f4fbfa; }
+    .book-stage:nth-child(2) { border-left-color: #e28b2f; background: #fff8ed; }
+    .book-stage:nth-child(3) { border-left-color: #2381b8; background: #f1f8fd; }
+    .book-stage:nth-child(4) { border-left-color: #d64f86; background: #fff4f8; }
+    .book-stage:nth-child(5) { border-left-color: #7658e8; background: #f5f2ff; }
+    .book-stage-label { color: var(--ink); font-size: 12px; font-weight: 950; }
+    .book-stage-label small { display: block; margin-top: 3px; color: var(--muted); font-size: 10px; font-weight: 800; }
+    .book-stage h4 { margin: 0; color: var(--ink); font-size: 14px; }
+    .book-stage p { margin: 3px 0 0; color: #555a78; font-size: 12px; line-height: 1.5; }
+    .book-stage strong { color: var(--teal); }
+    .book-tree { margin-top: 16px; padding: 14px; border-radius: 15px; background: linear-gradient(135deg, #fffdf2, #f7fbff); }
+    .book-tree-root { width: fit-content; margin: 0 auto 13px; padding: 11px 18px; border: 3px solid var(--yellow); border-radius: 999px; color: var(--ink); background: #fff; font-size: 15px; font-weight: 950; text-align: center; box-shadow: 0 7px 14px rgba(31,34,81,.08); }
+    .book-tree-root small { display: block; margin-top: 3px; color: var(--muted); font-size: 10px; font-weight: 750; }
+    .book-tree-columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .book-tree-branch { padding: 13px; border: 1px solid var(--line); border-radius: 13px; background: #fff; }
+    .book-tree-branch:nth-child(2) { border-top: 4px solid var(--teal); }
+    .book-tree-branch:nth-child(3) { border-top: 4px solid #e28b2f; }
+    .book-tree-branch:nth-child(4) { border-top: 4px solid #7658e8; }
+    .book-tree-branch h4 { margin: 0; color: var(--ink); font-size: 14px; }
+    .book-tree-branch p { margin: 4px 0 0; color: var(--muted); font-size: 11px; line-height: 1.45; }
+    .book-tree-branch ul { display: grid; gap: 6px; margin: 9px 0 0; padding: 0; list-style: none; }
+    .book-tree-branch li { padding: 7px 8px; border-radius: 8px; color: #4f5573; background: #f7f8fc; font-size: 11px; line-height: 1.4; }
+    .book-tree-branch li strong { display: block; color: var(--ink); font-size: 12px; }
+    .book-rule-strip { margin-top: 12px; padding: 13px 14px; border: 2px solid rgba(22,182,165,.22); border-radius: 12px; color: #3f4967; background: #effbf8; font-size: 13px; line-height: 1.6; }
+    .book-rule-strip strong { color: var(--teal); }
+    .book-table-wrap { overflow-x: auto; margin-top: 15px; }
+    .book-table { width: 100%; min-width: 720px; margin: 0; font-size: 12px; }
+    .book-table th, .book-table td { padding: 10px 8px; vertical-align: top; }
+    .book-table th { color: var(--muted); background: #fafaff; font-size: 11px; }
+    .book-table td:first-child { color: var(--ink); font-weight: 900; white-space: nowrap; }
+    .book-table td:nth-child(2) { color: var(--teal); font-weight: 850; }
+    .book-table td:nth-child(3) { color: #555a78; line-height: 1.5; }
+    .book-table td:nth-child(4) { color: var(--ink); font-weight: 750; line-height: 1.5; }
+    .book-output-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 9px; margin-top: 15px; }
+    .book-output { min-height: 105px; padding: 12px; border-radius: 12px; background: #f8f8fc; }
+    .book-output strong { display: block; color: var(--ink); font-size: 12px; }
+    .book-output span { display: block; margin-top: 5px; color: var(--muted); font-size: 11px; line-height: 1.5; }
+    .book-checklist { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 9px; margin-top: 15px; }
+    .book-check { padding: 12px 11px; border-top: 3px solid var(--teal); border-radius: 10px; background: #f4fbfa; }
+    .book-check:nth-child(2) { border-top-color: #2381b8; }
+    .book-check:nth-child(3) { border-top-color: #e28b2f; }
+    .book-check:nth-child(4) { border-top-color: #d64f86; }
+    .book-check:nth-child(5) { border-top-color: #7658e8; }
+    .book-check strong { display: block; color: var(--ink); font-size: 12px; }
+    .book-check span { display: block; margin-top: 5px; color: var(--muted); font-size: 11px; line-height: 1.45; }
+    .book-review-path { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 15px; }
+    .book-review-step { padding: 13px; border: 1px dashed #cfd0e1; border-radius: 12px; background: #fff; }
+    .book-review-step strong { display: block; color: var(--ink); font-size: 13px; }
+    .book-review-step span { display: block; margin-top: 4px; color: var(--muted); font-size: 11px; line-height: 1.5; }
+    .book-review-step b { display: inline-flex; margin-bottom: 7px; padding: 3px 7px; border-radius: 7px; color: #fff; background: var(--navy); font-size: 10px; }
+    .book-final-note { margin-top: 15px; padding: 16px 17px; border-left: 4px solid var(--yellow); border-radius: 0 13px 13px 0; color: #5a5132; background: #fff9e7; font-size: 13px; line-height: 1.65; }
+    .book-final-note strong { color: #806c2d; }
+
     .parent-guide { margin-top: 48px; }
     .guide-hero {
       position: relative;
@@ -456,6 +527,10 @@
       .summary-grid { grid-template-columns: 1fr; }
       .tree-card, .sentence-patterns { grid-column: auto; }
       .pattern-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .book-summary-grid { grid-template-columns: 1fr; }
+      .book-card.wide { grid-column: auto; }
+      .book-output-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .book-checklist { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     }
     @media (max-width: 680px) {
       .page-shell { width: min(100% - 20px, 1240px); }
@@ -475,6 +550,11 @@
       .tree-branch-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .tree-branch-grid::before { display: none; }
       .pattern-grid { grid-template-columns: 1fr; }
+      .book-summary-hero { padding: 25px 22px 22px; }
+      .book-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .book-stage { grid-template-columns: 1fr; gap: 4px; }
+      .book-tree-columns { grid-template-columns: 1fr; }
+      .book-output-grid, .book-checklist, .book-review-path { grid-template-columns: 1fr; }
     }
 
     @media print {
@@ -651,11 +731,164 @@
         <h2>内容依据 <span aria-hidden="true">📚</span></h2>
         <p>内容依据你提供的《教师用书.pdf》，版式和课堂语言参考你提供的 Grammar Presentation 示例。</p>
         <ul>
-          <li>Unit 1：All together</li>
-          <li>Unit 2：I’m excited</li>
-          <li>核心产出：个人资料介绍、情绪与喜好对话、短信写作</li>
+          <li>Unit 1–12：Think 2e Starter 全册主题与语言板块</li>
+          <li>每单元 3 课：输入、结构发现、操练与真实输出</li>
+          <li>核心产出：个人介绍、城市导览、日常短文、朋友卡、运动安排、短信、meal plan、成就故事、动物信息卡和交通指南</li>
         </ul>
       </article>
+    </section>
+
+    <section class="book-summary" aria-labelledby="book-summary-title">
+      <div class="book-summary-hero">
+        <div class="guide-label">whole-book synthesis · 全册总纲</div>
+        <h2 id="book-summary-title">整册总结 · 从“我是谁”到“我能表达自己的世界”</h2>
+        <p>这一册不是 12 个彼此分开的主题，而是一条逐渐变宽的表达路线：先认识自己和别人，再描述家庭、城市、习惯与朋友；接着表达能力、正在发生的事、规则和选择；最后把过去、动物、交通、比较和故事组织起来。每个新单元都保留前面的句子主干，再新增一种“句子要完成的任务”。</p>
+        <div class="book-stats" aria-label="全册统计">
+          <div class="book-stat"><strong>12</strong><span>主题单元</span></div>
+          <div class="book-stat"><strong>36</strong><span>45 分钟课时</span></div>
+          <div class="book-stat"><strong>5</strong><span>阶段性表达台阶</span></div>
+          <div class="book-stat"><strong>1</strong><span>持续生长的句子树</span></div>
+        </div>
+      </div>
+
+      <div class="book-summary-grid">
+        <article class="book-card">
+          <h3>一册的主题路线 · Theme journey</h3>
+          <p>每三单元左右，孩子的表达范围会扩大一层；主题变化背后，句子结构也在逐步增加。</p>
+          <div class="book-journey">
+            <div class="book-stage">
+              <div class="book-stage-label">U1–U2<small>认识与连接</small></div>
+              <div><h4>Who am I? How do I feel?</h4><p>介绍姓名、国家、年龄、身份和喜好；表达 feelings，学会提问、否定、短回答，并用宾语代词连接到别人。</p></div>
+            </div>
+            <div class="book-stage">
+              <div class="book-stage-label">U3–U4<small>关系与环境</small></div>
+              <div><h4>Whose? What is there?</h4><p>从家庭和房间说“谁的什么”，再走进城市地图，表达某处有什么、物品在哪里、下一步怎么走。</p></div>
+            </div>
+            <div class="book-stage">
+              <div class="book-stage-label">U5–U6<small>习惯与人物</small></div>
+              <div><h4>What do people do and have?</h4><p>用一般现在时说稳定习惯，用频率词、do/does 提问和否定；用 have/has got 描述外貌，再用 be 和动作句补充品质与行为。</p></div>
+            </div>
+            <div class="book-stage">
+              <div class="book-stage-label">U7–U9<small>行动与选择</small></div>
+              <div><h4>What can I do now?</h4><p>表达能力、安排时间、提出建议；描述正在发生的现场；在厨房和餐厅表达规则、许可、需要、提供与礼貌请求。</p></div>
+            </div>
+            <div class="book-stage">
+              <div class="book-stage-label">U10–U12<small>过去与比较</small></div>
+              <div><h4>What happened? Which is better?</h4><p>讲过去的身份、动作和能力，组织成就与动物故事；比较交通方式，使用 one/ones 避免重复，完成全书综合表达。</p></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="book-card">
+          <h3>全册最重要的一句话</h3>
+          <p>看到一个新句子，不先问“这是什么语法名称”，先问它正在完成什么任务。</p>
+          <div class="book-rule-strip"><strong>总方法：</strong>先找主语，再找谓语；判断谓语是在说明主语、表达动作、标记时间，还是给动作加上能力、规则、许可或比较信息。最后再检查后面的词在句子中扮演什么角色。</div>
+          <div class="book-tree">
+            <div class="book-tree-root">英语句子 · English sentence<small>主语 Subject + 谓语 Predicate + 其他信息</small></div>
+            <div class="book-tree-columns">
+              <div class="book-tree-branch">
+                <h4>① 主系表 · S + be + C</h4>
+                <p>回答：主语是什么、在哪里、怎么样、几岁。</p>
+                <ul>
+                  <li><strong>U1–U2</strong>地点、身份、状态、年龄；否定、提问、短回答。</li>
+                  <li><strong>U3–U4</strong>家庭所属、房间与城市位置。</li>
+                  <li><strong>U8</strong>be 继续保留，并长出助动词功能：be + V-ing。</li>
+                </ul>
+              </div>
+              <div class="book-tree-branch">
+                <h4>② 主谓宾 · S + V + O</h4>
+                <p>回答：主语做什么，动作指向谁或什么。</p>
+                <ul>
+                  <li><strong>U2</strong>I like her：like 是动作，her 是宾语。</li>
+                  <li><strong>U5</strong>一般现在时表达习惯；第三人称 -s；do/does 提问否定。</li>
+                  <li><strong>U10–U11</strong>过去规则动作、不规则动作与故事顺序。</li>
+                </ul>
+              </div>
+              <div class="book-tree-branch">
+                <h4>③ there be · 某处存在什么</h4>
+                <p>回答：在某个地方，有一个/一些什么东西。</p>
+                <ul>
+                  <li><strong>U4</strong>There is a park. / There are some shops.</li>
+                  <li><strong>U10</strong>There was / were 把存在句搬到过去。</li>
+                  <li><strong>判断</strong>It is a museum 说“它是什么”；There is a museum 说“那里有”。</li>
+                </ul>
+              </div>
+              <div class="book-tree-branch">
+                <h4>④ 情态与其他工具</h4>
+                <p>不替代主干，而是给动作增加能力、规则、许可、需要或比较信息。</p>
+                <ul>
+                  <li><strong>U7–U9</strong>can、must、I’d like、Would you like。</li>
+                  <li><strong>U11</strong>could / couldn’t 表达过去能力。</li>
+                  <li><strong>U12</strong>比较级和 one/ones 让选择更准确、表达不重复。</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="book-card wide">
+          <h3>全册语言结构地图 · 遇到句子时怎么选枝条？</h3>
+          <p>下面这张表可以作为每周复习时的“句型选择器”。先判断中文想表达的关系，再回到相应的英语结构。</p>
+          <div class="book-table-wrap">
+            <table class="book-table">
+              <thead><tr><th>我想表达什么</th><th>优先选择的结构</th><th>孩子版判断问题</th><th>本册代表句</th></tr></thead>
+              <tbody>
+                <tr><td>说明主语</td><td>主系表：S + be + C</td><td>我是在补充说明“谁/什么”在哪里、是谁、怎么样或几岁吗？</td><td>I’m from China. · She’s a singer. · They’re excited.</td></tr>
+                <tr><td>说主语做什么</td><td>主谓宾：S + V + O</td><td>有没有一个动作？这个动作指向谁或什么？</td><td>I like her. · She makes robots. · They play games.</td></tr>
+                <tr><td>说某处有什么</td><td>there is / there are</td><td>重点是“那里存在什么”，而不是“它是什么”吗？</td><td>There is a park. · There are some shops.</td></tr>
+                <tr><td>说拥有的东西或特征</td><td>have / has got；owner + ’s</td><td>我是在说“谁拥有/属于谁”吗？</td><td>She has got brown eyes. · Anna’s family.</td></tr>
+                <tr><td>说习惯和频率</td><td>一般现在时；always / often / sometimes / never</td><td>这是经常发生、稳定存在的动作吗？</td><td>She often uses her tablet. · The club meets on Monday.</td></tr>
+                <tr><td>说现在正在发生</td><td>be + V-ing</td><td>如果把画面暂停，动作正在这一刻发生吗？</td><td>Lucy is waiting. · People are dancing.</td></tr>
+                <tr><td>说能力/许可/规则</td><td>can / could；must / mustn’t + 动词原形</td><td>我是在说能不能、可不可以，还是必须/禁止吗？</td><td>She can swim. · You must wash your hands. · She could run.</td></tr>
+                <tr><td>说过去发生过什么</td><td>was / were；V-ed；不规则过去式</td><td>事情发生在过去吗？是状态、存在，还是实际动作？</td><td>She was an astronaut. · She climbed. · He went.</td></tr>
+                <tr><td>比较两个选择</td><td>comparative + than；one / ones</td><td>比较的共同特点是什么？后面的名词能否用 one/ones 代替？</td><td>A train is faster than a bus. · The blue one is faster.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="book-final-note"><strong>贯穿全册的检查顺序：</strong>① 主语是谁/什么？② 谓语是哪一类？③ 时间是现在、正在发生还是过去？④ 句子要表达说明、动作、存在、拥有、能力、规则还是比较？⑤ 动词和后面的词有没有跟着这个任务变化？</div>
+        </article>
+
+        <article class="book-card wide">
+          <h3>整册学生作品地图 · 每个阶段都留下可见成果</h3>
+          <p>作品不是额外负担，而是检验孩子能否把词汇和句型放回真实任务的证据。</p>
+          <div class="book-output-grid">
+            <div class="book-output"><strong>U1 · Personal profile</strong><span>姓名、国家、年龄、职业、喜欢的人或事；练习完整自我介绍。</span></div>
+            <div class="book-output"><strong>U2 · Text message</strong><span>问候、地点、情绪、原因、反问和结尾；学会把对话写给真实的人。</span></div>
+            <div class="book-output"><strong>U3 · Favourite room</strong><span>家庭关系、所属关系、房间家具和特点；写一段有主题句的描述。</span></div>
+            <div class="book-output"><strong>U4 · City brochure</strong><span>景点、方位、路线、价格和推荐理由；让读者看完可以行动。</span></div>
+            <div class="book-output"><strong>U5 · Days in your life</strong><span>时间线、活动和频率；说清楚“谁在什么时候经常做什么”。</span></div>
+            <div class="book-output"><strong>U6 · Friend card</strong><span>外貌、品质和帮助行为；让 be、have got、动作句各司其职。</span></div>
+            <div class="book-output"><strong>U7 · Sport timetable</strong><span>能力、日期、时间和建议；协商一次真实的运动安排。</span></div>
+            <div class="book-output"><strong>U8 · Scene microblog</strong><span>人物、正在发生的动作、衣服、地点和感受；写出一幅动态画面。</span></div>
+            <div class="book-output"><strong>U9 · Weekend meal plan</strong><span>三餐、食物、规则、需要和帮助；用礼貌语言完成共同选择。</span></div>
+            <div class="book-output"><strong>U10 · Achievement story</strong><span>过去身份、动作和时间顺序；把成就讲成 beginning → event → result。</span></div>
+            <div class="book-output"><strong>U11 · Animal information card</strong><span>过去事实、救援/变化、过去能力和保护行动；连接历史与今天。</span></div>
+            <div class="book-output"><strong>U12 · Transport guide</strong><span>交通比较、one/ones、车站信息和 unusual transport；完成全书迁移。</span></div>
+          </div>
+        </article>
+
+        <article class="book-card wide">
+          <h3>全册掌握标准 · 不只看“做对了没有”</h3>
+          <p>每个单元结束可以用同一套标准判断孩子是否真的把内容带走。</p>
+          <div class="book-checklist">
+            <div class="book-check"><strong>理解</strong><span>能用自己的话说出主题、人物/地点和 2–3 条关键信息。</span></div>
+            <div class="book-check"><strong>提取</strong><span>隔两三天还能认出核心词，并解释它在句子里承担什么作用。</span></div>
+            <div class="book-check"><strong>运用</strong><span>不看原文，能用本单元句型造出 3 句有意义的话。</span></div>
+            <div class="book-check"><strong>迁移</strong><span>换人物、地点、时间、情绪或对象后，仍能尝试保留句子骨架。</span></div>
+            <div class="book-check"><strong>延迟</strong><span>一周或两周后，不重新完整讲解，也能调用相应枝条。</span></div>
+          </div>
+          <div class="book-review-path">
+            <div class="book-review-step"><b>课后 2 天</b><strong>小范围提取</strong><span>只看图片或关键词，让孩子说出一条母句，再替换一个位置。重点看她是否记得句子角色。</span></div>
+            <div class="book-review-step"><b>单元结束</b><strong>沿着语法树复述</strong><span>先说本单元新增的枝，再指出哪些枝是从前面保留下来的，最后完成一个综合输出。</span></div>
+            <div class="book-review-step"><b>学完 3 个单元</b><strong>跨主题迁移</strong><span>把同一结构搬到新主题：用 U5 的动作句说运动，用 U10 的过去句讲家庭或旅行故事。</span></div>
+          </div>
+        </article>
+
+        <article class="book-card wide">
+          <h3>给家长和老师的总提醒</h3>
+          <div class="book-final-note"><strong>我们最终要培养的不是“见过多少语法点”，而是孩子面对新句子时有一套稳定的判断路线：</strong>先理解意思，再识别句子任务；先找到主语和谓语，再看时间、数量和角色变化；先用母句保证结构，再换一个叶子完成迁移。她可以暂时说得不完美，但应该越来越敢于自己判断、自己尝试、自己检查。这样，U1 的“我是谁”会一直留在树干里，直到 U12 变成“我能比较、能讲故事、能介绍一个真实世界”。</div>
+        </article>
+      </div>
     </section>
 
     <footer>Think 2e · U1–U12 classroom courseware · designed for a bright, brave classroom</footer>
