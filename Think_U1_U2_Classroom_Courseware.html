@@ -2563,10 +2563,31 @@
       });
     }
 
+    function jumpToUnit(unit) {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          const target = unit === 'all'
+            ? document.getElementById('overview-title')
+            : document.querySelector(`.unit-banner.${unitClass(unit)}`);
+          if (!target) return;
+          const toolbar = document.querySelector('.toolbar');
+          const offset = (toolbar?.getBoundingClientRect().height || 0) + 30;
+          const top = target.getBoundingClientRect().top + window.scrollY - offset;
+          const root = document.documentElement;
+          const previousScrollBehavior = root.style.scrollBehavior;
+          root.style.scrollBehavior = 'auto';
+          window.scrollTo({ top: Math.max(0, top), behavior: 'auto' });
+          root.style.scrollBehavior = previousScrollBehavior;
+        });
+      });
+    }
+
     document.querySelectorAll('.filter-pill').forEach(button => {
       button.addEventListener('click', () => {
         state.unit = button.dataset.unit;
+        state.lesson = 'all';
         render();
+        jumpToUnit(state.unit);
       });
     });
     lessonFilter.addEventListener('change', event => {
