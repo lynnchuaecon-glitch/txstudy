@@ -1,0 +1,1041 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Think 2e U1–U2 classroom courseware: six colorful 45-minute lessons." />
+  <title>Think 2e · U1–U2 教室用课件</title>
+  <style>
+    :root {
+      --ink: #1c2141;
+      --muted: #6e7291;
+      --paper: #fbfbff;
+      --line: #e8e8f2;
+      --navy: #222653;
+      --u1: #ff6b57;
+      --u1-soft: #fff0ed;
+      --u2: #7658e8;
+      --u2-soft: #f0edff;
+      --teal: #16b6a5;
+      --yellow: #ffd66b;
+      --shadow: 0 18px 45px rgba(31, 34, 81, .10);
+      --radius-lg: 28px;
+      --radius-md: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 2%, rgba(255, 214, 107, .22), transparent 26rem),
+        radial-gradient(circle at 92% 9%, rgba(118, 88, 232, .16), transparent 28rem),
+        #f5f5fb;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.55;
+    }
+
+    button, select, input { font: inherit; }
+    button { cursor: pointer; }
+
+    .page-shell { width: min(1240px, calc(100% - 32px)); margin: 0 auto; }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      margin: 28px auto 22px;
+      padding: 46px 50px 40px;
+      min-height: 300px;
+      border-radius: var(--radius-lg);
+      color: #fff;
+      background: linear-gradient(125deg, #222653 0%, #30356f 58%, #5a45bc 100%);
+      box-shadow: 0 24px 60px rgba(34, 38, 83, .25);
+      isolation: isolate;
+    }
+
+    .hero::before, .hero::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      border-radius: 999px;
+      filter: blur(.2px);
+    }
+    .hero::before {
+      width: 310px; height: 310px; right: -76px; top: -105px;
+      background: rgba(255, 214, 107, .22);
+      box-shadow: -170px 180px 0 rgba(22, 182, 165, .18);
+    }
+    .hero::after {
+      width: 135px; height: 135px; left: 56%; bottom: -80px;
+      background: rgba(255, 107, 87, .35);
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 13px;
+      padding: 7px 12px;
+      border: 1px solid rgba(255,255,255,.26);
+      border-radius: 999px;
+      color: #fff8d8;
+      background: rgba(255,255,255,.10);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .hero h1 { margin: 0; max-width: 720px; font-size: clamp(34px, 5vw, 62px); line-height: .98; letter-spacing: -.045em; }
+    .hero h1 em { color: var(--yellow); font-style: normal; }
+    .hero-subtitle { max-width: 660px; margin: 18px 0 0; color: rgba(255,255,255,.84); font-size: 17px; }
+    .hero-stats { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 27px; }
+    .hero-stat { padding: 9px 13px; border-radius: 13px; color: #fff; background: rgba(255,255,255,.12); font-size: 13px; font-weight: 700; }
+
+    .toolbar {
+      position: sticky;
+      z-index: 10;
+      top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 26px;
+      padding: 12px;
+      border: 1px solid rgba(232,232,242,.95);
+      border-radius: 20px;
+      background: rgba(255,255,255,.86);
+      box-shadow: 0 12px 30px rgba(31,34,81,.08);
+      backdrop-filter: blur(16px);
+    }
+    .filter-label { padding: 0 7px; color: var(--muted); font-size: 13px; font-weight: 800; white-space: nowrap; }
+    .filter-pills { display: flex; gap: 7px; flex-wrap: wrap; }
+    .filter-pill {
+      border: 0;
+      padding: 9px 14px;
+      border-radius: 999px;
+      color: #60647f;
+      background: #f1f1f8;
+      font-size: 13px;
+      font-weight: 800;
+      transition: transform .2s ease, color .2s ease, background .2s ease, box-shadow .2s ease;
+    }
+    .filter-pill:hover { transform: translateY(-1px); color: var(--ink); }
+    .filter-pill.active[data-unit="all"] { color: #fff; background: var(--navy); box-shadow: 0 7px 15px rgba(34,38,83,.2); }
+    .filter-pill.active[data-unit="U1"] { color: #fff; background: var(--u1); box-shadow: 0 7px 15px rgba(255,107,87,.24); }
+    .filter-pill.active[data-unit="U2"] { color: #fff; background: var(--u2); box-shadow: 0 7px 15px rgba(118,88,232,.24); }
+    .toolbar-divider { width: 1px; height: 24px; background: var(--line); }
+    .select-wrap { position: relative; }
+    .select-wrap select, .search-wrap input {
+      min-height: 38px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      color: var(--ink);
+      background: #fff;
+      outline: 0;
+      font-size: 13px;
+    }
+    .select-wrap select { padding: 0 30px 0 12px; }
+    .search-wrap { flex: 1 1 180px; min-width: 170px; }
+    .search-wrap input { width: 100%; padding: 0 12px 0 36px; }
+    .search-wrap::before { content: "⌕"; position: absolute; z-index: 1; margin: 6px 0 0 12px; color: var(--muted); font-size: 22px; line-height: 1; }
+    .toolbar-status { margin-left: auto; color: var(--muted); font-size: 12px; font-weight: 700; white-space: nowrap; }
+
+    .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 16px; margin: 40px 0 16px; }
+    .section-heading h2 { margin: 0; font-size: 24px; letter-spacing: -.03em; }
+    .section-heading p { margin: 0; color: var(--muted); font-size: 13px; }
+    .section-kicker { margin-bottom: 4px; color: var(--teal); font-size: 12px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+
+    .overview-card {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+    .overview-scroll { overflow-x: auto; }
+    table { width: 100%; min-width: 760px; border-collapse: collapse; }
+    th, td { padding: 15px 18px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    th { color: #777b98; background: #fafaff; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+    tbody tr:last-child td { border-bottom: 0; }
+    tbody tr:hover { background: #fcfcff; }
+    .unit-badge, .lesson-badge, .mini-tag {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+    .unit-badge { padding: 5px 9px; color: #fff; }
+    .unit-badge.u1 { background: var(--u1); }
+    .unit-badge.u2 { background: var(--u2); }
+    .overview-title { margin-top: 6px; font-weight: 850; }
+    .overview-focus { color: var(--muted); font-size: 13px; }
+    .output { color: var(--ink); font-size: 13px; font-weight: 700; }
+
+    .unit-block { margin-top: 44px; }
+    .unit-banner {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      overflow: hidden;
+      padding: 25px 28px;
+      border-radius: var(--radius-md);
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+    .unit-banner::after { content: "✦"; position: absolute; right: 28px; bottom: -13px; color: rgba(255,255,255,.23); font-size: 92px; line-height: 1; }
+    .unit-banner.u1 { background: linear-gradient(120deg, #f05d4b, #ff8875); }
+    .unit-banner.u2 { background: linear-gradient(120deg, #6045ca, #8b72f2); }
+    .unit-banner h2 { position: relative; z-index: 1; margin: 3px 0 0; font-size: clamp(25px, 3vw, 38px); line-height: 1; letter-spacing: -.04em; }
+    .unit-banner p { position: relative; z-index: 1; max-width: 620px; margin: 9px 0 0; color: rgba(255,255,255,.86); font-size: 14px; }
+    .unit-number { position: relative; z-index: 1; align-self: center; padding: 11px 14px; border: 1px solid rgba(255,255,255,.35); border-radius: 15px; background: rgba(255,255,255,.12); font-size: 14px; font-weight: 900; white-space: nowrap; }
+
+    .lesson-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 18px; }
+    .lesson-card {
+      display: flex;
+      min-width: 0;
+      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: #fff;
+      box-shadow: 0 12px 30px rgba(31,34,81,.07);
+      transition: transform .22s ease, box-shadow .22s ease;
+    }
+    .lesson-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(31,34,81,.12); }
+    .lesson-card-top { padding: 20px 20px 17px; border-bottom: 1px solid var(--line); }
+    .lesson-card.u1 .lesson-card-top { background: linear-gradient(135deg, var(--u1-soft), #fff); }
+    .lesson-card.u2 .lesson-card-top { background: linear-gradient(135deg, var(--u2-soft), #fff); }
+    .lesson-meta { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+    .lesson-badge { padding: 5px 9px; color: #fff; background: var(--navy); }
+    .lesson-card.u1 .lesson-badge { background: var(--u1); }
+    .lesson-card.u2 .lesson-badge { background: var(--u2); }
+    .duration { color: var(--muted); font-size: 12px; font-weight: 800; }
+    .lesson-card h3 { margin: 15px 0 4px; font-size: 21px; line-height: 1.08; letter-spacing: -.03em; }
+    .lesson-subtitle { min-height: 42px; margin: 0; color: var(--muted); font-size: 13px; }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 13px; }
+    .mini-tag { padding: 5px 8px; color: #585d7a; background: rgba(255,255,255,.84); border: 1px solid rgba(105,105,150,.18); }
+    .lesson-card-body { display: flex; flex: 1; flex-direction: column; padding: 18px 20px 20px; }
+    .label { margin: 0 0 8px; color: #8589a2; font-size: 11px; font-weight: 950; letter-spacing: .08em; text-transform: uppercase; }
+    .goal-list { display: grid; gap: 7px; margin: 0; padding: 0; list-style: none; }
+    .goal-list li { display: flex; gap: 8px; color: #363a59; font-size: 13px; }
+    .goal-list li::before { content: "✓"; flex: 0 0 auto; color: var(--teal); font-weight: 950; }
+    .language-box { margin-top: 17px; padding: 12px 13px; border-radius: 13px; color: #454a6c; background: #f8f8fc; font-size: 12px; }
+    .language-box strong { display: block; margin-bottom: 4px; color: var(--ink); font-size: 11px; letter-spacing: .05em; text-transform: uppercase; }
+    .lesson-core { display: grid; gap: 11px; margin-top: 17px; }
+    .core-field { padding: 12px 13px; border: 1px solid var(--line); border-radius: 13px; background: #fff; }
+    .method-label { margin-bottom: 7px; color: #8589a2; font-size: 10px; font-weight: 950; letter-spacing: .08em; text-transform: uppercase; }
+    .word-list { display: flex; flex-wrap: wrap; gap: 5px; }
+    .word-list span { padding: 4px 7px; border-radius: 8px; color: #4b506d; background: #f2f3fa; font-size: 11px; font-weight: 750; }
+    .key-sentence { background: linear-gradient(135deg, #fff6e4, #fff); }
+    .key-sentence p { margin: 0; color: var(--ink); font-size: 13px; font-weight: 850; line-height: 1.55; }
+    .mother-box { padding: 14px 15px; border: 1px solid rgba(22,182,165,.25); border-radius: 14px; background: linear-gradient(135deg, #effbf8, #fff); }
+    .mother-box .method-label { color: var(--teal); }
+    .mother-main { margin-bottom: 11px; color: var(--ink); font-size: 15px; font-weight: 900; line-height: 1.35; }
+    .branch-list { display: grid; gap: 7px; }
+    .branch-row { display: grid; grid-template-columns: 55px 1fr; gap: 7px; align-items: baseline; padding-top: 7px; border-top: 1px dashed rgba(22,182,165,.25); }
+    .branch-row strong { color: #278f82; font-size: 10px; }
+    .branch-row span { color: #454a68; font-size: 11px; }
+    .branch-row em { color: var(--muted); font-size: 10px; font-style: normal; }
+    .transfer-box, .check-box { padding: 11px 13px; border-radius: 12px; font-size: 11px; line-height: 1.5; }
+    .transfer-box { color: #51457c; background: #f5f1ff; }
+    .check-box { color: #7a5a20; background: #fff8e5; }
+    .transfer-box strong, .check-box strong { display: block; margin-bottom: 3px; font-size: 10px; letter-spacing: .06em; text-transform: uppercase; }
+    .timeline { display: grid; gap: 0; margin: 14px 0 0; }
+    .timeline-row { display: grid; grid-template-columns: 43px 1fr; gap: 10px; position: relative; padding-bottom: 11px; }
+    .timeline-row:last-child { padding-bottom: 0; }
+    .timeline-row:not(:last-child)::after { content: ""; position: absolute; top: 24px; left: 13px; bottom: 0; width: 1px; background: #dedff0; }
+    .time { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; width: 27px; height: 27px; border-radius: 9px; color: #fff; background: var(--navy); font-size: 10px; font-weight: 950; }
+    .lesson-card.u1 .time { background: var(--u1); }
+    .lesson-card.u2 .time { background: var(--u2); }
+    .timeline-row strong { display: block; margin-top: 3px; font-size: 12px; }
+    .timeline-row span { display: block; color: var(--muted); font-size: 11px; line-height: 1.45; }
+    .teacher-note { margin-top: 17px; padding: 13px; border-left: 3px solid var(--yellow); border-radius: 0 12px 12px 0; background: #fff9e7; }
+    .teacher-note p { margin: 0; color: #635632; font-size: 12px; }
+    .student-output { margin-top: 17px; padding-top: 15px; border-top: 1px dashed var(--line); color: #4e5270; font-size: 12px; }
+    .student-output strong { color: var(--ink); }
+
+    .empty-state { display: none; margin: 36px 0; padding: 42px 20px; border: 1px dashed #cfd0e1; border-radius: var(--radius-md); color: var(--muted); background: rgba(255,255,255,.72); text-align: center; }
+    .empty-state.show { display: block; }
+    .empty-state .empty-icon { display: block; margin-bottom: 8px; font-size: 34px; }
+
+    .notes {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 18px;
+      margin: 44px 0 30px;
+    }
+    .note-card { padding: 23px 24px; border: 1px solid var(--line); border-radius: var(--radius-md); background: #fff; box-shadow: 0 12px 30px rgba(31,34,81,.06); }
+    .note-card h2 { margin: 0 0 10px; font-size: 18px; }
+    .note-card p { margin: 0; color: var(--muted); font-size: 13px; }
+    .note-card ul { margin: 10px 0 0; padding-left: 18px; color: var(--muted); font-size: 13px; }
+
+    .parent-guide { margin-top: 48px; }
+    .guide-hero {
+      position: relative;
+      overflow: hidden;
+      padding: 26px 28px;
+      border-radius: var(--radius-md);
+      color: #fff;
+      background: linear-gradient(120deg, #1e876f, #20b7a2 62%, #68d7bf);
+      box-shadow: var(--shadow);
+    }
+    .guide-hero::after { content: "↗"; position: absolute; right: 27px; bottom: -18px; color: rgba(255,255,255,.24); font-size: 106px; font-weight: 900; line-height: 1; }
+    .guide-hero h2 { position: relative; z-index: 1; margin: 0; color: #fff; font-size: clamp(24px, 3vw, 34px); letter-spacing: -.04em; }
+    .guide-hero p { position: relative; z-index: 1; max-width: 720px; margin: 8px 0 0; color: rgba(255,255,255,.9); font-size: 14px; }
+    .guide-label { margin-bottom: 6px; color: rgba(255,255,255,.74); font-size: 11px; font-weight: 950; letter-spacing: .1em; text-transform: uppercase; }
+    .principle-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
+    .principle-card { min-height: 142px; padding: 17px; border: 1px solid var(--line); border-radius: 16px; background: #fff; box-shadow: 0 10px 24px rgba(31,34,81,.05); }
+    .principle-icon { display: grid; place-items: center; width: 31px; height: 31px; margin-bottom: 11px; border-radius: 10px; color: #fff; background: var(--navy); font-size: 16px; }
+    .principle-card:nth-child(2) .principle-icon { background: var(--teal); }
+    .principle-card:nth-child(3) .principle-icon { background: var(--u1); }
+    .principle-card:nth-child(4) .principle-icon { color: var(--ink); background: var(--yellow); }
+    .principle-card h3 { margin: 0 0 5px; font-size: 14px; }
+    .principle-card p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.55; }
+    .guide-columns { display: grid; grid-template-columns: 1.1fr .9fr; gap: 18px; margin-top: 18px; }
+    .guide-panel { padding: 22px 23px; border: 1px solid var(--line); border-radius: var(--radius-md); background: #fff; box-shadow: 0 10px 26px rgba(31,34,81,.06); }
+    .guide-panel h3 { margin: 0 0 5px; color: var(--ink); font-size: 18px; letter-spacing: -.02em; }
+    .guide-panel > p { margin: 0 0 13px; color: var(--muted); font-size: 12px; }
+    .rhythm-table { width: 100%; min-width: 0; margin: 0; font-size: 12px; }
+    .rhythm-table th, .rhythm-table td { padding: 10px 7px; }
+    .rhythm-table th { color: var(--muted); background: #fafaff; font-size: 10px; }
+    .rhythm-table td:nth-child(2) { color: var(--teal); font-weight: 900; white-space: nowrap; }
+    .prompt-stack { display: grid; gap: 9px; margin-top: 14px; }
+    .prompt-step { display: grid; grid-template-columns: 27px 1fr; gap: 10px; align-items: start; }
+    .prompt-number { display: grid; place-items: center; width: 27px; height: 27px; border-radius: 9px; color: #fff; background: var(--u2); font-size: 11px; font-weight: 950; }
+    .prompt-step strong { display: block; margin-top: 2px; font-size: 12px; }
+    .prompt-step span { display: block; color: var(--muted); font-size: 11px; line-height: 1.45; }
+    .mother-sentence { margin-top: 18px; padding: 15px 17px; border-radius: 14px; color: #3e4260; background: linear-gradient(135deg, #f1f9f7, #f7fbff); }
+    .mother-sentence strong { display: block; margin-bottom: 5px; color: var(--teal); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+    .mother-sentence em { display: block; color: var(--ink); font-size: 15px; font-weight: 850; line-height: 1.4; }
+    .mastery-row { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 9px; margin-top: 18px; }
+    .mastery-card { padding: 14px 12px; border: 1px solid var(--line); border-radius: 14px; background: #fff; }
+    .mastery-card strong { display: block; margin-bottom: 4px; font-size: 12px; }
+    .mastery-card span { display: block; color: var(--muted); font-size: 11px; line-height: 1.45; }
+    .downgrade { margin-top: 18px; padding: 15px 17px; border-left: 4px solid var(--yellow); border-radius: 0 14px 14px 0; background: #fff9e7; }
+    .downgrade strong { color: #806c2d; font-size: 12px; }
+    .downgrade p { margin: 4px 0 0; color: #635632; font-size: 12px; }
+    .record-strip { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-top: 18px; }
+    .record-item { padding: 13px; border: 1px dashed #cfd0e1; border-radius: 13px; background: rgba(255,255,255,.72); }
+    .record-item strong { display: block; color: var(--ink); font-size: 11px; }
+    .record-item span { display: block; margin-top: 6px; color: var(--muted); font-size: 11px; }
+
+    .unit-summary { margin-top: 18px; padding: 21px; border: 1px solid rgba(34,38,83,.11); border-radius: var(--radius-md); background: linear-gradient(135deg, rgba(255,255,255,.97), rgba(248,249,255,.97)); box-shadow: 0 14px 32px rgba(31,34,81,.07); }
+    .summary-top { display: flex; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 17px; }
+    .summary-top h3 { margin: 0; color: var(--ink); font-size: 23px; letter-spacing: -.035em; }
+    .summary-top p { max-width: 660px; margin: 6px 0 0; color: var(--muted); font-size: 12px; }
+    .summary-stamp { padding: 8px 11px; border-radius: 11px; color: #fff; background: var(--navy); font-size: 11px; font-weight: 900; white-space: nowrap; }
+    .unit-summary.u1 .summary-stamp { background: var(--u1); }
+    .unit-summary.u2 .summary-stamp { background: var(--u2); }
+    .summary-grid { display: grid; grid-template-columns: minmax(0, .96fr) minmax(0, 1.04fr); gap: 16px; }
+    .summary-card { min-width: 0; padding: 17px; border: 1px solid var(--line); border-radius: 16px; background: #fff; }
+    .summary-card h4 { margin: 0 0 3px; color: var(--ink); font-size: 16px; letter-spacing: -.02em; }
+    .summary-card > p { margin: 0 0 12px; color: var(--muted); font-size: 11px; }
+    .vocab-scroll { overflow-x: auto; }
+    .vocab-table { width: 100%; min-width: 560px; margin: 0; font-size: 11px; }
+    .vocab-table th, .vocab-table td { padding: 9px 7px; }
+    .vocab-table th { background: #fafaff; font-size: 9px; }
+    .vocab-word { color: var(--ink); font-size: 12px; font-weight: 900; }
+    .vocab-ipa { color: var(--u2); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; white-space: nowrap; }
+    .pos { display: inline-flex; padding: 3px 6px; border-radius: 7px; color: #fff; background: var(--teal); font-size: 9px; font-weight: 900; }
+    .vocab-example { color: #525674; }
+    .tree-card { grid-column: 1 / -1; }
+    .tree-intro { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 9px; }
+    .tree-legend { display: flex; flex-wrap: wrap; gap: 8px; color: var(--muted); font-size: 10px; }
+    .tree-legend span { display: inline-flex; align-items: center; gap: 4px; }
+    .legend-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--teal); }
+    .legend-dot.carry { background: #c8c9d7; }
+    .legend-dot.later { border: 1px dashed #b7b8c7; background: transparent; }
+    .grammar-tree { position: relative; margin-top: 17px; padding: 4px 4px 2px; }
+    .tree-stage { width: fit-content; margin: 0 auto 8px; padding: 5px 9px; border-radius: 8px; color: var(--teal); background: #effbf8; font-size: 10px; font-weight: 950; letter-spacing: .04em; }
+    .tree-root { position: relative; z-index: 2; width: fit-content; margin: 0 auto; padding: 12px 18px; border: 4px solid var(--yellow); border-radius: 999px; color: var(--ink); background: #fffdf2; font-size: 13px; font-weight: 950; text-align: center; box-shadow: 0 7px 14px rgba(31,34,81,.08); }
+    .tree-root small { display: block; margin-top: 3px; color: var(--muted); font-size: 10px; font-weight: 700; }
+    .tree-trunk { width: 3px; height: 23px; margin: 0 auto; background: #b38b50; }
+    .tree-branch-grid { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; }
+    .tree-branch-grid::before { content: ""; position: absolute; top: 0; left: 16%; right: 16%; height: 2px; background: #b38b50; }
+    .tree-branch { position: relative; min-width: 0; padding-top: 15px; }
+    .tree-branch::before { content: ""; position: absolute; top: 0; left: 50%; width: 2px; height: 15px; background: #b38b50; }
+    .tree-branch-head { display: flex; align-items: center; gap: 6px; min-height: 37px; padding: 7px 8px; border-radius: 11px; color: #fff; background: var(--navy); font-size: 11px; font-weight: 900; line-height: 1.2; }
+    .tree-branch-head span { display: grid; place-items: center; flex: 0 0 auto; width: 20px; height: 20px; border-radius: 7px; color: var(--ink); background: var(--yellow); font-size: 10px; }
+    .tree-branch:nth-child(2) .tree-branch-head { background: var(--teal); }
+    .tree-branch:nth-child(3) .tree-branch-head { background: var(--u1); }
+    .tree-branch:nth-child(4) .tree-branch-head { background: var(--u2); }
+    .tree-branch:nth-child(5) .tree-branch-head { color: var(--ink); background: var(--yellow); }
+    .leaf-list { display: grid; gap: 5px; margin-top: 8px; }
+    .leaf { padding: 7px 8px; border: 1px solid rgba(22,182,165,.25); border-radius: 9px; color: #3e4260; background: #effbf8; font-size: 10px; line-height: 1.35; }
+    .leaf small { display: block; margin-top: 2px; color: var(--muted); font-size: 9px; }
+    .leaf.carry { border-color: #e0e1ea; background: #f7f7fb; }
+    .leaf.later { border-style: dashed; border-color: #c9cad7; color: #898ba2; background: #fbfbfd; }
+    .tree-formula-band { display: flex; flex-wrap: wrap; align-items: baseline; gap: 7px; margin-top: 14px; padding: 10px 12px; border-radius: 10px; color: #4b506d; background: #f8f8fc; font-size: 11px; }
+    .tree-formula-band strong { color: var(--ink); font-size: 10px; letter-spacing: .05em; text-transform: uppercase; }
+    .tree-forms { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 7px; margin-top: 9px; }
+    .tree-form { padding: 10px; border-top: 3px solid var(--teal); border-radius: 10px; background: #f2fbf9; }
+    .tree-form:nth-child(2) { border-top-color: var(--u1); }
+    .tree-form:nth-child(3) { border-top-color: var(--u2); }
+    .tree-form:nth-child(4) { border-top-color: var(--yellow); }
+    .tree-form strong, .tree-form b, .tree-form small { display: block; }
+    .tree-form strong { color: var(--muted); font-size: 10px; }
+    .tree-form b { margin-top: 4px; color: var(--ink); font-size: 12px; line-height: 1.35; }
+    .tree-form small { margin-top: 3px; color: var(--muted); font-size: 9px; }
+    .tree-form.carry { border-top-color: #bfc0cf; background: #f7f7fb; }
+    .tree-contrast { display: grid; gap: 3px; margin-top: 11px; padding: 12px 13px; border-left: 4px solid var(--u2); border-radius: 0 11px 11px 0; background: #f5f1ff; }
+    .tree-contrast strong { color: var(--u2); font-size: 11px; }
+    .tree-contrast span { color: #4e5270; font-size: 11px; }
+    .tree-contrast em { color: var(--ink); font-size: 12px; font-style: normal; font-weight: 850; }
+    .tree-contrast small { color: var(--muted); font-size: 10px; }
+    .sentence-patterns { grid-column: auto; }
+    .pattern-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+    .pattern-card { padding: 14px; border-radius: 13px; background: linear-gradient(135deg, #f7f3ff, #fff); }
+    .pattern-card h5 { margin: 0 0 7px; color: var(--u2); font-size: 11px; }
+    .pattern-seed { padding: 9px 10px; border-radius: 9px; color: var(--ink); background: #fff; font-size: 13px; font-weight: 900; line-height: 1.35; }
+    .pattern-steps { display: grid; gap: 5px; margin-top: 8px; }
+    .pattern-step { display: flex; gap: 6px; color: #555a78; font-size: 10px; line-height: 1.4; }
+    .pattern-step::before { content: "↳"; color: var(--teal); font-weight: 900; }
+    .summary-footer { margin-top: 13px; padding: 11px 13px; border-radius: 11px; color: #4e5270; background: #f5f6fb; font-size: 11px; }
+    .summary-footer strong { color: var(--ink); }
+    footer { padding: 8px 0 36px; color: #9699ae; font-size: 11px; text-align: center; }
+
+    .fade-in { animation: rise .42s ease both; }
+    @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 980px) {
+      .lesson-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .notes { grid-template-columns: 1fr; }
+      .principle-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .guide-columns { grid-template-columns: 1fr; }
+      .mastery-row { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .summary-grid { grid-template-columns: 1fr; }
+      .tree-card, .sentence-patterns { grid-column: auto; }
+      .pattern-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 680px) {
+      .page-shell { width: min(100% - 20px, 1240px); }
+      .hero { margin-top: 10px; padding: 31px 25px 28px; min-height: 290px; border-radius: 22px; }
+      .hero-subtitle { font-size: 15px; }
+      .toolbar { top: 6px; border-radius: 16px; }
+      .toolbar-divider { display: none; }
+      .toolbar-status { width: 100%; margin: 0 7px 2px; }
+      .section-heading { align-items: start; flex-direction: column; gap: 5px; }
+      .unit-banner { align-items: start; flex-direction: column; padding: 22px; }
+      .unit-number { align-self: start; }
+      .lesson-grid { grid-template-columns: 1fr; }
+      .lesson-subtitle { min-height: 0; }
+      .principle-grid { grid-template-columns: 1fr; }
+      .mastery-row, .record-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .summary-top { align-items: start; flex-direction: column; }
+      .tree-branch-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .tree-branch-grid::before { display: none; }
+      .pattern-grid { grid-template-columns: 1fr; }
+    }
+
+    @media print {
+      body { background: #fff; }
+      .toolbar { position: static; box-shadow: none; }
+      .hero { color: #fff; box-shadow: none; print-color-adjust: exact; }
+      .lesson-card, .overview-card, .note-card { break-inside: avoid; box-shadow: none; }
+      .lesson-card:hover { transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page-shell">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-eyebrow">✦ Think 2e · classroom studio</div>
+      <h1 id="page-title">U1–U2<br /><em>一起学，敢开口。</em></h1>
+      <p class="hero-subtitle">一份可以直接带进课堂、也能带回家巩固的互动式教案：6 节课、每课 45 分钟，把输入、操练、真实表达和延迟复习连成一条清晰的学习路线。</p>
+      <div class="hero-stats" aria-label="course statistics">
+        <span class="hero-stat">2 Units</span>
+        <span class="hero-stat">6 Lessons</span>
+        <span class="hero-stat">45 min / lesson</span>
+        <span class="hero-stat">Speak · Read · Write</span>
+      </div>
+    </section>
+
+    <section class="toolbar" aria-label="课程筛选器">
+      <span class="filter-label">筛选 Unit</span>
+      <div class="filter-pills" role="group" aria-label="按 Unit 筛选">
+        <button class="filter-pill active" type="button" data-unit="all" aria-pressed="true">全部</button>
+        <button class="filter-pill" type="button" data-unit="U1" aria-pressed="false">UNIT 1 · All together</button>
+        <button class="filter-pill" type="button" data-unit="U2" aria-pressed="false">UNIT 2 · I’m excited</button>
+      </div>
+      <span class="toolbar-divider" aria-hidden="true"></span>
+      <div class="select-wrap">
+        <select id="lessonFilter" aria-label="筛选课次">
+          <option value="all">全部课次</option>
+        </select>
+      </div>
+      <div class="search-wrap">
+        <input id="searchInput" type="search" placeholder="搜索：feelings / writing / 语法…" aria-label="搜索课程内容" />
+      </div>
+      <span class="toolbar-status" id="toolbarStatus" aria-live="polite">显示 6 / 6 课</span>
+    </section>
+
+    <section aria-labelledby="overview-title">
+      <div class="section-heading">
+        <div>
+          <div class="section-kicker">route map</div>
+          <h2 id="overview-title">课程结构表</h2>
+        </div>
+        <p>先看路线，再打开下面的课堂卡片。</p>
+      </div>
+      <div class="overview-card overview-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Unit / Lesson</th>
+              <th>本课主题</th>
+              <th>关键词 / 关键句</th>
+              <th>学生带走的作品</th>
+            </tr>
+          </thead>
+          <tbody id="overviewBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="lessonArea" aria-label="课堂详情"></section>
+    <div class="empty-state" id="emptyState">
+      <span class="empty-icon">🧭</span>
+      没找到匹配的课次。换一个 Unit 或清空搜索词试试吧。
+    </div>
+
+    <section class="parent-guide" aria-labelledby="parent-guide-title">
+      <div class="guide-hero">
+        <div class="guide-label">parent companion mode</div>
+        <h2 id="parent-guide-title">把“上完课”变成“真的会用” 🐚</h2>
+        <p>结合之前的家庭教案：THINK 负责主线，阅读、听力和词汇只做轻量支援；家长的任务不是讲完所有知识，而是帮孩子把理解、表达和延迟复习接起来。</p>
+      </div>
+
+      <div class="principle-grid" aria-label="家长陪伴四原则">
+        <article class="principle-card">
+          <div class="principle-icon">◎</div>
+          <h3>一条主线</h3>
+          <p>THINK 负责主题、句型、听说读写；其他材料围绕本单元补充，不并行赶进度。</p>
+        </article>
+        <article class="principle-card">
+          <div class="principle-icon">♡</div>
+          <h3>意义优先</h3>
+          <p>先问“这句话在说谁、发生了什么”，再看拼写和规则，保护孩子的理解感。</p>
+        </article>
+        <article class="principle-card">
+          <div class="principle-icon">1</div>
+          <h3>一次抓一个点</h3>
+          <p>不要每说一句就纠错；先让孩子说完，再挑一个最关键的问题修改。</p>
+        </article>
+        <article class="principle-card">
+          <div class="principle-icon">↗</div>
+          <h3>从会做到会迁移</h3>
+          <p>做对只是起点；换人物、时间或主题后还能用，才算真正掌握。</p>
+        </article>
+      </div>
+
+      <div class="guide-columns">
+        <article class="guide-panel">
+          <h3>每周巩固节奏</h3>
+          <p>把课堂之外的任务控制在现实可持续的范围，忙碌时可以降级。</p>
+          <table class="rhythm-table">
+            <thead><tr><th>内容</th><th>建议时间</th><th>完成标准</th></tr></thead>
+            <tbody>
+              <tr><td>THINK 主线</td><td>150 min</td><td>理解情境、练核心句型，并有一次输出。</td></tr>
+              <tr><td>阅读专项</td><td>45 min</td><td>精读 1 篇，能说出大意和答题依据。</td></tr>
+              <tr><td>听力专项</td><td>30 min</td><td>听大意、核对、复听 2–3 个关键句。</td></tr>
+              <tr><td>1000 词</td><td>30 min</td><td>选 5–8 个词复现、造句和使用。</td></tr>
+              <tr><td>口语 / 写作</td><td>15 min</td><td>用本周语言说或写 3–5 句话。</td></tr>
+            </tbody>
+          </table>
+          <div class="downgrade"><strong>忙碌周降级规则</strong><p>先保 THINK 主线，再保词汇短复习；阅读和听力二选一，口语只保留 5 分钟。完成核心任务后不自动加量。</p></div>
+        </article>
+
+        <article class="guide-panel">
+          <h3>孩子卡住时，怎么提示？</h3>
+          <p>提示要逐级增加，不要一开始就把答案讲出来。</p>
+          <div class="prompt-stack">
+            <div class="prompt-step"><div class="prompt-number">1</div><div><strong>先手推一步</strong><span>“这句话在说谁？这一轮它代表什么？”</span></div></div>
+            <div class="prompt-step"><div class="prompt-number">2</div><div><strong>缩小选择</strong><span>“这里是 am / is，还是 are？为什么？”</span></div></div>
+            <div class="prompt-step"><div class="prompt-number">3</div><div><strong>指出不一致</strong><span>“题目要表达的动作，代码 / 句子里哪一处没有跟上？”</span></div></div>
+            <div class="prompt-step"><div class="prompt-number">4</div><div><strong>只给局部框架</strong><span>保留当前一个空，让孩子自己完成下一步并验证。</span></div></div>
+          </div>
+          <div class="mother-sentence"><strong>母句方法 · 每次只长一根枝条</strong><em>The little girl reads an interesting book in the library every Sunday.</em><span>让孩子指出：这次改变的是谁、动作、数量、时间、地点，还是句子之间的关系。</span></div>
+        </article>
+      </div>
+
+      <div class="guide-panel" style="margin-top:18px">
+        <h3>每周一次：检查“真正掌握”</h3>
+        <p>低压力地检查 5 层能力，不用只看练习得分。</p>
+        <div class="mastery-row">
+          <div class="mastery-card"><strong>理解</strong><span>不看文章，能说主题和 2–3 个信息吗？</span></div>
+          <div class="mastery-card"><strong>提取</strong><span>隔两三天还能认出核心词，并说出句中意思吗？</span></div>
+          <div class="mastery-card"><strong>运用</strong><span>能用本周句型造 3 句话吗？</span></div>
+          <div class="mastery-card"><strong>迁移</strong><span>换人物、时间或主题后还会吗？</span></div>
+          <div class="mastery-card"><strong>延迟</strong><span>一周或两周后还能使用吗？</span></div>
+        </div>
+        <div class="record-strip" aria-label="每课记录卡">
+          <div class="record-item"><strong>核心词</strong><span>5–8 个，能放回句子</span></div>
+          <div class="record-item"><strong>核心句型</strong><span>1–2 个，能替换造句</span></div>
+          <div class="record-item"><strong>本课卡点</strong><span>记录一个最关键的问题</span></div>
+          <div class="record-item"><strong>延迟复习</strong><span>2 天后 / 1 周后再使用</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="notes" aria-label="使用说明">
+      <article class="note-card">
+        <h2>课堂使用小贴士 <span aria-hidden="true">🎒</span></h2>
+        <p>每张卡片都按“目标 → 语言 → 活动 → 输出”组织。孩子先完成有意义的表达，再做简短的形式纠正。</p>
+        <ul>
+          <li>蓝色时间点是建议节奏，可按班级状态上下浮动 3–5 分钟。</li>
+          <li>黄色“老师提示”适合课前快速扫一眼，也可以直接念给学生听。</li>
+          <li>页面支持打印：浏览器选择“打印 → 另存为 PDF”即可生成纸质版。</li>
+        </ul>
+      </article>
+      <article class="note-card">
+        <h2>内容依据 <span aria-hidden="true">📚</span></h2>
+        <p>内容依据你提供的《教师用书.pdf》，版式和课堂语言参考你提供的 Grammar Presentation 示例。</p>
+        <ul>
+          <li>Unit 1：All together</li>
+          <li>Unit 2：I’m excited</li>
+          <li>核心产出：个人资料介绍、情绪与喜好对话、短信写作</li>
+        </ul>
+      </article>
+    </section>
+
+    <footer>Think 2e · U1–U2 classroom courseware · designed for a bright, brave classroom</footer>
+  </main>
+
+  <script>
+    const lessons = [
+      {
+        unit: 'U1', unitName: 'All together', lesson: 'Lesson 1', title: 'Meet the world', subtitle: '说出来自哪里，认识一组真正有用的提问词。',
+        tags: ['Countries', 'Nationalities', 'Question words'],
+        keyWords: ['country', 'nationality', 'from', 'name', 'age', 'favourite', 'singer'],
+        keySentences: ['Where are you from?', 'I’m from China.'],
+        motherSentence: 'I’m from China.',
+        motherBranches: [
+          ['换人物', 'She’s from Japan.', 'he / she → is'],
+          ['换成复数', 'They’re from Mexico.', 'they → are'],
+          ['换提问', 'Where are you from?', 'from 后面接地点']
+        ],
+        transfer: '制作 3 句 identity card：姓名 + 来自哪里 + 年龄。',
+        check: '易错检查：I am China. ✗ → I’m from China. ✓',
+        focus: 'country → nationality · What / Where / Who / How old / Why',
+        output: '完成一轮 4 句 meet & greet 对话。',
+        goals: ['说出 8 个国家与国籍。', '用 What / Where / Who / How old / Why 提问。', '用 I’m / He’s / They’re 介绍人物。'],
+        language: 'Where are you from?  ·  I’m from China.  ·  How old are you?',
+        flow: [
+          ['5′', 'Warm-up', 'Country A–Z：看到字母，说出一个国家。'],
+          ['8′', 'Big question', '用 “Where are you from?” 打开 Unit 1。'],
+          ['10′', 'Word map', '配对 Brazil → Brazilian 等国家与国籍。'],
+          ['10′', 'Question detective', '从人物、地点、年龄、原因猜 question word。'],
+          ['8′', 'Pair interview', '两人互问互答，再交换角色。'],
+          ['4′', 'Exit ticket', '完成：They ___ from Spain. 并口头造一个 Why 问句。']
+        ],
+        note: '先说意思，再纠正拼写；让完整句先站稳。',
+      },
+      {
+        unit: 'U1', unitName: 'All together', lesson: 'Lesson 2', title: 'Music connects us', subtitle: '从音乐人物档案读信息，把语法放进真实对话。',
+        tags: ['Reading', 'Dialogue', 'Adjectives'],
+        keyWords: ['profile', 'pianist', 'singer', 'favourite', 'great', 'new', 'fast'],
+        keySentences: ['Who’s your favourite singer?', 'He’s a great singer from Canada.'],
+        motherSentence: 'He’s a great singer.',
+        motherBranches: [
+          ['换人物', 'She’s a great singer.', 'he / she → is'],
+          ['换成复数', 'They’re great singers.', 'they → are；singer → singers'],
+          ['加信息', 'He’s a great singer from Canada.', '人物 + 职业 + 地点']
+        ],
+        transfer: '根据一个 profile，不看原文说出姓名、国家、年龄和职业。',
+        check: '易错检查：She are a singer. ✗ → She’s a singer. ✓',
+        focus: 'profiles · favourite artists · adjectives · question-word review',
+        output: '用人物信息完成一次 favourite artist 角色扮演。',
+        goals: ['从 profile 中找出姓名、国家、年龄和职业。', '听懂并修正对话中的地点信息。', '用形容词描述人、物和地点。'],
+        language: 'Who’s your favourite singer?  ·  She’s a great singer.  ·  It’s a fast train.',
+        flow: [
+          ['5′', 'Retrieve', '快速回忆国家与国籍，接力说完整短语。'],
+          ['8′', 'Predict', '根据音乐人物头像预测 profile 信息。'],
+          ['12′', 'Read / listen', '先找名字和数字，再用证据回答。'],
+          ['10′', 'Role-play', '演 Favourite artists 对话，找出地点小错误。'],
+          ['6′', 'Adjective sort', '把 new / old、fast / slow 等分成对。'],
+          ['4′', 'Exit', '改正一句 subject + to be 句子，并说出理由。']
+        ],
+        note: '阅读时不要求每个词都懂；先扫名字、国家、年龄、职业，再回到证据。',
+      },
+      {
+        unit: 'U1', unitName: 'All together', lesson: 'Lesson 3', title: 'Tell your story', subtitle: '画一面属于自己的 flag，把个人信息说出来。',
+        tags: ['Listening', 'Writing', 'Presentation'],
+        keyWords: ['flag', 'colour', 'activity', 'animal', 'information', 'musician', 'because'],
+        keySentences: ['My flag is blue and red.', 'My favourite musician is … because …'],
+        motherSentence: 'My flag is blue and red.',
+        motherBranches: [
+          ['换数量', 'They’re my favourite colours.', '两个颜色 → they’re'],
+          ['换内容', 'It’s my favourite sport.', '一个活动 / 物品 → it’s'],
+          ['加原因', 'My favourite musician is … because …', '用 because 说清理由']
+        ],
+        transfer: '完成 personal profile：至少 4 句，并用一个 because 解释喜欢的原因。',
+        check: '易错检查：颜色多于一个时，用 They’re，不用 It’s。',
+        focus: 'One-Minute Challenge · personal flag · personal information',
+        output: '完成个人资料小档案，并做 30 秒介绍。',
+        goals: ['听前预测可能出现的国家、人物、食物和职业。', '用颜色、活动和动物设计个人 flag。', '用完整句写并介绍自己的个人信息。'],
+        language: 'My flag is …  ·  I’m from …  ·  My favourite musician is …  ·  Because …',
+        flow: [
+          ['5′', 'Retrieve', '用小问答热身：name / country / age。'],
+          ['10′', 'Listen', '第一次听大意，第二次听一条证据。'],
+          ['10′', 'Flag plan', '选两种颜色、两项活动和一种动物。'],
+          ['12′', 'Write', '回答 personal information questionnaire。'],
+          ['6′', 'Present', '两人排练，志愿者上台介绍。'],
+          ['2′', 'Self-check', '勾选 questions、am / is / are、nationality。']
+        ],
+        note: '展示时让听众记录一个国家和一个形容词，听众也有任务，注意力会更集中。',
+      },
+      {
+        unit: 'U2', unitName: 'I’m excited', lesson: 'Lesson 4', title: 'Feelings first', subtitle: '学会说情绪，也学会让新同学感到被欢迎。',
+        tags: ['Feelings', 'Negative to be', 'Values'],
+        keyWords: ['excited', 'worried', 'tired', 'hungry', 'thirsty', 'bored', 'welcome'],
+        keySentences: ['How do you feel?', 'I’m worried. I’m not alone.'],
+        motherSentence: 'I’m not tired.',
+        motherBranches: [
+          ['换人物', 'She isn’t tired.', 'he / she / it → isn’t'],
+          ['换成复数', 'They aren’t tired.', 'you / we / they → aren’t'],
+          ['回到情境', 'Are you OK? — I’m worried.', '先问候，再回应情绪']
+        ],
+        transfer: '设计一句欢迎新同学的话，再用一个 feelings 句子回应。',
+        check: '易错检查：They isn’t tired. ✗ → They aren’t tired. ✓',
+        focus: 'happy / worried / excited … · am not / isn’t / aren’t',
+        output: '完成一段 welcome a new student 情景对话。',
+        goals: ['用动作和语境理解 10 个 feelings 词。', '用 am not / isn’t / aren’t 表达否定。', '说出欢迎新同学的一个善意行动。'],
+        language: 'How do you feel?  ·  I’m worried.  ·  Come with us.  ·  You’re welcome.',
+        flow: [
+          ['5′', 'Emotion mime', '不翻译，先用表情和动作猜 feelings。'],
+          ['10′', 'Word sort', '按积极 / 消极或身体情境给词语归类。'],
+          ['10′', 'Text gist', '阅读短信：人物怎么感觉？为什么？'],
+          ['8′', 'Notice not', '发现 not 的位置，比较 isn’t 与 aren’t。'],
+          ['8′', 'Welcome role-play', '先分类 OK / not OK，再演新同学到来。'],
+          ['4′', 'Exit', '补全两句 to be，并说一句友善的话。']
+        ],
+        note: '先把情绪词和真实场景连起来，再进入语法；价值观部分强调帮助，不做说教。',
+      },
+      {
+        unit: 'U2', unitName: 'I’m excited', lesson: 'Lesson 5', title: 'Ask and answer', subtitle: '把 Are you…?、短回答和喜欢的对象连成一条对话线。',
+        tags: ['Questions', 'Short answers', 'Pronouns'],
+        keyWords: ['question', 'answer', 'like', 'him', 'her', 'it', 'them'],
+        keySentences: ['Are you OK? — Yes, I am.', 'Do you like Billie Eilish? — Yes, I like her.'],
+        motherSentence: 'I like her.',
+        motherBranches: [
+          ['换成男性', 'I like him.', '一个男生 → him'],
+          ['换成事物', 'I like it.', '一个物品 / 电影 → it'],
+          ['换成复数', 'I like them.', '两人或多件事物 → them']
+        ],
+        transfer: '完成 4 轮“感觉 + 喜好”问答，至少使用 her、him、it、them 中的两个。',
+        check: '易错检查：Yes, she’s. ✗ → Yes, she is. ✓；I like he. ✗ → I like him. ✓',
+        focus: 'Am / Is / Are questions · short answers · me / him / her / it / them',
+        output: '设计并完成一轮“感觉 + 喜好”问答。',
+        goals: ['把 to be 放到主语前面组成问句。', '用完整短回答 Yes, … / No, … isn’t。', '正确使用 him / her / it / them。'],
+        language: 'Are you OK?  ·  Yes, I am.  ·  No, she isn’t.  ·  I like them.',
+        flow: [
+          ['5′', 'Retrieve', '用 feelings 接龙复习上一课。'],
+          ['10′', 'Discover', '遮住答案栏，猜 question 的动词位置。'],
+          ['10′', 'Listen', '第一次听 adjective，第二次听完整短回答。'],
+          ['8′', 'Answer drill', '问同伴并练习正、负短回答。'],
+          ['8′', 'Pronoun swap', '把 singer、film、friends 换成正确代词。'],
+          ['4′', 'Exit', '修复一个问句和一个 pronoun 句子。']
+        ],
+        note: '提醒孩子：Yes, she is. 不能缩写成 Yes, she’s.；先让主语—动词—宾语顺序稳定。',
+      },
+      {
+        unit: 'U2', unitName: 'I’m excited', lesson: 'Lesson 6', title: 'Read, write, care', subtitle: '读生日对话、写短信，并把 patience 带回真实生活。',
+        tags: ['Reading', 'Writing', 'Culture'],
+        keyWords: ['birthday', 'concert', 'surprise', 'joking', 'text message', 'mask', 'patient'],
+        keySentences: ['I’m at a concert. I’m really happy.', 'What about you?'],
+        motherSentence: 'I’m really happy.',
+        motherBranches: [
+          ['换情绪', 'I’m really worried.', '替换 feelings 词'],
+          ['换人物', 'She’s really happy.', 'I → she；am → is'],
+          ['写成短信', 'I’m at … What about you?', '地点 + 情绪 + 反问朋友']
+        ],
+        transfer: '写一条 35–50 词短信：问候、地点、情绪、原因、一个问题和结尾。',
+        check: '易错检查：短信至少要有一个完整问句和一个 to be 句子。',
+        focus: 'Ruby’s birthday · 35–50 word text message · masks · being patient',
+        output: '写一条 35–50 词短信，完成 U1 + U2 mini performance。',
+        goals: ['用证据回答 birthday dialogue 的细节问题。', '写出有问候、情绪、原因和结尾的短信。', '用尊重的方式谈不同文化，并说一个 patience 策略。'],
+        language: 'I’m at …  ·  I’m really …  ·  What about you?  ·  See you soon!',
+        flow: [
+          ['5′', 'Question relay', '用问句接力复习 U2 的结构。'],
+          ['10′', 'Birthday gist', '先读大意，再圈出 Ruby / Ben 的证据。'],
+          ['10′', 'Evidence read', '判断 concert、football、white chocolate 等信息。'],
+          ['12′', 'Write', '规划并写 35–50 词 text message。'],
+          ['5′', 'Culture talk', '谈 masks：喜欢哪一个？为什么？保持尊重。'],
+          ['3′', 'Reflect', '选择 wait、ask why 或 help 作为 patience 策略。']
+        ],
+        note: '文化讨论不做“哪个更好”的排名，重点是描述、提问和尊重差异。',
+      }
+    ];
+
+    const unitCopy = {
+      U1: { title: 'UNIT 1 · ALL TOGETHER', desc: '从“我是谁、我来自哪里”开始，用音乐人物和个人 flag 把语言变成真实的自我介绍。' },
+      U2: { title: 'UNIT 2 · I’M EXCITED', desc: '从 feelings 走向 questions、likes and dislikes，再用短信、文化和 patience 完成表达闭环。' }
+    };
+
+    const unitSummaries = {
+      U1: {
+        eyebrow: 'unit 1 · knowledge garden', title: 'WHO I AM · 我是谁？', intro: '把“来自哪里、是谁、喜欢谁”收束成一张可回忆、可替换、可继续生长的知识图。',
+        vocabulary: [
+          ['country', '/ˈkʌntri/', 'n.', '国家', 'I’m from China. China is a country.'],
+          ['nationality', '/ˌnæʃəˈnæləti/', 'n.', '国籍', 'What’s your nationality?'],
+          ['from', '/frəm/', 'prep.', '来自', 'I’m from China.'],
+          ['favourite', '/ˈfeɪvərɪt/', 'adj.', '最喜欢的', 'My favourite singer is Adele.'],
+          ['singer', '/ˈsɪŋər/', 'n.', '歌手', 'She’s a great singer.'],
+          ['pianist', '/ˈpiːənɪst/', 'n.', '钢琴家', 'Yuja Wang is a pianist.'],
+          ['musician', '/mjuˈzɪʃən/', 'n.', '音乐家', 'Who’s your favourite musician?'],
+          ['great', '/ɡreɪt/', 'adj.', '很棒的', 'He’s a great singer.'],
+          ['age', '/eɪdʒ/', 'n.', '年龄', 'How old are you? — I’m 11.']
+        ],
+        tree: [
+          { title: '主语 · Who?', status: 'this', leaves: [['I / you / he / she / they', '人物代词'], ['My favourite musician', '人或物'] ] },
+          { title: 'be 动词 · How?', status: 'this', leaves: [['I → am', 'I’m'], ['he / she / it → is', 'he’s / she’s / it’s'], ['you / we / they → are', 'you’re / we’re / they’re']] },
+          { title: '地点与描述 · What?', status: 'this', leaves: [['from + place', 'I’m from China.'], ['nationality', 'I’m Chinese.'], ['adjective + noun', 'a great singer']] },
+          { title: '提问 · Ask', status: 'this', leaves: [['What / Where / Who', '信息类型'], ['How old', '年龄'], ['Why', '原因']] },
+          { title: '宾语替换 · Object', status: 'later', leaves: [['待长出', 'me / him / her / it / them']] }
+        ],
+        treeModel: {
+          stage: 'U1 · 先把主干立起来',
+          formula: 'Subject 主语 + be 系动词 + Complement 表语',
+          message: 'be 动词的作用，是把“谁 / 什么”和后面的“地点、身份、状态或年龄”连起来；am / is / are 要跟着主语变化。',
+          branches: [
+            { title: '主语 · Subject', leaves: [['I / you', '说自己或对方'], ['he / she / it', '一个人或一件事'], ['we / they', '多人或多件事']] },
+            { title: '系动词 · be', leaves: [['I → am', 'I’m'], ['he / she / it → is', 'he’s / she’s / it’s'], ['you / we / they → are', 'you’re / we’re / they’re']] },
+            { title: '表语 · Complement', leaves: [['地点', 'I’m from China.'], ['身份', 'She’s a singer.'], ['状态 /年龄', 'They’re great. / I’m 11.']] }
+          ],
+          forms: [
+            ['地点', 'I’m from China.', 'from + place'],
+            ['身份', 'She’s a pianist.', 'a / an + job'],
+            ['描述', 'They’re great.', 'adjective'],
+            ['年龄', 'I’m 11 years old.', 'How old …?']
+          ],
+          contrast: { title: '这棵树的边界', formula: 'be 连接“主语”和“表语”，不表示所有动作。', example: 'I’m a singer.  ✓   ·   I sing.  ✓', note: 'Unit 2 会继续长出提问、否定和宾语代词。' }
+        },
+        patterns: [
+          { label: '身份与地点', seed: 'I’m from [country].', steps: ['She’s from [country].', 'They’re from [country].', 'Where are you from? — I’m from [place].'] },
+          { label: '喜欢的音乐人', seed: 'Who’s your favourite singer?', steps: ['My favourite singer is [name].', 'He’s / She’s a great singer.', 'Why is he / she great? — Because …'] },
+          { label: '人物档案', seed: 'He’s a great singer from Canada.', steps: ['She’s a pianist from China.', 'They’re musicians from Spain.', '替换人物、职业、国家，完成一张 profile。'] }
+        ]
+      },
+      U2: {
+        eyebrow: 'unit 2 · knowledge garden', title: 'HOW I FEEL & CONNECT · 我的感受与连接', intro: '在同一棵句子树上继续长叶子：否定、提问、短回答和宾语代词，让“我感觉怎样、我喜欢谁”说得更准确。',
+        vocabulary: [
+          ['excited', '/ɪkˈsaɪtɪd/', 'adj.', '兴奋的', 'I’m excited.'],
+          ['worried', '/ˈwʌrid/', 'adj.', '担心的', 'She’s worried.'],
+          ['tired', '/ˈtaɪəd/', 'adj.', '疲倦的', 'I’m not tired.'],
+          ['hungry', '/ˈhʌŋɡri/', 'adj.', '饿的', 'They’re hungry.'],
+          ['thirsty', '/ˈθɜːsti/', 'adj.', '渴的', 'Are you thirsty?'],
+          ['bored', '/bɔːd/', 'adj.', '无聊的', 'He isn’t bored.'],
+          ['like', '/laɪk/', 'v.', '喜欢', 'I like her.'],
+          ['welcome', '/ˈwelkəm/', 'v. / adj.', '欢迎；受欢迎的', 'Welcome to our class.'],
+          ['birthday', '/ˈbɜːθdeɪ/', 'n.', '生日', 'Ruby’s birthday is next week.'],
+          ['patient', '/ˈpeɪʃənt/', 'adj.', '有耐心的', 'We can be patient.']
+        ],
+        tree: [
+          { title: '主语 · Who?', status: 'carry', leaves: [['I / you / he / she / they', '复用 U1 叶子'], ['My friends', '复数主语']] },
+          { title: 'be 动词 · How?', status: 'this', leaves: [['am / is / are', '先看主语'], ['not', '否定：isn’t / aren’t'], ['positive → negative', '同一棵枝条继续长']] },
+          { title: '描述与状态 · What?', status: 'this', leaves: [['feelings adjectives', 'excited / worried / tired'], ['positive / negative', 'happy / sad 等'], ['likes / dislikes', 'I like …']] },
+          { title: '提问 · Ask & answer', status: 'this', leaves: [['Am / Is / Are + subject?', '问句倒装'], ['Yes, … / No, …', '短回答'], ['Are you OK?', '真实对话']] },
+          { title: '宾语替换 · Object', status: 'this', leaves: [['I → me · he → him', '人物'], ['she → her · they → them', '人物复用'], ['it → it', '一件事物']] }
+        ],
+        treeModel: {
+          stage: 'U2 · 在原来的主干上继续长',
+          formula: 'Subject 主语 + be 系动词 + Complement 表语',
+          message: '先保留 U1 的主系表主干，再观察 not 放在哪里、be 如何走到句首，以及 like 句为什么需要宾语代词。',
+          branches: [
+            { title: '主语 · Subject', leaves: [['I / you / he / she', '复用 U1 叶子', 'carry'], ['we / they / my friends', '复数主语', 'carry']] },
+            { title: '系动词 · be', leaves: [['am / is / are', '先看主语', 'carry'], ['be + not', 'I’m not / isn’t / aren’t', 'fresh'], ['be → 句首', 'Is she …? / Are they …?', 'fresh']] },
+            { title: '表语 · Complement', leaves: [['地点', '复用 U1：from + place', 'carry'], ['身份', '复用 U1：a singer / a pianist', 'carry'], ['描述', '复用 U1：great / 11 years old', 'carry'], ['感觉状态', 'I’m excited.', 'fresh'], ['否定状态', 'She isn’t tired.', 'fresh']] }
+          ],
+          forms: [
+            ['复用·地点', 'I’m from China.', 'U1：S + be + from + place', 'carry'],
+            ['复用·身份', 'She’s a singer.', 'U1：S + be + noun', 'carry'],
+            ['否定', 'She is not worried.', 'S + be + not + C', 'fresh'],
+            ['一般疑问', 'Is she worried?', 'Be + S + C?', 'fresh'],
+            ['短回答', 'Yes, she is. / No, she isn’t.', 'Yes / No + S + be (+ not)', 'fresh']
+          ],
+          contrast: { title: '另一条枝：主谓宾句', formula: '主语 + 动作动词 + 宾语', example: 'I like her.  ✓   ·   I like she.  ✗', note: 'like 是动作动词，后面要接宾语；her / him / it / them 不是 be 的变化。' }
+        },
+        patterns: [
+          { label: '情绪描述', seed: 'I’m [feeling].', steps: ['She’s [feeling].', 'They’re [feeling].', 'How do you feel? — I’m [feeling].'] },
+          { label: '否定与关心', seed: 'I’m not [feeling].', steps: ['She isn’t [feeling].', 'They aren’t [feeling].', 'Are you OK? — No, I’m not.'] },
+          { label: '喜欢的对象', seed: 'I like her.', steps: ['I like him.', 'I like it.', 'I like them.'] },
+          { label: '一问一答', seed: 'Are you OK? — Yes, I am.', steps: ['Is she tired? — No, she isn’t.', 'Are they hungry? — Yes, they are.', '把人物和 feelings 换掉，自己再造两轮。'] }
+        ]
+      }
+    };
+
+    const state = { unit: 'all', lesson: 'all', search: '' };
+    const overviewBody = document.getElementById('overviewBody');
+    const lessonArea = document.getElementById('lessonArea');
+    const emptyState = document.getElementById('emptyState');
+    const toolbarStatus = document.getElementById('toolbarStatus');
+    const lessonFilter = document.getElementById('lessonFilter');
+    const searchInput = document.getElementById('searchInput');
+
+    function unitClass(unit) { return unit.toLowerCase(); }
+
+    function searchable(lesson) {
+      return [lesson.unit, lesson.unitName, lesson.lesson, lesson.title, lesson.subtitle, lesson.tags.join(' '), lesson.focus, lesson.output, lesson.goals.join(' '), lesson.language, lesson.note, lesson.flow.flat().join(' '), lesson.keyWords.join(' '), lesson.keySentences.join(' '), lesson.motherSentence, lesson.motherBranches.flat().join(' '), lesson.transfer, lesson.check].join(' ').toLowerCase();
+    }
+
+    function filteredLessons() {
+      return lessons.filter(item => {
+        const unitMatch = state.unit === 'all' || item.unit === state.unit;
+        const lessonMatch = state.lesson === 'all' || item.lesson === state.lesson;
+        const query = state.search.trim().toLowerCase();
+        const searchMatch = !query || searchable(item).includes(query);
+        return unitMatch && lessonMatch && searchMatch;
+      });
+    }
+
+    function fillLessonFilter() {
+      const available = lessons.filter(item => state.unit === 'all' || item.unit === state.unit);
+      const options = ['<option value="all">全部课次</option>'].concat(available.map(item => `<option value="${item.lesson}">${item.lesson} · ${item.title}</option>`));
+      lessonFilter.innerHTML = options.join('');
+      if (available.some(item => item.lesson === state.lesson)) lessonFilter.value = state.lesson;
+      else { state.lesson = 'all'; lessonFilter.value = 'all'; }
+    }
+
+    function renderOverview(items) {
+      overviewBody.innerHTML = items.map(item => `
+        <tr class="fade-in">
+          <td><span class="unit-badge ${unitClass(item.unit)}">${item.unit}</span><div class="overview-title">${item.lesson}</div></td>
+          <td><strong>${item.title}</strong><div class="overview-focus">${item.subtitle}</div></td>
+          <td><div class="overview-focus"><strong>${item.keyWords.slice(0, 5).join(' · ')}</strong><br />${item.keySentences[0]}</div></td>
+          <td><div class="output">${item.output}</div></td>
+        </tr>
+      `).join('');
+    }
+
+    function renderTimeline(flow) {
+      return flow.map(row => `
+        <div class="timeline-row">
+          <div class="time">${row[0]}</div>
+          <div><strong>${row[1]}</strong><span>${row[2]}</span></div>
+        </div>
+      `).join('');
+    }
+
+    function renderUnitSummary(unit) {
+      const summary = unitSummaries[unit];
+      const tree = summary.treeModel;
+      return `
+        <section class="unit-summary ${unitClass(unit)}" aria-labelledby="${unit}-summary-title">
+          <div class="summary-top">
+            <div><div class="section-kicker">${summary.eyebrow}</div><h3 id="${unit}-summary-title">${summary.title}</h3><p>${summary.intro}</p></div>
+            <div class="summary-stamp">${unit} · SUMMARY</div>
+          </div>
+          <div class="summary-grid">
+            <article class="summary-card">
+              <h4>核心词汇 · Core vocabulary</h4>
+              <p>看懂含义 → 读准音标 → 认出词性 → 放回例句。</p>
+              <div class="vocab-scroll"><table class="vocab-table"><thead><tr><th>词汇</th><th>音标</th><th>词性</th><th>核心含义</th><th>例句</th></tr></thead><tbody>${summary.vocabulary.map(word => `<tr><td><span class="vocab-word">${word[0]}</span></td><td><span class="vocab-ipa">${word[1]}</span></td><td><span class="pos">${word[2]}</span></td><td>${word[3]}</td><td class="vocab-example">${word[4]}</td></tr>`).join('')}</tbody></table></div>
+            </article>
+            <article class="summary-card sentence-patterns">
+              <h4>核心句型 · 可替换、可复用</h4>
+              <p>先读根句，再替换一个位置，最后造一个自己的句子。</p>
+              <div class="pattern-grid">${summary.patterns.map(pattern => `<div class="pattern-card"><h5>${pattern.label}</h5><div class="pattern-seed">${pattern.seed}</div><div class="pattern-steps">${pattern.steps.map(step => `<div class="pattern-step">${step}</div>`).join('')}</div></div>`).join('')}</div>
+            </article>
+            <article class="summary-card tree-card">
+              <div class="tree-intro"><div><h4>核心语法点 · 一棵持续生长的句子树</h4><p>${tree.message}</p></div><div class="tree-legend"><span><i class="legend-dot"></i>本单元新叶子</span><span><i class="legend-dot carry"></i>已长好的叶子</span><span><i class="legend-dot later"></i>下一阶段</span></div></div>
+              <div class="grammar-tree">
+                <div class="tree-stage">${tree.stage}</div>
+                <div class="tree-root">主系表句 · Subject + be + Complement<small>${tree.formula}</small></div>
+                <div class="tree-trunk"></div>
+                <div class="tree-branch-grid">${tree.branches.map((branch, index) => `<div class="tree-branch"><div class="tree-branch-head"><span>${index + 1}</span>${branch.title}</div><div class="leaf-list">${branch.leaves.map(leaf => `<div class="leaf ${leaf[2] || branch.status || ''}">${leaf[0]}<small>${leaf[1]}</small></div>`).join('')}</div></div>`).join('')}</div>
+                <div class="tree-formula-band"><strong>这条主干怎么长出不同句子？</strong><span>${tree.formula}</span></div>
+                <div class="tree-forms">${tree.forms.map(form => `<div class="tree-form ${form[3] || ''}"><strong>${form[0]}</strong><b>${form[1]}</b><small>${form[2]}</small></div>`).join('')}</div>
+                <div class="tree-contrast"><strong>${tree.contrast.title}</strong><span>${tree.contrast.formula}</span><em>${tree.contrast.example}</em><small>${tree.contrast.note}</small></div>
+              </div>
+            </article>
+          </div>
+          <div class="summary-footer"><strong>总结时这样用：</strong>先遮住例句，让孩子说出树上的一个“根句”；再只替换一个叶子；最后换人物、地点、情绪或对象，造一句自己的句子。</div>
+        </section>
+      `;
+    }
+
+    function renderCard(item, index) {
+      return `
+        <article class="lesson-card ${unitClass(item.unit)} fade-in" style="animation-delay:${Math.min(index * 55, 220)}ms">
+          <div class="lesson-card-top">
+            <div class="lesson-meta"><span class="lesson-badge">${item.lesson}</span><span class="duration">45 min · classroom</span></div>
+            <h3>${item.title}</h3>
+            <p class="lesson-subtitle">${item.subtitle}</p>
+            <div class="tag-row">${item.tags.map(tag => `<span class="mini-tag">${tag}</span>`).join('')}</div>
+          </div>
+          <div class="lesson-card-body">
+            <div class="label">今天能做到</div>
+            <ul class="goal-list">${item.goals.map(goal => `<li>${goal}</li>`).join('')}</ul>
+            <div class="language-box"><strong>Key language</strong>${item.language}</div>
+            <div class="lesson-core">
+              <div class="core-field"><div class="method-label">关键词 · Key words</div><div class="word-list">${item.keyWords.map(word => `<span>${word}</span>`).join('')}</div></div>
+              <div class="core-field key-sentence"><div class="method-label">关键句 · Key sentences</div><p>${item.keySentences.join('<br />')}</p></div>
+              <div class="mother-box"><div class="method-label">母句方法 · 从一句长出三句</div><div class="mother-main">${item.motherSentence}</div><div class="branch-list">${item.motherBranches.map(branch => `<div class="branch-row"><strong>${branch[0]}</strong><span>${branch[1]} <em>· ${branch[2]}</em></span></div>`).join('')}</div></div>
+              <div class="transfer-box"><strong>迁移任务</strong>${item.transfer}</div>
+              <div class="check-box"><strong>本课只抓一个检查点</strong>${item.check}</div>
+            </div>
+            <div class="label" style="margin-top:18px">45 分钟节奏</div>
+            <div class="timeline">${renderTimeline(item.flow)}</div>
+            <div class="teacher-note"><div class="label" style="margin-bottom:5px;color:#8f7a38">教师提示</div><p>${item.note}</p></div>
+            <div class="student-output"><strong>学生作品：</strong>${item.output}</div>
+          </div>
+        </article>
+      `;
+    }
+
+    function renderLessonArea(items) {
+      const visibleUnits = ['U1', 'U2'].filter(unit => items.some(item => item.unit === unit));
+      lessonArea.innerHTML = visibleUnits.map(unit => {
+        const unitItems = items.filter(item => item.unit === unit);
+        const copy = unitCopy[unit];
+        return `
+          <section class="unit-block" aria-labelledby="${unit}-title">
+            <div class="unit-banner ${unitClass(unit)}">
+              <div><div class="section-kicker" style="color:rgba(255,255,255,.75)">unit route</div><h2 id="${unit}-title">${copy.title}</h2><p>${copy.desc}</p></div>
+              <div class="unit-number">${unitItems.length} lesson${unitItems.length === 1 ? '' : 's'} · 45 min</div>
+            </div>
+            <div class="lesson-grid">${unitItems.map((item, index) => renderCard(item, index)).join('')}</div>
+            ${state.lesson === 'all' && !state.search.trim() ? renderUnitSummary(unit) : ''}
+          </section>
+        `;
+      }).join('');
+    }
+
+    function render() {
+      fillLessonFilter();
+      const items = filteredLessons();
+      renderOverview(items);
+      renderLessonArea(items);
+      emptyState.classList.toggle('show', items.length === 0);
+      toolbarStatus.textContent = `显示 ${items.length} / ${lessons.length} 课`;
+      document.querySelectorAll('.filter-pill').forEach(button => {
+        const active = button.dataset.unit === state.unit;
+        button.classList.toggle('active', active);
+        button.setAttribute('aria-pressed', String(active));
+      });
+    }
+
+    document.querySelectorAll('.filter-pill').forEach(button => {
+      button.addEventListener('click', () => {
+        state.unit = button.dataset.unit;
+        render();
+      });
+    });
+    lessonFilter.addEventListener('change', event => {
+      state.lesson = event.target.value;
+      render();
+    });
+    searchInput.addEventListener('input', event => {
+      state.search = event.target.value;
+      render();
+    });
+
+    render();
+  </script>
+</body>
+</html>
