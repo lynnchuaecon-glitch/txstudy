@@ -382,6 +382,10 @@
     .tree-form b { margin-top: 4px; color: var(--ink); font-size: 13px; line-height: 1.35; }
     .tree-form small { margin-top: 3px; color: var(--muted); font-size: 10px; }
     .tree-form.carry { border-top-color: #bfc0cf; background: #f7f7fb; }
+    .tree-rule { max-width: 820px; margin: 14px auto 0; padding: 14px 17px; border: 2px solid rgba(22,182,165,.24); border-radius: 14px; background: linear-gradient(135deg, #effbf8, #f9fffd); text-align: center; }
+    .tree-rule strong { display: block; color: var(--teal); font-size: 12px; letter-spacing: .06em; }
+    .tree-rule span { display: block; margin-top: 5px; color: var(--ink); font-size: 16px; font-weight: 900; line-height: 1.45; }
+    .tree-rule small { display: block; margin-top: 5px; color: var(--muted); font-size: 12px; line-height: 1.45; }
     .tree-contrast { display: grid; gap: 3px; margin-top: 11px; padding: 12px 13px; border-left: 4px solid var(--u2); border-radius: 0 11px 11px 0; background: #f5f1ff; }
     .tree-contrast strong { color: var(--u2); font-size: 12px; }
     .tree-contrast span { color: #4e5270; font-size: 12px; }
@@ -801,11 +805,14 @@
         treeModel: {
           stage: 'U1 · 先把主干立起来',
           formula: 'Subject 主语 + be 系动词 + Complement 表语',
-          message: 'be 动词的作用，是把“谁 / 什么”和后面的“地点、身份、状态或年龄”连起来；am / is / are 要跟着主语变化。',
+          message: '先不要把地点、身份、状态、年龄背成四套规则。先判断：这句话是不是在给主语补充说明；如果是，它们就属于同一类“主语说明信息”。',
+          ruleLabel: '孩子版总规律 · 先抓住这一类',
+          rule: 'be 像一座桥：把“谁 / 什么”和“关于它的说明”连成一句完整的话。',
+          ruleHint: '地点、身份、状态、年龄，只是说明主语的不同内容；am / is / are 只根据主语变。',
           branches: [
             { title: '主语 · Subject', leaves: [['I / you', '说自己或对方'], ['he / she / it', '一个人或一件事'], ['we / they', '多人或多件事']] },
-            { title: '系动词 · be', leaves: [['I → am', 'I’m'], ['he / she / it → is', 'he’s / she’s / it’s'], ['you / we / they → are', 'you’re / we’re / they’re']] },
-            { title: '表语 · Complement', leaves: [['地点', 'I’m from China.'], ['身份', 'She’s a singer.'], ['状态 /年龄', 'They’re great. / I’m 11.']] }
+            { title: '连接桥 · be', leaves: [['I → am', 'I’m'], ['he / she / it → is', 'he’s / she’s / it’s'], ['you / we / they → are', 'you’re / we’re / they’re']] },
+            { title: '主语的说明 · Complement', leaves: [['在哪里 / 来自哪里', 'I’m from China.'], ['是谁 / 是什么', 'She’s a singer.'], ['怎么样 / 什么状态', 'They’re great.'], ['几岁', 'I’m 11.']] }
           ],
           forms: [
             ['地点', 'I’m from China.', 'from + place'],
@@ -813,7 +820,7 @@
             ['描述', 'They’re great.', 'adjective'],
             ['年龄', 'I’m 11 years old.', 'How old …?']
           ],
-          contrast: { title: '这棵树的边界', formula: 'be 连接“主语”和“表语”，不表示所有动作。', example: 'I’m a singer.  ✓   ·   I sing.  ✓', note: 'Unit 2 会继续长出提问、否定和宾语代词。' }
+          contrast: { title: '这棵树的边界', formula: 'be 连接“主语”和“关于主语的说明”，不表示所有动作。', example: 'I’m a singer.  ✓   ·   I sing.  ✓', note: 'Unit 2 会继续长出提问、否定和宾语代词。' }
         },
         patterns: [
           { label: '身份与地点', seed: 'I’m from [country].', steps: ['She’s from [country].', 'They’re from [country].', 'Where are you from? — I’m from [place].'] },
@@ -845,11 +852,14 @@
         treeModel: {
           stage: 'U2 · 在原来的主干上继续长',
           formula: 'Subject 主语 + be 系动词 + Complement 表语',
-          message: '先保留 U1 的主系表主干，再观察 not 放在哪里、be 如何走到句首，以及 like 句为什么需要宾语代词。',
+          message: 'U2 不是重新学习一套 be：仍然先判断句子是不是在补充说明主语，再看否定和提问怎样在同一条主干上变化；like 表达动作，另走主谓宾分枝。',
+          ruleLabel: '孩子版总规律 · 先保留这座桥',
+          rule: 'be 还是那座桥：先找主语，再把“关于主语的说明”连起来。',
+          ruleHint: 'not 是在桥后加否定；问句把桥移到主语前；like 表示动作，走主谓宾分枝。',
           branches: [
             { title: '主语 · Subject', leaves: [['I / you / he / she', '复用 U1 叶子', 'carry'], ['we / they / my friends', '复数主语', 'carry']] },
-            { title: '系动词 · be', leaves: [['am / is / are', '先看主语', 'carry'], ['be + not', 'I’m not / isn’t / aren’t', 'fresh'], ['be → 句首', 'Is she …? / Are they …?', 'fresh']] },
-            { title: '表语 · Complement', leaves: [['地点', '复用 U1：from + place', 'carry'], ['身份', '复用 U1：a singer / a pianist', 'carry'], ['描述', '复用 U1：great / 11 years old', 'carry'], ['感觉状态', 'I’m excited.', 'fresh'], ['否定状态', 'She isn’t tired.', 'fresh']] }
+            { title: '连接桥 · be', leaves: [['am / is / are', '先看主语', 'carry'], ['be + not', 'I’m not / isn’t / aren’t', 'fresh'], ['be → 句首', 'Is she …? / Are they …?', 'fresh']] },
+            { title: '主语的说明 · Complement', leaves: [['地点', '复用 U1：from + place', 'carry'], ['身份', '复用 U1：a singer / a pianist', 'carry'], ['描述', '复用 U1：great / 11 years old', 'carry'], ['感觉状态', 'I’m excited.', 'fresh'], ['否定状态', 'She isn’t tired.', 'fresh']] }
           ],
           forms: [
             ['复用·地点', 'I’m from China.', 'U1：S + be + from + place', 'carry'],
@@ -945,10 +955,12 @@
               <div class="tree-intro"><div><h4>核心语法点 · 一棵持续生长的句子树</h4><p>${tree.message}</p></div><div class="tree-legend"><span><i class="legend-dot"></i>本单元新叶子</span><span><i class="legend-dot carry"></i>已长好的叶子</span><span><i class="legend-dot later"></i>下一阶段</span></div></div>
               <div class="grammar-tree">
                 <div class="tree-stage">${tree.stage}</div>
-                <div class="tree-root">主系表句 · Subject + be + Complement<small>${tree.formula}</small></div>
+                <div class="tree-root">英语句子 · English sentence<small>本单元先长出：主系表句 · Subject + be + Complement</small></div>
+                <div class="tree-trunk"></div>
+                <div class="tree-rule"><strong>${tree.ruleLabel}</strong><span>${tree.rule}</span><small>${tree.ruleHint}</small></div>
                 <div class="tree-trunk"></div>
                 <div class="tree-branch-grid">${tree.branches.map((branch, index) => `<div class="tree-branch"><div class="tree-branch-head"><span>${index + 1}</span>${branch.title}</div><div class="leaf-list">${branch.leaves.map(leaf => `<div class="leaf ${leaf[2] || branch.status || ''}">${leaf[0]}<small>${leaf[1]}</small></div>`).join('')}</div></div>`).join('')}</div>
-                <div class="tree-formula-band"><strong>这条主干怎么长出不同句子？</strong><span>${tree.formula}</span></div>
+                <div class="tree-formula-band"><strong>形式公式 · 把规律放回结构</strong><span>${tree.formula}</span></div>
                 <div class="tree-forms">${tree.forms.map(form => `<div class="tree-form ${form[3] || ''}"><strong>${form[0]}</strong><b>${form[1]}</b><small>${form[2]}</small></div>`).join('')}</div>
                 <div class="tree-contrast"><strong>${tree.contrast.title}</strong><span>${tree.contrast.formula}</span><em>${tree.contrast.example}</em><small>${tree.contrast.note}</small></div>
               </div>
