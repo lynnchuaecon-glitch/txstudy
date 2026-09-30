@@ -1,0 +1,140 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>高精度加法 · 黑白打印版</title><style>
+*{box-sizing:border-box}html{color-scheme:light}body{margin:0;background:#ececec;color:#000;font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;font-size:11pt;line-height:1.45}.toolbar{max-width:188mm;margin:12px auto;display:flex;justify-content:space-between;gap:15px;align-items:center;font-size:10pt}.toolbar button{font:inherit;padding:8px 15px;background:white;border:1px solid #333;border-radius:4px;cursor:pointer}.main{max-width:188mm;margin:0 auto 20px;background:#fff;padding:11mm 9mm}.title{border-bottom:1.5pt solid #000;padding-bottom:7pt;margin-bottom:10pt}.eyebrow{font-size:9pt;letter-spacing:.06em;margin:0}h1{font-size:22pt;line-height:1.4;margin:4pt 0 8pt}h2{font-size:15pt;line-height:1.4;margin:5pt 0 6pt}h3{font-size:11.5pt;line-height:1.5;margin:7pt 0 4pt}h4{font-size:10pt;line-height:1.5;margin:0 0 3pt}p{margin:1.5pt 0 3pt}strong,b{font-weight:700}.chapter{margin:10pt 0 0;padding:6pt 0 0;border-top:1pt solid #333}.kicker{font-size:9pt;font-weight:700;letter-spacing:.04em}.goal{font-size:10pt;margin:0 0 7pt;padding-bottom:5pt;border-bottom:.5pt solid #777}.callout,.task,.paper-task{border:.75pt solid #444;padding:6pt 8pt;margin:8pt 0;background:#fff}.callout strong:first-child{font-weight:750}.callout p:last-child,.task p:last-child{margin-bottom:0}.task h3,.paper-task h3{margin-top:0}.formula{padding:7pt 9pt;margin:8pt 0;border-top:1pt solid #444;border-bottom:1pt solid #444;font-weight:700;font-size:12pt;text-align:center;line-height:1.55}.two{display:block}.two h3{margin-top:8pt}.table-scroll{margin:6pt 0;overflow:visible}table{width:100%;border-collapse:collapse;font-size:10pt;line-height:1.5;margin:4pt 0 7pt}th,td{border:.6pt solid #555;padding:3.5pt 6pt;vertical-align:top;text-align:left}th{font-weight:700;background:#efefef;color:#000}caption{font-size:9pt;text-align:left;margin-bottom:3pt}thead{display:table-header-group}code{font: .94em/1.6 "SFMono-Regular",Consolas,"PingFang SC",monospace;color:#000;overflow-wrap:anywhere}pre{border:.7pt solid #555;background:#f7f7f7;color:#000;font-size:10pt;line-height:1.65;padding:7pt 9pt;margin:7pt 0;white-space:pre-wrap;overflow-wrap:anywhere}pre code{background:none;color:#000;font-size:inherit}ul,ol{padding-left:1.6em;margin:5pt 0 7pt}li{margin:3pt 0}.digit-array{display:flex;gap:7pt;margin:7pt 0}.digit{min-width:60pt;border:.75pt solid #333;text-align:center;padding:4pt 9pt}.digit small{display:block;font-size:9pt}.digit b{font-family:Consolas,monospace;font-size:18pt;line-height:1.5}.direction,.label,.muted,.chapter-footer{font-size:10pt;color:#000}.hint{border-left:2pt solid #444;padding:4pt 8pt;margin:7pt 0;font-size:10pt;line-height:1.55}.hint p{margin:3pt 0 4pt}.hint pre{font-size:9pt}.chapter-footer{margin-top:6pt;border-top:.5pt dotted #555;padding-top:4pt}.flow{display:flex;flex-wrap:wrap;gap:5pt;align-items:center;margin:7pt 0}.flow span{border:.7pt solid #555;padding:4pt 7pt;font-size:10pt}.flow .arrow{border:0;padding:0}.note-area{margin:6pt .5%;display:inline-block;vertical-align:top;width:48%}.note-area label{font-weight:700;display:block;font-size:10.5pt}.writing-lines div{height:16pt;border-bottom:.5pt solid #777}.checklist label{display:block;font-size:10pt;margin:4pt 0}.checkbox{font-family:"PingFang SC",sans-serif;margin-right:6pt}.answer-line{font-size:10.5pt;margin:8pt 0}.footer-note{font-size:9pt;border-top:.6pt solid #555;padding-top:5pt;margin-top:10pt}a{color:#000;text-decoration:none}h2,h3,h4,.kicker,.goal,caption{break-after:avoid}p,li{orphans:3;widows:3}tr,pre,.digit-array,.formula,.flow,.writing-lines{break-inside:avoid}.task,.callout,.paper-task,.hint{break-inside:auto}.note-area,#card .callout{break-inside:avoid}
+@page{size:A4;margin:10mm 14mm 12mm}
+@media print{body{background:#fff;font-size:11pt}.toolbar{display:none}.main{margin:0;padding:0;max-width:none}.chapter{break-before:auto}.title{break-before:auto}*{box-shadow:none!important;text-shadow:none!important}th{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+@media(max-width:700px){.main{padding:20px;max-width:100%}.toolbar{padding:0 15px}.table-scroll{overflow-x:auto}h1{font-size:20pt}}
+</style></head><body><div class="toolbar"><span>A4 纵向 · 连续排版 · 黑白清晰</span><button onclick="window.print()">打印 / 存为 PDF</button></div><main class="main" id="main"><div class="content">
+<header class="title"><p class="eyebrow">C++ 自学讲义 · 黑白打印版</p><h1>高精度加法：从数楼梯出发</h1><p><strong>主线：</strong>发现存不下 → 数位数组 → 逐位相加 → 处理边界 → 接回递推</p><p>学习目标：弄懂原理，独立完成一次大数加法，再把工具用到楼梯题中。可先读第 1～4 节，再读第 5～8 节并写代码。</p></header><section class="chapter" id="why" aria-labelledby="h-why">
+  <div class="kicker">01 / 先找核心问题</div><h2 id="h-why">公式对了，为什么结果还会错？</h2>
+  <p class="goal">这一节只弄清：需要升级的是“数的保存和相加”，不是重写楼梯思路。</p>
+  <p>楼梯每次可以上 1 阶，也可以上 2 阶。到达第 <code>i</code> 阶，最后一步只可能从第 <code>i−1</code> 阶或第 <code>i−2</code> 阶走过来。两类走法不会重复，合在一起就是总数。</p>
+  <div class="formula">第 i 阶的走法数<br>= 前一阶的走法数 + 前两阶的走法数</div>
+  <p>你原来的 <code>a[1] = 1</code>、<code>a[2] = 2</code> 和下面的关系都符合题意：</p>
+  <pre><code>a[i] = a[i - 1] + a[i - 2];</code></pre>
+  <div class="callout warm"><strong>真正的障碍：结果越来越大，一个 long long 放不下。</strong><p>在常见的 64 位 <code>long long</code> 环境中，最大正整数是 <code>9223372036854775807</code>。这道题到第 92 阶时，走法数就超过它了，而题目允许算到第 5000 阶。</p><p>有符号整数溢出后，结果不再可靠；不能指望它一定变成某个负数。</p></div>
+  <div class="two"><div><h3>格子多 ≠ 每格能装很大的数</h3><p><code>long long a[5005]</code> 表示有 5005 个格子，<strong>每个格子</strong>仍受 <code>long long</code> 的范围限制。把数组加长，不能让某一个元素突破范围。</p></div><div><h3>我们需要的新工具</h3><p>用<strong>多个格子一起表示一个大整数</strong>，再自己编写数位运算。这种方法叫<strong>高精度运算</strong>。本课只学非负整数的加法。</p></div></div>
+  <p>“高精度”在这里的意思是：超过普通整数类型的范围，仍能保存每一位，得到精确的整数结果。它仍受数组容量和内存限制，不是无限大。</p>
+  <aside class="hint"><h4>按需查阅 · 为什么不改用 double？</h4><p><code>double</code> 能表示更大数量级的数，但有效数字有限。走法总数需要每一位都准确，近似值不符合题目要求。这里需要“大整数”，不是“小数”。</p></aside>
+  <div class="chapter-footer">接下来要回答：一个数拆开以后，怎样保存才能方便相加？</div>
+</section>
+
+<section class="chapter" id="store" aria-labelledby="h-store">
+  <div class="kicker">02 / 数据表示</div><h2 id="h-store">一个大整数，用一整个数组保存</h2>
+  <p class="goal">约定好“每格代表什么”，程序才知道怎样使用这些数字。</p>
+  <p>先拿 <strong>144</strong> 练习。它由 4 个一、4 个十和 1 个百组成。每个格子只放一个十进制数字，范围是 <strong>0～9</strong>。</p>
+  <div class="digit-array" aria-label="144 的数组表示：x[0]=4 个位，x[1]=4 十位，x[2]=1 百位">
+    <div class="digit"><small>x[0]</small><b>4</b><small>个位</small></div><div class="digit"><small>x[1]</small><b>4</b><small>十位</small></div><div class="digit"><small>x[2]</small><b>1</b><small>百位</small></div>
+  </div>
+  <div class="direction">数组下标：0 → 1 → 2　｜　数位：个位 → 十位 → 百位</div>
+  <p>它表示的数是 <code>4 × 1 + 4 × 10 + 1 × 100 = 144</code>。数组没有把数改成 441，只是换了保存顺序。</p>
+  <h3>为什么个位放在下标 0？</h3>
+  <p>竖式加法从个位开始，进位交给下一位。把个位放在下标 0 后，程序就可以按 <code>0、1、2……</code> 的顺序计算，进位从 <code>j</code> 交给 <code>j+1</code>。这是一种方便的约定，不是 C++ 强制的规则。</p>
+  <div class="callout"><strong>存的时候：低位在前。读成平常的数字时：高位在前。</strong><p>计算从下标 0 往后走；输出从最高有效位往下标 0 走。两个方向不同，各有用途。</p></div>
+  <h3>还要记一个“长度”</h3>
+  <pre><code>int x[10] = {4, 4, 1}; // 表示 144，其余元素初始化为 0
+int lenX = 3;          // 这个数实际用了 3 位</code></pre>
+  <div class="table-scroll"><table><thead><tr><th>名字</th><th>它负责什么</th><th>这里是多少</th></tr></thead><tbody><tr><td>容量</td><td>数组总共准备了多少格</td><td>10 格</td></tr><tr><td><code>lenX</code></td><td>这个数实际用了多少位</td><td>3 位</td></tr><tr><td>最高有效位的下标</td><td>输出应该从哪里开始</td><td><code>lenX − 1</code>，即 2</td></tr></tbody></table></div>
+  <p>容量和长度是两件事。准备了 10 格，不代表每次都要输出 10 位。单独表示数字 <strong>0</strong> 时，我们约定长度为 1、第一格是 0。</p>
+  <div class="task"><h3>完整小任务：设计一个数的存法</h3><p>在纸上画出 <strong>5070</strong> 的数组表示，同时标出每格的下标、数位和有效长度。再沿输出方向读一遍，检查能否还原原数。</p><aside class="hint"><h4>按需查阅 · 画完后核对表示方法</h4><p>从下标 0 开始依次存 <code>0、7、0、5</code>，有效长度是 4。两个 0 都有位置意义，不能丢掉。倒着读数组中的有效数位，才是 5070。</p></aside></div>
+</section>
+
+<section class="chapter" id="add" aria-labelledby="h-add">
+  <div class="kicker">03 / 运算原理</div><h2 id="h-add">高精度加法，就是让数组做竖式</h2>
+  <p class="goal">看懂一次完整相加：读两位数字和旧进位，留下当前位，送出新进位。</p>
+  <p>回到楼梯：第 10 阶有 89 种走法，第 11 阶有 144 种。第 12 阶需要完成的就是 <strong>89 + 144</strong>。我们用它学习原递推中的“一次加法”。</p>
+  <div class="formula">这一位的总和 s<br>= 第一个数的这一位 + 第二个数的这一位 + 传来的进位</div>
+  <div class="two"><div><h3>留下个位</h3><p><code>s % 10</code> 是除以 10 的余数。比如 13 留下 3，写到结果的当前格。</p></div><div><h3>送出进位</h3><p><code>s / 10</code> 是整数除法。比如 13 里面有 1 个完整的十，把 1 交给下一位。</p></div></div>
+  <p><strong>同一个 s，要分别计算这两件事。</strong>不要先把 <code>s</code> 改成余数，否则会丢掉计算进位需要的信息。</p>
+  <div class="table-scroll"><table><caption class="label">89 + 144 的完整追踪</caption><thead><tr><th>计算哪一位</th><th>这一位总和 s</th><th>留下 s % 10</th><th>送出 s / 10</th></tr></thead><tbody><tr><td>个位 j = 0</td><td>9 + 4 + 0 = 13</td><td>3</td><td>1</td></tr><tr><td>十位 j = 1</td><td>8 + 4 + 1 = 13</td><td>3</td><td>1</td></tr><tr><td>百位 j = 2</td><td>0 + 1 + 1 = 2</td><td>2</td><td>0</td></tr></tbody></table></div>
+  <p>结果数组从下标 0 开始是 <code>3、3、2</code>，按正常数位顺序输出就是 <strong>233</strong>。89 没有百位，计算时按 0 补齐；这就是竖式的“数位对齐”。</p>
+  <div class="paper-task"><h3>纸上演示：让 999 + 1 的进位走到最后</h3><p>按“读两位与旧进位 → 计算 s → 留下一位 → 更新进位”的顺序填表。最后一行专门检查剩余进位。</p><table><thead><tr><th>处理数位</th><th>x 的数字</th><th>y 的数字</th><th>传入进位</th><th>总和 s</th><th>结果数字</th><th>送出进位</th></tr></thead><tbody><tr><td>个位 j=0</td><td>9</td><td>1</td><td>0</td><td>____</td><td>____</td><td>____</td></tr><tr><td>十位 j=1</td><td>9</td><td>0</td><td>____</td><td>____</td><td>____</td><td>____</td></tr><tr><td>百位 j=2</td><td>9</td><td>0</td><td>____</td><td>____</td><td>____</td><td>____</td></tr><tr><td>最后检查</td><td colspan="6">剩余进位：____；需要增加一位吗？____；按正常顺序输出：________。</td></tr></tbody></table></div><div class="callout blue"><strong>为什么逐位加不会漏掉数值？</strong><p>因为每次都有 <code>s = 10 × 进位 + 当前位留下的数字</code>。我们把完整的十交给高一位，把不足十的部分留在当前位。数值没有丢，只是分别放到了正确的位置。</p></div>
+  <aside class="hint"><h4>按需查阅 · 大数已经很大了，s 还会溢出吗？</h4><p>对于两个非负整数的十进制逐位相加，最大的单步总和是 <code>9 + 9 + 1 = 19</code>。因此每个数位、进位和 <code>s</code> 都可以用普通 <code>int</code>。整个数很长，不代表每一小步的数也很大。</p></aside>
+</section>
+
+<section class="chapter" id="rules" aria-labelledby="h-rules">
+  <div class="kicker">04 / 完整规则</div><h2 id="h-rules">算对每一位，还要守住这四条规则</h2>
+  <p class="goal">从“会算 89 + 144”，走到“换一组数也不会漏”。</p>
+  <h3>① 位数不同：缺少的高位按 0 算</h3><p><code>89 + 144</code> 要处理到百位。先取两个有效长度的较大值 <code>L</code>，处理下标 <code>0</code> 到 <code>L−1</code>。本课约定输入数组中未使用的格子已经清零，并且容量足够。</p>
+  <h3>② 最高位算完：再检查最后的进位</h3><p><code>999 + 1</code> 的百位算完后，还有一个 1 没有安家，要写入新的千位。结果可能比两个加数中较长的那个<strong>多一位</strong>。</p><p>若这时进位是 0，就不额外添一位。数组要为可能出现的新数位留出空间。</p>
+  <h3>③ 开始新加法：状态从本次重新建立</h3><p>每次相加前，进位都从 <code>0</code> 开始。结果数组先清零，有效长度重新计算。数组反复使用时尤其要防止旧数字混进新结果。</p>
+  <h3>④ 输出：从最高有效位往个位读</h3><p>若结果长为 <code>lenZ</code>，输出下标从 <code>lenZ−1</code> 到 <code>0</code>。不要把数组容量当成输出长度，也不能输出 <code>z</code> 就指望 C++ 自动打印所有数字。</p>
+  <div class="callout warm"><strong>0 也有一个数位。</strong><p>结果为 0 时，要输出一个 0。不要因为寻找最高非零位而一路越界，也不要把结果输出成空白。</p></div>
+  <div class="task"><h3>边界验证任务</h3><p>用纸上追踪表计算 <strong>999 + 1</strong> 和 <strong>0 + 0</strong>。各用一句话说明：只按“较长加数的位数”计算并直接结束，会在哪一种情况下漏掉什么？你的输出规则又怎样照顾 0？</p></div>
+</section>
+
+<section class="chapter" id="tools" aria-labelledby="h-tools">
+  <div class="kicker">05 / 把原理翻译成代码</div><h2 id="h-tools">工具只有四件：数组、循环、取余、整除</h2>
+  <p class="goal">先会做“一次大数相加”，再把它用于楼梯的多次递推。</p>
+  <div class="table-scroll"><table><thead><tr><th>工具</th><th>在这件事里做什么</th></tr></thead><tbody><tr><td>数组</td><td>每格保存一个数位，多个格子组成一个数</td></tr><tr><td>循环</td><td>从个位开始，对每一位重复同样的计算</td></tr><tr><td><code>% 10</code></td><td>取出当前位应留下的数字</td></tr><tr><td><code>/ 10</code></td><td>算出要送给高一位的进位（整数除法）</td></tr></tbody></table></div>
+  <h3>先登记变量，每个名字只负责一件事</h3>
+  <div class="table-scroll"><table><thead><tr><th>变量</th><th>含义</th><th>什么时候变化</th></tr></thead><tbody><tr><td><code>x、y</code></td><td>两个加数的数位数组</td><td>一次加法中不修改它们</td></tr><tr><td><code>z</code></td><td>结果的数位数组</td><td>算完一位就写入一格</td></tr><tr><td><code>lenX、lenY、lenZ</code></td><td>三个数各自的有效位数</td><td>读入或生成新数时确定</td></tr><tr><td><code>j</code></td><td>当前处理的数位下标</td><td>处理完一位后加 1</td></tr><tr><td><code>carry</code></td><td>尚未加入当前位的进位</td><td>每一轮算完后更新，传给下一轮</td></tr><tr><td><code>s</code></td><td>这一轮尚未拆分的总和</td><td>每轮重新计算</td></tr></tbody></table></div>
+  <h3>准备一次练习的数据</h3>
+  <pre><code>// 只用于练习 89 + 144；10 格是这个小练习的容量
+int x[10] = {9, 8};
+int y[10] = {4, 4, 1};
+int z[10] = {};       // 所有元素初始化为 0
+int lenX = 2, lenY = 3;
+int carry = 0;</code></pre>
+  <h3>一轮计算的核心</h3>
+  <pre><code>int s = x[j] + y[j] + carry;
+z[j] = s % 10;
+carry = s / 10;</code></pre>
+  <p>第一行读的是<strong>上一位传来的旧进位</strong>；第三行得到的是<strong>送给下一位的新进位</strong>。它们可以使用同一个变量，因为旧进位已经加进 <code>s</code> 了。</p>
+  <h3>把三行放回一个完整过程</h3>
+  <ol><li><strong>准备：</strong>确保输入数组空余位置为 0，结果清零，进位为 0。</li><li><strong>逐位：</strong>确定较长加数的长度，用循环从个位到最高位执行这三行。</li><li><strong>收尾：</strong>处理最后剩下的进位，确定结果的有效长度。</li><li><strong>输出：</strong>从结果最高有效位向个位打印。</li></ol>
+  <div class="task"><h3>现在由你完成一个完整工具</h3><p>用上面的变量和三行核心，自行补出循环、收尾和输出，写成计算 <strong>89 + 144</strong> 的小程序。完成后，改成 <strong>999 + 1</strong> 再试一次。重点不是照抄三行，而是让它们在正确的范围和顺序里工作。</p><aside class="hint"><h4>按需查阅 · 如果不知道循环怎么组织</h4><p>先在纸上列出需要处理的下标，再决定起点与终点。两个加数的长度分别是 <code>lenX</code> 和 <code>lenY</code>，较大的那个告诉你要处理多少位。最后的进位检查放在这个循环之后。</p></aside><aside class="hint"><h4>按需查阅 · 如果不知道怎样保存最后一个进位</h4><p>假设刚处理了 L 位，那么这些下标是 0 到 L−1。新添的那一位应该在下标 L。根据最后的进位是否为 0，决定结果长度是 L 还是 L+1。</p></aside></div>
+  <aside class="hint"><h4>按需查阅 · 选读：如果加数很长，怎样从输入变成数组？</h4><p>用 <code>string</code> 读入十进制数字文本，再从右往左取字符。不要先读入 <code>long long</code>，否则拆分之前就已经放不下了。</p><pre><code>string text;
+cin &gt;&gt; text;
+// 假设输入合法、无多余前导零，且数组容量足够
+int lenX = text.size();
+// 第 j 格来自文本从右往左的第 j 个字符：
+x[j] = text[lenX - 1 - j] - '0';</code></pre><p><code>'7' - '0'</code> 得到整数 7。你需要自己写遍历各个字符的循环。本题“数楼梯”只输入较小的阶数 n，走法数是在计算中长大的，所以<strong>楼梯输入不需要改成字符串</strong>。</p></aside>
+</section>
+
+<section class="chapter" id="stairs" aria-labelledby="h-stairs">
+  <div class="kicker">06 / 用回原题</div><h2 id="h-stairs">一次加法会了，就接着算下一阶</h2>
+  <p class="goal">沿用前面的 x、y、z 三个一维数组。这一节只新增一件事：算完一阶，更新前两项。</p>
+  <p>你已经会把 <code>x</code> 和 <code>y</code> 中的两个大数相加，结果存入 <code>z</code>。楼梯题反复需要的，正是这个加法工具。因为新一阶只用到前两阶，我们一直保留这两个走法数就够了。</p>
+  <h3>1. 三个数组还是原来的工具</h3>
+  <div class="table-scroll"><table><thead><tr><th>数组</th><th>准备计算第 i 阶时，保存什么</th><th>有效长度</th></tr></thead><tbody><tr><td><code>x</code></td><td>前两阶，也就是第 i−2 阶的走法数</td><td><code>lenX</code></td></tr><tr><td><code>y</code></td><td>前一阶，也就是第 i−1 阶的走法数</td><td><code>lenY</code></td></tr><tr><td><code>z</code></td><td>本轮相加的结果：第 i 阶的走法数</td><td><code>lenZ</code></td></tr></tbody></table></div>
+  <p>这里每个数组都表示<strong>一个完整的大数</strong>，每格仍只保存一位数字。前面学过的逐位相加、最后进位和有效长度规则，全部继续使用。</p>
+  <h3>2. 算完一次，准备下一次</h3>
+  <p>仍用前面那次 <strong>89 + 144</strong>。下面为方便阅读写出完整数值；数组里实际保存的仍是一个个数位。</p>
+  <div class="table-scroll"><table><thead><tr><th>时刻</th><th>x 保存</th><th>y 保存</th><th>z 保存</th></tr></thead><tbody><tr><td>准备算第 12 阶</td><td>89（第 10 阶）</td><td>144（第 11 阶）</td><td>清零，等待结果</td></tr><tr><td>完成本次加法</td><td>89</td><td>144</td><td>233（第 12 阶）</td></tr><tr><td>更新后，准备算第 13 阶</td><td>144（第 11 阶）</td><td>233（第 12 阶）</td><td>下次相加前清零</td></tr></tbody></table></div>
+  <div class="callout"><strong>相加的方法不变，变的是下一次交给它的两个数。</strong><p>算完后，较旧的 89 已经用完；接下来需要的是 144 和 233。始终只保留眼下需要的几个数，这种方法叫“滚动保存”。</p></div>
+  <h3>3. 更新时，先保护还要用的旧值</h3>
+  <ol><li><strong>先完成加法：</strong>用 x、y 算出整个 z，包括最后进位和 lenZ。加法过程中不改 x、y。</li><li><strong>再复制旧 y 到 x：</strong>把 y 的所有格子复制到 x，并让 lenX 变为 lenY。这样旧 y 已经保存好了。</li><li><strong>再复制 z 到 y：</strong>把 z 的所有格子复制到 y，并让 lenY 变为 lenZ。</li><li><strong>下次相加前：</strong>把 z 清零、carry 置 0，重新计算本次的 lenZ。</li></ol>
+  <p><strong>为什么不能反过来？</strong>如果先用 233 覆盖 y，再把 y 复制给 x，两个数组就都变成 233，原本还要用的 144 就丢了。</p>
+  <aside class="hint"><h4>按需查阅 · 实现提示：怎样复制一个普通数组？</h4><p>C++ 普通数组不能直接写 <code>x = y</code>。用一个循环，把 y 的各个格子逐一复制给 x；长度变量另外赋值。第一次实现可以复制整个数组容量，包含未使用位置的 0，避免留下旧数位。三个数组从一开始就都要初始化为 0。</p><p>复制只改变目标数组，不会把来源数组清空。必须等 z 已经复制给 y 后，才能清空 z。</p></aside>
+  <h3>4. 从第 3 阶开始重复这个过程</h3>
+  <p>起步时，x 保存第 1 阶的走法数 1，y 保存第 2 阶的走法数 2，两个有效长度都是 1。接着从第 3 阶开始，每一阶都做一遍<strong>“高精度相加 → 按顺序更新前两项”</strong>，直到第 n 阶。</p>
+  <p><code>i</code> 是外层循环中的楼梯阶数；<code>j</code> 是一次高精度加法里处理的数位下标。<strong>外层每前进一阶，里面就完成一次整个大数的相加。</strong></p>
+  <p>按上面的约定，每轮相加后都更新 x、y，所以当 n≥2 时，最后的结果保存在 y 中，按 lenY 从高位向低位输出。n=2 不必进入循环；n=1 则取初始的 x。</p>
+  <aside class="hint"><h4>按需查阅 · 实现准备：每个数组要多大？</h4><p>本题 x、y、z 各预留 <strong>1100 格</strong>即可，每格存一位，空余格保持为 0。数组长度看的是走法数有多少位，不是楼梯有多少阶。</p><p>容量依据（选读）：由递推可估计第 n 阶走法数不超过 <code>1.62^n</code>，而 <code>1.62^5000 &lt; 10^1048</code>，1100 格留有余量。三个数组合计只需约 13 KB（按每个 int 为 4 字节计）。</p></aside>
+  <div class="task"><h3>完整任务：让同一个加法工具连续工作</h3><p>从 x 表示 1、y 表示 2 开始，在纸上连续推到第 5 阶。每轮记录“相加前的 x、y → 得到的 z → 更新后的 x、y”，同时记下三个有效长度。</p><p>能解释每次更新为什么没有丢掉下一轮要用的数，再把这个过程接进自己的楼梯程序。不要只验证某一次加法，要验证它能连续工作。</p></div>
+</section>
+
+
+<section class="chapter" id="practice" aria-labelledby="h-practice">
+  <div class="kicker">07 / 独立应用与验证</div><h2 id="h-practice">先把工具做稳，再用它解决题目</h2>
+  <p class="goal">每次练习都有完整产出。先自己尝试，确实卡住时再看提示。</p>
+  <h3>任务 A · 完成一次高精度加法</h3><p>写出能处理两个非负整数相加的小程序。第一版可以直接给数组赋值，先不处理字符串输入。自己负责循环范围、最后进位、有效长度和输出。</p>
+  <div class="table-scroll"><table><thead><tr><th>用什么测试</th><th>检查什么</th></tr></thead><tbody><tr><td><code>89 + 144</code></td><td>位数不同、进位、原题中的一次递推</td></tr><tr><td><code>999 + 1</code></td><td>连续进位、结果多一位</td></tr><tr><td><code>0 + 0</code></td><td>最小值也能正确输出</td></tr><tr><td><code>5070 + 30</code></td><td>中间和末尾的零没有被丢掉</td></tr></tbody></table></div>
+  <p class="answer-line">自测 1：你的程序算出 999 + 1 是多少？　运行结果：________________</p><p class="answer-line">自测 2：你的程序算出 5070 + 30 是多少？　运行结果：________________</p><h3>任务 B · 把工具接回数楼梯</h3><p>保留原来的递推思路，升级数据表示、相加过程和输出。由你完成代码；这份课件不给整题的可提交程序。</p>
+  <div class="table-scroll"><table><thead><tr><th>测试输入</th><th>验证重点</th></tr></thead><tbody><tr><td><code>n = 1、2</code></td><td>不进入递推时，初始化和输出是否仍正确</td></tr><tr><td><code>n = 4、12</code></td><td>小范围手推与程序一致，数位方向正确</td></tr><tr><td><code>n = 91、92、93</code></td><td>跨过旧 long long 的范围后仍能精确递推</td></tr><tr><td><code>n = 5000</code></td><td>容量、边界、运行时间和内存能否承受</td></tr></tbody></table></div>
+  <p class="muted">“变大了”“没崩溃”不能证明大数正确。先核对小结果，再用独立的逐位加法检查跨界测试中的相邻三项关系；最终结合评测结果验证。不要继续拿已溢出的旧程序当标准答案。</p>
+  <h3>任务 C · 迁移到另一道题</h3><p>两家图书馆分别报告了一个很长的藏书册数，要求精确求总数。请说明：能复用高精度加法的哪部分？这里还需要“楼梯的外层循环”吗？</p><aside class="hint"><h4>按需查阅 · 做完以后检查迁移思路</h4><p>可以复用数字表示、逐位加法、最后进位和输出。两个很长的输入要从字符串转换成数位数组。只相加一次，不需要楼梯递推；工具相同，组织工具的题目主线不同。</p></aside>
+  <div class="callout"><strong>什么时候想到这个工具？</strong><p>题目要求精确整数结果，结果可能超过普通整数范围，而且核心运算是加法时，可以考虑高精度加法。如果题目明确只要求对某个数取模，就按那道题的输出要求建模，不必总是保存整个大数。</p></div>
+</section>
+
+<section class="chapter" id="card" aria-labelledby="h-card">
+  <div class="kicker">08 / 留给自己的方法</div><h2 id="h-card">把方法带走，不只记住三行代码</h2>
+  <div class="callout"><strong>一张方法卡</strong><p><b>为什么：</b>结果超过普通整数范围，但必须精确。</p><p><b>怎样存：</b>一格一位，个位在下标 0，另记有效长度。</p><p><b>怎样算：</b>从低位到高位，加上旧进位，留下余数，送出新进位。</p><p><b>怎样收尾：</b>补最后进位，确定长度，从高位向低位输出。</p><p><b>怎样用：</b>题目原来的数量关系不变，用这个工具完成其中的加法。</p></div>
+  <h3>交给评测前，我能独立完成这些事吗？</h3>
+  <div class="checklist"><label><span class="checkbox">□</span>我能说明数组容量、有效长度和下标分别是什么。</label><label><span class="checkbox">□</span>我能追踪一次有连续进位的加法，解释每个变量的作用。</label><label><span class="checkbox">□</span>我能独立写出循环、收尾和输出，并通过三类测试。</label><label><span class="checkbox">□</span>我能按顺序更新 x、y，并说清楼梯阶数 i 与数位下标 j 的区别。</label></div>
+  <p class="muted">这些是你的自查记录，不是自动认定“已经掌握”。隔天不看课件再做一次，更能看出哪些地方真正会了。</p>
+  <div class="note-area"><label for="my-plan">我的设计与还不确定的地方</label><div class="writing-lines"><div></div><div></div></div></div>
+  <div class="note-area"><label for="my-reflection">改对后，我自己的反思</label><div class="writing-lines"><div></div><div></div></div></div>
+  </section>
+</div></main>
+</body></html>
