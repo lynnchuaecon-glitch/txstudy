@@ -1,12 +1,12 @@
 {
   "status": "passed",
   "pages": {
-    "01_动态规划_从零建立模型": 17,
-    "02_动态规划_提高组建模与优化": 20,
+    "01_动态规划_从零建立模型": 18,
+    "02_动态规划_提高组建模与优化": 21,
     "03_动态规划_独立练习与验收": 29,
-    "04_动态规划_妈妈陪读与教练核验": 14
+    "04_动态规划_妈妈陪读与教练核验": 15
   },
-  "total_pages": 80,
+  "total_pages": 83,
   "toc_verified": true,
   "all_pages_visually_reviewed": true,
   "sample_count": 24,
@@ -63,10 +63,10 @@
     "note": "核验教材模型与样例 不代表已验证孩子程序或考试通过"
   },
   "pdf_sha256": {
-    "01_动态规划_从零建立模型.pdf": "7b3cabceeba078e213fdc6052fd88a855b86a1b1218df5ea4d8f7069734c8d81",
-    "02_动态规划_提高组建模与优化.pdf": "edc31fec5aac1a332b01b822364ffb04c91ef84184bd963697e6a32dd43316f6",
-    "03_动态规划_独立练习与验收.pdf": "f0b6c9e453a3521bf934642055185a43359973eb32f6c08659407b5fda804fac",
-    "04_动态规划_妈妈陪读与教练核验.pdf": "2bb2097316e6632241c569e4de6f7230e6a54f449e82485f9d4f66db047ca6f9"
+    "01_动态规划_从零建立模型.pdf": "edf5779522d3c6a3644787388c8661af36b02e6e91688c8797f9de4b753db540",
+    "02_动态规划_提高组建模与优化.pdf": "87f9641b5206d97ad3c3a97dbc86540536b1fff9774d79617aece2ab28167913",
+    "03_动态规划_独立练习与验收.pdf": "967708a1991222ca2ad726e3e458c810214a8e16157ac3b1bfd5a882934f225e",
+    "04_动态规划_妈妈陪读与教练核验.pdf": "9d842ebd0af2a17d2600a40338139243618db62fb62c66b74025313bf3b7145a"
   },
   "html": {
     "status": "passed",
@@ -92,5 +92,19 @@
     "javascript_errors": [],
     "source_text_blocks_verified": 1080,
     "screenshots_reviewed": true
+  },
+  "typography_revision": {
+    "date": "2026-10-12",
+    "heading_font": "Noto Sans CJK SC Bold",
+    "chapter_pt": 21,
+    "section_pt": 14.5,
+    "body_font": "Noto Serif CJK SC",
+    "body_pt": 11.5,
+    "lesson_subsections_numbered": true,
+    "heading_bold_inheritance_verified": true,
+    "toc_verified": true,
+    "all_83_pages_visually_reviewed": true,
+    "body_text_preserved_except_reference_correction": true,
+    "reference_correction": "第一册第1章末尾：第四册第1章 → 第四册第3章"
   }
 }

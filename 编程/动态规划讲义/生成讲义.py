@@ -13,12 +13,12 @@ ROOT=Path(__file__).resolve().parent
 TMP=ROOT.parent.parent/'tmp/dp-handbook'
 TMP.mkdir(parents=True,exist_ok=True)
 NAMES=['01_动态规划_从零建立模型','02_动态规划_提高组建模与优化','03_动态规划_独立练习与验收','04_动态规划_妈妈陪读与教练核验']
-FONT='Noto Serif CJK SC'; LATIN='Calibri'; MONO='Consolas'
+FONT='Noto Serif CJK SC'; HEAD_FONT='Noto Sans CJK SC'; LATIN='Calibri'; MONO='Consolas'
 PAGE_MAP=json.loads((TMP/'page_map.json').read_text()) if (TMP/'page_map.json').exists() else {}
 
-def set_font(style,name,size,bold=False):
+def set_font(style,name,size,bold=False,east_asia=FONT):
  style.font.name=name;style.font.size=Pt(size);style.font.bold=bold;style.font.italic=False;style.font.color.rgb=RGBColor(0,0,0)
- rf=style.element.get_or_add_rPr().get_or_add_rFonts();rf.set(qn('w:eastAsia'),FONT)
+ rf=style.element.get_or_add_rPr().get_or_add_rFonts();rf.set(qn('w:eastAsia'),east_asia)
  for a in ['asciiTheme','hAnsiTheme','eastAsiaTheme','cstheme']:
   rf.attrib.pop(qn('w:'+a),None)
 
@@ -65,8 +65,10 @@ def diagram(kind):
 
 for k in ['recursion','dag','tree']:diagram(k)
 
-def paragraph(doc,text,style=None,bold=False):
- p=doc.add_paragraph(style=style);r=p.add_run(text);r.bold=bold
+def paragraph(doc,text,style=None,bold=None):
+ p=doc.add_paragraph(style=style);r=p.add_run(text)
+ # None inherits the paragraph style. False would cancel bold headings.
+ if bold is not None:r.bold=bold
  p.paragraph_format.widow_control=True
  return p
 
@@ -88,7 +90,9 @@ def table(doc,rows):
   cells=t.add_row().cells
   for ci,txt in enumerate(data):
    c=cells[ci];c.width=Inches(widths[ci]);c.vertical_alignment=WD_CELL_VERTICAL_ALIGNMENT.CENTER
-   p=c.paragraphs[0];p.style=doc.styles['Table Text'];p.paragraph_format.keep_with_next=False
+   p=c.paragraphs[0];p.style=doc.styles['Table Text']
+   # Keep compact teaching tables intact; longer tables repeat their header.
+   p.paragraph_format.keep_with_next=len(rows)<=5 and ri<len(rows)-1
    p.add_run(txt).bold=ri==0
    tcpr=c._tc.get_or_add_tcPr();mar=OxmlElement('w:tcMar')
    for side in ['top','bottom','left','right']:
@@ -110,9 +114,10 @@ for vol,cn in enumerate(['一','二','三','四']):
  sec.header_distance=Inches(.25);sec.footer_distance=Inches(.27)
  sty=doc.styles
  set_font(sty['Normal'],LATIN,11.5);sty['Normal'].paragraph_format.line_spacing=Pt(18.5);sty['Normal'].paragraph_format.space_after=Pt(6)
- for key,size in [('Title',25),('Subtitle',16),('Heading 1',18),('Heading 2',13.5)]:
-  set_font(sty[key],LATIN,size,True)
-  sty[key].paragraph_format.space_before=Pt(12);sty[key].paragraph_format.space_after=Pt(9)
+ for key,size,leading,before,after in [('Title',27,38,0,14),('Subtitle',16,26,0,14),('Heading 1',21,30,24,14),('Heading 2',14.5,23,18,8),('Heading 3',12,20,12,6)]:
+  set_font(sty[key],LATIN,size,True,east_asia=HEAD_FONT)
+  sty[key].paragraph_format.line_spacing=Pt(leading)
+  sty[key].paragraph_format.space_before=Pt(before);sty[key].paragraph_format.space_after=Pt(after)
   sty[key].paragraph_format.keep_with_next=True
  for key in ['Title','Subtitle']:
   sty[key].paragraph_format.space_before=Pt(0)
@@ -150,14 +155,18 @@ for vol,cn in enumerate(['一','二','三','四']):
   if page:p.add_run('\t'+str(page))
  paragraph(doc,'目录可点击跳转。打印阅读时可按章选择页码。','Table Text')
  if vol==3:paragraph(doc,'本册含核验结论，请在孩子尝试后查看相应条目。','Table Text')
- idx=firsth;chapter=0
+ idx=firsth;chapter=0;lesson_number=None;subsection=0
  while idx<len(lines):
   line=lines[idx];idx+=1
   if not line:continue
   if line.startswith('@h1 '):
    p=paragraph(doc,line[4:],'Heading 1');p.paragraph_format.page_break_before=(chapter==0 or vol==2)
    add_bookmark(p,f'chapter_{chapter}',chapter+1);chapter+=1
-  elif line.startswith('@h2 '):paragraph(doc,line[4:],'Heading 2')
+   match=re.match(r'第(\d+)章',line[4:]);lesson_number=int(match[1]) if match and vol<2 else None;subsection=0
+  elif line.startswith('@h2 '):
+   subsection+=1
+   label=(f'{lesson_number}.{subsection}  ' if lesson_number is not None else '')+line[4:]
+   paragraph(doc,label,'Heading 2')
   elif line.startswith('@table '):
    rows=[line[7:].split('|')]
    while lines[idx]!='@endtable':rows.append(lines[idx].split('|'));idx+=1
@@ -168,7 +177,7 @@ for vol,cn in enumerate(['一','二','三','四']):
    # Array-style program relations deliberately use editable linear notation.
    paragraph(doc,line[9:],'Formula')
   elif line.startswith('@code ') or line=='@sample':
-   if line.startswith('@code '):paragraph(doc,line[6:],bold=True)
+   if line.startswith('@code '):paragraph(doc,line[6:],'Heading 3')
    buf=[]
    while lines[idx]!='@endcode':buf.append(lines[idx]);idx+=1
    idx+=1
@@ -181,7 +190,8 @@ for vol,cn in enumerate(['一','二','三','四']):
    descr={'recursion':'递归调用中的重复子问题','dag':'两条从点1到点4的有向路径','tree':'四个节点的树与快乐值'}[k]
    for e in p._p.xpath('.//wp:docPr'):e.set('descr',descr)
   elif line.startswith('@task '):
-   paragraph(doc,'独立检查  '+line[6:],bold=True)
+   paragraph(doc,'独立检查','Heading 2')
+   paragraph(doc,line[6:])
    for label in ['我的状态和来源','我设计的关键测试','第一次偏差与修改依据']:
     paragraph(doc,label+'  __________________________________________________','Table Text')
   elif line.startswith('@url '):
