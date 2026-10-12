@@ -1,0 +1,986 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"><title>动态规划 · 孩子自学</title><style>
+:root{--ink:#243b39;--muted:#61736e;--accent:#17685b;--paper:#fffefa;--wash:#f2f5f0;--line:#d9e3da;--read-size:18px;color-scheme:light}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);background:var(--wash);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}a{color:var(--accent);text-underline-offset:4px}button,input,select,textarea{font:inherit}button,.button{cursor:pointer;border:1px solid var(--line);border-radius:8px;padding:9px 14px;background:white;color:var(--ink);text-decoration:none;display:inline-block}button:hover,.button:hover{background:#e8f1ea}.primary{background:var(--accent);color:white;border-color:var(--accent)}.primary:hover{background:#115246;color:white}:focus-visible{outline:3px solid #bd8b37;outline-offset:3px}[hidden]{display:none!important}.skip{position:absolute;left:-9999px}.skip:focus{left:20px;top:10px;z-index:20;background:white;padding:10px}
+header{height:72px;padding:0 24px;background:var(--paper);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:15px;position:sticky;top:0;z-index:5}.brand{font-size:19px;font-weight:700;text-decoration:none;color:var(--ink)}.brand span{font-size:12px;color:var(--muted);font-weight:400;margin-left:14px}.tools{display:flex;gap:7px;align-items:center}.tools button{font-size:14px;padding:8px 11px}#menu-toggle{display:none}
+aside{position:fixed;top:72px;left:0;bottom:0;width:292px;background:var(--paper);border-right:1px solid var(--line);padding:22px 16px;overflow:auto}.side-title{font-size:12px;letter-spacing:.1em;color:var(--muted);font-weight:600;margin:0 10px 13px}#search{width:100%;border:1px solid var(--line);border-radius:8px;background:#f6f7f2;padding:11px;font-size:14px}#search-result{font-size:12px;color:var(--muted);min-height:20px;margin:8px 3px}.nav-group{margin:18px 0}.nav-group h2{font-size:13px;color:var(--muted);margin:0 10px 8px}.nav-link{display:block;font-size:13px;line-height:1.6;padding:8px 10px;margin:3px 0;text-decoration:none;color:var(--ink);border-radius:7px;position:relative}.nav-link:hover{background:var(--wash)}.nav-link[aria-current=page]{background:#e2eee4;color:#134f44;font-weight:600}.nav-link[data-recorded=true]::after{content:' ·';color:var(--accent);font-weight:900}.side-foot{font-size:12px;color:var(--muted);line-height:1.8;border-top:1px solid var(--line);padding:17px 10px;margin-top:24px}
+main{margin-left:292px;padding:36px 42px 80px;min-height:calc(100vh - 72px)}.reader-wrap{max-width:880px;margin:0 auto}.crumb{font-size:12px;letter-spacing:.08em;color:var(--muted);margin:0 0 17px}.chapter{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:42px 48px;margin-bottom:24px;scroll-margin-top:100px;font-size:var(--read-size);line-height:1.9}.chapter h1{font-size:clamp(25px,2.5vw,34px);line-height:1.45;margin:0 0 27px;letter-spacing:-.015em}.chapter h2{font-size:1.17em;line-height:1.6;margin:32px 0 12px}.chapter h3{font-size:1.05em}.chapter p{margin:14px 0;overflow-wrap:anywhere}.chapter .lead{font-weight:600;color:var(--accent)}.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}.chapter .sub{font-size:1.2em;color:var(--muted)}.chapter .small{font-size:14px;line-height:1.8;color:var(--muted)}.actions{display:flex;flex-wrap:wrap;gap:10px;margin:25px 0}.actions a{font-size:15px}.callout{border-left:3px solid #88aa8d;background:#f0f5ea;padding:14px 20px;margin:22px 0}.callout p{margin:6px 0}.think{border-left-color:#c49a51;background:#fcf5e7}.think strong{font-size:14px;color:#805b23;display:block;margin-bottom:7px}details{border:1px solid var(--line);border-radius:9px;margin:20px 0;background:#fffefa}summary{padding:13px 17px;cursor:pointer;font-size:15px;font-weight:600;color:var(--accent)}.details-body{padding:1px 21px 18px;border-top:1px solid var(--line)}.formula,pre{background:#f3f5f1;padding:16px 18px;border-radius:8px;overflow:auto;font-family:ui-monospace,SFMono-Regular,Consolas,"Liberation Mono",monospace;font-size:.88em;line-height:1.8;white-space:pre-wrap;overflow-wrap:anywhere}.table-wrap{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:8px}table{border-collapse:collapse;width:100%;font-size:.86em;min-width:420px}th,td{padding:10px 13px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}th{background:#eaf0e7;font-weight:600}td+td,th+th{border-left:1px solid var(--line)}tr:last-child td{border-bottom:0}figure{margin:24px 0}figure img{display:block;max-width:100%;height:auto;border-radius:6px}.task{border-left:3px solid var(--accent);padding:14px 20px;background:#edf5ee;margin:24px 0}.task h3{margin:0 0 9px}.task-lines{font-size:.87em;color:var(--muted)}.source{font-size:14px;word-break:break-all}.chapter-nav{display:flex;justify-content:space-between;gap:20px;margin:24px 0}.chapter-nav button{font-size:14px;max-width:48%;text-align:left;line-height:1.6}
+.notes{padding:26px 30px;background:var(--paper);border:1px solid var(--line);border-radius:12px}.notes h2{font-size:19px;margin:0 0 8px}.notes p{font-size:13px;color:var(--muted);line-height:1.8}.notes label{font-size:14px;display:block;margin:18px 0 7px}.notes select{padding:10px;border:1px solid var(--line);border-radius:7px;max-width:100%;background:white}.notes textarea{width:100%;min-height:155px;resize:vertical;border:1px solid var(--line);border-radius:8px;padding:14px;line-height:1.8;font-size:16px;color:var(--ink);background:white}#save-status{min-height:23px}.status-row{display:flex;align-items:center;flex-wrap:wrap;gap:15px}.status-row label{margin:0}.quiet{color:var(--muted);font-size:12px}.nojs{margin:15px;padding:15px;background:#fcf5e7}.visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+@media(min-width:1500px){main{padding-top:48px}}@media(max-width:1050px){aside{width:260px}main{margin-left:260px;padding:26px}.chapter{padding:32px}}@media(max-width:760px){header{height:auto;min-height:64px;padding:12px 16px;flex-wrap:wrap}.brand{font-size:17px}.brand span{display:none}#menu-toggle{display:inline-block}.tools{gap:5px}.tools button{font-size:12px;padding:7px 9px}aside{display:none;top:110px;width:min(340px,90vw);z-index:4;box-shadow:10px 0 25px #203c3120}body.menu-open aside{display:block}main{margin:0;padding:18px 12px 55px}.chapter{padding:25px 21px;border-radius:10px;font-size:var(--read-size)}.notes{padding:22px}.chapter h1{font-size:27px}.chapter-nav button{padding:9px}.table-wrap{margin-right:-2px}.crumb{font-size:11px}.source{font-size:12px}}
+@media print{header,aside,.crumb,.chapter-nav,.notes,.actions,.no-print{display:none!important}main{margin:0;padding:0}.chapter{padding:0;border:0;background:white;font-size:11pt;line-height:1.7;margin:0}.chapter h1{font-size:20pt}.chapter h2{break-after:avoid}.callout,.task,pre,tr,figure{break-inside:avoid}a{color:black}details{border:0}.details-body{padding:0;border:0}summary{display:none}body{background:white}.table-wrap{overflow:visible}table{min-width:0}figure img{max-height:180px;margin:auto}p{orphans:3;widows:3}@page{size:A4;margin:18mm}}
+</style></head><body data-edition="孩子自学"><a class="skip" href="#reader">跳到正文</a><header><a class="brand" href="#welcome" data-target="welcome">动态规划 <span>孩子自学 · 离线阅读</span></a><div class="tools"><button id="menu-toggle" aria-controls="sidebar" aria-expanded="false">目录</button><button id="font-down" aria-label="缩小正文字号">A−</button><button id="font-up" aria-label="增大正文字号">A+</button><button id="export">导出记录</button><button id="print">打印本节</button></div></header><aside id="sidebar" aria-label="讲义目录"><p class="side-title">一步一步，留下自己的作品</p><label class="visually-hidden" for="search">搜索章节和正文</label><input id="search" type="search" placeholder="搜索章节或关键词" autocomplete="off"><p id="search-result" aria-live="polite">可以搜索章节标题或正文关键词。</p><nav><div class="nav-group"><h2>开始之前</h2><a class="nav-link" href="#welcome" data-target="welcome">怎样使用电脑讲义</a></div><div class="nav-group"><h2>第一册 从零建立模型</h2><a class="nav-link" href="#v1-intro" data-target="v1-intro">本册导读</a><a class="nav-link" href="#v1-c1" data-target="v1-c1">阅读路线和使用方法</a><a class="nav-link" href="#v1-c2" data-target="v1-c2">第1章 用一张小纸条记住过去</a><a class="nav-link" href="#v1-c3" data-target="v1-c3">第2章 状态是决定未来所需的信息</a><a class="nav-link" href="#v1-c4" data-target="v1-c4">第3章 一张表为什么算得对</a><a class="nav-link" href="#v1-c5" data-target="v1-c5">第4章 递归 搜索和记忆化怎样连起来</a><a class="nav-link" href="#v1-c6" data-target="v1-c6">第5章 最少硬币和不能盲信的贪心</a><a class="nav-link" href="#v1-c7" data-target="v1-c7">第6章 网格把一维扩展成二维</a><a class="nav-link" href="#v1-c8" data-target="v1-c8">第7章 结尾在哪里会改变状态</a><a class="nav-link" href="#v1-c9" data-target="v1-c9">第8章 零一背包先把物品这一维看清</a><a class="nav-link" href="#v1-c10" data-target="v1-c10">第9章 背包家族来自使用次数和计数对象</a><a class="nav-link" href="#v1-c11" data-target="v1-c11">第10章 两条序列的关系</a><a class="nav-link" href="#v1-c12" data-target="v1-c12">第11章 把模型写成可靠的程序</a><a class="nav-link" href="#v1-c13" data-target="v1-c13">本册资料说明</a></div><div class="nav-group"><h2>第二册 提高组建模与优化</h2><a class="nav-link" href="#v2-intro" data-target="v2-intro">本册导读</a><a class="nav-link" href="#v2-c1" data-target="v2-c1">第12章 区间问题从最后一次合并入手</a><a class="nav-link" href="#v2-c2" data-target="v2-c2">第13章 依赖图和有向无环图</a><a class="nav-link" href="#v2-c3" data-target="v2-c3">第14章 把有限的历史变成状态机</a><a class="nav-link" href="#v2-c4" data-target="v2-c4">第15章 多维状态和两个人同步走</a><a class="nav-link" href="#v2-c5" data-target="v2-c5">第16章 树形动态规划先认识父子关系</a><a class="nav-link" href="#v2-c6" data-target="v2-c6">第17章 换根把一棵树的答案传给邻居</a><a class="nav-link" href="#v2-c7" data-target="v2-c7">第18章 把小集合写进一个整数</a><a class="nav-link" href="#v2-c8" data-target="v2-c8">第19章 数位动态规划把大范围拆成短数字</a><a class="nav-link" href="#v2-c9" data-target="v2-c9">第20章 概率与期望也是对子问题的合并</a><a class="nav-link" href="#v2-c10" data-target="v2-c10">第21章 优化之前先找到重复劳动</a><a class="nav-link" href="#v2-c11" data-target="v2-c11">第22章 单调队列维护会过期的候选</a><a class="nav-link" href="#v2-c12" data-target="v2-c12">第23章 进一步优化要先证明条件</a><a class="nav-link" href="#v2-c13" data-target="v2-c13">第24章 面对没有标签的新题</a><a class="nav-link" href="#v2-c14" data-target="v2-c14">本册资料说明</a></div><div class="nav-group"><h2>第三册 用自己的作品证明掌握</h2><a class="nav-link" href="#v3-intro" data-target="v3-intro">本册导读</a><a class="nav-link" href="#v3-c1" data-target="v3-c1">练习前的约定</a><a class="nav-link" href="#v3-c2" data-target="v3-c2">A1 换一种步长</a><a class="nav-link" href="#v3-c3" data-target="v3-c3">A2 带着有限容量出发</a><a class="nav-link" href="#v3-c4" data-target="v3-c4">A3 雨天的棋盘</a><a class="nav-link" href="#v3-c5" data-target="v3-c5">A4 一段有起点也有终点的记录</a><a class="nav-link" href="#v3-c6" data-target="v3-c6">A5 两份日记的共同部分</a><a class="nav-link" href="#v3-c7" data-target="v3-c7">A6 零钱够不够</a><a class="nav-link" href="#v3-c8" data-target="v3-c8">B1 搬走一排箱子</a><a class="nav-link" href="#v3-c9" data-target="v3-c9">B2 消息沿单向线路传递</a><a class="nav-link" href="#v3-c10" data-target="v3-c10">B3 每天选择一种训练</a><a class="nav-link" href="#v3-c11" data-target="v3-c11">B4 树上的邀请</a><a class="nav-link" href="#v3-c12" data-target="v3-c12">B5 到大家家里有多远</a><a class="nav-link" href="#v3-c13" data-target="v3-c13">B6 不挨着的棋子</a><a class="nav-link" href="#v3-c14" data-target="v3-c14">B7 访问全部城市</a><a class="nav-link" href="#v3-c15" data-target="v3-c15">B8 两人一起收集</a><a class="nav-link" href="#v3-c16" data-target="v3-c16">C1 一段号码中的好数字</a><a class="nav-link" href="#v3-c17" data-target="v3-c17">C2 走到终点平均还要几步</a><a class="nav-link" href="#v3-c18" data-target="v3-c18">C3 跳跃途中获得分数</a><a class="nav-link" href="#v3-c19" data-target="v3-c19">C4 把一排工作分成若干段</a><a class="nav-link" href="#v3-c20" data-target="v3-c20">C5 必须邀请指定人数</a><a class="nav-link" href="#v3-c21" data-target="v3-c21">C6 严格上升的奖励路线</a><a class="nav-link" href="#v3-c22" data-target="v3-c22">D1 为展览挑作品</a><a class="nav-link" href="#v3-c23" data-target="v3-c23">D2 安排互不冲突的活动</a><a class="nav-link" href="#v3-c24" data-target="v3-c24">D3 同时装进重量和体积</a><a class="nav-link" href="#v3-c25" data-target="v3-c25">D4 数出不同下标的目标子序列</a><a class="nav-link" href="#v3-c26" data-target="v3-c26">四次阶段验收</a><a class="nav-link" href="#v3-c27" data-target="v3-c27">孩子自己的复盘页</a></div></nav><div class="side-foot">第一、二册：24章讲解<br>第三册：24道独立练习<br>第四册：妈妈陪读与核验<br><br><a href="动态规划妈妈陪读指南.html">妈妈陪读入口</a><br>2026年10月12日 · HTML版</div></aside><main id="reader"><div class="reader-wrap"><p class="crumb" id="crumb">从纸笔模型到独立解决问题</p><noscript><p class="nojs">浏览器未启用脚本，以下仍可连续阅读完整内容；本机记录、搜索和字号调整需要启用脚本。</p></noscript><section class="chapter" id="welcome" data-title="怎样使用电脑讲义" data-book="从纸笔模型到独立解决问题"><div class="eyebrow">动态规划 / 离线自学讲义</div><h1 tabindex="-1">把过去记清楚，<br>把下一步想明白。</h1><p>从零开始，沿着24章讲解与24道原创练习，学习状态、来源、边界、验证和迁移。今天只需要推进一个完整问题。</p><div class="actions"><a class="button primary" href="#v1-c1" data-target="v1-c1">先看学习路线</a><a class="button" href="#v1-c2" data-target="v1-c2">从第1章开始</a><a class="button" href="#v3-c1" data-target="v3-c1">进入独立练习</a></div><h2>一节课，分三次行动</h2><div class="callout"><p><strong>先想：</strong>读题，用纸笔画一个小例子，写下自己的猜想。</p><p><strong>再读：</strong>展开推导，找出与你原来想法不同的地方。</p><p><strong>独立做：</strong>合上讲解，完成任务、写码、自测，再记下真正的卡点。</p></div><p>递归还不稳也能开始。先读第一册第1—3章，再用第4章连接递归和记忆化。提高组章节需要更长的练习过程，不按翻过的页数判断掌握。</p><h2>这份电脑讲义怎样用</h2><p>左侧目录可以搜索正文；“A− / A+”调整字号；每节下方可以记草稿、卡点和进度。再次打开时会回到上次阅读的一节。</p><p class="small">文件无需联网即可阅读。记录自动保存在当前浏览器；换设备、移动文件或清除浏览器数据后可能无法找回，请用右上角“导出记录”保存文本副本。右上角可打印当前一节。</p><p class="small">进度由你自己标记。读完、独立完成、隔天重做通过是不同进展，标记不会代替实际程序测试。妈妈核验依据放在另一份文档中。</p></section>
+<section class="chapter" id="v1-intro" data-title="本册导读" data-book="第一册 从零建立模型">
+<div class="eyebrow">第一册 从零建立模型</div>
+<h1 tabindex="-1">本册导读</h1>
+<p class="lead">给已经学过数组和循环 正在巩固递归的你</p>
+<p>这套讲义要帮助你学会一件事：面对很多种选择，判断哪些过去必须记住，哪些过去可以合并，然后有根据地算出答案。我们从纸上走楼梯开始，逐步走向提高组的树、集合、数位与优化。你不必先把递归学得很熟，才能开始第一册。</p>
+<p>每次读一个小节，先完成“先停下来想”，再读推导。例题是用来学习方法的；第三册的独立练习要合上讲义做。讲义给状态、推理和局部代码，不提供整题可提交程序。输入、变量、循环、自测和最后提交由你完成。</p>
+<p>妈妈可以检查你是否讲清“这一格是什么、为什么这样合并、有没有漏掉或重复”。程序是否正确，还需要实际运行和小规模核验。看懂、自己做出、隔天还会、换题会用，是四种不同的进展。</p>
+<h2>这套讲义怎样服务考试</h2>
+<p>按2026年10月12日核对的官方资料，GESP六级涉及简单一维DP和简单背包，七级进一步涉及二维DP及最值优化，八级还要求更综合的效率分析与优化。五级的递归、分治、贪心、复杂度等是本书的重要前置知识。本书的章节顺序是教学安排，不是各级考试的官方题单。[S1]</p>
+<p>提高组的DP学习还要进入多维、树形、状态压缩和常用优化等方向。第二册围绕这些能力组织，数位、概率期望和几类优化作为拓展与综合训练。会做DP不能替代GESP或CSP-S的数论、图论、数据结构、字符串、阅读程序与考场训练。[S2]</p>
+<p>本书不承诺读完就能通过考试。我们把目标落实成可检查的作品：手推表、状态定义、正确性理由、独立程序、边界测试、隔天重做和陌生题迁移。</p>
+</section>
+<section class="chapter" id="v1-c1" data-title="阅读路线和使用方法" data-book="第一册 从零建立模型">
+<div class="eyebrow">第一册 从零建立模型</div>
+<h1 tabindex="-1">阅读路线和使用方法</h1>
+<h2>怎样读一节课</h2>
+<p>先读题意，画出一个小例子。遇到“先停下来想”，盖住后文，写一句自己的想法；没有想好也可以留下草稿。再读讲解，找出与你原来想法不同的地方。读到“独立任务”便停下，先完成任务，不继续向后翻找公式。</p>
+<p>一次学习可以只推进一个完整问题。建议把讲解、独立写码、调试分成不同的学习段，每段约二十五到四十分钟，按当天精神调整。这是起始安排，不是必须完成的页数。明显疲劳时留下状态定义和卡点，下一次从题意重来。</p>
+<div class="table-wrap" tabindex="0" aria-label="可横向滚动的表格"><table><thead><tr><th scope="col">学习阶段</th><th scope="col">阅读范围</th><th scope="col">进入下一阶段前要拿出的证据</th></tr></thead><tbody><tr><td>起步</td><td>第一册第1至4章</td><td>能画选择树 解释同一问题为什么只需算一次</td></tr><tr><td>基础</td><td>第一册第5至11章</td><td>能独立完成线性 网格 背包和序列模型</td></tr><tr><td>提高</td><td>第二册第12至20章</td><td>能根据依赖设计维度 顺序和边界</td></tr><tr><td>优化</td><td>第二册第21至24章</td><td>先写慢方法 再证明优化没有改变答案</td></tr><tr><td>迁移</td><td>第三册阶段验收</td><td>无模型标签做题 留下独立建模与调试记录</td></tr></tbody></table></div>
+<p>递归、DFS、树图、二进制或前缀和遇到陌生处，先补对应章节的前置小课。不要靠背后面的公式跳过它。第二册的学习跨度会明显大于第一册，不要求在同一学期全部做完。</p>
+<h2>开始前把符号翻译成人话</h2>
+<p>min表示挑最小，max表示挑最大。f只是表的名字，f[3]读作这张表中编号3的格子。f[i][j]用两个下标定位一格，例如行与列。i、j、n等字母没有固定魔法含义，每次都要在题目里重新说明。</p>
+<p>公式中的等号描述一个格子应当等于什么。C++中的赋值语句把右边算出的值写入左边变量；等于比较则写两个等号。正INF与负INF是我们约定的不可达标记，不是可以随意参与加减的真正无穷大。</p>
+<p>下文的关系式采用数组下标和程序式表达，目的是方便从纸上模型过渡到代码。复杂度文字里的2^n表示2的n次方；C++中的^却是按位异或，不能用来求乘方。第一次遇到O(n)、二进制或概率，可以先阅读紧邻的说明，再用小例子练习，不需要先会所有符号才开始。</p>
+</section>
+<section class="chapter" id="v1-c2" data-title="第1章 用一张小纸条记住过去" data-book="第一册 从零建立模型">
+<div class="eyebrow">第一册 从零建立模型</div>
+<h1 tabindex="-1">第1章 用一张小纸条记住过去</h1>
+<h2>先知道我们在解决什么</h2>
+<p>有四级楼梯。你从第0级出发，每次向上走一级或两级，必须恰好到第4级。问有多少种走法。走法按每次步长的先后顺序区分，先走1再走2，与先走2再走1不同。这里问数量，不问最少走几步。</p>
+<div class="callout think"><strong>先停下来想</strong><p>不用公式，把四级楼梯的全部走法有顺序地写出来。你准备怎样保证没有漏掉，也没有重复？把“第一步是1”和“第一步是2”分两列，或者把走法画成分叉图。</p></div>
+<details class="derivation"><summary>留下自己的想法后，展开后续推导</summary><div class="details-body">
+<p>逐条列举可以得到1111、112、121、211、22。把小题列完很重要，它给以后写的程序一个可信的检查结果。但如果有一百级，逐条写出所有走法就会越来越慢。</p>
+<h2>从最后一步往前看</h2>
+<p>站在第4级之前，最后一步只能来自第3级或第2级。所有到第3级的走法，末尾补一个1；所有到第2级的走法，末尾补一个2。这两类不会重叠，因为最后一步不同，而且没有第三种合法最后一步。</p>
+<p>于是，我们需要的不是每条路线的全文，而是“到某一级有多少条路线”。先记小问题的答案，再拼成大问题的答案。这就是第一次接触动态规划，英文简称DP。</p>
+<div class="formula" aria-label="关系式">ways[i] = ways[i-1] + ways[i-2]</div>
+<p>这里方括号表示数组中的一格。ways[4]读作“到第4级的走法数”，不是“第4条走法”。i是楼梯的位置，ways[i]是一个数量；它们的职责不同。</p>
+<div class="table-wrap" tabindex="0" aria-label="可横向滚动的表格"><table><thead><tr><th scope="col">楼梯位置 i</th><th scope="col">0</th><th scope="col">1</th><th scope="col">2</th><th scope="col">3</th><th scope="col">4</th></tr></thead><tbody><tr><td>到这里的走法数</td><td>1</td><td>1</td><td>2</td><td>3</td><td>5</td></tr></tbody></table></div>
+<p>第0级为什么记1？因为“已经在起点，什么也不走”有一种空走法。它让从第0级直接跨两级这件事得到正确计数。它不是“走了一步”。第1级只能走1，所以是1。若统一让i从1开始，则只在i&gt;=2时使用i-2这一项；绝不能访问负下标。</p>
+<h2>一份变量登记表</h2>
+<div class="table-wrap" tabindex="0" aria-label="可横向滚动的表格"><table><thead><tr><th scope="col">变量</th><th scope="col">现实含义</th><th scope="col">初值</th><th scope="col">什么时候变化</th></tr></thead><tbody><tr><td>n</td><td>目标楼梯编号</td><td>输入得到</td><td>本题中不变</td></tr><tr><td>i</td><td>当前准备求的位置</td><td>按循环安排</td><td>一格算完后往后走</td></tr><tr><td>ways[i]</td><td>恰好到第i级的走法数</td><td>先明确0和1</td><td>两个来源准备好后写入</td></tr></tbody></table></div>
+<p>把这张表复述给妈妈：她不需要知道数组的语法，也应能指出“位置”和“数量”不能互换。若输出n，输出的是楼梯的高度；若输出ways[n]，才是题目要的走法数。</p>
+</div></details>
+<h2>独立任务</h2>
+<p>把规则改成每次走1级或3级。先列出到第4级的全部走法，再自己写出“最后一步来自哪里”和新的递推关系。特别检查第0、1、2级。先不要写代码，拿这张纸解释为什么旧公式不能原样使用。核验见第四册第3章“章节独立任务核验”。</p>
+</section>
+<section class="chapter" id="v1-c3" data-title="第2章 状态是决定未来所需的信息" data-book="第一册 从零建立模型">
+<div class="eyebrow">第一册 从零建立模型</div>
+<h1 tabindex="-1">第2章 状态是决定未来所需的信息</h1>
+<h2>为什么可以忘记一条路线的细节</h2>
+<p>两个人都到了第5级。一个一路走1，另一个混着走1和2。如果后面的规则只看位置，他们面对的下一步选择相同。对于“后面怎么走”这个问题，过去的完整路线可以合并成同一个位置。</p>
+<p>状态就是这份决定未来所需的信息。状态的名字可以叫i，表里保存这个状态对应的答案。状态不是随便写几个下标；它是在回答“后面的选择还会受哪些过去的信息影响”。</p>
+<div class="callout think"><strong>先停下来想</strong><p>现在增加规则，不能连续两次走2级。两个人都在第5级，一个最后一步是1，一个最后一步是2。他们下一步能做的事相同吗？只记位置还够吗？</p></div>
+<details class="derivation"><summary>留下自己的想法后，展开后续推导</summary><div class="details-body">
+<p>这次不够。我们必须知道上一步是不是2。可以把状态写成位置i与标记s，s=0表示上一步不是2，s=1表示上一步是2。到了同一位置而标记不同，是两个不同状态。少记这个标记，会把合法未来不同的路线混在一起。</p>
+<div class="formula" aria-label="关系式">f[i][0] = f[i-1][0] + f[i-1][1]</div>
+<div class="formula" aria-label="关系式">f[i][1] = f[i-2][0]    当 i &gt;= 2</div>
+<p>空走法设f[0][0]=1、f[0][1]=0，尚未走过2。计算时对所有不存在的位置跳过来源。到第n级的总数是两个标记的和。第4级原来的22现在不合法，这个小例子能区分“记上一步”和“不记上一步”两种模型。</p>
+<h2>哪些历史可以合并</h2>
+<p>对于计数，同一状态的多条历史仍然是不同方案，所以把数量相加。对于求最大收益，若两条历史未来选择完全相同，且更高的当前收益不会造成额外限制，就可以只保留收益更高的一条。对于求最小费用，同样条件下只保留更便宜的一条。</p>
+<p>如果历史A更便宜却耗光了一张优惠券，历史B稍贵却还保留优惠券，它们的未来未必相同。只记“当前位置和当前最小费用”可能丢掉后来更好的B。优惠券是否可用也应进入状态。</p>
+<p>这就是“无后效性”要表达的意思：状态定义好以后，未来不再需要状态之外的旧信息。它不表示题目完全没有历史影响；有影响的历史要被你放进状态。</p>
+<h2>检查状态是否足够</h2>
+<p>找两条被你写进同一个状态的不同历史，问它们未来的合法选择是否一样。若不一样，就给状态补上能区分它们的维度。若一样，再问保留的那个数是否足以比较或统计这些历史。这个方法比背“DP五步”更能帮助你发现缺失条件。</p>
+<p>不要见到一个条件就盲目加一维。如果“到第i天”已经决定星期几，就不必再单独记星期几。如果某件事能从已有下标唯一算出，也不必重复存。</p>
+</div></details>
+<h2>独立任务</h2>
+<p>你在一条路上走，每次走1格或2格，途中最多使用一次“跳3格”的机会。请设计一张小纸条，让别人只看纸条就知道后面允许哪些走法。写状态含义，给出两条证明“只记位置不够”的历史；本轮不必写递推式。</p>
+</section>
+<section class="chapter" id="v1-c4" data-title="第3章 一张表为什么算得对" data-book="第一册 从零建立模型">
+<div class="eyebrow">第一册 从零建立模型</div>
+<h1 tabindex="-1">第3章 一张表为什么算得对</h1>
+<h2>给每一格写一份合同</h2>
+<p>学习新模型时，先写完整的一句话。例如“f[i]表示恰好到第i级的走法数”。“前i个”“恰好”“至多”“必须选”“以i结尾”都是合同里的条件。改变这些词，就可能改变初值、转移和最终输出位置。</p>
+<p>做DP时常用六件事来检查：状态含义、合法来源、合并方式、起点与不可达状态、计算顺序、答案位置。它们不是填空模板。每一项都要能从题意解释出来。</p>
+<div class="table-wrap" tabindex="0" aria-label="可横向滚动的表格"><table><thead><tr><th scope="col">问题类型</th><th scope="col">同一状态的来源怎样合并</th><th scope="col">没有合法来源时</th></tr></thead><tbody><tr><td>有多少方案</td><td>不同且不重叠的来源相加</td><td>0</td></tr><tr><td>是否可行</td><td>任一来源可行就可行</td><td>false</td></tr><tr><td>最小费用</td><td>取来源代价的最小值</td><td>INF表示不可达</td></tr><tr><td>最大收益</td><td>取来源收益的最大值</td><td>负INF表示不可达</td></tr></tbody></table></div>
+<p>空状态的答案要另行确定。计数常见空方案为1；求最小费用常见起点为0。这不是把整张表都初始化成1或0的理由。尤其“恰好达到某容量”时，其他容量起初未必可达。</p>
+<h2>转移为什么不会漏也不会多</h2>
+<p>楼梯题按最后一步分成两类。要证明公式正确，先说明任何合法走法一定在其中一类里，这是不漏；再说明两类不会代表同一条完整走法，这是不重。最后说明把合法的小走法补上最后一步后仍然合法，这是不加入错误方案。</p>
+<p>对于最值题，还要说明丢掉较差历史为什么安全：替换成同状态下更好的历史，不改变后面能选的动作。这叫最优子结构。它依赖你定义的状态足够完整，不能只因为题目出现“最大”或“最小”就认定成立。</p>
+<h2>为什么要从小到大填</h2>
+<p>若ways[4]需要ways[3]与ways[2]，就必须先准备好它们。可以画箭头：从一个格子指向使用它的格子。如果箭头一直指向更大的编号，从小到大填写就合理。</p>
+<p>以后遇到区间，要按长度填；遇到树，要先算孩子再算父亲；遇到有向无环图，要按依赖顺序填。循环顺序来自依赖关系，不来自“DP都从1开始”的口诀。</p>
+<p>证明整张表正确，也可以跟着这个顺序：起点正确；假设依赖的小问题都正确，本格的分类与合并保证本格正确；最后就能走到答案。这是归纳思想。开始时用自己的话解释即可，不必急着写正式数学证明。</p>
+<h2>一次填表需要多久</h2>
+<p>若一共有n个状态，每格最多查看2个来源，工作量与n成正比，记为O(n)。若n格中的每格都检查前面的n个位置，总工作量大约是n²，记为O(n²)。空间复杂度统计同时保留多少格，而不是循环执行多少次。</p>
+<p>判断能否运行，要把状态数、每状态转移数、常数、时限和内存一起看。十万的平方是百亿，通常不适合直接双重枚举；具体能跑多少次不能只用一个固定口号代替测量。</p>
+<h2>独立任务</h2>
+<p>有人说：“我从第n级向第1级填楼梯表，反正公式没改，答案也一样。”请用第4级解释第一次读到哪个尚未准备好的数，再画出合法的依赖顺序。完成后检查自己的上一章状态表是否也有可靠的计算顺序。</p>
+</section>
+<section class="chapter" id="v1-c5" data-title="第4章 递归 搜索和记忆化怎样连起来" data-book="第一册 从零建立模型">
+<div class="eyebrow">第一册 从零建立模型</div>
+<h1 tabindex="-1">第4章 递归 搜索和记忆化怎样连起来</h1>
+<h2>先用问答认识递归</h2>
+<p>递归可以看作把同一种问题交给更小的自己。问“到第4级有几种走法”，需要先知道“到第3级”和“到第2级”。每个问题都必须有清楚的返回值，遇到第0级等简单情况时直接回答。</p>
+<p>一次函数调用有自己的一份参数和局部变量。外层调用等内层回答后再继续，不是把全世界的i一起改掉。手推时画几张纸片，每张写“我正在求哪个n、我等哪个结果”，比在脑中追踪十层调用容易。</p>
+<figure><img src="data:image/png;base64,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" alt="求第5级分为求第4级和第3级，展开后第3级和第2级被重复询问。" width="1500" height="430"></figure>
+<p>深度优先搜索DFS是一种遍历选择的方式：沿一个分支继续走，走完或失败再回来试其他分支。递归经常用于实现DFS，但递归不等于DFS，DFS也可以用显式栈实现。此处先理解“沿分支探索”和“返回后继续”。</p>
+<h2>展开和返回是两个方向</h2>
+<p>以“求1到n的和”为例，sum(3)先停在“3加上什么”，等待sum(2)；sum(2)停在“2加上什么”，等待sum(1)。sum(1)直接回答1，于是sum(2)回答3，最后sum(3)回答6。</p>
+<div class="table-wrap" tabindex="0" aria-label="可横向滚动的表格"><table><thead><tr><th scope="col">调用</th><th scope="col">先知道的事</th><th scope="col">等待谁</th><th scope="col">返回的数</th></tr></thead><tbody><tr><td>sum(3)</td><td>需要把3算进去</td><td>sum(2)</td><td>3+3=6</td></tr><tr><td>sum(2)</td><td>需要把2算进去</td><td>sum(1)</td><td>2+1=3</td></tr><tr><td>sum(1)</td><td>已经到边界</td><td>不再等待</td><td>1</td></tr></tbody></table></div>
+<p>从3走到1是在展开问题，从1回到3是在把答案带回来。外层不是消失了，而是暂时暂停。楼梯会等待两个小问题，原理仍一样。先把一条链的展开与返回说清，再追踪分叉。</p>
+<h2>重复计算发生在哪里</h2>
+<p>求第5级会求第4级和第3级；求第4级又会求第3级。两次“第3级”若状态含义完全相同，它们会得到同一答案。把算好的结果记在表里，下次直接取用，就叫记忆化。</p>
+<h3>记忆化的通用流程</h3><pre><code>求解某状态：
+    如果是边界，返回边界答案
+    如果这个状态已经算完，返回记录值
+    依次求解所有合法且规模更小的来源
+    按题意合并来源，记录结果并标记算完
+    返回记录值</code></pre>
+<p>这是流程说明，不是可提交代码。你必须自己定义“状态”“边界”“来源”和“合并”。不能把答案是否为0当作是否算过：有些状态的正确答案就是0。可以另设done数组，或使用一个不可能是合法答案的标记。</p>
+<h2>两种计算安排</h2>
+<p>记忆化搜索是先问大问题，需要哪个小问题才去算哪个；递推填表是先列好顺序，把需要的小问题依次算完。两者可以使用相同的状态与转移。稀疏状态适合按需计算；依赖规则清楚、状态稠密时，循环填表通常直观，也避免过深递归的栈风险。</p>
+<p>一个函数绕一圈又要求尚未算完的自己，记忆化不会自动解决循环依赖。例如图里有A到B、B到A，不能仅靠“结果算完后存一下”保证结束。首先要证明依赖无环，或使用适合这类循环方程、最短路等问题的方法。</p>
+<p>楼梯题有n个不同状态，每个状态的来源数是常数。记忆化以后总工作量O(n)，但递归深度仍可能O(n)。省掉重复计算和省掉调用栈是不同的事。</p>
+<h2>前置小课和独立任务</h2>
+<p>请先手推一个函数“求1到n的和”，画出n=3时三个调用各自等待的结果，再说明n怎样变小、在哪停止。这个任务卡住就先巩固递归，不急着写记忆化。</p>
+<p>之后把楼梯n=5的调用画到重复状态出现，给同一个状态涂同一种颜色。数一数“问题被问了几次”和“不同问题有几个”。最后自己选择记忆化或循环方式实现第一章的原题，测试n=0、1、4。n=0是我们定义下的合法最小情况。</p>
+</section>
+<section class="chapter" id="v1-c6" data-title="第5章 最少硬币和不能盲信的贪心" data-book="第一册 从零建立模型">
+<div class="eyebrow">第一册 从零建立模型</div>
+<h1 tabindex="-1">第5章 最少硬币和不能盲信的贪心</h1>
+<h2>同样是到达目标 这次要求不同</h2>
+<div class="callout think"><strong>先停下来想</strong><p>有面值1、3、4的硬币，每种都有很多枚。要恰好凑出6元，最少用几枚？每次取当前能拿的最大硬币，会得到什么？有没有更少的方案？</p></div>
+<details class="derivation"><summary>留下自己的想法后，展开后续推导</summary><div class="details-body">
+<p>取4以后只能再取1和1，一共3枚；取3和3只要2枚。局部最大的选择没有保证全局最优。DP保留不同金额的最优答案，让最后一步的不同可能都参加比较。</p>
+<p>定义f[x]为恰好凑出x元所需的最少硬币数。最后取面值c，就必须先凑出x-c元，并且再多用一枚硬币。每一种c都是候选来源。</p>
+<div class="formula" aria-label="关系式">f[x] = min( f[x-c] + 1 )</div>
+<p>这个min只枚举c&lt;=x且x-c可达的面值。f[0]=0；其他位置先设为INF，表示暂时没有合法方案。计算x时只依赖更小金额，因此从1到目标金额填写。</p>
+<div class="table-wrap" tabindex="0" aria-label="可横向滚动的表格"><table><thead><tr><th scope="col">金额 x</th><th scope="col">0</th><th scope="col">1</th><th scope="col">2</th><th scope="col">3</th><th scope="col">4</th><th scope="col">5</th><th scope="col">6</th></tr></thead><tbody><tr><td>最少枚数</td><td>0</td><td>1</td><td>2</td><td>1</td><td>1</td><td>2</td><td>2</td></tr></tbody></table></div>
+<p>这里不能把各来源相加，因为题目要最少枚数；也不能把不可达写成0，否则“没有办法凑成”的状态会冒充“免费就凑成了”。如果面值只有3和4，金额1和2应保持不可达。</p>
+<h2>一个最优方案为什么能接在最优小方案后面</h2>
+<p>假设某个凑6元的最优方案最后取3元，前面那部分就是凑3元。如果前面不是凑3元的最省方案，换成更省的凑3元方案，面额不变、后面的最后一枚仍然能用，总枚数还会减少，与原来最优矛盾。</p>
+<p>这里替换之所以成立，是每种硬币数量不受限制。如果总共只有一枚3元，状态只记金额就可能不知道这枚硬币是否已用，需要改变模型。最优子结构必须和题目条件一起检查。</p>
+<h2>从答案追溯一个方案</h2>
+<p>如果还要求输出拿了哪些硬币，可以在每次更新最优值时，记录这次选的最后一枚。到目标金额后，反复减去记录的面值，直到0。并列最优可以任取一个；若题目要求字典序最小，还要额外处理并列规则。</p>
+<p>一维压缩后的记录是否可靠要另行检查。硬币无限使用且金额严格减小，追溯可行；0/1背包若只记录会被覆盖的容量前驱，可能重复拿到同一物品。后面会回到这个问题。</p>
+</div></details>
+<h2>独立任务</h2>
+<p>面值只有2和5，目标7。请写出0到7的表，明确不可达格，再写“为什么从不可达格不能继续假装拿一枚就成功”。完成后换成目标3，检查程序输出的含义。输出约定由你在编码前写清。</p>
+</section>
+<section class="chapter" id="v1-c7" data-title="第6章 网格把一维扩展成二维" data-book="第一册 从零建立模型">
+<div class="eyebrow">第一册 从零建立模型</div>
+<h1 tabindex="-1">第6章 网格把一维扩展成二维</h1>
+<h2>坐标是两个变化量</h2>
+<p>一个3行4列的棋盘，从左上角走到右下角，每次只能向右或向下。第2行第2列有障碍，不能进入。问有多少条合法路径。起点和终点都算格子，坐标从1开始。</p>
+<div class="callout think"><strong>先停下来想</strong><p>到某一格前的最后一步，可能来自哪两格？有障碍的格子应当保存多少条路线？先画格子，不写数组。</p></div>
+<details class="derivation"><summary>留下自己的想法后，展开后续推导</summary><div class="details-body">
+<p>定义f[r][c]为从起点恰好走到第r行第c列的路径数。非障碍格由上边和左边进入；越界来源不存在。起点如果没有障碍，只有一条空路径。</p>
+<div class="formula" aria-label="关系式">f[r][c] = f[r-1][c] + f[r][c-1]</div>
+<div class="table-wrap" tabindex="0" aria-label="可横向滚动的表格"><table><thead><tr><th scope="col">行与列</th><th scope="col">第1列</th><th scope="col">第2列</th><th scope="col">第3列</th><th scope="col">第4列</th></tr></thead><tbody><tr><td>第1行</td><td>1</td><td>1</td><td>1</td><td>1</td></tr><tr><td>第2行</td><td>1</td><td>障碍 0</td><td>1</td><td>2</td></tr><tr><td>第3行</td><td>1</td><td>1</td><td>2</td><td>4</td></tr></tbody></table></div>
+<p>逐行从左向右填，保证上面和左面已经准备好。初始化可选择显式处理起点与边界；也可以增加一圈值为0的虚拟边界，再放一个虚拟入口。两种办法都能正确，但不要同时使用而重复贡献。初学先用显式起点。</p>
+<p>若起点或终点有障碍，答案为0。整行或整列被封住可能使后面的区域不可达。只用没有障碍的样例，无法检查这些分支。</p>
+<h2>路径最多能收集多少价值</h2>
+<p>若每格还有价值a[r][c]，走过就取得价值，目标改成最大总和，坐标模型仍有用，但表里保存的是最优分数。起点值应是a[1][1]；不可达格应设负INF。到一个普通格子，取合法来源的较大分数后，加本格价值一次。</p>
+<p>如果格子可能为负数，“边界设0”会虚构从棋盘外免费进入的路线。只有当状态含义允许从任意处重新开始时，0才可能代表合法选择。初始化永远从题意来。</p>
+</div></details>
+<h2>独立任务</h2>
+<p>先实现有障碍的路径计数。用上表、1行1列、起点有障碍三类数据自测。然后只写出“最大价值版本”的状态、初值和转移，不急着改程序，向妈妈说明为什么计数的加法变成取最大值。</p>
+</section>
+<section class="chapter" id="v1-c8" data-title="第7章 结尾在哪里会改变状态" data-book="第一册 从零建立模型">
+<div class="eyebrow">第一册 从零建立模型</div>
+<h1 tabindex="-1">第7章 结尾在哪里会改变状态</h1>
+<h2>连续一段的最大和</h2>
+<div class="callout think"><strong>先停下来想</strong><p>给出整数序列-2、3、-1、4、-5。要选一段连续且非空的数，使和最大。连续表示中间不能跳过。最后一个数是负的时，最好的那一段一定以最后一个数结尾吗？</p></div>
+<details class="derivation"><summary>留下自己的想法后，展开后续推导</summary><div class="details-body">
+<p>定义end[i]为必须以第i个数结尾的非空连续段最大和。若选a[i]，前面只有两个选择：在a[i]重新开始；或把以i-1结尾的最好连续段接过来。不能接更早但不包含i-1的一段，否则不连续。</p>
+<div class="formula" aria-label="关系式">end[i] = max(a[i], end[i-1] + a[i])</div>
+<div class="table-wrap" tabindex="0" aria-label="可横向滚动的表格"><table><thead><tr><th scope="col">位置 i</th><th scope="col">1</th><th scope="col">2</th><th scope="col">3</th><th scope="col">4</th><th scope="col">5</th></tr></thead><tbody><tr><td>a[i]</td><td>-2</td><td>3</td><td>-1</td><td>4</td><td>-5</td></tr><tr><td>end[i]</td><td>-2</td><td>3</td><td>2</td><td>6</td><td>1</td></tr><tr><td>截至这里的全局最好</td><td>-2</td><td>3</td><td>3</td><td>6</td><td>6</td></tr></tbody></table></div>
+<p>end[n]只回答“以最后一个数结尾”，所以总答案要在全部end[i]里取最大值。全负数据如-4、-2，非空答案应为-2。把初值设0并允许空段，会改变题目。</p>
+<h2>严格上升但允许跳过</h2>
+<p>最长严格上升子序列LIS要求保持原来的先后顺序，可以跳过一些位置，选出的值必须严格变大。例如3、1、2、2、4，最长长度是3，可以选1、2、4。两个相等的2不能同时让严格上升长度增加。</p>
+<p>定义len[i]为必须以a[i]结尾的最长严格上升子序列长度。前一个选中位置j可以是任何j&lt;i且a[j]&lt;a[i]的位置。没有合适j时，a[i]自己构成长为1的序列。</p>
+<div class="formula" aria-label="关系式">len[i] = max(1, len[j] + 1)</div>
+<p>其中j只在合法前驱里枚举。共有n个状态，每个最多检查n个前驱，时间O(n²)，空间O(n)。总答案仍是全部len[i]的最大值。状态“以i结尾”让未来能判断是否可以接上新值。</p>
+<p>如果只记“前i个数的最长长度”，就会丢掉结尾大小。同样长的两个子序列，结尾小的往往更容易延长。第二册会利用这个信息得到更快算法，但此刻先把朴素模型写对。</p>
+<h2>连续和子序列要分清</h2>
+<p>“连续”与“子序列”是题意条件，不是词语细节。连续段只能接i-1；上升子序列可以接更早的j，却必须检查值的大小。转移差别来自允许的动作，不能因为两题都有max就复制公式。</p>
+</div></details>
+<h2>独立任务</h2>
+<p>请分别用2、2、2与5、4、3检查严格上升子序列的程序。再设计一个例子，证明最长上升子序列不一定以最后一个数结束。向妈妈解释为什么这里取最大值，却不能把不同前驱的长度直接相加。</p>
+</section>
+<section class="chapter" id="v1-c9" data-title="第8章 零一背包先把物品这一维看清" data-book="第一册 从零建立模型">
+<div class="eyebrow">第一册 从零建立模型</div>
+<h1 tabindex="-1">第8章 零一背包先把物品这一维看清</h1>
+<h2>物品只能拿一次</h2>
+<p>有三件物品，重量与价值分别为(2,3)、(3,4)、(4,5)。背包容量5，物品不可拆分，每件最多拿一次，总重量不超过容量，求最大价值。这里“最多拿一次”叫0/1，“不超过”表示不必装满。</p>
+<div class="callout think"><strong>先停下来想</strong><p>只按价值高低挑、只按价值除以重量挑，能保证这组和所有其他数据都最优吗？先列三件物品的所有子集，删掉超重的组合。</p></div>
+<details class="derivation"><summary>留下自己的想法后，展开后续推导</summary><div class="details-body">
+<p>对第i件物品做选择时，之前能用哪些物品很重要。定义f[i][c]为只考虑前i件物品、容量上限为c时的最大价值。最后分成“不选第i件”和“选第i件”两类。</p>
+<div class="formula" aria-label="关系式">f[i][c] = max(f[i-1][c], f[i-1][c-w[i]] + v[i])</div>
+<p>第二项只有c&gt;=w[i]时合法。两项都来自第i-1层，保证第i件物品只使用一次。第0层没有物品，在“最多装到c”且允许空集的定义下，各容量的答案都是0。</p>
+<div class="table-wrap" tabindex="0" aria-label="可横向滚动的表格"><table><thead><tr><th scope="col">考虑的物品</th><th scope="col">容量0</th><th scope="col">容量1</th><th scope="col">容量2</th><th scope="col">容量3</th><th scope="col">容量4</th><th scope="col">容量5</th></tr></thead><tbody><tr><td>没有物品</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>加入第一件</td><td>0</td><td>0</td><td>3</td><td>3</td><td>3</td><td>3</td></tr><tr><td>加入第二件</td><td>0</td><td>0</td><td>3</td><td>4</td><td>4</td><td>7</td></tr><tr><td>加入第三件</td><td>0</td><td>0</td><td>3</td><td>4</td><td>5</td><td>7</td></tr></tbody></table></div>
+<p>答案是f[n][W]。表格中f[1][5]=3不表示重量恰好为5，而是容量上限为5时拿第一件最划算。把这句话讲明白，再讨论压缩。</p>
+<h2>为什么一维时容量倒着走</h2>
+<p>计算新一层只用上一层，可以只保留一行dp[c]。但覆盖顺序必须保证读取dp[c-w]时，它仍代表“未考虑当前物品”的旧值。容量从大到小处理，c-w更小，还没有在本轮被更新，因此能保住旧层含义。</p>
+<p>最小反例只有一件重量2、价值3的物品，容量4。若容量从小到大，更新到c=2后dp[2]=3；随后c=4会读到刚更新的dp[2]，又加3，变成6。同一件物品被用两次，违反题意。</p>
+<h3>局部代码 只展示层次与方向</h3><pre><code>for (int c = W; c &gt;= w; --c) {
+    dp[c] = max(dp[c], dp[c - w] + v);
+}</code></pre>
+<p>这段代码假定物品的w、v已经读入并处在处理当前物品的一轮中，dp此前也按“不超过”的含义初始化。它不是完整程序。写自己的程序前，在纸上标注每次读的是旧层还是新层。</p>
+<h2>恰好装满是另一个合同</h2>
+<p>如果要求总重量恰好等于W，设g[c]为恰好重量c时的最大价值。开始只有g[0]=0，其他容量是负INF。只有g[c-w]可达时才能更新。最终g[W]不可达就应按题目要求报告无解。</p>
+<p>若还要输出选中了哪些物品，初学保留二维表，从第n层向前比较“不选”和“选”的来源。仅在一维表存一个会被后续覆盖的容量前驱，可能追出不合法重复物品，不能想当然地压缩方案记录。</p>
+</div></details>
+<h2>独立任务</h2>
+<p>先独立实现二维0/1背包，再用同一组小数据改成一维并核对每一层。测试“一件物品容量足够放两件”、容量0、所有物品都过重。最后将题意改为“恰好装满”，写出需要改变的初始化和可达性检查。</p>
+</section>
+<section class="chapter" id="v1-c10" data-title="第9章 背包家族来自使用次数和计数对象" data-book="第一册 从零建立模型">
+<div class="eyebrow">第一册 从零建立模型</div>
+<h1 tabindex="-1">第9章 背包家族来自使用次数和计数对象</h1>
+<h2>完全背包允许重复使用</h2>
+<p>完全背包里每种物品可以选任意多件，重量必须为正以保证容量依赖向前推进。选当前物品之后，还可以继续使用它。所以二维转移的“选”分支来自本层，而“不选”分支来自上一层。</p>
+<div class="formula" aria-label="关系式">f[i][c] = max(f[i-1][c], f[i][c-w[i]] + v[i])</div>
+<p>一维压缩时容量从小到大，故意读取本轮更新后的较小容量。这与0/1的不同不是一条待背口诀，而是“当前物品还可不可以再用”的结果。若出现零重量正价值且无限次，最大价值无上界，应首先检查题目条件。</p>
+<h2>多重与分组先从清楚的慢方法开始</h2>
+<p>多重背包中第i种最多s[i]件。最直接是在旧层枚举使用k件，0&lt;=k&lt;=s[i]且k*w[i]&lt;=c，取f[i-1][c-k*w]+k*v的最大值。时间可达O(W乘各数量之和)。每个候选都读旧层，避免超过上限。</p>
+<p>二进制拆分把数量例如13拆成1、2、4、6四包，包的重量价值分别乘相应数量，随后按0/1处理。任意0至13件都能由某些包表示，所以求最值时可用。由于某些数量可能有多种包的组合表示，不能未经证明把这种拆法用于“原物品选择方案数”。</p>
+<p>分组背包要求每组最多选一件。对同组的所有候选，必须基于进入这一组之前的旧层计算，再统一得到新层。若边枚举本组物品边读已更新结果，可能同组选了多件。用old和next两个数组最容易看清；若每组必须选一件，不能直接保留“不选本组”分支。</p>
+<h2>计数时先问怎样算同一种方案</h2>
+<p>面值1和2，凑出3。若1+2与2+1算同一种，是无序组合，共有{1,1,1}和{1,2}。若先后顺序算不同，是有序序列，共有111、12、21。目标都是计数，问题却不同。</p>
+<p>组合数的常见实现是先枚举硬币种类，再从小金额到大金额更新；它按“可用前几种硬币”分层，让每个组合只有一种归属。序列数则先枚举目标金额，再枚举最后一枚硬币；它按最后一步分类，因此12与21分别计入。</p>
+<p>这些结论依赖这里的模型：正面值、每种无限量、不同种类按面值区分。若输入有重复面值，或者物品按编号区分，必须先明确题目怎样定义不同方案，不能直接套循环顺序。</p>
+<h2>独立任务</h2>
+<p>请给“面值1和2、目标4”的组合与序列各列一张清单，再画出各自最后一次更新的来源。只有清单与程序一致，才可以说自己理解了循环顺序。另找一个同组两件物品的例子，证明分组背包不能组内连续叠加。</p>
+</section>
+<section class="chapter" id="v1-c11" data-title="第10章 两条序列的关系" data-book="第一册 从零建立模型">
+<div class="eyebrow">第一册 从零建立模型</div>
+<h1 tabindex="-1">第10章 两条序列的关系</h1>
+<h2>公共子序列为何需要两个进度</h2>
+<p>给字符串A=ABC、B=AC，求最长公共子序列LCS长度。子序列可以跳过字符，但必须保持顺序。两边都要描述“已经考虑到哪里”，所以需要两个前缀长度。</p>
+<p>定义f[i][j]为A的前i个字符与B的前j个字符的最长公共子序列长度。空前缀的答案是0。为便于解释，这里字符编号从1开始；若C++字符串从0开始，A的第i个字符实际写A[i-1]。</p>
+<p>当末尾字符相等，可以让它们配成一对，再接在两个更短前缀的公共子序列后面；当末尾不同，它们不可能作为同一对匹配，至少有一个末尾不被选中。为避免初学者漏分支，可以始终比较跳过任一末尾，并在相等时再比较配对。</p>
+<div class="formula" aria-label="关系式">f[i][j] = max(f[i-1][j], f[i][j-1])</div>
+<div class="formula" aria-label="关系式">若 A[i] == B[j] 再与 f[i-1][j-1] + 1 比较</div>
+<div class="table-wrap" tabindex="0" aria-label="可横向滚动的表格"><table><thead><tr><th scope="col">A前缀与B前缀</th><th scope="col">空</th><th scope="col">A</th><th scope="col">AC</th></tr></thead><tbody><tr><td>空</td><td>0</td><td>0</td><td>0</td></tr><tr><td>A</td><td>0</td><td>1</td><td>1</td></tr><tr><td>AB</td><td>0</td><td>1</td><td>1</td></tr><tr><td>ABC</td><td>0</td><td>1</td><td>2</td></tr></tbody></table></div>
+<p>从左上到右下填写，时间O(nm)。如果要求方案，可从末尾倒着追踪使用了哪个来源。字符相等时也可以使用常见简化公式f[i-1][j-1]+1；上面的多候选写法更直接展示允许忽略末尾。</p>
+<h2>编辑距离换了表中保存的东西</h2>
+<p>把A变成B，允许插入、删除或替换一个字符，每次代价1。定义d[i][j]为把A前i个字符变成B前j个字符的最少操作数。d[i][0]=i、d[0][j]=j，这两条边表示删光或从空串插入。</p>
+<p>最后一次对齐有三种情形：删除A末尾，来自d[i-1][j]+1；插入B末尾，来自d[i][j-1]+1；配对两边末尾，来自d[i-1][j-1]，相等不加代价，不同加1。取最小值。kit变成sit只需替换首字母一次。</p>
+<p>LCS与编辑距离表面上都有二维表，却保存不同对象、使用不同代价。不要因为表的样子相似就混用初始化。尤其LCS的空前缀是0，编辑距离的边界是一串连续的插入或删除成本。</p>
+<h2>空间压缩前先认出左上角</h2>
+<p>只保留上一行与当前行，空间可降为O(m)。若进一步只保留一行，还要单独保存被覆盖前的左上角。没有讲清每个来源来自哪一行之前，不必急着使用最省空间的版本。</p>
+<h2>独立任务</h2>
+<p>自己填出A=ABA、B=BA的LCS表，解释最终答案在哪个格。然后只手推A为空串、B=ABC时的编辑距离边界，说明为什么整行不能全设0。</p>
+</section>
+<section class="chapter" id="v1-c12" data-title="第11章 把模型写成可靠的程序" data-book="第一册 从零建立模型">
+<div class="eyebrow">第一册 从零建立模型</div>
+<h1 tabindex="-1">第11章 把模型写成可靠的程序</h1>
+<h2>从中文状态到数组</h2>
+<p>先写一行注释：“dp[i][j]表示……”。列出每个下标的有效范围，决定分配多大的数组。再写初始化，随后按依赖实现转移，最后单独核对输出位置。这一顺序能减少“程序写完才想变量是什么意思”的混乱。</p>
+<p>你可以先写清楚但稍慢的版本，打印小数据的每一层。看到第一格与手推不一致时，检查那一格的来源和初值。不要因为最终答案不对就立刻重写整题，也不要同时修改状态、边界和循环三个部分。</p>
+<h2>数值范围是模型的一部分</h2>
+<p>楼梯计数会增长得很快。本书约定ways[0]=ways[1]=1，ways[91]=7540113804746346429，还在通常64位有符号long long范围内；ways[92]=12200160415121876738，已经超出。递推式正确仍然可能算错，因为存放答案的容器不够大。</p>
+<p>若题目要求精确大整数，就需要高精度；若明确要求对M取模，可以在计数加法中取模。不能为了避免溢出擅自取模。求最小值或最大值时，通常不能先对各候选取模再比较，因为取模会改变大小关系。</p>
+<p>long long类型的变量接收结果，不代表右边运算已经自动用long long。例如两个int先相乘可能已溢出，需在乘法发生前提升类型。INF也要留出加法余量，并且先检查来源可达，再相加，避免对哨兵继续运算。</p>
+<h2>三类测试加一次小规模核验</h2>
+<p>第一类是关键区分例：专门让错误思路失败，例如0/1背包只有一件物品、容量却能装两件。第二类是边界：全负、不可达、相等元素、起点障碍等。第三类是最小规模：空前缀、单个元素、容量0，前提是题目允许这些输入。</p>
+<p>小规模核验是写一个很小规模能列举所有方案的笨办法，再与DP比较许多小输入。笨办法可以慢，但要独立按题意实现，不能把DP的同一条错误公式再抄一遍。两者不同后，保留最小失败样例，找第一处分歧。</p>
+<p>跑过许多数据提高信心，不能代替正确性理由。正确性理由也不能替代检查实现。两者配合，才知道“想法对”和“程序真按想法做了”。</p>
+<h2>第一册验收</h2>
+<p>合上讲义，从第三册完成A组。妈妈只读题，不提醒题型。你要独立留下：状态的一整句话、一个手推例子、转移的来源分类、初值、顺序、复杂度、程序和三类测试。隔一到三天换一题重做。</p>
+<p>如果你能跟着公式填表，却说不清为什么旧历史可以合并，回第2章；若模型正确但程序错，优先对照变量与每层含义，不必把所有理论重学。记录实际提示，不把“提示后完成”当作独立通过。</p>
+</section>
+<section class="chapter" id="v1-c13" data-title="本册资料说明" data-book="第一册 从零建立模型">
+<div class="eyebrow">第一册 从零建立模型</div>
+<h1 tabindex="-1">本册资料说明</h1>
+<p>[S1] 中国计算机学会 GESP认证大纲页面及其C++与Python一至八级附件。仅用于范围核对，讲解、例题与练习为本讲义原创教学编排。核对日期2026年10月12日。</p>
+<p class="source"><a href="https://gesp.ccf.org.cn/101/1008/10012.html" target="_blank" rel="noopener noreferrer">https://gesp.ccf.org.cn/101/1008/10012.html</a></p>
+<p class="source"><a href="https://gesp.ccf.org.cn/101/attach/1725701770182688.pdf" target="_blank" rel="noopener noreferrer">https://gesp.ccf.org.cn/101/attach/1725701770182688.pdf</a></p>
+<p>[S2] 中国计算机学会 NOI大纲2025年修订版发布页。提高组章节为教学路线，不等同于官方逐题要求或得分保证。</p>
+<p class="source"><a href="https://www.noi.cn/xw/2025-04-18/841584.shtml" target="_blank" rel="noopener noreferrer">https://www.noi.cn/xw/2025-04-18/841584.shtml</a></p>
+<p class="source"><a href="https://www.noi.cn/upload/resources/file/2025/04/18/NOI_Syllabus_Edition_2025.pdf" target="_blank" rel="noopener noreferrer">https://www.noi.cn/upload/resources/file/2025/04/18/NOI_Syllabus_Edition_2025.pdf</a></p>
+</section>
+<section class="chapter" id="v2-intro" data-title="本册导读" data-book="第二册 提高组建模与优化">
+<div class="eyebrow">第二册 提高组建模与优化</div>
+<h1 tabindex="-1">本册导读</h1>
+<p class="lead">从已知模型走向陌生条件</p>
+<p>这一册默认你已能独立完成第一册的线性、网格、背包与序列问题。遇到新题时，仍先写“未来需要知道什么”，再决定状态。二维或三维只是在记更多必要信息，树形、区间、集合也只是不同的依赖形状。</p>
+<p>第12至20章训练模型，第21至23章训练优化，第24章把方法放回陌生题。前置知识会在各章标明。不认识树、位运算或概率时先完成前置小课。不要把第一次看不懂高阶内容当成前面的学习没有价值。</p>
+<p>每章的公式都是推导结果。先画小例子再读公式，完成独立任务后再去第三册做不标模型的练习。模型学习与练习验收分开进行。</p>
+</section>
+<section class="chapter" id="v2-c1" data-title="第12章 区间问题从最后一次合并入手" data-book="第二册 提高组建模与优化">
+<div class="eyebrow">第二册 提高组建模与优化</div>
+<h1 tabindex="-1">第12章 区间问题从最后一次合并入手</h1>
+<h2>相邻石子为什么不是普通背包</h2>
+<p>有一排石子堆，数量为4、1、3、2。每次只能把相邻的两堆合成一堆，代价等于这两堆的石子总数。反复合并成一堆，求总代价最小。一次合并后，新堆还会参加以后的合并，石子可能被重复计入代价。</p>
+<div class="callout think"><strong>先停下来想</strong><p>最后一次合并发生前，原来的区间会变成什么样？它一定由左右两段组成吗？把四堆画成三种最后分界，分别在第1、2、3堆后分开。</p></div>
+<details class="derivation"><summary>留下自己的想法后，展开后续推导</summary><div class="details-body">
+<p>定义dp[l][r]为把第l至r堆全部合成一堆的最小代价。最后一次合并前，必定是[l,k]与[k+1,r]各自先合成一堆。它们互不重叠，正好覆盖原区间，最后再付整个区间的石子总数。</p>
+<div class="formula" aria-label="关系式">dp[l][r] = min(dp[l][k] + dp[k+1][r] + sum(l,r))</div>
+<p>其中l&lt;=k&lt;r。单堆不用合并，dp[i][i]=0。区间越长，依赖越短，因此先算长度2，再算长度3，最后长度n。时间O(n³)：约n²个区间，每个枚举约n个分界。空间O(n²)。</p>
+<div class="table-wrap" tabindex="0" aria-label="可横向滚动的表格"><table><thead><tr><th scope="col">区间</th><th scope="col">最后合并前的候选代价</th><th scope="col">最小代价</th></tr></thead><tbody><tr><td>1至2</td><td>4+1</td><td>5</td></tr><tr><td>2至3</td><td>1+3</td><td>4</td></tr><tr><td>3至4</td><td>3+2</td><td>5</td></tr><tr><td>1至3</td><td>0+4+8 或 5+0+8</td><td>12</td></tr><tr><td>2至4</td><td>0+5+6 或 4+0+6</td><td>10</td></tr><tr><td>1至4</td><td>0+10+10 或 5+5+10 或 12+0+10</td><td>20</td></tr></tbody></table></div>
+<p>第1至4区间总数是10，但最终最小代价是20，因为有些石子在早先合并中也付过代价。“结果的一堆有多大”与“过程中累计付了多少”是不同变量。</p>
+<h2>前置小课 前缀和</h2>
+<p>设S[0]=0，S[i]为前i堆的石子总数，那么sum(l,r)=S[r]-S[l-1]。先用4、1、3、2得到S为0、4、5、8、10，再核对第2至4堆的和为10-4=6。预处理O(n)，每次区间求和O(1)，避免把转移再多套一层求和循环。</p>
+<h2>同一依赖形状 不同代价</h2>
+<p>矩阵链乘也可按最后分界分成左右两段，但最后代价取决于矩阵维度，不是区间元素的和。若第i个矩阵的维度为p[i-1]乘p[i]，最后在k分开，额外乘法次数是p[l-1]*p[k]*p[r]。把这三个维度画成两块矩阵相乘，就能解释来源。</p>
+<p>如果石子在圆环上，任一最终合并方案都可以沿某个原始间隙展开成长度n的线段。把数组复制一遍，在2n长度上只算长度不超过n的区间，最后在n个长度为n的窗口里取最小值。不能直接只输出原来从1开始的窗口。</p>
+</div></details>
+<h2>独立任务</h2>
+<p>用三堆1、10、1，分别画两种第一步合并，并核对区间公式。然后只写圆环版本的答案范围，不急着写程序。解释为什么把数组复制后不能把2n堆全合成一堆作为答案。</p>
+</section>
+<section class="chapter" id="v2-c2" data-title="第13章 依赖图和有向无环图" data-book="第二册 提高组建模与优化">
+<div class="eyebrow">第二册 提高组建模与优化</div>
+<h1 tabindex="-1">第13章 依赖图和有向无环图</h1>
+<h2>前置小课 箭头表达什么</h2>
+<p>图由点和边组成。有向边u到v表示只能沿这个方向走。有向无环图简称DAG，意思是顺着箭头不可能绕回出发点。可以给点安排一种顺序，使每条边都从前面指向后面，这叫拓扑顺序。</p>
+<p>找顺序的一种方法是先取没有前驱的点，删除它发出的边，再取新出现的没有前驱的点。记录每个点还有几条入边，每删除一条就减少一次。若最后没能取完所有点，图里存在环。</p>
+<h2>路径计数换了计算顺序</h2>
+<p>给定DAG与起点s，问到每个点的路径数。定义ways[v]为从s到v的路径数。ways[s]=1表示空路径，其他为0。按拓扑顺序处理u，把ways[u]加入每条出边所指的v。</p>
+<figure><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABdwAAAGuCAIAAAAF8lPqAABImklEQVR4nO3de5xPdeI/8DNuuZRritySamUr3VxqtaSoqGwGsSZUq9KGiHaVVKg26UqhO0kilVI23dSy69Zl8aVaKqFItcUYDDPze/w63+/Zz86YMZiZz1yez7/OnHM+5/P+fObzOed9Xp/3JSEjIyMAAAAAoGCVKuDnAwAAAEAoAwAAABAfWsoAAAAAxIFQBgAAACAOhDIAAAAAcSCUAQAAAIgDoQwAAABAHAhlAAAAAOJAKAMAAAAQB0IZAAAAgDgQygAAAADEgVAGAAAAIA6EMgAAAABxIJQBAAAAiAOhDAAAAEAcCGUAAAAA4kAoAwAAABAHQhkAAACAOBDKAAAAAMSBUAYAAAAgDoQyAAAAAHEglAEAAACIA6EMAAAAQBwIZQAAAADiQCgDAAAAEAdCGQAAAIA4EMoAAAAAxIFQBgAAACAOhDIAAAAAcVAmHk8KAOSxxMRE72lJM2vWrHgXAQA4KAkZGRkHdwQAIG5kMUhnAKDo0n0JAIoqiQw+CQBQpGkpAwDFIY6ZOnVqnMpC3CQlJWVao0MTABQtQhkAKNqJjDimhMsUzchlAKAIEcoAQFFNZMQx7DWakcsAQFFhTBkAKJIkMvg8AEBRJ5QBgKLXTEYiQ1bRp8II0ABQVAhlAKBocKeNTwsAFDNCGQAoYjSTwWcDAIoHoQwAAABAHAhlAKAIMJoMuWRkGQAoQoQyAAAAAHEglAEAAACIA6EMAAAAQBwIZQAAAADiQCgDAAAAEAdCGQAAAIA4EMoAAAAAxIFQBgAAACAOhDIAAAAAcSCUAQAAAIgDoQwAAABAHAhlAAAAAOJAKAMAFGrp6empqanxLgUAQN4TygAAhdqaNWuqVq1avXr1Jk2aJCYmbtiwId4lAgDIG0IZAKBQO+SQQ4Ig2Llz51dffZWSklKtWrV4lwgAIG8IZQCAQq106dLRcsuWLStVqpRph9mzZ8+aNavAywUAcLDKHPQRAADyUUJCQg5bN2/efM0112zdunXFihW33XZbzjsDABQqWsoAAEXY8OHDt27dGgTBmDFj+vbtm5aWFu8SAQDkllAGACgy7rnnnor/7bnnnou2Tps2bc6cOVkf9fPPP48ZM+bss88+8sgjq1Spctxxx11++eXvv/9+wZYdACAz3ZcAgCLjpptuGj58eHZbExISYgegCX388cddu3b95ptvojUbN26c9Yt+/frdd999+VleAICcaCkDABQZCQkJZbKXNZHZvHnzxRdfXKlSpUmTJi1YsOCVV17p3r17tHXChAnPPvtsgb8IAID/paUMAFBU/fTTT1WrVs1hh1GjRtWtW3f+/Pnly5cP17Rv3/7www8fP358+Ofjjz9++eWXF0hhAQAy01IGACgs5syZM3v27J07d+Zm55SUlObNm7dr1279+vV73SE1NfWFF14YP358lMiE+vXrFy1//fXXB11qAIADJJQBAAqLZcuW9ejRo0GDBv379//888/3/CJ2QqWMjIxw5Z49e8aNG7dhw4aFCxeeddZZCxYsyHq0zZs3N2vW7Iwzzsi0vk6dOtFyzZo18/MFAQDkRCgDABQWYZOWbdu2Pfnkk6ecckrlXzRu3DjaYcyYMeHKypUr33HHHeHKH3744ZJLLlm0aFGmo9WrV++NN97I+izff/99tHzhhRfm26sBANgHoQwAUFiUKfOf0e5Gjx69devWlOzNnj072rlmzZoJCQm5fJZ58+aFC9WrVx84cGBevwgAgNwSygAAhVGbNm1iM5qctW/fvkWLFrnZc9u2bXfffXcQBGXLln3mmWdq1KhxcMUEADhwQhkAoKTIyMi4+uqr169fX6FCheeee+68886Ld4kAgBLNlNgAQEkxaNCg2bNnN2zYcOrUqaeeemq8iwMAlHRaygAAJcLgwYMfe+yxLl26/OMf/5DIAACFgZYyAEBhkZGRES2npqbu3Lkzh51379691wfu1Q033DB58uTx48dfeeWVeVFSAIA8IJQBAAqL2BSmbdu2uX9gbECT1ZAhQ1566aV58+Y1a9Ys06ZXX3313//+d+/evfe/sAAAB0v3JQCgsEhJSYmWlyxZksN82CkpKa+++mq4Z61atVq2bJndMe+///7p06e/+eabWROZIAjuvPPOtWvX5s+rAQDYBy1lAIDC4qSTTurdu3fdunVbt2594okn5rxzq1atFi9eXLt27cMPPzy7fRYtWjRy5MhXXnnlhBNOyLp10qRJK1as6NmzZ16UHQBgvwllAIBCYf369VWrVp0wYULYj2nYsGG9evWKDVOmTJmyc+fOzp07hylM+fLlq1Wr1rdv33r16nXu3LlNmzZZjzl06ND09PQ+ffpk3ZSSkpKc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7NkTrenVq1dSUtL3338f/rl06dKhQ4eec8451apVu+CCC7744otcHvmLL75o2LDhE088kUN55s+fv19N/LKe3Nq0adOiRYuJEyfm5uGDBg168MEH161bF7ty69atJ5xwwu9///tPP/0060OWL19epUqVcuXKHX300S+99FLWHW677bbLLrvs5Zdfznks9m+//TY4IL169SpTpswRRxxx5plnrlmzJsgH11577WWXXXb33Xd/+OGHeX7wAig/UBioi0J8CWWgQN1zzz0V/9tzzz0XbZ02bdqcOXOye+yuXbsGDRq0vz93AwVsx44dSUlJGzduvP766/v06bN79+7s9vzb3/62ffv2cHnjxo3ff/99bHKxfPny888/f/Xq1dk9fOHChZdccknDhg2HDBkyfPjwP//5z8/94sQTT3z//feDIIiiitTU1CZNmtStW3f37t2jR4/+7rvvcn4JI0eO3LBhQ9++fVu3br1u3bqsmcWmTZsuvfTSLl26XHDBBRs3bszN25KUlNSqVasnnngiJSUlXHP00UevX7++efPmuXn4u+++O2jQoIYNGx5zzDHH/p9f/epXn3766fPPP3/SSSe98847QRB8+eWXUWnDVh67d+9et25d586dsx7zjTfemDFjRufOnRs0aPDaa6/t9Xk/+eSThg0bNm/efNGiRcF+Klu2bFpa2pYtW0444YRjjz02dtMPP/yQJ7PyrVq1asaMGTfffPOQIUNi47k8UQDlB4pWXTSycePGevXqqZRCnijaLZOhyLnpppuGDx+e3daEhITYAWhirVix4g9/+MOKFSvys3TAf+nfv//cuXP3903ZsWPHN998Ey5Pnjy5YsWKjz766F73nDp1arQ8dOjQe+65J/ozNTW1d+/en3zySbNmzZ588snLLrss68MrVKgQBMGGDRs2bdrUpk2bIAiOOOKITZs2fffdd4sXL27duvXKlSvDPc8444z77rsvISHh3nvvvfXWWx966KFnn332ggsu2Gup/vGPfzz77LPh8tFHH/3ZZ5+dcsopNWrUiN1n27ZtP/30UxAEb775ZtOmTV977bUzzzwzh/ckNTV17ty5P//888KFC4cNG/bwww/36NGjdevW77///qmnnhrkQvny5YMgyMjIWL58+aGHHpqpTX7FihXbtm0bBMGvfvWrPXv21KtXb9q0aVWqVMnhgP/+978//vjjcLlDhw7nnnvu8OHDn3/++UyN/L///vtdu3YtXbr0rLPO6tev39ixY8O3PTdKlfrfn74ydaHavXt3mzZtypcvP3v27KOOOio4CD///HO48Mc//jHn7mbz58+vWbPmr3/969wfvADKDxShumhkz549vXv3/uGHH/KhdFASaSkDBSohIaFM9vZ6FUxNTb3zzjvbtm0rkYECdscdd/zzn/9c899Wr1699hebN2/+5JNP1qxZk5ycHK55+OGH16xZs3HjxowY2SUymzdvfv7558PlmjVrzpo1K2oAcuyxxzZo0OCTTz4JgmD79u3du3cfMWJE1iNE8UH37t3/8IswhihXrtxNN90Uti4Jd/j3v/993HHHHXvssXfccUcYNHTs2PGJJ57IeswdO3b07t07PT29UqVKM2fOnDJlSvv27Tdv3pzpTWjdunX0kA4dOuTQGij0yiuvRPHBwIEDL7zwwiAIOnbsuGHDhlz2gYpebGwiE7s13KFs2bIZGRk///zzb37zm30WKWyXdNFFFz3++OMVK1a86aabPvzww0yvtF27duH+GRkZ06dPf+GFF4KD9sADD6xcuXLZsmXNmjVbvnx5pq2rV6/u1atXnTp1ypUrV7t27T59+uTQdejf//53uFC1atUcnvHrr7++6KKLTj311Ntvv/3gG9TkXP6wDdd555132C9atmz59NNPH+QzAvGti2Zyxx13/P3vf/dPgbwilIF4Cn9qzsGCBQtatmw5f/78v/3tbwVVKOB/Va9ePet0adHQp7Vr1w4DgqhBQatWrXL/3o0fP37Xrl1hM5ZMQcCaNWtatmwZ7VmlSpXVq1fv3Llzv/4xK1asCAdDueKKK8JjfvTRR2F7kyAI0tPTo0gokpGRcdVVV/3rX/864YQTPvjggy5duoTry5UrF7vbkiVLXnzxxXD5/vvvnzJlym9/+9ucCzNhwoRwoXv37sOHDw8ThCOOOOL8888fOHBgNAjOwcv9YMnhS2jcuPG0adNKlSp1//33v/HGG5ka16xevToajOaSSy7ZsGFDnz59DqBUzzzzTGzi9thjjzX6RYUKFcaOHRu75+uvv3766ac/++yzP/zww+7duzdt2jR58uQmTZpk17squojkHMqMGDFi+/btu3fvvuOOO1q3br158+Z8Kn/Y/qtVq1bvvPNO8i8WL1585ZVXZt0NKCp10Uzeeuut+++/P9+KAyWRUAby0pw5c2bPnp3Le6eUlJTmzZu3a9du/fr1e91h69atffv2HTBgwLx58xo3buxfBYVE+ENidAMfhTJR5LHPUVG/++67hx56KGwt8u233y5btix267333vvKK6+Ey4cffvgHH3wwc+bM6OC5FLZAqVixYlR7Hjt2bNTafMCAAeEgLLFuvfXWWbNm3XzzzR999NFrr73WsmXLrHHwzp07//CHP4QDAN96662DBg3aZ0kWLVo0f/78IAiOOuqoTIMfDx48+Jtvvrn00kvD8c4LzMaNG998882KFSvOnDnzsMMO+/nnn++4444ePXqccsopUfOiIAhGjx6dnp4ejkk8Y8aM3HdcyiRs7bJXU6ZMiXbbtGlTz549b7rppp9//jklJWXBggUNGzYMuwtdddVVWcdwSUtL27ZtW7jcpUuXY7O3YMGCMEZp1KjRli1bsot4DrL8QRCsX7/+7rvvfvPNN7dv375mzZoOHTqE67MmgECRqItmsnHjxhtuuCFTUg8cJKEM5KVly5b16NGjQYMG/fv3//zzz/f8InbkzoyMjHDlnj17xo0bt2HDhoULF5511lkLFizIerTKlSuvWLGiT58+5smGOGrbtu3QoUM///zzaE0YSUQDbYShTJkyZcJ66qRJk4477rjWrVvv9XsdGjJkyLZt26677rpXX3116NCh559//l/+8pewE9D48ePDzkdht6Z333335JNP3q8CZ2Rk7N69+7HHHqtSpUrZsmX79euXmpr6P//zP2PGjAl3aNmyZdaWC8OGDfv0009XrVp15513pqamPvjgg4sXL/7tb3/bq1evsEVP6I9//GPYlXLo0KEjR47MTXmGDh0ajoDzyiuvVK9ePXZT27ZtwzfqnHPOWbt2bW6OliluCFfu77x1Dz30UFpa2iOPPHLiiSeGf4ap0PLly/v167dhw4bwxmbatGlBEJx88smvvPLKIYccEuSF9evXZzcN1iOPPNKjR4/bb7+9cuXKpUqV+s1vfjNp0qRw05YtWzIld5l+3162bNma3Pn888//8Ic/5Ef5wzY1r732Wvv27StWrNioUaNoaq2mTZse8DMCcayLxtqzZ8/ll18+YsSIvDofAiGhDOSl8Kfsbdu2Pfnkk6ecckrlX8Q2chkzZky4snLlyuHgDuE0Fpdccslep/bIeeBGoAB8++23Y8eObdy4caNGjcIgIGw9sWjRovDPsJdQWlpa+OfgwYODIPjggw/OPvvsgQMHZj3gSy+9NHPmzAkTJjzyyCOlSpUaMGBAly5dhg0b1rRp0759+/bv3z/c7fTTT1+0aNFJJ52UXcF27NgRLlx99dXhU4d3y6mpqdOmTUtOTn7zzTevvvrq6dOn//a3v01KSgqzlVq1as2aNSvqhBX629/+1rVr1xdffLFRo0ZhU53whr9OnTrt27ePJsYeNWrUU089FU6ltHXr1pEjR86dOzc2sslq6tSpCxYsKFeu3PPPP9+sWbOsO0yaNKl8+fIfffRR06ZNx44dG72oTMI7inLlymWKGIL99M033wwbNuzBBx/s84twcJ+oMVG/fv1WrVpVt27dTZs2XXnllWGWNHr06Nwc+eGHH27duvV9992XwxTaKSkp559/fuPGjW+99dasA/G8/vrrmVoenXXWWdFy1vc5GlAmISGhWrVquSlkvpY/jPaOOeaYTG3K6tSpc9dddx1k8YB41UUjt95667HHHrvXgeeBgyGUgbwUm6GMHj1669atKdmbPXt2tHPNmjU1h4HCKbyxzMjImDJlypo1a95+++1w/bBhw8Jc4LDDDguC4Jhjjgn/jGa5DoLgvPPOy3S0jz/+eNy4cYsXL7722mvDNQkJCc8++2yHDh1Wr14dDb77m9/85p133om9v80qmlv6hRdeCJ+6UaNGZcqU6dq161/+8pe//vWvLVq0GDRoUJUqVRYvXhwOG1yuXLmXXnop64w5Z5999mmnnRYu/+tf/7r33nuDIGjQoMH777+flJQUVvFHjhw5YsSISpUqzZgx49lnn73//vvXrl3boUOHI444olevXnsd8PWbb74ZMGBAhQoVXnrppU6dOu31VdSuXfuBBx4IhzQeOnRoo0aNbr311s8++yzTbscff3zXrl3nz59/1VVXPfjgg/Pnzw8b55944omtW7d+/fXXg9xZuHBh2Cjpr3/9a40aNcqVK1erVq1wEOIrrrjikUceKV26dEpKSrdu3bZs2dK6detXX311zJgx1apVO+GEE2688cYcZigvXbr0Bx98MGTIkLp164b53XvvvVfnF6+88kqYmp144omff/55ODF5mzZtkpOTY48wefLk448/PnZN9ON2qVKlmjRpkl1LmSpVquQ8Nuf48eNXrVqV8ztz8OXPdBHMyMgYOnRoixYtFi1aVKtWrZyfHSjkddHXX3/9jTfeMJoM5Ac/wkN+adOmTe7bubRv375Fixb+GVCYhRP6fP311+Gf0Xc2TGGOPPLIrA/J1M4lIyNj3bp1b7/9duwt9M6dO++999733nsvds+FCxceccQRJ510UpMmTX71q1/Vr1+/Xr16RxxxRI0aNapXrx62cznvvPOOOuqoNm3a/PrXv27QoEG1atX+/e9/r1279u23377jjjtOOOGEMPIYMmTIrbfeGh720EMP/fLLL1u2bJldzTs9Pf3aa6/dtWvXCSecMG/evLp164ZNb/r27TtlypRmzZo9/fTT4bTKFStWnDx5cpUqVcaNG/fss89OmzZt8uTJPXv2jA6VmprapUuXww477O23344Sn0x+/vnnU089tVatWj179nzuuefCdkmjf1G3bt0777yzV69e4Z7h1l27doVNdYIguOyyy6ZPn76/09K1bdu2dOnSaWlpmzZtKlu27KmnnrpkyZIgCC699NLHH388ISFhx44dF1988d/+9rf+/fvff//9ZcqUadu27ZAhQx544IFPP/30wQcfHDJkyF/+8pesb2DUnn/MmDE33nhjdgWoW7fuxo0bw35YmTZlbRW1cOHCcOF3v/td1g/YV199FS5k6hSWyaxZs/r375+QkJCYmDhq1KjsRig7+PLHCj8zq1atGjx4cNTSCiiiddF169Zdd911r7zyyl7nvwMOklAGAPZDdCcctmLYvn17OALrcccdt8/HJiQk/O53v4v+3L1799SpU0eNGvXll1+G0zANGjRo6dKlTzzxRHJycmpq6oe/yHSQa665Zvz48WXKlLnooovCZuRbt279+he9evWqX79+2O8m9O2330bjegRB8OOPP/bs2fPuu+/u379/ly5dst7Mjxw5Mhzp9ssvv5w6deqf//zn9evXJyUl/fOf/3zggQcGDBgQjWoceuCBB5YvX/7++++npaUNHDgwCmXS0tIuv/zyypUr//DDD926dcvuDdm+ffumTZu+/PLLzz77rH379m+//XbYNaxcuXJ33313UlJS1v2j5b/85S/hwsyZM6tXr37uuefu8/0PgqBGjRpnn332mjVrBgwYcMUVV4Sjq5x77rnPP/986dKlf/rpp8TExK+//nru3LkXXHBB+JBwbqaffvrp6aefTk9PHzNmzFFHHbXXjmmhvcZzWXXt2nWftzdhG6KaNWs+/PDDWbfec8894cJXX32Vc0QSBoIvvvji7NmzP/744zBWy7/yb9iwoWvXrmE/iF69epUqVerKK6989NFHM3WaA4qE1NTUpKSkQYMGnXrqqfEuCxRPui8BwH4IbzXPPvvszp0733fffdHswh9//PGLL74YZgr79OOPPz700EPHHXfclVde+f333/fu3fudd95p0qTJhx9+eOSRR06YMGHixImtWrXK2hxj+PDhEydODH/5POyww8qXL9+kSZOPPvoo3FqhQoVVq1a9+eab4Z/bt2/v1KnTxo0bO3ToMHbs2Kh5zsqVK6+55pojjzzyzDPPjKKNsHX66NGjwyfdvXv3DTfccN9997Vu3fr8889ft27dDTfckCmR2bNnz6BBg66//vpwfXJycvjyU1JSrrrqqtatW8+dO3fevHmff/75mjVrmjZtuvYXRx11VDQiTBQ5/fjjjx999NGsWbPCtjmjRo2KEpkdO3ZE72o0SVOVKlWOPvroIAhWrVrVs2fP88477/LLL8/am2avnnvuuS+++GLo0KGvvvrq7NmzmzdvHo7ju3Tp0jZt2rRt23blypVRIhN59NFH69evHy7v7+xFB+bhhx9+6623atas+c4779SpUyfrDkuWLHn55Zc7dOgwadKkHEb2/de//hU95JZbbsnaDSpv7dixo1OnTl26dHnppZeuvfbahISE9PT0J554IjcTdQGF0LBhw6pWrZpDEg0cJC1lAGA/hLM733zzzVdeeeWf/vSnaIDV6tWrd+3atUWLFm+88UZ2j01OTp43b96MGTPmzJlz3HHHderUqd0vDjnkkD179kRtPW655ZbRo0dfc80133777dlnn127du3PP//8u+++q1q16s033/yfS3iZMrt27dqxY0fsr5cDBgyYP3/+tGnTLrjgggsvvPCTTz4ZNWrULbfckpCQcNpppyUlJX3zzTfhnnv27Fm0aFH0pAsXLvzzn//81ltvXXzxxdu3b8/IyJgwYcIJJ5zw2WefZdfA4aGHHho3btwzzzxzyimnfP311zfeeGOYzrz77rt333137dq1w4Fpwp2jEXzbtm0bHSE2w3rqqacuvvjic889d9asWb///e+j9a+99to111xTo0aN2IPs2bMnahuyZ8+ecETh3DRWCmfmDodbvu66637961/PnTv30EMPnTlz5ueff/7uu+/utSvQNddc07p16/vvv79Lly6Zxt/NJ3PmzLnxxhuPP/74V155JeyJll3Dq9i2V7F++umnqlWrRpOFhZo0aZLf45dVqFBh0aJF4Wfm0ksvPeyww8IhiiZNmjRy5Mice1oBhc3LL788ffr0pUuXGvoQ8o9QBvJSbN03NTU1HIcyO7FTV+hyD0XCp59+unr16nPOOeeCCy5ITk5OS0t76623wvllrr766vnz5y9evPiWW27J+sCUlJS5c+euXr26bt26gwcPfvrppytUqBC7Q2wjlChumDlz5tq1a3/44YcJEyacccYZu3btin1U+JBDDjkkagLz+uuvh9M59+zZ89hjjz3yyCM/+eSTqGXEOeecs3LlyqFDhz711FPhOWfAgAHh1EJffPHFggULFi9eXLFixXDnhISEQYMGffnllyeeeGJ2E06Hz7Vt27Z//vOfS5YsiQaOueiii7Lu/P3334cLsS01Yk+DlSpVCpv/hJMiRbp163bppZeGN/lTpkzp3bt3EATXX3992MZn9+7d4WAov/rVr4YPHx5N+52Dxx577IUXXnj33XerVq364IMPbty4ce3atTVr1qxQocI//vGPjh07Ztp/xowZj/3i0ksvffLJJw899NAwmsk/8+fP79q164UXXvjss89WqVLlAI7w2muvde3a9b777vvjH/8Y+++L/r/5KjbFu/rqq8NQZs+ePcuXL2/Tpk0BFABKsryti/br12/r1q05dJCMzirR2PPA/hLKQF6KvfLF/hq8T3udWxQobB599NFKlSpNmjQpCIJTTjmlTJky4cQ911xzTTiyTDggYtYHVqxYMTExMVwePHhwjx49cvjV8U9/+lOYlYSpx08//dSjR4+pU6fGDqO7Vx07dpw4ceJbb7113XXXff3115UqVfruu+9iQ5Aff/xx3rx5zZo1+/HHH5OTk0eNGhWuP+aYY/70pz9lPWDDhg3ffvvtOnXqhAHQokWLzjzzzHDT3/72t1atWgW5Fo4OG75vseXJTV4Q3eRHkx+dc8454cLmzZvDG4kGDRqUKlUqbHqTXYoUeu+998Jxc3766ad27dqFg7ZcdNFFF1988fz587M20d+0aVO48PLLL2/cuHHx4sV7PWzU6mfIkCG33357ds8eHS270/6HH354ySWXDBo06M477zywn6a3b98ejtZ8/fXXr169OjaoyhQF5kf5Mwn7o4VyP+AoUEjqomlpaWFint3wXlm3AvvL1RHyUuyvBEuWLDnxxBNz2Pntt9++5JJLgiCoVatWy5Yt/SegkFu/fv3kyZOjbjIffPDBli1bGjRoUL9+/SFDhqxbt65evXqHHHLI7bffPnfu3ByOc8stt9xxxx3hRNqxojvwe+65J1Nrkdx79dVXly9fvmTJkjPPPPPDDz8855xzatasWbly5XBramrq+l8ceuiho0ePjtbnoF69entdv1+JzM8//xx2m6pRo0ZsJ6PYUCbsoJSzcAyaqlWrRqFMNO5yw4YNo196c84Lfve7302fPj0IgmrVqnX7RevWrcPWRuedd96IESPCkkT/jieeeOKqq67K/Y3Q2LFjsw5RnHX2or3mI19//XXHjh1HjRqVKRv64osvLrvssqVLlw4ZMuTll1/OOazZsWNH1Elt0qRJURqY8+1TnpQ/qy1btoQLZcuWzXmAYaAQ1kWjr3CsWrVqRSN87XUHYL8IZSAvnXTSSb17965bt27r1q1zvgqGtzSLFy+uXbv24Ycf7t8AhV///v3vvffe2CE87rrrrnLlyr366qsVKlRo3LhxNFt2zsJ7/m+//bZ9+/bXX3997969y5cvn2mfxYsX/+Uvf2nSpEn79u3PPvvsTCPs5uCSX8S2Sli3bl10/7xy5cpw3uWUlJRjjjkmKCh///vfw4X27dvHBgpRn6ZMTSr2aufOnQsWLAgn9ClXrly4MhoquEmTJunp6bt27apSpUpsDJFVhw4d2rZte9VVVyUmJkbzQIeyJmWxc5/vs3ilS5f+zW9+EzUm2qvzzjuvQoUKnTt3DhvpxEpPT+/evXufPn2yttZ58sknw3/isGHDRowYkZs0LRK2twrlMN/TwZd/r8IZx8MpzKMBmID8oy4KRY5QBvLM+vXrq1atOmHChLB2O2zYsF69esUO0DhlypSdO3d27tw5TGHKly9frVq1vn371qtXr3Pnzjn3tI/t6JuRkWG4NSh4PXv27Nq1a/Tn3LlzZ82a9eabbzZt2vQAjnb//fevXLny2muvHTly5FNPPXX++efHbm3RosVDDz3Utm3bu+66q27dun/605/++Mc/5v6L/91330UNH/baoqFs2bIXX3xxUFCmTp0aLvTq1WuvfZpq1Kixz5YXL7300o4dO8qXLz948OBoZRjTBEFw+umnlypVat26dVFnq+wcdthh77zzTtb1aWlpH3300SGHHHLyyScH+++ss85KTk4uX7783LlzjzzyyCj+WL58eWpq6umnnx7++x577LFHHnkkLS1t9+7dmUZQfvzxxz/66KP27duHndciGzdufOKJJ8L/V27aE2XX4SictSr/yv/ee+9169bt3HPPjYZMSk9PHz9+fBAE9evXD0eWAYpuXRTIJ6bEhjzz2Wefvfrqq+Fy+fLlW7Zs2axZsxtvvDHqedu1a9fJkycff/zxgwcP3rZtW/jL8JNPPrlkyZIOHTq0aNFizpw5ez1ySkrK008/Hf05ffr0Xbt2+c9BAYtNZBYuXPj0008vW7Ysl80oMvnmm28mTpwYLvfp06d58+ZZ96lfv/5bb7116KGHbtiwoX///rETEsVKT0//4osvwuX33nvvnHPOOeuss55//vmCjG7DE1p2tmzZMmvWrCAIWrdunWmq6S+//DJcaNSoUc5PkZGR8eCDDwZBcPvtt0czOu3evTscHaZcuXLhMMP16tXLfauicPTZpUuX3nvvvR07dmzevPnatWvDlkT7a+vWrePGjQtbPO3cubN+/frjxo0LNzVu3Hjo0KHHHHPMww8/nJ6eXq5cuUsvvfS666476qijRo0aFc0nFQTBhAkTdu3adccdd9z63yZOnLhnz54DblP56aefRsvZTX6UJ+X/7rvvvv/++xdeeKFjx47ffPPNd99917dv3/nz55922mnvvvturVq1Dqz8QGGoiwL5RygDeWb69OnLli2L/uzUqdNRRx01YcKETp06hdfCChUq3H777Tt37pw4ceI555wTdsetXr361KlTy5cvv2LFim7dug0bNizTYRs1alSzZs3rr78+WnPVVVdlGpcBKEgbN27cvHnzjBkzjjjiiKxbczOZ2g033JCcnJyQkDBu3Lg777yzWrVqe50go2HDhkOHDg2Xp0+fPnv27HB55cqVPXr0CEdO+de//hU11QmndlqwYMHAgQMzdczJP6+99lqNGjVGjhyZ3Qvv16/frl27Kleu/Oijj2baFA2au8/+nlOmTFm6dGm3bt2uv/76n376adeuXT///PPo0aPDUWmaN2+etaFNbBiRKSEaNWpU9+7dTz755EqVKjVv3vyee+654IILFi1a1L179xzCrHBQ57165plnli5dGi5feumlCQkJAwYMGDRoUBgYTZw48auvvho4cOAVV1wRBMHRRx/93HPPff/99yNGjGjVqlXYh2v79u3Lly/P4R044FBm5syZ4UKNGjWyG0354MsfdlB67rnnWrduvWLFiqOPPrpp06Zbtmx5/vnnlyxZss/QDSjMdVEgXwllIA8kJydfd91106ZNyzTrSuPGjcPBFO66665wTfSj+qpVq+67775w+dhjj40mWH3ooYei3ydDa9eu3b59e8p/S05O/te//uWfBwUg61Q+derU6dy5c6aVGRkZu3bt2rRp0+OPPx6t3Osd/sxflC9ffvr06Z07d96wYcPy5ctvvfXWaIfYth6xQ65G3/oaNWpMnz49mi6ndOnS3bp1W7Zs2TvvvHPxxRfvV1OR3LzeHOzatWvAgAG7d+++7bbbunTpkrUR37hx42bNmnXYYYfNmTOnSZMmX3755bJly/7nf/7no48+uvnmm6MRYXJucPT5558PGDDgoosueuaZZ7Zu3XrvvfdWrly5atWqI0eODHeIGuAsW7bs97///THHHFOnTp1u3bplPdQXX3zRpUuXESNGvPDCCytWrEhPT7/hhhvWrFnTv3//TJ1xsj6wbt26v//97zM1C9q6deugX0Rj6wZBcOSRRwZB8OCDD4b/siiSmDJlyvr164MgOPPMM8PmUR999FH//v3DIXjT09MzshddR/Zp6dKlEydOHD9+/KhRo9q1axf9bL7XBll5Vf7Q73//+/nz52/ZsiU1NfXbb7999dVXu3fvHk3ZDhTRumgmmzZtimqk+fNqoGQRysDBmjNnTtOmTZ955pmsNzPR/Uk400emwR0++OCDaDl2xMSHH37YfwUKj9z0FszIyHj77beHDRt2zDHHXHPNNdH6rAOyLl++/IorrjjuuOP+/ve/d+vW7dNPP01KSmratOnYsWOjfWKbMxxzzDFhh5qEhISot3/t2rXDiWzKli171VVXffbZZy+88MLpp58e+0TR6ejYGB06dIgKnN1riR745ptvNmzYMPbhsR24wjWNGjWK5j966aWXhg8fHnuoMWPGDBw4sHXr1suXLz/77LODIDjiiCO+/PLLLl26nH766XfffXe4W6lSpS688MLsyrNly5bf/e53/fv3nz17doUKFWrXrn3nnXc++eST0Q61atX6wx/+EC6fccYZ06ZNmzBhwpYtW6LXGI0KHN6N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AEChJZQBgPjYr8FWcz9tE+T8WQIACg+hDAAUgXvmqO+SZjLksrGM/m4AUPiVincBAKCE0ooBAKCEE8oAAAAAxIFQBgAAACAOhDIAAAAAcSCUAQAAAIgDoQwAAABAHAhlAAAAAOJAKAMAAAAQB0IZAAAAgDgQygAAAADEgVAGAAAAIA6EMgAAAABxIJQBAAq19PT01NTUeJcCACDvCWUAgEJtzZo1VatWrV69epMmTRITEzds2BDvEgEA5A2hDABQqB1yyCFBEOzcufOrr75KSUmpVq1avEsEAJA3hDIAQKFWunTpaLlly5aVKlXKtMPs2bNnzZpV4OUCADhYZQ76CAAA+SghISGHrZs3b77mmmu2bt26YsWK2267LeedAQAKFS1lAIAibPjw4Vu3bg2CYMyYMX379k1LS4t3iQAAcksoAwAUGffcc0/F//bcc89FW6dNmzZnzpysj0pOTh45cuRJJ51UtWrVunXrXnjhhbNnzy7YggMA7IXuSwBAkXHTTTcNHz48u60JCQmxA9CEtmzZ8tvf/nbdunXhnz/++OP7v7jnnnv69++fz+UFAMiJljIAQJGRkJBQJntZE5kgCC6//PImTZq89NJL//jHPx5//PF69eqF6+++++4CLz4AwH/RUgYAKKp++umnqlWr5rDDu+++e9xxx40bNy78s2nTpkcffXS7du2CIChXrlxBFRMAYO+0lAEACos5c+bMnj17586dudk5JSWlefPm7dq1W79+fXb7VK9e/c4774xdc/LJJ4cL+i4BAHEnlAEACotly5b16NGjQYMG/fv3//zzz/f8InZCpYyMjHDlnj17xo0bt2HDhoULF5511lkLFizY6wFPOeWUypUrx6558803gyC4+uqrBw8enP8vCAAgJ7ovAQCFRfny5YMg2LZt25O/yLrDmF9kWvnDDz9ccsklb7zxRsuWLXM+/scffzxixIhHH320T58+eVpwAIADoaUMAFBYlCnzn5+LRo8evXXr1pTsxU5rXbNmzYSEhJwP/vLLL59//vnVqlV77733xo0bt2XLlvx8KQAA+yaUAQAKozZt2sRmNDlr3759ixYtstu6e/fuG2+8sWfPnsnJyR9//PHMmTP/9Kc/nXjiiS+++GLelRcAYL8JZQCAYm7o0KGbN2+eMmXK+++/P3ny5DPOOCPsJHXFFVcsXbo03qUDAEou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" alt="点1分别指向点2与点3，点2与点3分别指向点4。" width="1500" height="430"></figure>
+<p>在图1到2、1到3、2到4、3到4中，到4有两条路径。若点编号被打乱，按1、2、3、4这样的数字顺序未必合法；编号是名字，不是依赖顺序。</p>
+<p>如果改为从s出发的最长路，定义best[v]为到v的最大权值和。初始化best[s]=0，其余负INF；只从可达u更新best[v]=max(best[v],best[u]+w(u,v))。即使边权为负，DAG的顺序仍然可用。其他源点不能凭空拥有0分，除非题目允许从任意点开始。</p>
+<h2>为什么复杂度常常是点数加边数</h2>
+<p>拓扑排序处理每个点一次、每条边一次。DP也是沿每条边传递一次信息，所以总时间O(n+m)，而不是看到“图”就认定要O(n²)。邻接表适合存稀疏图；若用邻接矩阵检查所有可能边，实际复杂度会不同。</p>
+<p>图中的平行边是否代表不同路径必须读题。若按边序列区分，每条平行边贡献一次；若只按点序列区分，直接逐边计数可能重复。路径定义与计数对象仍然不能省略。</p>
+<h2>记忆化并不能消灭环</h2>
+<p>若某条路径可以反复绕环后再到终点，走法数甚至可能无限。带环图的最短路也需要适用的算法，不能简单照搬DAG最长路公式。在新题中先检查“依赖能否按有限顺序计算”，再决定是否使用这种DP。</p>
+<h2>独立任务</h2>
+<p>把示意图中的点重新命名为4到1、4到3、1到2、3到2，起点改为4。先找拓扑顺序，再手推到2的路径数。解释按编号从小到大计算会在何处失败。</p>
+</section>
+<section class="chapter" id="v2-c3" data-title="第14章 把有限的历史变成状态机" data-book="第二册 提高组建模与优化">
+<div class="eyebrow">第二册 提高组建模与优化</div>
+<h1 tabindex="-1">第14章 把有限的历史变成状态机</h1>
+<h2>上一天做了什么很重要</h2>
+<p>每天有两种训练A与B，各自有当天的得分。每天选一种，不能连续两天选A，求总得分最大。最后一天选A或选B，会影响下一天哪些动作合法，所以状态必须保留昨天的类型。</p>
+<p>定义f[i][A]与f[i][B]分别为前i天结束时、当天选对应训练的最大总分。第一天直接由当天得分初始化。之后，A只能接在B后面，B可以接在A或B后面。即使训练分数为负，每天也必须选择一种，不能擅自跳过。</p>
+<div class="formula" aria-label="关系式">f[i][A] = f[i-1][B] + score[i][A]</div>
+<div class="formula" aria-label="关系式">f[i][B] = max(f[i-1][A], f[i-1][B]) + score[i][B]</div>
+<div class="table-wrap" tabindex="0" aria-label="可横向滚动的表格"><table><thead><tr><th scope="col">天数</th><th scope="col">A的分数</th><th scope="col">B的分数</th><th scope="col">以A结束的最好分数</th><th scope="col">以B结束的最好分数</th></tr></thead><tbody><tr><td>1</td><td>5</td><td>2</td><td>5</td><td>2</td></tr><tr><td>2</td><td>6</td><td>1</td><td>8</td><td>6</td></tr><tr><td>3</td><td>4</td><td>3</td><td>10</td><td>11</td></tr></tbody></table></div>
+<p>你可以把A与B画成两个小圆，允许的相邻训练之间画箭头。这种有限状态及其转移图叫状态机。DP把“第几天”和“状态机在哪个点”放在一起。</p>
+<h2>冷却时间怎样进入状态</h2>
+<p>若选A后必须隔两天才能再次选A，单纯记昨天是不是A就不够。可以记还需要等待的天数r，r只取0、1、2：r=0时允许选A并把下一天的等待数设2；选B则把等待数减1但不低于0。先画清楚“每天开始前”还是“每天结束后”的含义，再写数组。</p>
+<p>若要求恰好选K次A，还要记已选次数k。若只问总次数不超过K，答案可能要在多个k中比较。固定要求和可自由选择的资源数量，常常决定答案是单格还是一组格的最值。</p>
+<h2>同一动作不能在一天里连续发生</h2>
+<p>若压缩掉天数这一维，更新当天新状态时应统一读取昨天的old，写入next。原地写到一半又读当天结果，可能相当于一天做了两次训练。除非你已证明更新顺序安全，否则用两层数组更清楚。</p>
+<h2>独立任务</h2>
+<p>用纸片模拟“做A后要隔两天，另外最多做两次A”的五天训练。设计状态，写出它是在一天开始前还是结束后。给出一对说明“只记最后一天的类型还不够”的历史。</p>
+</section>
+<section class="chapter" id="v2-c4" data-title="第15章 多维状态和两个人同步走" data-book="第二册 提高组建模与优化">
+<div class="eyebrow">第二册 提高组建模与优化</div>
+<h1 tabindex="-1">第15章 多维状态和两个人同步走</h1>
+<h2>多记信息之前 先找它们之间的关系</h2>
+<p>两个人同时从n乘n网格左上角出发，每步向右或向下，最后都到右下角。每个格子有非负奖励，两人经过同一格时奖励只拿一次。问总奖励最大。这里格子没有障碍；有障碍的版本需另外跳过非法状态。</p>
+<p>若分别求两条最大路径，再把重复奖励扣掉，未必得到共同最优。第一条单独最优路径可能占掉第二条能拿到的大部分奖励。我们需要同时考虑两条路径。</p>
+<div class="callout think"><strong>先停下来想</strong><p>两人都已走了k步时，各自坐标的行加列等于多少？如果知道k和一个人的行号，列号还能自己决定吗？</p></div>
+<details class="derivation"><summary>留下自己的想法后，展开后续推导</summary><div class="details-body">
+<p>坐标从1开始，在走k步后有r+c=k+2。因此状态可以记k、r1、r2，并用c1=k+2-r1、c2=k+2-r2还原列。原来似乎需要四个位置下标，实际上同步步数让我们少记一个自由量。</p>
+<h2>四种来源从动作组合得到</h2>
+<p>定义f[k][r1][r2]为两人恰好走k步、分别位于(r1,c1)和(r2,c2)时，已拿到的最大总奖励。上一时刻，每个人要么从上边来，要么从左边来，组合后共四种来源。</p>
+<p>若当前行号是r，从上边来时上一行是r-1；从左边来时上一行仍是r。枚举两个行号分别是否减1，查看上一层中对应的合法状态，取最大值后加本轮奖励。若r1=r2，同一步下列号也相同，本格奖励只加一次；否则加两格。</p>
+<p>起点f[0][1][1]=a[1][1]，其他状态负INF。每一步都检查还原出的列在1到n之内。终点是k=2n-2且r1=r2=n。状态总数O(n³)，每个最多四个来源；滚动k这一维后空间O(n²)。</p>
+<h2>为什么只检查同一步重合就够</h2>
+<p>两个人若经过同一格(r,c)，都必须在第r+c-2步到达它，因为只向右或向下。所以同一格的重复一定发生在同一步，不会出现一个早两步来、另一个晚两步来的情况。这个不变量让“本轮去重”正确。</p>
+<p>如果允许等待或向左走，这个性质会失效，不能直接使用同一个模型。减少维度往往来自这样的等式或不变量，必须证明，而不是为了让数组小一点随意删维。</p>
+</div></details>
+<h2>独立任务</h2>
+<p>在2乘2网格中填入1、2、3、4，画出两人可能的走法，手工求共同最大收集值。再解释为什么起点和终点也只能各计算一次。写出k=1时所有合法的(r1,r2)组合。</p>
+</section>
+<section class="chapter" id="v2-c5" data-title="第16章 树形动态规划先认识父子关系" data-book="第二册 提高组建模与优化">
+<div class="eyebrow">第二册 提高组建模与优化</div>
+<h1 tabindex="-1">第16章 树形动态规划先认识父子关系</h1>
+<h2>前置小课 树和子树</h2>
+<p>树是连通且没有环的无向图。选一个点作根以后，每个非根点都有一个父亲，剩下向下连的点是孩子。一个点连同它下方的所有后代组成它的子树。两个不同孩子的子树彼此不重叠。</p>
+<p>DFS可以从根进入孩子，等孩子的子树处理完再回到父亲。在无向图中，邻接表还会包含回到父亲的边，遍历时要跳过它；没有这样做就会来回递归。树特别深时，递归栈可能不够，可用显式栈生成访问顺序，再逆序处理。</p>
+<h2>相邻的人不能同时参加</h2>
+<div class="callout think"><strong>先停下来想</strong><p>每个人有参加聚会的快乐值，关系形成一棵树。直接相连的人不能同时选，允许谁都不选，求总快乐值最大。某个孩子能不能参加，取决于父亲的哪一件事？</p></div>
+<details class="derivation"><summary>留下自己的想法后，展开后续推导</summary><div class="details-body">
+<p>定义dp[u][0]为u不参加时，u整棵子树的最大快乐值；dp[u][1]为u参加时的最大快乐值。这里0与1限定的是u本人，不是整棵子树是否选人。</p>
+<div class="formula" aria-label="关系式">dp[u][1] = weight[u] + 所有孩子 v 的 dp[v][0] 之和</div>
+<div class="formula" aria-label="关系式">dp[u][0] = 所有孩子 v 的 max(dp[v][0], dp[v][1]) 之和</div>
+<p>若u参加，每个孩子必须不参加；若u不参加，每个孩子可以自主选择。不同孩子子树之间没有额外边，因此可以分别求最优再相加。这是可分解的关键。如果有跨子树的限制，就不能直接独立相加。</p>
+<figure><img src="data:image/png;base64,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iHI++uijgwcPfvPNN6I7jF5lypRRq9Xy4Br5aIjePZIk/f3337mNc3mhIUOGaA9fegUajWbjxo2ibGlp+dtvv2n3YdErJSXlwIEDc+fObdy48datW1UqVXR0tFqtHjt27OjRo1etWvX777/Ls5/cunWrVatWR44c6dChg/jsFy5cSEtLyy2TysjIyMrK0nsyzJ49+8CBAxEREQbO76uT5RkbG7/xxht5tN+2bdvo0aM3b97cv39/7XojI6OmTZueP3/eyMho4MCBYkiUOM1mzpwpSVL9+vVFd6pNmzbpjOGSaTSa1NRUGxubnE/5+vru378/MjJy8+bN/fr1GzZs2KpVq27evDl8+PDPP/9ctJk0aZLOSD0AxQuhDAAAAApbVlbW9OnTnZ2dRUAjD/oICwsbMGCAzuCgl7LmOe2a5OTkgwcPioFC3t7elpaWzs7O9erVGzlypJza5CSm9rh586abm9vcuXNFZUhISGJiojzxx08//SRJ0uLFizt16iS/8Pz588nJyeLZ6Ojot956S9R37NixefPmI0aMqFu3rvakIfLduAgmTExMRI6zfv360aNHt2vXbuHCha/Zd+bOnTuZmZliIJLhwsLC5L4Y06ZNe2EiI/qJeHt7i7L8wSVJcnJysrS0TE9PP3ny5JkzZ0RljRo1vv32W+2XL1myZM6cObltPCoqql+/fjp5iqxevXqi/4g8P67hNBrN/v375b5Lgjyz8tOnT+fOnZuWlvbRRx8lJCSMHTtWu9n+/fvFbMdidNuxY8fq1as3derUl9qBVq1aZWRk6IxdEnlcrVq1RJef9u3bz549e+fOnZHPiTa9e/desmTJy35eAEUKoQwAAAAKW4MGDU6ePCnKn3zyyfnz50U5KChIbrNnz558WVNmx44doifOwIEDbWxsNBrNjecGDx6cx6vkO2R5CI8kSWIuWFNT0wkTJty5c+f3339v3779tGnTtLveyC/ct2+fdjBx7969ZcuWLV++vEaNGqK9GIdy5swZcfstxr+o1WrthydPnnznnXcmTJjw1Vdf5dzJlStXhoSEvP/++wMHDsytr0daWlrXrl3//vvvadOmff755zrRQ27UarV2PhIZGSkmT8mbdr+e8uXLd+zYsXPnzu+++26dOnUaN2585coVY2PjihUrigYPHz7UaDTy4Tpy5Mju3bt1Ig9trq6uhgz5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" alt="节点1权值5，连节点2权值4与节点3权值3，节点2再连节点4权值6。" width="1500" height="430"></figure>
+<p>根1权值5，孩子2权值4、孩子3权值3，节点2另有孩子4权值6。叶4的两个值是0和6；节点2的两个值是6和4；叶3是0和3；根1不选时为6+3=9，选时为5+6+0=11。答案是根的两个状态取最大值。</p>
+<p>叶子的dp[u][0]=0，dp[u][1]=weight[u]。即使权值负数也可照此定义，因为允许空集，最后会选择更好的分支。每条父子边只做常数次合并，时间O(n)。</p>
+<h2>子树里还要限制选几个</h2>
+<p>若要求恰好选K个人，需增加数量维：dp[u][s][k]，s表示u是否选，k表示u子树内恰好选几人。初始化时，不选u只有k=0可达，选u只有k=1可达。其余状态负INF。</p>
+<p>逐个合并孩子。当前已处理部分选了a人，孩子子树选了b人，合起来有a+b人；根据u的选择限制孩子的选择，再比较最大值。这里合并是一个小背包，每个孩子相当于提供不同人数与收益的选项。</p>
+<p>用新的临时数组接收合并结果，避免同一个孩子贡献多次。循环上界限制在已处理子树大小、孩子子树大小与K之内。直接写法可用O(nK²)作粗略上界；某些模型可得到更紧界，须根据合并范围另外证明。不要把所有树上背包一概写成O(nK)。</p>
+</div></details>
+<h2>独立任务</h2>
+<p>在示意树上把节点2的权值改成20，重新计算两种状态。解释为什么“先选全树快乐值最大的人，再删掉他的邻居”没有一般正确性保证。之后为“恰好选2人”列出根的可达人数与状态，不要求立即编码。</p>
+</section>
+<section class="chapter" id="v2-c6" data-title="第17章 换根把一棵树的答案传给邻居" data-book="第二册 提高组建模与优化">
+<div class="eyebrow">第二册 提高组建模与优化</div>
+<h1 tabindex="-1">第17章 换根把一棵树的答案传给邻居</h1>
+<h2>每个点都要作为起点</h2>
+<p>给定一棵n个点的树，每条边长度1。对每个点u，求它到全部其他点的距离总和ans[u]。若从每个点都重新遍历整树，需要O(n²)。我们希望把已有答案改一小步，传给相邻的点。</p>
+<p>先以1为根，计算size[u]为u子树的点数，down[u]为u到本子树所有点的距离和。每个孩子v的子树中，所有点到u都比到v多1，所以：</p>
+<div class="formula" aria-label="关系式">size[u] = 1 + 所有孩子 v 的 size[v] 之和</div>
+<div class="formula" aria-label="关系式">down[u] = 所有孩子 v 的 (down[v] + size[v]) 之和</div>
+<p>按从叶到根的顺序求完后，ans[1]=down[1]。这里size始终按最初的根1定义，下一步传递时不随新的观察起点变化。</p>
+<h2>从父亲挪到孩子 哪些距离变了</h2>
+<p>从u走到孩子v作为新起点，v原来子树里的size[v]个点都近了1；剩下n-size[v]个点都远了1。所以：</p>
+<div class="formula" aria-label="关系式">ans[v] = ans[u] - size[v] + (n - size[v])</div>
+<p>第一遍向上收集子树，第二遍从根向下传播全树答案。两遍各处理每条边常数次，时间O(n)。路径1-2-3-4的四个距离和为6、4、4、6，可以直接列出距离核验。</p>
+<p>加权边长w时，把“近1、远1”改成“近w、远w”，差值变成(n-2*size[v])*w。节点也有权重时，size则要换成相关节点权重和；这不是原公式随意改符号，而是重新统计两边受影响的总量。</p>
+<h2>换根的一般难点</h2>
+<p>更复杂的问题需要知道“父亲那一侧给我什么贡献”，再与孩子们的贡献合并。想把信息传给孩子v时，常要排除v自己的那份贡献。加法可以减掉；最大值不能直接相减，通常要保留最大和次大，或对子节点做前后缀合并。</p>
+<p>“先算子树，再算子树外”是一种思路，不代表每题都有同一条换根公式。必须明确传递的信息是什么，并证明去掉某个孩子后剩余信息还够用。</p>
+<h2>独立任务</h2>
+<p>在星形树中，中心1连接2、3、4、5。先直接数出中心与某个叶子的距离和，再用换根式核对。向妈妈解释从中心走向一个叶子时，有多少个点变近、多少个点变远。</p>
+</section>
+<section class="chapter" id="v2-c7" data-title="第18章 把小集合写进一个整数" data-book="第二册 提高组建模与优化">
+<div class="eyebrow">第二册 提高组建模与优化</div>
+<h1 tabindex="-1">第18章 把小集合写进一个整数</h1>
+<h2>前置小课 二进制是一排开关</h2>
+<p>有n个对象，每个对象是否已选只有两种状态。可用n个二进制位表示集合：第i位为1表示对象i在集合中。若对象编号从0开始，1左移i位就是只打开第i个开关，C++写作1&lt;&lt;i。</p>
+<p>例如四个对象0、1、2、3中，集合{0,2}写作0101，数值为5。检查对象i是否在集合，用mask &amp; (1&lt;&lt;i)是否为0；加入它用按位或。位运算表达的是集合关系，先用开关图解释，再写符号。位数超出int安全范围时需使用更宽类型并检查移位范围。</p>
+<h2>只记访问了哪些点还不够</h2>
+<p>有n个城市，给出两两之间非负旅行费用。固定从城市0出发，每个城市恰好访问一次，最后停在哪里都可以，求最小总费用。定义dp[mask][v]为已经访问的城市集合为mask、最后停在v时的最小费用。</p>
+<p>为何要记最后位置？访问同一批城市后停在不同地方，到下一个城市的代价不同。集合相同并不意味着未来选择的代价相同，必须补上末尾v。</p>
+<p>初始dp[1][0]=0，其他为INF。从mask中最后的v出发，枚举一个不在mask里的城市u，更新新集合mask|(1&lt;&lt;u)的末尾u，代价加dist[v][u]。按集合大小增加的顺序计算最直观；按mask从小到大在此也可行，因为每次只加入一个原来为0的位，新数值必然更大。</p>
+<div class="formula" aria-label="关系式">dp[mask 加入 u][u] = min(原值, dp[mask][v] + dist[v][u])</div>
+<p>全部访问后，在所有末尾v中取最小值；若要求回起点，就在每个末尾加dist[v][0]再比较。时间O(2^n*n²)，空间O(2^n*n)。n=18时表约有472万格，使用8字节约36 MiB，尚未计入其他内存；n增加几位就会迅速膨胀。</p>
+<h2>行状态压缩是另一种小集合</h2>
+<p>在若干行、每行m列的棋盘放棋子，要求左右相邻与上下相邻的格子不能同时放。若m很小，可以用一个mask表示一行放了哪些位置。行内合法条件是mask与左移一位的mask不重叠；相邻行a、b合法条件是a &amp; b为0。</p>
+<p>若有障碍，mask还不能与障碍位重叠。定义f[row][mask]为处理到这一行、当前行恰好如此摆放的方案数。枚举合法上一行状态，加总兼容来源。虚拟第0行只允许空mask=0，方案数1；最后对末行所有合法mask求和。</p>
+<p>若行宽m=3，没有相邻1的掩码为000、001、010、100、101。先列这五个，再试上下兼容，比对0至7的数字硬背条件更清楚。若斜着也不能相邻，还要检查移位后的行间交集。</p>
+<h2>子集枚举的代价</h2>
+<p>有些题要枚举一个集合的所有子集。一个含k个元素的集合有2^k个子集；如果对全部mask再枚举其子集，总量是3^n量级，因为每个元素有“不在mask、在mask不在子集、在子集”三种归属。不要把“嵌套两个mask循环”随意估成4^n，也不要漏掉空子集是否需要处理。</p>
+<h2>独立任务</h2>
+<p>对三座城市，费用0到1为2、0到2为5、1到2为1，反方向相同。列出从0出发访问全部城市但不返回的两条路线，核对集合与末尾状态。再说明把末尾v删掉会丢失什么信息。</p>
+</section>
+<section class="chapter" id="v2-c8" data-title="第19章 数位动态规划把大范围拆成短数字" data-book="第二册 提高组建模与优化">
+<div class="eyebrow">第二册 提高组建模与优化</div>
+<h1 tabindex="-1">第19章 数位动态规划把大范围拆成短数字</h1>
+<h2>从一到大数 为什么还能做表</h2>
+<p>统计0到R中，十进制表示不含数字4的整数个数。若R很大，逐个检查太慢，但R最多只有十几或二十位。我们可以从最高位开始决定每一位，使构造出的数字不超过R。</p>
+<div class="callout think"><strong>先停下来想</strong><p>R=352。如果前面已经填成2，后面的两位还受5和2限制吗？如果前面填成35，最后一位的上限又是多少？</p></div>
+<details class="derivation"><summary>留下自己的想法后，展开后续推导</summary><div class="details-body">
+<p>若前缀已严格小于上界前缀，后面的每一位都可从0到9；若还相等，下一位只能不超过上界该位。这需要一个tight标记，表示前缀是否仍贴着上界。</p>
+<h2>把状态定义完整</h2>
+<p>用solve(pos,tight,started,extra)表示从第pos位开始，已知前缀条件下合法的后缀个数。started表示是否已经出现第一个非零有效数字。extra记录题目真正需要的额外历史，例如上一位是什么，或者数字和除以K的余数。</p>
+<p>“不含4”本身可在等长补前导零的表示里判断，且0视为合法时可以简化started。但若题目涉及数字长度、相邻数字、0出现次数，前导零与真实的数字0必须分清，所以先学完整版本。</p>
+<p>每次枚举d从0到上限。新tight只有在旧tight为真且d等于上界本位时才为真；新started由旧started或d不为0决定。若仍未开始，就走前导零分支，不把它误记成真实数字。若已开始，则检查数字是否合法，并更新extra。</p>
+<p>当pos越过最后一位时，检查整个数是否满足条件。若started仍为假，这条分支表示数0，要按题目对0的定义单独判定。它不是很多个不同的全零数。</p>
+<h2>范围查询和缓存</h2>
+<p>设F(R)统计0到R的答案，区间[L,R]的答案是F(R)-F(L-1)，并约定R&lt;0时F(R)=0。一般缓存tight=false的状态，因为此时后缀不再受当前上界具体数字限制。缓存键必须包含会影响未来的全部状态。</p>
+<p>若把tight=true的结果也缓存，必须保证缓存只服务于同一个上界，或把相应上界信息放入键中。调用F(R)和F(L-1)时复用旧缓存却忘了上界已变，容易得到看似合理的错误答案。</p>
+<h2>一次完整的小例子</h2>
+<p>R=25且不含4。按十位分组：补零十位的0至9中有9个合法数；10至19有9个；20至25排除24，剩5个，总共23个。全程只是在数分支，没有把每个大整数逐一访问。</p>
+<p>如果改成“相邻两个有效数字不能相同”，需要记上一位last，并用一个特殊值表示还未开始。若改成“数字和能被3整除”，需要记余数rem，新余数为(rem+d)%3。题目条件决定extra，不能给所有数位题套同一个状态。</p>
+</div></details>
+<h2>独立任务</h2>
+<p>设计“0到R中有效数字不含4，且数字和是3的倍数”的状态。先列0到20的合法数字作为核验，不看第四册。说明数字0是否应该计入，以及前导零是否会制造多种表示。</p>
+</section>
+<section class="chapter" id="v2-c9" data-title="第20章 概率与期望也是对子问题的合并" data-book="第二册 提高组建模与优化">
+<div class="eyebrow">第二册 提高组建模与优化</div>
+<h1 tabindex="-1">第20章 概率与期望也是对子问题的合并</h1>
+<h2>前置小课 平均要按概率加权</h2>
+<p>若一次游戏一半概率得0分，一半概率得10分，平均得分是5。若两种结果概率不同，就不能简单除以2，而要分别乘出现概率再相加。这个长期平均叫期望，不表示每次真的会得到5分。</p>
+<p>本章只讨论有限状态、转移概率已知的简单模型。遇到概率知识还陌生时，可以先反复模拟或用表格列所有小结果，再学习公式。概率转移用加权和，最值转移用min或max，不能混用。</p>
+<h2>没有循环依赖的期望</h2>
+<p>从数轴位置x&lt;n出发，每次等概率向前1或2，达到或超过n就停止。求期望还要走几步。定义E[x]为从x开始到结束的期望剩余步数。x&gt;=n时E[x]=0，因为已经结束。</p>
+<p>在x&lt;n时一定先走一步，然后以相等概率来到x+1或x+2，所以E[x]=1+(E[x+1]+E[x+2])/2。依赖更大的位置，因此从n-1向0倒着算。这里倒序不是例外，而是同一条“先算来源”的原则。</p>
+<p>例如n=3：E[3]=E[4]=0，E[2]=1，E[1]=1.5，E[0]=2.25。期望可以不是整数，即使每次真实步数都是整数。输出小数位数与允许误差要按题目要求处理。</p>
+<h2>原地停留会产生方程</h2>
+<p>若从x有概率p原地停留、概率1-p前进一格，每次尝试都算一步，则E[x]=1+p*E[x]+(1-p)*E[x+1]。把含E[x]的项移到一边，在p&lt;1时得到E[x]=1/(1-p)+E[x+1]。</p>
+<p>p=1且尚未结束时，永远不会前进，不能做除以0的计算，也没有有限的期望结束时间。更复杂的环可能需要解联立方程，不能因为写出了递归函数就认为已经得到DP。</p>
+<h2>概率状态与计数状态的差别</h2>
+<p>统计有多少路径，通常每条合法路径贡献1；统计到达概率，每条转移贡献来源概率乘转移概率。不同长度的路径未必等概率，所以“合法路径数除以总路径数”并不总是正确。</p>
+<p>当题目用模意义表示概率时，涉及模逆元及其存在条件，是额外的数论知识。本章的实数期望不能简单把除法改成整数除法或随意取模。</p>
+<h2>独立任务</h2>
+<p>把前进1或2的概率改成四分之三与四分之一，终点仍为3。自己推导三个非终止状态的期望，不靠记忆改公式。再解释“每次先付一步”和“到达终点就不用再走”的边界怎样进入计算。</p>
+</section>
+<section class="chapter" id="v2-c10" data-title="第21章 优化之前先找到重复劳动" data-book="第二册 提高组建模与优化">
+<div class="eyebrow">第二册 提高组建模与优化</div>
+<h1 tabindex="-1">第21章 优化之前先找到重复劳动</h1>
+<h2>建立慢方法作为参照</h2>
+<p>优化的起点是一份正确、可解释的朴素DP。先数状态有多少、每格找来源花多少时间、存了多少层。瓶颈可能是区间求和、枚举前驱、枚举容量、保存所有层，处理方式各不相同。</p>
+<p>每次优化后，用相同的小输入核对优化前后整张表或最终答案。新方法快但与旧方法不一致时，先保留失败样例，不要立刻把旧方法删掉。要证明优化保留了哪些来源，为什么丢掉的来源永远不会更好。</p>
+<h2>前缀和与前缀最值</h2>
+<p>如果转移是f[i]=sum(f[j])，j从max(0,i-K)到i-1，可以用累计和得到这段总和，避免每次重新相加。若取模，做区间相减后须把负值正规化到0至M-1。</p>
+<p>若转移是f[i]=w[i]+max(f[j])，j取0到i-1，可以维护一个前缀最大值，一次读出答案。但如果范围变成[i-K,i-1]，旧最大值可能已经过期，不能仅用一个历史最大值。第22章将处理这个窗口。</p>
+<h2>用价值当下标而不是重量</h2>
+<p>若0/1背包容量W很大，但所有非负整数价值总和V很小，可以定义g[v]为恰好获得总价值v所需的最小重量。初始g[0]=0，其余INF，每件物品按价值倒序更新最小重量，最后找g[v]&lt;=W的最大v。</p>
+<p>时间O(nV)，与按重量的O(nW)相比，关键是选择更小的可枚举范围。这叫改变状态坐标，不是把原表粗暴截短。负价值或其他附加条件下，需要重新检查下标范围与转移。</p>
+<h2>最长上升子序列怎样变快</h2>
+<p>第一册的O(n²)算法枚举每个元素前面所有更小的值。一种优化保留tail[len]，表示已扫描前缀中长度为len的严格上升子序列，其最小可能结尾。长度相同，结尾更小不会减少未来可接的更大数，所以较大结尾可以被替代。</p>
+<p>处理新数x时，找到第一个tail位置，其值大于或等于x，用x替换；若没有这样的位置，就把最长长度增加1。tail按长度严格递增，可二分查找。严格上升使用第一个&gt;=x的位置；不下降子序列才改为第一个&gt;x的位置。</p>
+<p>扫描3、1、2、2、4时，tail依次是[3]、[1]、[1,2]、[1,2]、[1,2,4]。它告诉我们最优长度，不保证当时tail中的全部数字来自同一条真实子序列；要输出方案还需记录原下标与前驱。</p>
+<p>这个优化正确的关键是“同长度下结尾越小越有利”。若题目加了颜色限制、距离限制或收益目标，该支配关系可能不足，不能直接用tail替代原状态。</p>
+<h2>数据结构维护前驱最优值</h2>
+<p>若转移需查“所有值小于a[i]的前驱状态”的最大值，可先把数值离散化成相对排名，再用树状数组或线段树查询前缀最大值。处理a[i]前查询排名1至rank-1，再把本状态更新到rank，可保持严格小于。</p>
+<p>树状数组是一组覆盖不同长度区间的小盒子。前缀查询把目标前缀拆成不重叠的几个盒子；单点更新修改包含该点的相关盒子。需要先学会lowbit及其区间含义，再实现。这里只做取更大值的单调更新时可用前缀最大树状数组；一般删除或把值改小不能直接套同一写法。</p>
+<h2>独立任务</h2>
+<p>序列2、2、3，分别手推严格上升与不下降的tail过程。再把“枚举所有更小前驱”的状态写成一次数据结构查询，指出是否应该查询当前值的排名本身。不会二分或树状数组时，先保留O(n²)程序作为验证依据。</p>
+</section>
+<section class="chapter" id="v2-c11" data-title="第22章 单调队列维护会过期的候选" data-book="第二册 提高组建模与优化">
+<div class="eyebrow">第二册 提高组建模与优化</div>
+<h1 tabindex="-1">第22章 单调队列维护会过期的候选</h1>
+<h2>从有限步长跳跃出发</h2>
+<p>有位置0至n，每次向前跳1至K格，落到位置i会获得a[i]分，必须到n。设f[i]为到i的最大总分，f[0]=0。每个前驱j必须在max(0,i-K)到i-1之间。</p>
+<div class="formula" aria-label="关系式">f[i] = a[i] + max(f[j])    max(0,i-K) &lt;= j &lt; i</div>
+<p>朴素写法O(nK)。当i向右移动时，合法前驱形成滑动窗口：左边最旧位置过期，右边新状态加入。我们想快速知道窗口中最大的f[j]。</p>
+<h2>为什么某些候选可以永久删掉</h2>
+<p>假设两个候选下标p&lt;q，而f[p]&lt;=f[q]。q得分至少一样高，且比p更晚离开未来窗口，所以p在未来任何二者都合法的时刻都不会更好；当q过期时p早已过期。因此p可以从候选队列中删掉。</p>
+<p>队列中的下标从前到后增大，f值从前到后严格下降或不增，取决于相等时的删除策略。队首就是当前最大值。这里若只求最大值，可以在相等时保留更晚的q；若还要统计最优方案数或输出特定路径，相等候选不能未经处理就丢弃。</p>
+<h3>每个位置的处理顺序</h3><pre><code>先把队首中下标小于 i-K 的候选删除
+用当前队首求 f[i]
+从队尾删除所有值不大于 f[i] 的候选
+把下标 i 放入队尾</code></pre>
+<p>求f[i]前不能先把i加入队列，否则会把当前状态当成自己的前驱。初始队列放位置0；若存在无法到达的状态，就只把可达状态加入，并处理队列为空的情况。</p>
+<h2>手推一次队列</h2>
+<p>取K=2，a[1..4]=2、-1、3、1。f依次为0、2、1、5、6。处理i=3前，前驱只允许1和2，位置0已过期；值2比值1大，所以从位置1到3得到5。新位置3的值5优于旧候选，且更晚过期，因此它们可以退出。</p>
+<p>每个下标入队一次、最多从队首或队尾退出一次，总操作数O(n)。虽然代码有while循环，总工作量并非O(n²)，这叫均摊分析：给每个元素数一生中的入队与出队次数。</p>
+<h2>多重背包怎样用上它</h2>
+<p>多重背包当前物品重量w、价值v、最多s件。对某个余数r，把容量写成r+t*w。旧层到新层的转移可以改写为：new[r+t*w]等于t*v，加上old[r+q*w]-q*v在max(0,t-s)&lt;=q&lt;=t中的最大值。</p>
+<p>推导来自使用t-q件当前物品。固定余数后，q形成长度至多s+1的滑动窗口，所以可以用单调队列。注意这里q=t也合法，代表当前物品一件不拿；和前面的跳跃题j&lt;i不一样。旧层必须保留，按余数组分别处理。</p>
+<p>本章首先要求你独立实现跳跃问题；多重背包优化在慢版与拆分版都稳定后再做。每次都从真实转移推出窗口，不能只因为看到“最大值”就放一个队列。</p>
+<h2>独立任务</h2>
+<p>对K=2、a=5、-100、-100、5画出每一步合法窗口。找出全局历史最大值已经过期却仍被错误使用的时刻。解释只维护一个最大数为什么不够。</p>
+</section>
+<section class="chapter" id="v2-c12" data-title="第23章 进一步优化要先证明条件" data-book="第二册 提高组建模与优化">
+<div class="eyebrow">第二册 提高组建模与优化</div>
+<h1 tabindex="-1">第23章 进一步优化要先证明条件</h1>
+<h2>把所有候选看成直线</h2>
+<p>考虑f[i]=min(f[j]+(S[i]-S[j])²+C)，0&lt;=j&lt;i，f[0]=0。S是某个非负序列的前缀和，C是固定分段费用。直接枚举j是O(n²)。先把平方展开，分离只与i有关和只与j有关的部分。</p>
+<div class="formula" aria-label="关系式">f[i] = S[i]*S[i] + C + min( (-2*S[j])*S[i] + f[j] + S[j]*S[j] )</div>
+<p>对每个j，设直线斜率m[j]=-2*S[j]，截距b[j]=f[j]+S[j]²。求f[i]变成在x=S[i]处找这些直线中最低的一条。新状态算完后，它也变成一条新直线，供后续使用。</p>
+<div class="callout think"><strong>先停下来想</strong><p>为什么不能在计算f[i]之前，把由f[i]生成的线放进去？这会把j=i加入来源，与j&lt;i的规则冲突，并形成自我依赖。</p></div>
+<details class="derivation"><summary>留下自己的想法后，展开后续推导</summary><div class="details-body">
+<h2>单调凸包何时成立</h2>
+<p>由于原数组非负，S不下降，加入的斜率不增加，查询x也不下降。对最小值问题，可以维护下凸包，并让查询指针只向一个方向移动。相同斜率只保留截距更小的一条；若需要方案计数，要额外保留并列信息。</p>
+<p>对斜率严格递减的三条线a、b、c，若交点x(a,b)不小于x(b,c)，中间线b没有独占最优的区间，可以删除。因为m[a]-m[b]与m[b]-m[c]都为正，这个比较可以通过交叉乘法完成。</p>
+<div class="formula" aria-label="关系式">(b[b]-b[a])*(m[b]-m[c]) &gt;= (b[c]-b[b])*(m[a]-m[b])</div>
+<p>这里m与b分别是斜率和截距数组；字母b同时作为中间线标签时容易读混，编码可改名为slope、intercept与索引u、v、w。交叉乘积可能超出long long，必须根据范围选择更宽的中间类型。不要为了省几个字造成变量职责混乱。</p>
+<p>若S可能下降，斜率和查询点的单调性就可能消失，普通单调队列式凸包不能照搬。可考虑适用的数据结构如李超树或按条件使用二分查询，但需要单独学习和证明。这一页说明适用边界，不把名字本身当作算法已经学会。</p>
+<h2>一个可核验的例子</h2>
+<p>取S为0、1、3、4，C=2。朴素枚举得到f[1]=3，f[2]=9，f[3]=12。分别把j=0、1、2变成直线，在x=1、3、4处查询，验证两种计算完全相同。先做这一步，再谈删除冗余线。</p>
+<p>在会写优化前，至少能自己完成平方展开、指出每条线代表哪个决策、解释平行线处理，并用小数据与O(n²)对照。对公式不熟时，停在朴素解也是有价值的正确进展。</p>
+<h2>分治优化依赖决策单调性</h2>
+<p>另一类模型是把前j个元素分成g段，定义D[g][j]=min(D[g-1][k]+cost(k+1,j))，k在g-1至j-1。若已证明最优分界opt[g][j]随着j增加不下降，就能用分治减少候选搜索范围。</p>
+<p>先计算当前区间中点mid，在允许的候选范围里找最优k。左半边的最优分界不大于这个k，右半边的不小于这个k，于是递归处理两边，各自缩小搜索范围。一层DP的常见复杂度降为O(n log n)，总体O(Gn log n)，但前提是代价能快速计算且决策单调性成立。</p>
+<p>选并列最优时要统一取最小或最大分界，避免证明与实现使用不同的opt定义。仅在几个样例中看到分界递增，不构成证明；应使用题目代价的性质、已证明定理，或保留朴素方法。</p>
+<h2>区间优化不是把上一个方法搬过去</h2>
+<p>第12章非负石子合并满足一类更强条件，可用Knuth优化把最优分界限制在opt[l][r-1]到opt[l+1][r]之间，从而做到O(n²)。它的区间包含关系与四边形不等式条件不同于上一段的分层分治优化。</p>
+<p>这一优化在非负区间和代价下有适用依据；若代价被改成任意函数、元素允许负数，不能直接假设成立。提高阶段的目标是先能写出精确条件和慢版，再决定是否继续推导定理。较难优化并非所有DP题的必经步骤。</p>
+<h2>把分治优化具体做一层</h2>
+<p>假设已经证明决策单调性，当前要计算本层j从L至R的答案，候选分界在lo至hi。取mid为区间中点，只枚举lo至min(hi,mid-1)中的合法k；对恰好g段，还应与k&gt;=g-1以及旧层可达性共同检查。找出最优分界best后，左半区候选上界收缩到best，右半区候选下界提高到best。</p>
+<h3>一层分治的流程</h3><pre><code>求当前层的区间 L 至 R，候选范围 lo 至 hi：
+    如果 L 大于 R，结束这一分支
+    取中点 mid
+    在合法候选中，读上一层并找最优分界 best
+    保存当前层 mid 的答案
+    递归处理 L 至 mid-1，候选 lo 至 best
+    递归处理 mid+1 至 R，候选 best 至 hi</code></pre>
+<p>这段流程的正确性来自候选范围确实包含对应位置的最优分界。若某段没有合法候选，应保持不可达，并按具体分层边界安排计算，不能拿一个未赋值的best继续递归。常见实现直接令本层j从g开始，上一层只允许至少g-1个元素。</p>
+<p>为什么可能满足单调性？例如代价是非负序列一段总和的平方。把两段端点向外扩展时，交叉增加量由非负量的乘积决定，满足相应的Monge不等式；加上只与分界k有关的上一层值后，这个比较关系仍保留，便能推出最优分界不逆向跳动。新代价必须重新核对性质，不能只认出“分段”两个字。</p>
+<h2>把区间优化的条件写出来</h2>
+<p>对石子合并的区间代价w(l,r)=sum(l,r)，若a&lt;=b&lt;=c&lt;=d，非负石子保证w(b,c)&lt;=w(a,d)，因为外区间包含更多非负石子；同时w(a,c)+w(b,d)=w(a,d)+w(b,c)，因为每一段的计数次数相同。后一个等式自然满足需要的四边形不等式。</p>
+<p>Knuth优化定理在这类条件下给出最优分界的夹逼关系。取并列最优中最大的分界，令opt[i][i]=i；求区间[l,r]时，仅枚举从opt[l][r-1]到min(r-1,opt[l+1][r])的k，仍然能保留一个最优方案。按区间长度递增，两个夹逼边界已经算好。</p>
+<p>以前面的4、1、3、2为例，长度2的分界分别为1、2、3；长度3中opt[1][3]=1、opt[2][4]=3；长度4仍会选k=2，费用20。注意不同区间的opt不是看起来总递增的一串数字，保证的是上面的两条区间关系。</p>
+<p>总枚举量降为O(n²)的原因是固定长度时，相邻区间的候选边界会相互抵消，总跨度只有O(n)；共有O(n)种长度。并不是每个区间候选都固定只剩两个。实现前可以把慢版的全部opt打印出来，确认索引约定与不等式对应。</p>
+<p>本节给出了条件、使用步骤和例子。若想将定理迁移到新代价，需要进一步证明该代价满足这些条件；本书不要求初学阶段证明所有优化定理本身。能把“已证明的定理如何用于本题”和“尚未证明的猜测”分开，是提高组需要的严谨习惯。</p>
+</div></details>
+<h2>独立任务</h2>
+<p>对S=0、2、3、6，C=1，先计算朴素DP，再列每个决策对应的直线。另构造一个包含负增量的S，指出哪一项单调性首先失效。能识别“这个优化不适用”，也是掌握的一部分。</p>
+</section>
+<section class="chapter" id="v2-c13" data-title="第24章 面对没有标签的新题" data-book="第二册 提高组建模与优化">
+<div class="eyebrow">第二册 提高组建模与优化</div>
+<h1 tabindex="-1">第24章 面对没有标签的新题</h1>
+<h2>从一句新条件找到状态缺口</h2>
+<p>设有一排展品，每件有价值；不能选相邻两件；最多选K件；还要求所有选中价值之和除以3余1。不要一次把全部符号写到纸上。先解决“不能相邻”，再问每个新增条件需要记住什么。</p>
+<p>位置i决定已经看过哪些展品；上一件是否选影响下一件能否选；已选数量决定是否超额；价值和的余数决定终点是否满足要求。可以定义f[i][last][k][rem]保存最大价值，或者按题目所求改成方案数。目标类型决定保存的量，限制决定状态维度。</p>
+<p>如果要求最大价值，余数只能作为约束信息，不代表可以把真实价值也取模后比较。最后只能在合法数量、合法末尾状态与余数1的格子里取最大值。没有合法方案应报告无解，不可用0冒充。</p>
+<h2>建模和简化的完整工作顺序</h2>
+<p>先写一个能正确表达条件的状态，估算状态数。若太大，检查是否有维度能由其他量算出，是否存在可替换的较差历史，是否能换一个更小的量作下标。仍然太大，再寻找转移优化或另一种算法。</p>
+<p>同一问题可能有多种正确状态。例如不相邻选择，可以用“前i件的最优”跳过i-1，也可以显式记上一件是否选。更容易证明、更方便添加新限制、在数据范围内可运行的定义，就是合适的定义。</p>
+<p>不要仅凭数据范围猜题型。n很小提示可以枚举或集合状态，容量很小提示背包，但这些只是线索。真正的模型必须解释方案与状态之间怎样对应，转移为什么完整且合法。</p>
+<h2>同时求最优值与最优方案数</h2>
+<p>有些题既问最好能得到多少分，又问有多少种方法达到这个最好分。可以在每个状态保存一对值best与count。发现更好的候选时，用新best替换，并把count改成该来源的方案数；发现并列最优时，把方案数加进来；更差候选不贡献。</p>
+<p>这仍要求来源分类不重复。如果同一完整方案能从两种转移走到同一状态，直接把count相加会重计。涉及多个相互独立子部分时，组合方案数可能需要相乘，然后再对不同决策相加。最优值用真实整数比较，计数只在题目要求时取模。</p>
+<p>如果还要求输出一条最优方案，在二维或多维表中记录被选中的来源，沿着严格变小的规模逆向追溯。计数、最优值和方案记录是三种职责，可以一起保存，但不能让同一个变量在不同循环里偷偷换含义。</p>
+<h2>比赛中的可执行策略</h2>
+<p>先读完整题目与数据范围，列出小规模正确做法。若完整解暂时没有出来，检查是否能为特定限制实现已证明正确的部分解；部分分条件以题目为准。保留能运行的版本，再逐步优化，避免把一个正确程序改成尚未验证的复杂程序。</p>
+<p>提交前检查数组大小、类型、边界、不可达、取模、复杂度和输入输出要求。调试输出要移除。遇到未知失败，缩小样例并找第一格偏差；遇到超时，统计实际循环范围，不能只给代码贴一个想象的O(n)标签。</p>
+<h2>学会迁移需要怎样的练习</h2>
+<p>先做改变一项规则的近迁移，如背包从最多改恰好、网格计数改最值。随后做题面不同但状态相同的远迁移，如训练选择与机器冷却。最后混合不同算法的题，不告诉你是不是DP，让你决定是否需要DP。</p>
+<p>每次总结由你自己写：原来漏记了什么、哪一个反例让我发现、下次先检查哪句话。教练可以指出遗漏，不能替你编写“我已经懂了”。不会做一题时，记录的是尚缺的一项能力，而不是给自己贴“不会DP”的标签。</p>
+<h2>第二册验收与学习边界</h2>
+<p>先完成第三册B组，再按前置条件选择C组。树形、集合、数位与优化应分别留下独立作品；不把做过一题就当作整个专题掌握。通过同模型变式后，再用不标模型的综合题检验。</p>
+<p>本书覆盖从基础到提高组的主要DP建模方法，并介绍进一步优化的适用边界。它不穷尽所有竞赛构造，也不替代树状数组、线段树、图论、字符串、数论等独立专题。出现新结构时，仍要回到状态、依赖与证明，而不是寻找一份无限长的模板清单。</p>
+</section>
+<section class="chapter" id="v2-c14" data-title="本册资料说明" data-book="第二册 提高组建模与优化">
+<div class="eyebrow">第二册 提高组建模与优化</div>
+<h1 tabindex="-1">本册资料说明</h1>
+<p>本册讲解与训练为原创教学编排。范围参照中国计算机学会发布的NOI大纲2025年修订版，核对日期2026年10月12日；进阶章节的顺序与难度分层是教学建议。不同考试年度的实际题目和规则以官方发布为准。</p>
+<p class="source"><a href="https://www.noi.cn/xw/2025-04-18/841584.shtml" target="_blank" rel="noopener noreferrer">https://www.noi.cn/xw/2025-04-18/841584.shtml</a></p>
+<p class="source"><a href="https://www.noi.cn/upload/resources/file/2025/04/18/NOI_Syllabus_Edition_2025.pdf" target="_blank" rel="noopener noreferrer">https://www.noi.cn/upload/resources/file/2025/04/18/NOI_Syllabus_Edition_2025.pdf</a></p>
+</section>
+<section class="chapter" id="v3-intro" data-title="本册导读" data-book="第三册 用自己的作品证明掌握">
+<div class="eyebrow">第三册 用自己的作品证明掌握</div>
+<h1 tabindex="-1">本册导读</h1>
+<p class="lead">本册不标模型 不附整题代码</p>
+<p>本册共24道原创练习，按前置能力分组。A组在第一册之后，B组在第二册主要模型之后，C组在相应进阶章节之后，D组用于混合迁移。每组中的题目不必一口气做完，也不是某个考试的官方难度评级。</p>
+<p>先读题和样例，再合上讲义独立分析。样例用来澄清题意，不代表足够验证。每题还要自己补一个能区分错误思路的例子、一个边界例和一个最小例。需要更多草稿纸时另附，不必把思考挤进小空格。</p>
+<p>妈妈保管第四册的核验依据。看过提示后仍可继续完成，但要如实记下看过哪一级提示。没有在线评测时，用样例与额外小数据核验，只能记录“本地验证通过”，不能记录为AC。</p>
+</section>
+<section class="chapter" id="v3-c1" data-title="练习前的约定" data-book="第三册 用自己的作品证明掌握">
+<div class="eyebrow">第三册 用自己的作品证明掌握</div>
+<h1 tabindex="-1">练习前的约定</h1>
+<p>所有题目均使用标准输入输出。本讲义中的“取模”都明确给出模数；没有写取模的题目应输出精确整数或指定小数。样例之外的约束也属于题意。编程环境可使用支持C++11或以上的工具，实际考试以当次规则为准。</p>
+<p>本册不统一给出机器时限。每题给出数据范围和期望的工作量目标，目的在于练习复杂度判断。即使朴素程序能在小样例运行，也需说明对最大输入会做多少工作。</p>
+<h2>每题留下同一份简短记录</h2>
+<p>1．题目要输出什么；我手推的一个小例子。</p>
+<p>2．每个状态的一整句话；过去哪些信息会影响未来。</p>
+<p>3．来源怎样分类；为什么不漏、不重、合法；最值题为什么可以丢掉较差历史。</p>
+<p>4．初值、不可达、计算顺序、答案位置、时间和空间复杂度。</p>
+<p>5．程序文件、自测输入输出、第一次失败的位置、修改依据。</p>
+<p>6．孩子自己的反思；提示记录；隔天重做日期。</p>
+<div class="table-wrap" tabindex="0" aria-label="可横向滚动的表格"><table><thead><tr><th scope="col">记录项</th><th scope="col">自己填写</th></tr></thead><tbody><tr><td>本次题号与日期</td><td>____________________________</td></tr><tr><td>需要的帮助</td><td>无提示 / 提醒题意 / 缩小例子 / 状态提示 / 看过推导</td></tr><tr><td>本地测试结果</td><td>____________________________</td></tr><tr><td>隔天陌生变式</td><td>____________________________</td></tr></tbody></table></div>
+</section>
+<section class="chapter" id="v3-c2" data-title="A1 换一种步长" data-book="第三册 用自己的作品证明掌握">
+<div class="eyebrow">第三册 用自己的作品证明掌握</div>
+<h1 tabindex="-1">A1 换一种步长</h1>
+<p>从第0级出发，每次走1级或3级，恰好到第n级。按步长顺序区分走法。输出走法数对1000000007取模的结果。n=0时空走法算一种。</p>
+<p>输入一行n，0&lt;=n&lt;=1000000。输出一个整数。目标工作量O(n)，空间可以先用O(n)，完成后再考虑只保留必要历史。</p>
+<h3>样例输入与输出</h3><pre><code>输入
+4
+输出
+3</code></pre>
+<p>样例中的三条走法是1111、13、31。它们只用来解释题意。自己另外测试会触及负下标的最小情况。</p>
+<details class="exercise-hint"><summary>独立检查提醒 · 先尝试，再按需展开</summary><div class="details-body"><p>写清楚小于3级时有哪些合法来源。不要先写一个对所有i都访问i-3的循环。</p></div></details><div class="task"><h3>停在这里，完成自己的作品</h3><p class="task-lines">写下状态和来源，设计关键测试；出现错误时，找出第一次偏差与修改依据。可以用纸笔，也可以记录在本页下方。</p></div>
+</section>
+<section class="chapter" id="v3-c3" data-title="A2 带着有限容量出发" data-book="第三册 用自己的作品证明掌握">
+<div class="eyebrow">第三册 用自己的作品证明掌握</div>
+<h1 tabindex="-1">A2 带着有限容量出发</h1>
+<p>有n件不同编号的物品，每件只能拿一次，重量w、价值v。要求总重量恰好等于W，输出最大总价值。没有任何方案恰好装满时输出-1。价值均非负。</p>
+<p>输入第一行n W；随后n行每行w v。1&lt;=n&lt;=100，0&lt;=W&lt;=2000，1&lt;=w&lt;=2000，0&lt;=v&lt;=1000000。输出一个整数。目标O(nW)。</p>
+<h3>样例输入与输出</h3><pre><code>输入
+3 5
+2 3
+3 4
+4 8
+输出
+7</code></pre>
+<details class="exercise-hint"><summary>独立检查提醒 · 先尝试，再按需展开</summary><div class="details-body"><p>说明为什么重量4价值8这一件不能直接作为样例答案。构造一个“容量有剩余时反而价值更高”的区分例。</p></div></details><div class="task"><h3>停在这里，完成自己的作品</h3><p class="task-lines">写下状态和来源，设计关键测试；出现错误时，找出第一次偏差与修改依据。可以用纸笔，也可以记录在本页下方。</p></div>
+</section>
+<section class="chapter" id="v3-c4" data-title="A3 雨天的棋盘" data-book="第三册 用自己的作品证明掌握">
+<div class="eyebrow">第三册 用自己的作品证明掌握</div>
+<h1 tabindex="-1">A3 雨天的棋盘</h1>
+<p>n行m列的棋盘中，点号表示可走，井号表示障碍。从左上角到右下角，每次向右或向下。起点或终点是障碍时没有路径。输出路径数对1000000007取模。</p>
+<p>输入第一行n m；接着n行长度为m的字符串。1&lt;=n,m&lt;=1000。输出一个整数。目标O(nm)。</p>
+<h3>样例输入与输出</h3><pre><code>输入
+3 4
+....
+.#..
+....
+输出
+4</code></pre>
+<details class="exercise-hint"><summary>独立检查提醒 · 先尝试，再按需展开</summary><div class="details-body"><p>给每一行标出先算哪些格，并为只有一列的棋盘设计一个障碍测试。</p></div></details><div class="task"><h3>停在这里，完成自己的作品</h3><p class="task-lines">写下状态和来源，设计关键测试；出现错误时，找出第一次偏差与修改依据。可以用纸笔，也可以记录在本页下方。</p></div>
+</section>
+<section class="chapter" id="v3-c5" data-title="A4 一段有起点也有终点的记录" data-book="第三册 用自己的作品证明掌握">
+<div class="eyebrow">第三册 用自己的作品证明掌握</div>
+<h1 tabindex="-1">A4 一段有起点也有终点的记录</h1>
+<p>给出n个整数，选连续且非空的一段，使元素和最大，输出最大和。允许负数，不能选择空段。</p>
+<p>输入第一行n，第二行n个整数。1&lt;=n&lt;=200000，-1000000000&lt;=a[i]&lt;=1000000000。输出精确整数。目标O(n)。</p>
+<h3>样例输入与输出</h3><pre><code>输入
+5
+-2 3 -1 4 -5
+输出
+6</code></pre>
+<details class="exercise-hint"><summary>独立检查提醒 · 先尝试，再按需展开</summary><div class="details-body"><p>在编码前写出你保存的值是“必须以这里结尾”还是“前面任何位置都可以”。给出全负数测试。</p></div></details><div class="task"><h3>停在这里，完成自己的作品</h3><p class="task-lines">写下状态和来源，设计关键测试；出现错误时，找出第一次偏差与修改依据。可以用纸笔，也可以记录在本页下方。</p></div>
+</section>
+<section class="chapter" id="v3-c6" data-title="A5 两份日记的共同部分" data-book="第三册 用自己的作品证明掌握">
+<div class="eyebrow">第三册 用自己的作品证明掌握</div>
+<h1 tabindex="-1">A5 两份日记的共同部分</h1>
+<p>给出两个只含大写英文字母的字符串A、B，求它们的最长公共子序列长度。可以删除字符，不能改变剩余字符的顺序。</p>
+<p>输入两行，分别为A、B；本题输入的两个串均非空，长度各不超过1000。输出一个整数。目标O(|A|*|B|)。算法仍应为内部空前缀定义边界。</p>
+<h3>样例输入与输出</h3><pre><code>输入
+ABA
+BA
+输出
+2</code></pre>
+<details class="exercise-hint"><summary>独立检查提醒 · 先尝试，再按需展开</summary><div class="details-body"><p>用相同字母多次出现的例子，解释“字符相同”为什么不表示可以随意配对并把所有次数相加。</p></div></details><div class="task"><h3>停在这里，完成自己的作品</h3><p class="task-lines">写下状态和来源，设计关键测试；出现错误时，找出第一次偏差与修改依据。可以用纸笔，也可以记录在本页下方。</p></div>
+</section>
+<section class="chapter" id="v3-c7" data-title="A6 零钱够不够" data-book="第三册 用自己的作品证明掌握">
+<div class="eyebrow">第三册 用自己的作品证明掌握</div>
+<h1 tabindex="-1">A6 零钱够不够</h1>
+<p>给出n种不同的正整数面值，每种可用无限枚。要恰好凑出金额X，输出最少枚数，无解输出-1。</p>
+<p>输入第一行n X，第二行n个不同面值。1&lt;=n&lt;=50，0&lt;=X&lt;=100000，1&lt;=面值&lt;=100000。输出一个整数。目标O(nX)。</p>
+<h3>样例输入与输出</h3><pre><code>输入
+2 7
+2 5
+输出
+2</code></pre>
+<details class="exercise-hint"><summary>独立检查提醒 · 先尝试，再按需展开</summary><div class="details-body"><p>自己找一个“总拿最大面值”失败的例子。特别测试X=0和完全无法凑出的金额。</p></div></details><div class="task"><h3>停在这里，完成自己的作品</h3><p class="task-lines">写下状态和来源，设计关键测试；出现错误时，找出第一次偏差与修改依据。可以用纸笔，也可以记录在本页下方。</p></div>
+</section>
+<section class="chapter" id="v3-c8" data-title="B1 搬走一排箱子" data-book="第三册 用自己的作品证明掌握">
+<div class="eyebrow">第三册 用自己的作品证明掌握</div>
+<h1 tabindex="-1">B1 搬走一排箱子</h1>
+<p>有n堆箱子排成一行，每次只能合并相邻两堆，搬运代价是两堆箱子数之和。直到只剩一堆，求最小总代价。</p>
+<p>输入第一行n，第二行n个正整数。1&lt;=n&lt;=300，每堆数量不超过1000000。输出精确整数。先达到O(n³)，不要求使用进一步优化。</p>
+<h3>样例输入与输出</h3><pre><code>输入
+4
+4 1 3 2
+输出
+20</code></pre>
+<details class="exercise-hint"><summary>独立检查提醒 · 先尝试，再按需展开</summary><div class="details-body"><p>画出最后一次合并前的两段，并说明单堆代价为什么是0而不是它的箱子数。</p></div></details><div class="task"><h3>停在这里，完成自己的作品</h3><p class="task-lines">写下状态和来源，设计关键测试；出现错误时，找出第一次偏差与修改依据。可以用纸笔，也可以记录在本页下方。</p></div>
+</section>
+<section class="chapter" id="v3-c9" data-title="B2 消息沿单向线路传递" data-book="第三册 用自己的作品证明掌握">
+<div class="eyebrow">第三册 用自己的作品证明掌握</div>
+<h1 tabindex="-1">B2 消息沿单向线路传递</h1>
+<p>有n个点、m条有向边，保证无环且没有重复的有向边。给定s、t，问从s到t有多少条路径。路径按经过的边序列区分；s=t时空路径算一种。结果对1000000007取模。</p>
+<p>输入第一行n m s t，随后m行u v表示一条从u到v的边。1&lt;=n&lt;=200000，0&lt;=m&lt;=300000。输出一个整数。目标O(n+m)。</p>
+<h3>样例输入与输出</h3><pre><code>输入
+4 4 4 2
+4 1
+4 3
+1 2
+3 2
+输出
+2</code></pre>
+<details class="exercise-hint"><summary>独立检查提醒 · 先尝试，再按需展开</summary><div class="details-body"><p>本题编号已经刻意打乱。说明你的处理顺序为什么与编号大小无关，并设计一个不可达终点测试。</p></div></details><div class="task"><h3>停在这里，完成自己的作品</h3><p class="task-lines">写下状态和来源，设计关键测试；出现错误时，找出第一次偏差与修改依据。可以用纸笔，也可以记录在本页下方。</p></div>
+</section>
+<section class="chapter" id="v3-c10" data-title="B3 每天选择一种训练" data-book="第三册 用自己的作品证明掌握">
+<div class="eyebrow">第三册 用自己的作品证明掌握</div>
+<h1 tabindex="-1">B3 每天选择一种训练</h1>
+<p>n天内每天必须选A或B，不能连续两天选A，并且恰好有K天选A。每天两种训练各有分数，允许负分。求最大总分；无合法方案时输出IMPOSSIBLE。</p>
+<p>输入第一行n K，随后n行每行A分数 B分数。1&lt;=n&lt;=200，0&lt;=K&lt;=n，每个分数的绝对值不超过1000000。输出整数或IMPOSSIBLE。目标O(nK)。</p>
+<h3>样例输入与输出</h3><pre><code>输入
+3 2
+5 2
+6 1
+4 3
+输出
+10</code></pre>
+<details class="exercise-hint"><summary>独立检查提醒 · 先尝试，再按需展开</summary><div class="details-body"><p>明确“每天必须选择”和“恰好K天”对初值的影响。设计K大到无法安排的测试。</p></div></details><div class="task"><h3>停在这里，完成自己的作品</h3><p class="task-lines">写下状态和来源，设计关键测试；出现错误时，找出第一次偏差与修改依据。可以用纸笔，也可以记录在本页下方。</p></div>
+</section>
+<section class="chapter" id="v3-c11" data-title="B4 树上的邀请" data-book="第三册 用自己的作品证明掌握">
+<div class="eyebrow">第三册 用自己的作品证明掌握</div>
+<h1 tabindex="-1">B4 树上的邀请</h1>
+<p>n个人的关系形成一棵树，每个人有一个快乐值。直接相连的两个人不能同时被邀请，允许一个都不邀请。求最大的快乐值总和。</p>
+<p>输入第一行n，第二行n个快乐值，接着n-1行每行u v为无向边。1&lt;=n&lt;=100000，快乐值绝对值不超过1000000000。输出精确整数。目标O(n)。深链可能需要避免递归栈过深。</p>
+<h3>样例输入与输出</h3><pre><code>输入
+4
+5 4 3 6
+1 2
+1 3
+2 4
+输出
+11</code></pre>
+<details class="exercise-hint"><summary>独立检查提醒 · 先尝试，再按需展开</summary><div class="details-body"><p>分别描述“根被选”和“根没被选”时，孩子子树拥有的自由。自己测试单节点负权值。</p></div></details><div class="task"><h3>停在这里，完成自己的作品</h3><p class="task-lines">写下状态和来源，设计关键测试；出现错误时，找出第一次偏差与修改依据。可以用纸笔，也可以记录在本页下方。</p></div>
+</section>
+<section class="chapter" id="v3-c12" data-title="B5 到大家家里有多远" data-book="第三册 用自己的作品证明掌握">
+<div class="eyebrow">第三册 用自己的作品证明掌握</div>
+<h1 tabindex="-1">B5 到大家家里有多远</h1>
+<p>n个点构成一棵树，每条边长度1。对每个点i，输出它到所有其他点的距离之和，按编号顺序输出n个整数。</p>
+<p>输入第一行n，随后n-1行无向边。1&lt;=n&lt;=200000。目标O(n)，使用能容纳距离和的整数类型。</p>
+<h3>样例输入与输出</h3><pre><code>输入
+4
+1 2
+2 3
+3 4
+输出
+6 4 4 6</code></pre>
+<details class="exercise-hint"><summary>独立检查提醒 · 先尝试，再按需展开</summary><div class="details-body"><p>画出从一个点沿边走向邻居时，被这条边分开的两个点集，分别说明哪一边的点更近。</p></div></details><div class="task"><h3>停在这里，完成自己的作品</h3><p class="task-lines">写下状态和来源，设计关键测试；出现错误时，找出第一次偏差与修改依据。可以用纸笔，也可以记录在本页下方。</p></div>
+</section>
+<section class="chapter" id="v3-c13" data-title="B6 不挨着的棋子" data-book="第三册 用自己的作品证明掌握">
+<div class="eyebrow">第三册 用自己的作品证明掌握</div>
+<h1 tabindex="-1">B6 不挨着的棋子</h1>
+<p>n行m列棋盘，点号可放，井号不能放。任意两个棋子不能在上下或左右相邻的格子，斜着相邻允许。问一共有多少种摆放方式，包括不放棋子的空方案，对1000000007取模。</p>
+<p>输入第一行n m，随后n行棋盘。1&lt;=n&lt;=100，1&lt;=m&lt;=8。输出一个整数。可预先列合法行状态及兼容状态；说明你的状态数量和转移次数。</p>
+<h3>样例输入与输出</h3><pre><code>输入
+2 2
+..
+..
+输出
+7</code></pre>
+<details class="exercise-hint"><summary>独立检查提醒 · 先尝试，再按需展开</summary><div class="details-body"><p>明确同一行、相邻两行和障碍分别带来什么合法条件。不要把“棋子个数”和“摆放方式数”混为一谈。</p></div></details><div class="task"><h3>停在这里，完成自己的作品</h3><p class="task-lines">写下状态和来源，设计关键测试；出现错误时，找出第一次偏差与修改依据。可以用纸笔，也可以记录在本页下方。</p></div>
+</section>
+<section class="chapter" id="v3-c14" data-title="B7 访问全部城市" data-book="第三册 用自己的作品证明掌握">
+<div class="eyebrow">第三册 用自己的作品证明掌握</div>
+<h1 tabindex="-1">B7 访问全部城市</h1>
+<p>有n座城市，编号0到n-1。给出所有有向两两费用，费用不一定对称。固定从0出发，每个城市恰好访问一次，最后可以停在任意城市，不必返回0。求最小总费用。</p>
+<p>输入第一行n，随后n行，每行n个整数组成费用矩阵；对角线为0。1&lt;=n&lt;=18，其他费用在0至1000000之间。输出一个整数。目标O(2^n*n²)，核算内存。</p>
+<h3>样例输入与输出</h3><pre><code>输入
+3
+0 2 5
+2 0 1
+5 1 0
+输出
+3</code></pre>
+<details class="exercise-hint"><summary>独立检查提醒 · 先尝试，再按需展开</summary><div class="details-body"><p>找两条已访问集合相同、最后城市不同的历史，说明它们的后续代价可能不同。检查n=1。</p></div></details><div class="task"><h3>停在这里，完成自己的作品</h3><p class="task-lines">写下状态和来源，设计关键测试；出现错误时，找出第一次偏差与修改依据。可以用纸笔，也可以记录在本页下方。</p></div>
+</section>
+<section class="chapter" id="v3-c15" data-title="B8 两人一起收集" data-book="第三册 用自己的作品证明掌握">
+<div class="eyebrow">第三册 用自己的作品证明掌握</div>
+<h1 tabindex="-1">B8 两人一起收集</h1>
+<p>在n乘n网格中，每格有一个非负奖励。两人同时从左上角到右下角，每步都向右或向下。每格奖励最多收取一次，即使两人都经过。求总奖励最大值。本题没有障碍。</p>
+<p>输入第一行n，随后n行奖励。1&lt;=n&lt;=50，奖励不超过1000000。输出一个整数。目标O(n³)，可以滚动层数。</p>
+<h3>样例输入与输出</h3><pre><code>输入
+2
+1 2
+3 4
+输出
+10</code></pre>
+<details class="exercise-hint"><summary>独立检查提醒 · 先尝试，再按需展开</summary><div class="details-body"><p>证明同一格若被两人经过，一定在相同的步数到达。若这个结论说不清，先不要把重复奖励去掉。</p></div></details><div class="task"><h3>停在这里，完成自己的作品</h3><p class="task-lines">写下状态和来源，设计关键测试；出现错误时，找出第一次偏差与修改依据。可以用纸笔，也可以记录在本页下方。</p></div>
+</section>
+<section class="chapter" id="v3-c16" data-title="C1 一段号码中的好数字" data-book="第三册 用自己的作品证明掌握">
+<div class="eyebrow">第三册 用自己的作品证明掌握</div>
+<h1 tabindex="-1">C1 一段号码中的好数字</h1>
+<p>统计区间[L,R]中的整数，要求十进制表示不含数字4，且所有数位之和是3的倍数。数字0视为合法。没有额外的前导零表示。</p>
+<p>输入一行L R，0&lt;=L&lt;=R&lt;=10^18。输出精确整数。目标随十进制位数增长，而不是随R增长。注意L=0时的下界处理。</p>
+<h3>样例输入与输出</h3><pre><code>输入
+0 20
+输出
+7</code></pre>
+<details class="exercise-hint"><summary>独立检查提醒 · 先尝试，再按需展开</summary><div class="details-body"><p>解释“不超过上界”的限制何时可以解除，以及缓存哪些条件下可以复用。</p></div></details><div class="task"><h3>停在这里，完成自己的作品</h3><p class="task-lines">写下状态和来源，设计关键测试；出现错误时，找出第一次偏差与修改依据。可以用纸笔，也可以记录在本页下方。</p></div>
+</section>
+<section class="chapter" id="v3-c17" data-title="C2 走到终点平均还要几步" data-book="第三册 用自己的作品证明掌握">
+<div class="eyebrow">第三册 用自己的作品证明掌握</div>
+<h1 tabindex="-1">C2 走到终点平均还要几步</h1>
+<p>从位置0出发，每次有四分之三概率前进1，有四分之一概率前进2。达到或超过位置n时停止。问期望需要几步。</p>
+<p>输入一行n，0&lt;=n&lt;=1000000。输出保留6位小数的结果。目标O(n)，使用适当的浮点类型。</p>
+<h3>样例输入与输出</h3><pre><code>输入
+3
+输出
+2.562500</code></pre>
+<details class="exercise-hint"><summary>独立检查提醒 · 先尝试，再按需展开</summary><div class="details-body"><p>说清已经到达或越过终点时的期望值。手算n=1，再决定数组需要覆盖到哪一个位置。</p></div></details><div class="task"><h3>停在这里，完成自己的作品</h3><p class="task-lines">写下状态和来源，设计关键测试；出现错误时，找出第一次偏差与修改依据。可以用纸笔，也可以记录在本页下方。</p></div>
+</section>
+<section class="chapter" id="v3-c18" data-title="C3 跳跃途中获得分数" data-book="第三册 用自己的作品证明掌握">
+<div class="eyebrow">第三册 用自己的作品证明掌握</div>
+<h1 tabindex="-1">C3 跳跃途中获得分数</h1>
+<p>位置0至n，初始在0，每次向前跳1至K格，必须恰好落在n结束。落在i时得a[i]分，允许负数。求最大总得分。</p>
+<p>输入第一行n K，第二行a[1]至a[n]。1&lt;=K&lt;=n&lt;=200000，分数绝对值不超过1000000000。输出精确整数。目标O(n)，但先写小规模O(nK)作为核验。</p>
+<h3>样例输入与输出</h3><pre><code>输入
+4 2
+2 -1 3 1
+输出
+6</code></pre>
+<details class="exercise-hint"><summary>独立检查提醒 · 先尝试，再按需展开</summary><div class="details-body"><p>写清候选过期的条件，解释等分时保留较晚候选为什么对本题求最值足够。</p></div></details><div class="task"><h3>停在这里，完成自己的作品</h3><p class="task-lines">写下状态和来源，设计关键测试；出现错误时，找出第一次偏差与修改依据。可以用纸笔，也可以记录在本页下方。</p></div>
+</section>
+<section class="chapter" id="v3-c19" data-title="C4 把一排工作分成若干段" data-book="第三册 用自己的作品证明掌握">
+<div class="eyebrow">第三册 用自己的作品证明掌握</div>
+<h1 tabindex="-1">C4 把一排工作分成若干段</h1>
+<p>有n项工作，耗时a[i]为非负整数。把全部工作依次分成若干非空连续段，每段费用是该段耗时总和的平方再加固定费用C，求总费用最小。</p>
+<p>输入第一行n C，第二行n个耗时。1&lt;=n&lt;=100000，0&lt;=C&lt;=1000000，0&lt;=a[i]&lt;=100。输出精确整数。先实现O(n²)小规模版本，再利用条件优化。中间交叉乘积需检查类型范围。</p>
+<h3>样例输入与输出</h3><pre><code>输入
+3 2
+1 2 1
+输出
+12</code></pre>
+<details class="exercise-hint"><summary>独立检查提醒 · 先尝试，再按需展开</summary><div class="details-body"><p>展开一个候选分界的费用，说明哪部分只与当前前缀有关，哪部分能作为前驱候选保存。检查所有耗时为0的情况。</p></div></details><div class="task"><h3>停在这里，完成自己的作品</h3><p class="task-lines">写下状态和来源，设计关键测试；出现错误时，找出第一次偏差与修改依据。可以用纸笔，也可以记录在本页下方。</p></div>
+</section>
+<section class="chapter" id="v3-c20" data-title="C5 必须邀请指定人数" data-book="第三册 用自己的作品证明掌握">
+<div class="eyebrow">第三册 用自己的作品证明掌握</div>
+<h1 tabindex="-1">C5 必须邀请指定人数</h1>
+<p>题意与B4相同，但现在必须恰好邀请K人。快乐值可为负数，无合法方案输出IMPOSSIBLE。</p>
+<p>输入第一行n K，第二行n个快乐值，随后n-1条无向边。1&lt;=n&lt;=200，0&lt;=K&lt;=min(n,50)，快乐值绝对值不超过1000000。目标允许O(nK²)的清楚合并写法。</p>
+<h3>样例输入与输出</h3><pre><code>输入
+4 2
+5 4 3 6
+1 2
+1 3
+2 4
+输出
+11</code></pre>
+<details class="exercise-hint"><summary>独立检查提醒 · 先尝试，再按需展开</summary><div class="details-body"><p>将“子树内选几个”和“根是否被选”分别说清，解释为什么合并一个孩子时要防止重复使用同一个孩子子树。</p></div></details><div class="task"><h3>停在这里，完成自己的作品</h3><p class="task-lines">写下状态和来源，设计关键测试；出现错误时，找出第一次偏差与修改依据。可以用纸笔，也可以记录在本页下方。</p></div>
+</section>
+<section class="chapter" id="v3-c21" data-title="C6 严格上升的奖励路线" data-book="第三册 用自己的作品证明掌握">
+<div class="eyebrow">第三册 用自己的作品证明掌握</div>
+<h1 tabindex="-1">C6 严格上升的奖励路线</h1>
+<p>给出按时间先后排列的n个项目，每个项目有高度h和非负奖励v。可以跳过项目，但选择的项目必须保持原顺序，且高度严格上升。求最大总奖励，允许不选。</p>
+<p>输入第一行n，随后n行每行h v。1&lt;=n&lt;=200000，1&lt;=h&lt;=10^9，0&lt;=v&lt;=10^9。目标O(n log n)，先用O(n²)小规模版本验证。</p>
+<h3>样例输入与输出</h3><pre><code>输入
+4
+2 5
+2 8
+3 4
+1 20
+输出
+20</code></pre>
+<details class="exercise-hint"><summary>独立检查提醒 · 先尝试，再按需展开</summary><div class="details-body"><p>本题最大化的是奖励，不是长度。解释第一册最长上升子序列的len数组为什么不能直接作为答案。</p></div></details><div class="task"><h3>停在这里，完成自己的作品</h3><p class="task-lines">写下状态和来源，设计关键测试；出现错误时，找出第一次偏差与修改依据。可以用纸笔，也可以记录在本页下方。</p></div>
+</section>
+<section class="chapter" id="v3-c22" data-title="D1 为展览挑作品" data-book="第三册 用自己的作品证明掌握">
+<div class="eyebrow">第三册 用自己的作品证明掌握</div>
+<h1 tabindex="-1">D1 为展览挑作品</h1>
+<p>一排n件作品，价值为非负整数。最多选K件，不能选相邻两件，选中价值总和除以3必须余1。求满足条件的最大价值总和，无合法方案输出-1。</p>
+<p>输入第一行n K，第二行n个价值。1&lt;=n&lt;=200，0&lt;=K&lt;=30，0&lt;=价值&lt;=1000000。目标O(nK)，余数和是否选上一件只产生常数因子。</p>
+<h3>样例输入与输出</h3><pre><code>输入
+4 2
+4 5 6 7
+输出
+10</code></pre>
+<details class="exercise-hint"><summary>独立检查提醒 · 先尝试，再按需展开</summary><div class="details-body"><p>先指出每个限制分别需要保留什么历史，再决定哪些终止状态可以成为答案。</p></div></details><div class="task"><h3>停在这里，完成自己的作品</h3><p class="task-lines">写下状态和来源，设计关键测试；出现错误时，找出第一次偏差与修改依据。可以用纸笔，也可以记录在本页下方。</p></div>
+</section>
+<section class="chapter" id="v3-c23" data-title="D2 安排互不冲突的活动" data-book="第三册 用自己的作品证明掌握">
+<div class="eyebrow">第三册 用自己的作品证明掌握</div>
+<h1 tabindex="-1">D2 安排互不冲突的活动</h1>
+<p>有n个活动，每个活动占用半开时间区间[start,end)，收益为value。你可以选择一些活动，任意时刻最多参加一个，求总收益最大。前一个活动在t结束，另一个在t开始，可以同时选择二者。允许不参加。</p>
+<p>输入第一行n，随后n行start end value。1&lt;=n&lt;=200000，0&lt;=start&lt;end&lt;=10^9，0&lt;=value&lt;=10^9。目标O(n log n)。本题不提示模型，可结合排序、二分与已学方法。</p>
+<h3>样例输入与输出</h3><pre><code>输入
+3
+0 3 5
+3 5 4
+1 5 8
+输出
+9</code></pre>
+<details class="exercise-hint"><summary>独立检查提醒 · 先尝试，再按需展开</summary><div class="details-body"><p>用样例检验“选单个收益最大的活动”是否正确。说明你怎样快速找到可以接在当前活动前面的范围。</p></div></details><div class="task"><h3>停在这里，完成自己的作品</h3><p class="task-lines">写下状态和来源，设计关键测试；出现错误时，找出第一次偏差与修改依据。可以用纸笔，也可以记录在本页下方。</p></div>
+</section>
+<section class="chapter" id="v3-c24" data-title="D3 同时装进重量和体积" data-book="第三册 用自己的作品证明掌握">
+<div class="eyebrow">第三册 用自己的作品证明掌握</div>
+<h1 tabindex="-1">D3 同时装进重量和体积</h1>
+<p>有n件物品，每件只能拿一次，分别有重量w、体积v、收益p。总重量不超过W且总体积不超过V，求最大收益，允许空集。</p>
+<p>输入第一行n W V；随后n行w v p。1&lt;=n&lt;=60，0&lt;=W,V&lt;=100，1&lt;=w,v&lt;=100，0&lt;=p&lt;=1000000。目标O(nWV)。</p>
+<h3>样例输入与输出</h3><pre><code>输入
+3 3 3
+2 1 4
+1 2 5
+3 3 10
+输出
+10</code></pre>
+<details class="exercise-hint"><summary>独立检查提醒 · 先尝试，再按需展开</summary><div class="details-body"><p>如果只记剩余重量，会遗漏哪一种会影响未来的资源？压缩物品维后，解释两种容量的遍历方向。</p></div></details><div class="task"><h3>停在这里，完成自己的作品</h3><p class="task-lines">写下状态和来源，设计关键测试；出现错误时，找出第一次偏差与修改依据。可以用纸笔，也可以记录在本页下方。</p></div>
+</section>
+<section class="chapter" id="v3-c25" data-title="D4 数出不同下标的目标子序列" data-book="第三册 用自己的作品证明掌握">
+<div class="eyebrow">第三册 用自己的作品证明掌握</div>
+<h1 tabindex="-1">D4 数出不同下标的目标子序列</h1>
+<p>给出字符串S与T，只含大写字母。问S中有多少种不同的下标选择，按顺序取出后恰好等于T。只要下标组合不同就算不同方式，即使得到的字母相同。结果对1000000007取模。</p>
+<p>输入两行S和T，1&lt;=|S|&lt;=100000，1&lt;=|T|&lt;=100。目标O(|S|*|T|)。</p>
+<h3>样例输入与输出</h3><pre><code>输入
+AAA
+AA
+输出
+3</code></pre>
+<details class="exercise-hint"><summary>独立检查提醒 · 先尝试，再按需展开</summary><div class="details-body"><p>本题与“最长公共子序列长度”输出的对象不同。请先列出样例中的下标组合，再定义状态。解释一个S位置能否在同一方案中被用两次。</p></div></details><div class="task"><h3>停在这里，完成自己的作品</h3><p class="task-lines">写下状态和来源，设计关键测试；出现错误时，找出第一次偏差与修改依据。可以用纸笔，也可以记录在本页下方。</p></div>
+</section>
+<section class="chapter" id="v3-c26" data-title="四次阶段验收" data-book="第三册 用自己的作品证明掌握">
+<div class="eyebrow">第三册 用自己的作品证明掌握</div>
+<h1 tabindex="-1">四次阶段验收</h1>
+<p>验收一在A组学习后进行：随机选择A2与A4中的一道，隔天换另一道。不得先告诉孩子模型名。重点看状态含义、不可达或非空条件、独立实现与三类测试。</p>
+<p>验收二在B组学习后进行：先从B1、B3、B4、B7选一题独立完成，再改变一项规则，只要求重新建模。例如把至多改成恰好，或把不返回起点改为必须返回。重点看能否解释新条件影响哪个状态。</p>
+<p>验收三在优化学习后进行：从C3、C4、C6中选择已学过前置知识的一题。要求同时提交小规模慢版、快版、若干自动或手工核验结果，以及删除候选的理由。只交快代码不算完成这一验收。</p>
+<p>验收四用D组检验混合迁移：打乱题序，分多次完成。先独立判断是否需要DP、是否需要其他算法辅助，不要求同一天做完。若看过核验思路，换一个同结构的新题再测独立性。</p>
+<h2>掌握状态由证据决定</h2>
+<div class="table-wrap" tabindex="0" aria-label="可横向滚动的表格"><table><thead><tr><th scope="col">状态</th><th scope="col">可观察的证据</th><th scope="col">接下来做什么</th></tr></thead><tbody><tr><td>看懂</td><td>能跟随例题讲述</td><td>合上材料做一个小题</td></tr><tr><td>会做原型</td><td>无关键提示完成同类题</td><td>改变一项条件</td></tr><tr><td>能迁移</td><td>新题能独立建模并解释</td><td>延时重做与混合练习</td></tr><tr><td>较稳定</td><td>隔天仍会 小数据核验一致</td><td>进入下一阶段并保持复现</td></tr></tbody></table></div>
+<p>这些状态可以随专题不同而不同。你可能已经熟悉线性DP，同时刚开始树形DP，这很正常。学习记录不填预设的“已掌握”，只写实际作品和得到的帮助。</p>
+</section>
+<section class="chapter" id="v3-c27" data-title="孩子自己的复盘页" data-book="第三册 用自己的作品证明掌握">
+<div class="eyebrow">第三册 用自己的作品证明掌握</div>
+<h1 tabindex="-1">孩子自己的复盘页</h1>
+<p>本次题号与日期：____________________________</p>
+<p>我最初怎样理解题目：________________________</p>
+<p>我后来发现的第一处偏差：____________________</p>
+<p>让我改变想法的例子或证据：__________________</p>
+<p>我的修改为什么能解决问题：__________________</p>
+<p>下次我准备先检查的一句话：__________________</p>
+<p>我还想问的问题：____________________________</p>
+</section><div class="chapter-nav"><button id="previous" data-target="">上一节</button><button id="next" data-target="">下一节</button></div><section class="notes" aria-labelledby="note-heading"><h2 id="note-heading">我的学习记录</h2><p>先记录你的真实想法。不会的地方可以直接写“我卡在……”，不用把讲义的话当作自己的反思。</p><div class="status-row"><label for="stage">本节进度</label><select id="stage"><option value="0">未开始</option><option value="1">学过，仍需练习</option><option value="2">本次独立完成</option><option value="3">隔天重做通过</option></select><span class="quiet">由学习者自行标记</span></div><label for="note">我的草稿、卡点、测试与重做记录</label><textarea id="note" placeholder="写下今天想通了什么、还卡在哪里，或下一次准备验证的例子。"></textarea><p id="save-status" role="status" aria-live="polite"></p></section></div></main><script>
+(()=>{'use strict';
+const chapters=[...document.querySelectorAll('.chapter')], links=[...document.querySelectorAll('.nav-link')];
+const key='family-dp-reader-v1-'+document.body.dataset.edition, labels=['未开始','学过，仍需练习','本次独立完成','隔天重做通过'];
+let state={last:'welcome',font:18,records:{}}, available=true, current, timer;
+const byId=new Map(chapters.map(s=>[s.id,s]));
+try{const raw=localStorage.getItem(key);if(raw){const data=JSON.parse(raw);if(data&&typeof data==='object'){if(byId.has(data.last))state.last=data.last;if(Number.isFinite(data.font))state.font=Math.max(16,Math.min(24,data.font));if(data.records&&typeof data.records==='object'&&!Array.isArray(data.records))for(const id of byId.keys()){const r=data.records[id];if(r&&typeof r.note==='string'&&Number.isInteger(r.stage)&&r.stage>=0&&r.stage<4)state.records[id]={note:r.note,stage:r.stage};}}}localStorage.setItem(key,JSON.stringify(state));}catch(e){available=false;}
+const note=document.querySelector('#note'), stage=document.querySelector('#stage'), status=document.querySelector('#save-status');
+function message(){status.textContent=available?'已保存在当前浏览器。换设备前请导出学习记录。':'当前浏览器无法保存本机记录。离开前请导出，避免丢失。';}
+function persist(){try{localStorage.setItem(key,JSON.stringify(state));available=true;}catch(e){available=false;}message();}
+function save(){if(!current)return;state.records[current]={note:note.value,stage:Number(stage.value)};links.forEach(a=>{const r=state.records[a.dataset.target];a.dataset.recorded=!!r&&(r.stage>0||r.note.length>0);});persist();}
+function hashId(){try{return decodeURIComponent(location.hash.slice(1));}catch(e){return '';}}
+function navigate(id,scroll=true){if(!byId.has(id))id='welcome';if(current&&id!==current){clearTimeout(timer);save();}current=id;state.last=id;chapters.forEach(s=>s.hidden=s.id!==id);const active=byId.get(id);links.forEach(a=>{if(a.dataset.target===id)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');const r=state.records[a.dataset.target];a.dataset.recorded=!!r&&(r.stage>0||r.note.length>0);});const record=state.records[id]||{note:'',stage:0};note.value=record.note;stage.value=String(record.stage);document.querySelector('#note-heading').textContent='我的学习记录 · '+active.dataset.title;document.querySelector('#crumb').textContent=active.dataset.book;document.title=active.dataset.title+' · 动态规划';const index=chapters.indexOf(active);for(const [sel,pos,prefix] of [['#previous',index-1,'上一节'],['#next',index+1,'下一节']]){const b=document.querySelector(sel);b.hidden=pos<0||pos>=chapters.length;if(!b.hidden){b.dataset.target=chapters[pos].id;b.textContent=prefix+' · '+chapters[pos].dataset.title;}}document.body.classList.remove('menu-open');document.querySelector('#menu-toggle').setAttribute('aria-expanded','false');persist();if(scroll)window.scrollTo({top:0,behavior:'instant'});}
+document.querySelectorAll('[data-target]').forEach(el=>el.addEventListener('click',e=>{e.preventDefault();const id=el.dataset.target;if(!byId.has(id))return;if(hashId()===id)navigate(id);else location.hash=id;}));
+window.addEventListener('hashchange',()=>navigate(hashId()));
+note.addEventListener('input',()=>{status.textContent='正在保存…';clearTimeout(timer);timer=setTimeout(save,350);});stage.addEventListener('change',save);window.addEventListener('pagehide',save);
+document.querySelector('#search').addEventListener('input',e=>{const q=e.target.value.trim().toLowerCase();let matches=0;links.forEach(a=>{const yes=!q||byId.get(a.dataset.target).textContent.toLowerCase().includes(q);a.hidden=!yes;if(yes)matches++;});document.querySelectorAll('.nav-group').forEach(g=>g.hidden=![...g.querySelectorAll('a')].some(a=>!a.hidden));document.querySelector('#search-result').textContent=q?(matches?'找到 '+matches+' 节，可从目录打开。':'没有匹配章节，试试“背包”或“状态”。'):'可以搜索章节标题或正文关键词。';});
+document.querySelector('#menu-toggle').addEventListener('click',e=>{const open=document.body.classList.toggle('menu-open');e.currentTarget.setAttribute('aria-expanded',String(open));});document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.body.classList.remove('menu-open');document.querySelector('#menu-toggle').setAttribute('aria-expanded','false');}});
+function font(delta){state.font=Math.max(16,Math.min(24,state.font+delta));document.documentElement.style.setProperty('--read-size',state.font+'px');persist();}document.querySelector('#font-down').addEventListener('click',()=>font(-1));document.querySelector('#font-up').addEventListener('click',()=>font(1));font(0);
+function alignSidebar(){document.querySelector('#sidebar').style.top=document.querySelector('header').getBoundingClientRect().height+'px';}alignSidebar();window.addEventListener('resize',alignSidebar);
+let before=[];function preparePrint(){before=[...byId.get(current).querySelectorAll('details')].map(d=>[d,d.open]);before.forEach(([d])=>d.open=true);}function restorePrint(){before.forEach(([d,open])=>d.open=open);before=[];}window.addEventListener('beforeprint',preparePrint);window.addEventListener('afterprint',restorePrint);document.querySelector('#print').addEventListener('click',()=>window.print());
+document.querySelector('#export').addEventListener('click',()=>{clearTimeout(timer);save();const lines=['动态规划学习记录',new Intl.DateTimeFormat('zh-CN',{timeZone:'Asia/Shanghai',dateStyle:'long',timeStyle:'short'}).format(new Date()),'进度由学习者自行标记，不代替程序验证或教练评估。',''];for(const s of chapters){const r=state.records[s.id];if(r&&(r.note.trim()||r.stage>0))lines.push(s.dataset.book+' / '+s.dataset.title,'进度：'+labels[r.stage],r.note||'（尚未填写笔记）','');}if(lines.length===4)lines.push('尚未填写学习记录。');const url=URL.createObjectURL(new Blob([lines.join('\n')],{type:'text/plain;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='动态规划_'+document.body.dataset.edition+'_学习记录.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});
+navigate(byId.has(hashId())?hashId():state.last,false);
+})();
+</script></body></html>
