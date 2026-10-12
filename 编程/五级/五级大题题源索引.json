@@ -1,0 +1,243 @@
+[
+  {
+    "id": 1,
+    "paper": "2406",
+    "question": 1,
+    "title": "黑白格",
+    "category": "二维降维与区间",
+    "pdf_pages": "8-9",
+    "limits": "1≤n,m≤100；1≤k≤n×m",
+    "small_topics": "01、15-17",
+    "handout_pages": [
+      9,
+      10
+    ]
+  },
+  {
+    "id": 2,
+    "paper": "2406",
+    "question": 2,
+    "title": "小杨的幸运数字",
+    "category": "数论与数的结构",
+    "pdf_pages": "9-11",
+    "limits": "1≤n≤10⁴；2≤aᵢ≤10⁶",
+    "small_topics": "05、07",
+    "handout_pages": [
+      11
+    ]
+  },
+  {
+    "id": 3,
+    "paper": "2409",
+    "question": 1,
+    "title": "小杨的武器",
+    "category": "贪心与收益分析",
+    "pdf_pages": "7-9",
+    "limits": "1≤n,m≤10⁵；−10⁴≤cᵢ,aᵢ≤10⁴",
+    "small_topics": "23-24",
+    "handout_pages": [
+      12
+    ]
+  },
+  {
+    "id": 4,
+    "paper": "2409",
+    "question": 2,
+    "title": "挑战怪物",
+    "category": "数论与数的结构",
+    "pdf_pages": "9-10",
+    "limits": "1≤t≤10；1≤h≤10⁵",
+    "small_topics": "05、09-10、01",
+    "handout_pages": [
+      13
+    ]
+  },
+  {
+    "id": 5,
+    "paper": "2412",
+    "question": 1,
+    "title": "奇妙数字",
+    "category": "数论与数的结构",
+    "pdf_pages": "8-10",
+    "limits": "2≤n≤10¹²",
+    "small_topics": "07、23",
+    "handout_pages": [
+      14
+    ]
+  },
+  {
+    "id": 6,
+    "paper": "2412",
+    "question": 2,
+    "title": "武器强化",
+    "category": "贪心与收益分析",
+    "pdf_pages": "10-12",
+    "limits": "1≤n,m≤1000；1≤pᵢ≤n；1≤cᵢ≤10⁹",
+    "small_topics": "23-24、01",
+    "handout_pages": [
+      15,
+      16
+    ]
+  },
+  {
+    "id": 7,
+    "paper": "2503",
+    "question": 1,
+    "title": "平均分配",
+    "category": "贪心与收益分析",
+    "pdf_pages": "8-10",
+    "limits": "1≤n≤10⁵；共2n件；0≤bᵢ,cᵢ≤10⁹",
+    "small_topics": "19-24",
+    "handout_pages": [
+      17
+    ]
+  },
+  {
+    "id": 8,
+    "paper": "2503",
+    "question": 2,
+    "title": "原根判断",
+    "category": "数论与数的结构",
+    "pdf_pages": "10-11",
+    "limits": "1≤T≤20；3≤p≤10⁹且p为质数；1<a<p",
+    "small_topics": "04、07、08",
+    "handout_pages": [
+      18,
+      19
+    ]
+  },
+  {
+    "id": 9,
+    "paper": "2506",
+    "question": 1,
+    "title": "奖品兑换",
+    "category": "二分答案与可行性",
+    "pdf_pages": "13-14",
+    "limits": "1≤n,m≤10⁹；1≤a,b≤10⁴",
+    "small_topics": "16-17、23",
+    "handout_pages": [
+      20,
+      21
+    ]
+  },
+  {
+    "id": 10,
+    "paper": "2506",
+    "question": 2,
+    "title": "最大公因数",
+    "category": "数论与数的结构",
+    "pdf_pages": "14-16",
+    "limits": "1≤n,q≤10⁵；1≤aᵢ≤1000",
+    "small_topics": "06、08",
+    "handout_pages": [
+      22
+    ]
+  },
+  {
+    "id": 11,
+    "paper": "2509",
+    "question": 1,
+    "title": "数字选取",
+    "category": "数论与数的结构",
+    "pdf_pages": "9-10",
+    "limits": "1≤n≤10⁵",
+    "small_topics": "05、09-10、23",
+    "handout_pages": [
+      23
+    ]
+  },
+  {
+    "id": 12,
+    "paper": "2509",
+    "question": 2,
+    "title": "有趣的数字和",
+    "category": "二进制分治统计",
+    "pdf_pages": "10-12",
+    "limits": "1≤l≤r≤10⁹；部分数据r≤10⁴，另有完整二进制区间",
+    "small_topics": "02-04、08、18",
+    "handout_pages": [
+      24,
+      25
+    ]
+  },
+  {
+    "id": 13,
+    "paper": "2512",
+    "question": 1,
+    "title": "数字移动",
+    "category": "二分答案与可行性",
+    "pdf_pages": "10-11",
+    "limits": "N为偶数；N,Aᵢ≤10⁵；每个值恰好两次，且至少需一次移动",
+    "small_topics": "16-17",
+    "handout_pages": [
+      26,
+      27
+    ]
+  },
+  {
+    "id": 14,
+    "paper": "2512",
+    "question": 2,
+    "title": "相等序列",
+    "category": "数论与数的结构",
+    "pdf_pages": "12-13",
+    "limits": "1≤N,Aᵢ≤10⁵",
+    "small_topics": "07、23",
+    "handout_pages": [
+      28,
+      29
+    ]
+  },
+  {
+    "id": 15,
+    "paper": "2603",
+    "question": 1,
+    "title": "有限不循环小数",
+    "category": "数论与数的结构",
+    "pdf_pages": "11-12",
+    "limits": "1≤L≤R≤10⁶",
+    "small_topics": "05、07、08",
+    "handout_pages": [
+      30
+    ]
+  },
+  {
+    "id": 16,
+    "paper": "2603",
+    "question": 2,
+    "title": "找数",
+    "category": "排序与查找",
+    "pdf_pages": "13-14",
+    "limits": "1≤n,m≤10⁵；1≤aᵢ,bᵢ≤10⁹；各数组内部互不相同",
+    "small_topics": "15-16、19-22",
+    "handout_pages": [
+      31
+    ]
+  },
+  {
+    "id": 17,
+    "paper": "2606",
+    "question": 1,
+    "title": "排排坐",
+    "category": "贪心与收益分析",
+    "pdf_pages": "9-10",
+    "limits": "1≤n≤1000；1≤aᵢ≤1000",
+    "small_topics": "19-24",
+    "handout_pages": [
+      32
+    ]
+  },
+  {
+    "id": 18,
+    "paper": "2606",
+    "question": 2,
+    "title": "晚宴",
+    "category": "数论与数的结构",
+    "pdf_pages": "10-11",
+    "limits": "2≤n≤1000；1≤vᵢ≤10⁶；值互不相同，保证有合法数对",
+    "small_topics": "06、01、23",
+    "handout_pages": [
+      33
+    ]
+  }
+]
