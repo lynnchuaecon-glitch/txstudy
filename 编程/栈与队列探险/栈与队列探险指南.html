@@ -1,0 +1,264 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="下一位该是谁？先把顺序想明白。"><title>栈与队列探险指南</title><style>:root{--paper:#f4f3eb;--card:#fffef9;--ink:#243e36;--muted:#617569;--green:#28644e;--deep:#193f34;--lime:#ddebba;--line:#d8dfce;--accent:#9b6138}*{box-sizing:border-box}html{scroll-padding-top:95px}body{margin:0;background:var(--paper);color:var(--ink);font:18px/1.9 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}a{color:var(--green);text-underline-offset:4px}h1,h2,h3{line-height:1.4;letter-spacing:-.02em}h1{font-size:clamp(30px,4vw,47px);margin:15px 0 20px}h2{font-size:29px}h3{font-size:21px}p{margin:15px 0 23px}button,input,select,textarea{font:inherit;color:inherit}button,select{border:1px solid #b7c6b0;background:var(--card);border-radius:9px;padding:8px 13px;font-size:14px;min-height:40px;cursor:pointer}button:hover{background:#e7eedb}button:disabled{opacity:.4;cursor:default}button.primary{background:var(--green);color:white}a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #b77839;outline-offset:3px}code{font:.9em/1.7 ui-monospace,monospace;background:#edf1e5;padding:2px 5px;border-radius:4px;overflow-wrap:anywhere}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#173d32;color:#f8f8e8;padding:22px;border-radius:12px;font-size:15px}pre code{background:none;padding:0}li{margin:8px 0}.muted{color:var(--muted);font-size:14px}.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--green)}.skip{position:fixed;top:-100px;left:20px;z-index:200;background:white}.skip:focus{top:10px}
+.sidebar{position:fixed;inset:0 auto 0 0;width:265px;padding:27px 18px;background:var(--deep);color:white;z-index:70;display:flex;flex-direction:column}.sidebar h2{font-size:24px;margin:5px 0 12px}.sidebar .eyebrow{color:var(--lime);font-size:10px}.sidebar a{color:#e7eddb}.sidebar>p{font-size:12px;color:#c7d8c4;margin:5px 0 14px}.toc{overflow:auto;min-height:0;margin-top:14px}.toc a{display:flex;gap:10px;border-radius:9px;text-decoration:none;padding:9px 10px;font-size:13px;line-height:1.7;margin:4px 0}.toc a.active{background:var(--lime);color:#183d32}.toc a:hover{background:#3d6250;color:white}.toc .num{font-family:monospace;min-width:22px}.side-end{margin-top:18px;border-top:1px solid #466757;padding-top:14px;font-size:12px}.progress{background:#406051;height:5px;border-radius:4px}.progress span{display:block;height:5px;background:var(--lime);width:0}.progress-label{font-size:11px;margin:7px 0}.main{margin-left:265px;min-width:0}.toolbar{position:sticky;top:0;z-index:50;background:#f4f3ebf7;border-bottom:1px solid var(--line);padding:10px 26px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}.toolbar button{font-size:12px;min-height:35px;padding:6px 11px}.toolbar .status{font-size:12px;color:var(--muted);flex:1;min-width:120px}.menu-button{display:none}.content{max-width:1080px;margin:auto;padding:35px 40px 70px}.hero{background:#e3ecd8;border:1px solid #ccdac0;border-radius:22px;padding:38px;margin-bottom:25px}.hero p{max-width:700px;color:#46614d}.tags{display:flex;gap:8px;flex-wrap:wrap}.tag{font-size:12px;border:1px solid #b9caaa;border-radius:20px;padding:3px 11px;background:#f4f7e9}.intro,.lesson{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:32px 36px;margin:0 0 25px;box-shadow:0 10px 35px #183b3007}.lesson header{border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:25px}.lesson h2{margin:10px 0 16px}.goal{font-size:16px;color:var(--muted);margin:8px 0}.prereq{font-size:13px;color:var(--muted);margin:8px 0 0}.callout{background:#eef3e5;border-left:4px solid var(--green);border-radius:0 10px 10px 0;padding:18px 22px;font-size:16px;margin:25px 0}.table-scroll{overflow:auto;max-width:100%;margin:25px 0}table{border-collapse:collapse;width:100%;font-size:14px;text-align:left;line-height:1.8}th,td{border-bottom:1px solid var(--line);padding:12px 14px;vertical-align:top;min-width:65px}th{background:#eef2e5}td:first-child{font-weight:600}.practice{padding:24px;background:#faf1e3;border:1px solid #e6d7be;border-radius:13px;margin-top:30px}.practice h3{margin-top:0;color:#86572f}.practice p,.practice li{font-size:16px}details{border:1px solid var(--line);border-radius:10px;padding:0 17px;margin:15px 0;background:#f7f8ef}summary{cursor:pointer;font-size:15px;font-weight:600;padding:13px 0}details p{font-size:15px}details[open]{padding-bottom:6px}.coach{background:#f2f2ea}.tests{padding-top:8px;border-top:1px dashed #d6c4a5;margin-top:20px}.journal{border-top:1px solid var(--line);margin-top:28px;padding-top:22px}.journal label{display:block;font-size:15px;margin:12px 0}.journal textarea{width:100%;min-height:145px;padding:15px;border:1px solid #bacbb3;border-radius:10px;background:#fffef7;line-height:1.8;resize:vertical;font-size:16px}.journal select{max-width:100%;font-size:14px}.lesson-footer{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:25px;border-top:1px solid var(--line);padding-top:22px}.route{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:24px 0}.route>a,.route>div{display:block;background:#eff3e5;border:1px solid #d6dfca;border-radius:12px;padding:20px;text-decoration:none}.route b{display:block;font-size:20px}.route small{font-size:13px;color:var(--muted)}.station-list{padding-left:24px}.station-list a{font-size:16px}.station-list small{font-size:12px;color:var(--muted)}
+.lab{background:#edf4e3;border:1px solid #b6cda8;border-radius:14px;padding:25px;margin:28px 0}.lab h3{margin:0 0 12px}.lab p{font-size:15px}.lab-controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:17px 0}.lab-controls span{font:13px monospace;color:var(--muted)}.lab select{max-width:100%;margin-bottom:12px}.tiles{display:flex;gap:6px;flex-wrap:wrap;margin:16px 0}.tile{background:#fffef5;border:1px solid #bdcdb0;border-radius:8px;min-width:50px;padding:8px 12px;text-align:center;font-weight:600}.tile small{display:block;font:11px/1.7 monospace;color:var(--muted)}.tile.active{outline:3px solid #ae7436;outline-offset:1px}.tile.in-range{background:#d5e6bd}.event{background:#fffdf3;border-left:3px solid var(--green);border-radius:5px;padding:15px;min-height:70px;font-size:15px;white-space:pre-line}.print-only{display:none}.footer{color:var(--muted);font-size:12px;margin-top:30px}[hidden]{display:none!important}.all-mode .lesson[hidden],.all-mode #home[hidden]{display:block!important}.index-page .main{margin:0}.index-page .content{max-width:1120px}.index-page .toolbar{justify-content:space-between}
+@media(max-width:1050px){.content{padding:25px}.sidebar{width:245px}.main{margin-left:245px}.intro,.lesson{padding:28px}.hero{padding:30px}}
+@media(max-width:760px){body{font-size:16px}.sidebar{transform:translateX(-100%);width:285px;box-shadow:8px 0 25px #0002}.nav-open .sidebar{transform:translateX(0)}.main{margin-left:0}.menu-button{display:inline-block}.content{padding:18px 12px 45px}.toolbar{padding:9px 12px}.toolbar .status{width:100%;flex-basis:100%}.hero{padding:26px}.intro,.lesson{padding:24px 20px}h2{font-size:25px}.practice,.lab{padding:20px 15px}.route{grid-template-columns:1fr}.tile{min-width:42px;padding:7px}.table-scroll{margin-left:-3px;margin-right:-3px}.journal textarea{font-size:16px}.sidebar .toc{max-height:70vh}}
+@media print{@page{size:A4;margin:17mm 16mm}body{background:white;color:#1b3028;font-size:11pt;line-height:1.7}.sidebar,.toolbar,.lab,.lesson-footer,.footer,.journal textarea,.journal select,.journal .muted{display:none!important}.main{margin:0}.content{max-width:none;padding:0}.hero,.intro,.lesson{background:white;box-shadow:none;border:0;border-radius:0;padding:0;margin:0 0 22px}#home[hidden],.lesson[hidden]{display:block!important}.lesson{break-before:page}h1{font-size:29pt}h2{font-size:22pt}h3{font-size:15pt}h2,h3,summary{break-after:avoid}.practice,.callout{background:white;border:1px solid #aaa;padding:14px}.practice p,.practice li{font-size:11pt}.table-scroll{overflow:visible}table{font-size:10pt}th,td{min-width:0;padding:8px}tr{break-inside:avoid}details:not([open]){display:none}pre{color:black;background:white;border:1px solid #aaa;font-size:10pt}code{background:none;color:black}.print-only{display:block}.print-note{white-space:pre-wrap;border:1px solid #aaa;min-height:90px;padding:12px}.journal{break-inside:avoid}a{color:inherit;text-decoration:none}.route{display:block}.route>a,.route>div{margin-bottom:10px;border:1px solid #ccc;background:white}.tags{display:none}.goal{font-size:11pt}.prereq{font-size:9pt}}
+</style></head><body>
+<a class="skip" href="#main">跳到正文</a><aside class="sidebar" id="sidebar"><div class="eyebrow">THINK · MODEL · VERIFY</div><h2>栈与队列探险</h2><p>一轮只推进一个核心任务。</p><div class="progress"><span id="progress-fill"></span></div><div class="progress-label" id="progress-label">尚未自评</div><nav class="toc" aria-label="站点目录"><a href="#home"><span class="num">⌂</span>出发与路线</a><a href="#lesson-1"><span class="num">01</span><span>先看谁该先取出，再认识栈和队列</span></a><a href="#lesson-2"><span class="num">02</span><span>栈：只能从这一端放，也从这一端拿</span></a><a href="#lesson-3"><span class="num">03</span><span>用数组搭一个栈：top 到底表示什么？</span></a><a href="#lesson-4"><span class="num">04</span><span>交给标准库前，先翻译每个动作</span></a><a href="#lesson-5"><span class="num">05</span><span>括号匹配：最近打开的，必须先关上</span></a><a href="#lesson-6"><span class="num">06</span><span>接回递归与撤销：谁还没有完成？</span></a><a href="#lesson-7"><span class="num">07</span><span>队列：轮到最早等待的人</span></a><a href="#lesson-8"><span class="num">08</span><span>普通 queue 与优先队列，不能互相冒充</span></a><a href="#lesson-9"><span class="num">09</span><span>循环队列：把用过的格子再利用</span></a><a href="#lesson-10"><span class="num">10</span><span>队列接搜索：为什么近的一层先出来？</span></a><a href="#lesson-11"><span class="num">11</span><span>单调栈：把还在等答案的位置记下来</span></a><a href="#lesson-12"><span class="num">12</span><span>单调队列：只留下还可能成为窗口最大值的数</span></a><a href="#lesson-13"><span class="num">13</span><span>独立验收：容器里存的究竟是什么？</span></a></nav><div class="side-end"><a href="../秋季学期讲义/秋季学期讲义总入口.html">← 秋季学期讲义总入口</a></div></aside>
+<main class="main" id="main"><div class="toolbar"><button id="menu" class="menu-button" aria-controls="sidebar" aria-expanded="false">目录</button><button id="all">展开全文</button><button id="print">打印／存为 PDF</button><button id="export">导出笔记</button><button id="import">导入笔记</button><input id="import-file" type="file" accept=".json,application/json" hidden><span class="status" id="save-status" role="status">先手推，再点实验；笔记可导出备份。</span></div><div class="content"><div id="home"><header class="hero"><div class="eyebrow">ALGORITHM FIELD GUIDE · 秋季学期 / 2026</div><h1>栈与队列探险指南</h1><p>下一位该是谁？先把顺序想明白。</p><div class="tags"><span class="tag">13 站 · 按进度选用</span><span class="tag">1 个逐步实验</span><span class="tag">手推 → 实现 → 三类自测</span></div></header>
+<section class="intro"><h2>一站可以分几次，关键思考留给你。</h2><p>01～08 建立栈与普通队列基础；09～12 是按先修能力选择的拓展；13 做独立验收。</p><p>从学校当前题目或一个小任务进入。先说明题意和模型，再决定变量，最后自己写代码。每站只有一个核心任务；卡住时再逐级看提示，不要求一口气答完一串零碎问题。</p><aside class="callout">这里的“基础稳定后选学”是教学分层，不是额外的本学期必做清单。疲劳时停在一张简短思路卡，隔天先手推再重做。</aside><a href="#lesson-1">从第 1 站出发 →</a>
+<h3>这份讲义的路线</h3><ol class="station-list"><li><a href="#lesson-1">先看谁该先取出，再认识栈和队列</a> <small>· 本学期基础</small></li><li><a href="#lesson-2">栈：只能从这一端放，也从这一端拿</a> <small>· 本学期基础</small></li><li><a href="#lesson-3">用数组搭一个栈：top 到底表示什么？</a> <small>· 本学期基础</small></li><li><a href="#lesson-4">交给标准库前，先翻译每个动作</a> <small>· 本学期基础</small></li><li><a href="#lesson-5">括号匹配：最近打开的，必须先关上</a> <small>· 本学期基础</small></li><li><a href="#lesson-6">接回递归与撤销：谁还没有完成？</a> <small>· 本学期基础</small></li><li><a href="#lesson-7">队列：轮到最早等待的人</a> <small>· 本学期基础</small></li><li><a href="#lesson-8">普通 queue 与优先队列，不能互相冒充</a> <small>· 本学期基础</small></li><li><a href="#lesson-9">循环队列：把用过的格子再利用</a> <small>· 基础稳定后选学</small></li><li><a href="#lesson-10">队列接搜索：为什么近的一层先出来？</a> <small>· 基础稳定后选学</small></li><li><a href="#lesson-11">单调栈：把还在等答案的位置记下来</a> <small>· 基础稳定后选学</small></li><li><a href="#lesson-12">单调队列：只留下还可能成为窗口最大值的数</a> <small>· 基础稳定后选学</small></li><li><a href="#lesson-13">独立验收：容器里存的究竟是什么？</a> <small>· 本学期基础</small></li></ol>
+<details><summary>家长／教练：怎样使用与验收</summary><p>先完整看题和孩子的尝试，指出已经成立的部分与当前核心问题，再让孩子独立完成一个有意义的任务。正文里的小例子用于解释概念；练习、代码和正式反思由孩子完成。每站的核对默认折叠，只在她尝试后用来判断依据。</p><p>不是每站都要写完整程序；建模站以手推和解释为产出，工具与验收站再接实现。自测至少包括区分新旧思路的例子、最小输入和边界。记录提示程度；讲义已准备不代表孩子已学会。</p></details>
+<details><summary>阅读、笔记与打印</summary><p>分站阅读适合一次聚焦；展开全文方便备课。笔记与自评只保存在当前浏览器，导出 JSON 可以备份；导入同一讲义时保留冲突的两份文字，已有自评优先。打印会包含全部站点及当前笔记，实验控件不打印；折叠提示和核对不打印，手动展开的会打印。</p><p>关闭 JavaScript 后仍能阅读全部正文；分站导航、实验与笔记保存需启用 JavaScript。HTML 内嵌样式和脚本，单文件可离线阅读，跳转其他讲义依赖原目录结构。</p></details>
+<p class="muted">接续阅读：<a href="../递归探险/递归探险指南.html#lesson-4">递归：调用栈</a> · <a href="../贪心探险/贪心探险指南.html#lesson-13">贪心：优先队列</a></p></section></div><section class="lesson" id="lesson-1" aria-labelledby="heading-1">
+<header><div class="eyebrow">01 / 13 · 本学期基础</div><h2 id="heading-1">先看谁该先取出，再认识栈和队列</h2><p class="goal">这一站带走：从撤销和排队两个例子，认识两种不同的取出顺序。</p><p class="prereq">先修：数组、循环、条件判断</p></header>
+<p>在画图软件里，你先画了 A，再画 B，最后画 C。按一次“撤销”，应该先去掉刚画的 C；再按一次，才去掉 B。软件需要记住画过哪些笔画，并且每次先取出最近画的那一笔。</p>
+<p>换成窗口排队：A 最早来，B 接着来，C 最后来。窗口空出来时，应该先叫 A，再叫 B。虽然也是依次记下 A、B、C，这次却需要先取出最早加入的那一个。</p>
+<p>为了按这些规则保存和取出数据，程序可以使用不同的<b>容器</b>。这里的“容器”指保存数据并提供放入、查看、取出操作的工具。每次先取最近加入者的，叫<b>栈</b>；先取最早加入者的，叫<b>队列</b>。</p>
+<div class="table-scroll"><table><thead><tr><th>例子</th><th>依次加入 A、B、C 后先取谁</th><th>对应规则</th></tr></thead><tbody><tr><td>撤销笔画</td><td>C，然后 B，最后 A</td><td>栈：后进先出</td></tr><tr><td>按到达顺序叫号</td><td>A，然后 B，最后 C</td><td>队列：先进先出</td></tr></tbody></table></div>
+<p><b>怎样从题目选到工具？</b>仍看撤销：要保存的是“已经画出的笔画”，新画一笔就加入，按撤销时取出最近一笔。先把这三个动作说清楚，才知道栈的规则正好适合它。栈负责按顺序交出笔画记录；根据记录把画面恢复，仍要由程序完成。</p>
+<p>还有一种规则可以先作比较：若任务编号 8、2、5 依次到来，题目却要求“每次处理编号最小的任务”，就应该先取 2。它既不是最近来的，也不是最早来的。这种按大小或其他优先级取数据的工具叫<b>优先队列</b>，第 8 站再与普通队列对照。</p>
+<div class="practice"><h3>停下来，轮到你完成</h3><p>把“撤销最后一笔画”“按到达顺序叫号”“每次取编号最小的任务”分别配上工具。用编号为 8、2、5 的三张卡依次放入，验证三种规则各会先取谁。</p>
+<details class="hint"><summary>尝试后仍卡住 · 提示一</summary><p>只问下一次必须取谁，不先问 C++ 名字。</p></details>
+<details class="hint"><summary>只在需要时 · 提示二</summary><p>先来先服务与最小值先服务，可能选到不同对象。</p></details>
+<div class="tests"><h3>三类自测</h3><ul><li>最小：一个对象。</li><li>区分：A、B、C 先后进入后连续取两次。</li><li>边界：一个对象也没有时请求取出。</li></ul></div>
+<details class="coach"><summary>家长／教练核对 · 请先让孩子尝试</summary><p>分别对应栈、普通队列、优先队列。必须区分“没有对象”与“对象的值为 0”。空容器没有合法的顶或首元素。</p></details></div>
+<div class="journal"><h3>我的过程与证据</h3><label for="stage-1">这一站，我目前：</label><select id="stage-1" data-stage="1"><option value="">尚未自评</option><option value="hand">能解释并手推</option><option value="help">有提示时能完成</option><option value="independent">能独立实现并自测</option><option value="transfer">能在新情境中迁移</option></select>
+<label for="note-1">记录手推、变量、测试或待复盘问题；改对后由我自己写反思。</label><textarea id="note-1" data-note="1" placeholder="未完成时：我试了什么？卡在哪里？&#10;改对后：我错在哪里？为什么会错？下次怎样防？"></textarea><p class="muted">阅读、点实验或展开提示不会自动改变自评。笔记仅保存在当前浏览器，换设备前请导出。</p><div class="print-only print-stage">尚未自评</div><div class="print-only print-note"></div></div>
+<nav class="lesson-footer" aria-label="前后站"><a href="#home">← 学习路线</a><a href="#lesson-2">下一站 →</a></nav></section><section class="lesson" id="lesson-2" aria-labelledby="heading-2">
+<header><div class="eyebrow">02 / 13 · 本学期基础</div><h2 id="heading-2">栈：只能从这一端放，也从这一端拿</h2><p class="goal">这一站带走：手推入栈、查看与出栈的区别。</p><p class="prereq">先修：数组、循环、条件判断</p></header>
+<p>想象桌上叠着三张卡：最下面是 A，中间是 B，最上面是 C。规定只能从上面放，也只能从上面拿。此时必须先拿走 C，才能拿到 B。这就是栈的“后进先出”。最上面可以操作的位置叫<b>栈顶</b>，最下面叫<b>栈底</b>。</p>
+<p>放一张卡叫<b>入栈</b>，拿走最上面的卡叫<b>出栈</b>。还有一个不同的动作叫<b>查看栈顶</b>：只读出 C，卡片仍然留在原处。查看后再查看，看到的还是 C；出栈后再查看，才会看到 B。</p>
+<p>下面的实验为了方便显示，把卡片横着排，最右边当栈顶。方向换了，规则没有变：只从最右边放入或拿走。如果已经没有卡片，就不能再查看或出栈；程序需要先判断是否为空，再决定如何回应。</p>
+<div class="lab" data-lab="containers"></div>
+<div class="practice"><h3>停下来，轮到你完成</h3><p>按“放 A、放 B、查看、取出、放 C、取出、取出、再取出”手推；每一步记录栈内容、是否真的删除，以及空栈时怎样回应。</p>
+<details class="hint"><summary>尝试后仍卡住 · 提示一</summary><p>查看后，下一次查看是否还看到同一个对象？</p></details>
+<details class="hint"><summary>只在需要时 · 提示二</summary><p>取空栈不是取到了某个默认值。</p></details>
+<div class="tests"><h3>三类自测</h3><ul><li>最小：放入一项后查看两次。</li><li>区分：交替放入与取出。</li><li>边界：开始为空；取完后再次取；取完后再加入。</li></ul></div>
+<details class="coach"><summary>家长／教练核对 · 请先让孩子尝试</summary><p>两次查看都应是同一顶元素，直到真正出栈。示例按栈取出依次是 B、C、A，最后一次空栈。实验可切换队列比较同一输入的不同结果。</p></details></div>
+<div class="journal"><h3>我的过程与证据</h3><label for="stage-2">这一站，我目前：</label><select id="stage-2" data-stage="2"><option value="">尚未自评</option><option value="hand">能解释并手推</option><option value="help">有提示时能完成</option><option value="independent">能独立实现并自测</option><option value="transfer">能在新情境中迁移</option></select>
+<label for="note-2">记录手推、变量、测试或待复盘问题；改对后由我自己写反思。</label><textarea id="note-2" data-note="2" placeholder="未完成时：我试了什么？卡在哪里？&#10;改对后：我错在哪里？为什么会错？下次怎样防？"></textarea><p class="muted">阅读、点实验或展开提示不会自动改变自评。笔记仅保存在当前浏览器，换设备前请导出。</p><div class="print-only print-stage">尚未自评</div><div class="print-only print-note"></div></div>
+<nav class="lesson-footer" aria-label="前后站"><a href="#lesson-1">← 上一站</a><a href="#lesson-3">下一站 →</a></nav></section><section class="lesson" id="lesson-3" aria-labelledby="heading-3">
+<header><div class="eyebrow">03 / 13 · 本学期基础</div><h2 id="heading-3">用数组搭一个栈：top 到底表示什么？</h2><p class="goal">这一站带走：选择一种约定并贯穿全部操作。</p><p class="prereq">先修：数组、循环、条件判断</p></header>
+<p>现在用数组的格子保存这些卡片，格子从 0 编号。为了知道哪些格子正在使用，我们用一个整数 <code>top</code> 记录<b>栈里目前有几个元素</b>。开始没有元素，所以 top=0。</p>
+<p>例如依次放入 6、8 后，st[0]=6、st[1]=8，top=2。最上面的元素在下标 1，正好是 top−1；下一个新元素要放进下标 2，正好是 top。因此本讲中，top 同时也是下一次写入的位置。</p>
+<p>加入 x 时，先写入 st[top]，再把元素个数加 1。出栈时，把 top 减 1，就表示最后一格不再使用。例如刚才的栈出栈后 top=1；下标 1 的格子即使还留着 8，它也已经不属于当前栈。以后加入新数，可以覆盖这格。</p>
+<p>用区间写法表示，当前使用的是 <code>[0,top)</code>：包含下标 0，不包含下标 top。查看栈顶前要确认 top&gt;0；写新元素前要确认还有空格。有些资料把 top 定义成“栈顶的下标”，那是另一套约定；本讲始终把它当元素个数。</p>
+<div class="practice"><h3>停下来，轮到你完成</h3><p>用容量为 4 的数组实现入栈、查看、出栈；先写出 top 的登记表，再追踪有效区间，不要求把出栈后旧格子清零。</p>
+<details class="hint"><summary>尝试后仍卡住 · 提示一</summary><p>有效数据是哪几格，由数值为零决定，还是由 top 决定？</p></details>
+<details class="hint"><summary>只在需要时 · 提示二</summary><p>只有一个元素时，数量和最后一个下标分别是多少？</p></details>
+<div class="tests"><h3>三类自测</h3><ul><li>最小：加入 0，不能当作空栈。</li><li>区分：放入 3、7，弹出后放入 9。</li><li>边界：空栈操作、容量刚好用满、尝试超容量。</li></ul></div>
+<details class="coach"><summary>家长／教练核对 · 请先让孩子尝试</summary><p>第二组最终为 [3,9]，top=2。超容量操作不能写数组外；本地工具可返回失败，具体竞赛题则按题目约束设计容量。</p></details></div>
+<div class="journal"><h3>我的过程与证据</h3><label for="stage-3">这一站，我目前：</label><select id="stage-3" data-stage="3"><option value="">尚未自评</option><option value="hand">能解释并手推</option><option value="help">有提示时能完成</option><option value="independent">能独立实现并自测</option><option value="transfer">能在新情境中迁移</option></select>
+<label for="note-3">记录手推、变量、测试或待复盘问题；改对后由我自己写反思。</label><textarea id="note-3" data-note="3" placeholder="未完成时：我试了什么？卡在哪里？&#10;改对后：我错在哪里？为什么会错？下次怎样防？"></textarea><p class="muted">阅读、点实验或展开提示不会自动改变自评。笔记仅保存在当前浏览器，换设备前请导出。</p><div class="print-only print-stage">尚未自评</div><div class="print-only print-note"></div></div>
+<nav class="lesson-footer" aria-label="前后站"><a href="#lesson-2">← 上一站</a><a href="#lesson-4">下一站 →</a></nav></section><section class="lesson" id="lesson-4" aria-labelledby="heading-4">
+<header><div class="eyebrow">04 / 13 · 本学期基础</div><h2 id="heading-4">交给标准库前，先翻译每个动作</h2><p class="goal">这一站带走：把手工栈的放入、查看和删除，对应到标准库操作。</p><p class="prereq">先修：数组、循环、条件判断</p></header>
+<p>第 3 站里，我们自己用数组和 top 管理栈。C++ 标准库已经提供了这种工具：包含 <code>&lt;stack&gt;</code> 后，可用 <code>std::stack&lt;int&gt; st;</code> 声明一个存整数的栈。你仍要决定何时放入、何时取出，只是不必自己管理数组位置。</p>
+<p>几个操作分别对应刚才的动作：<code>st.push(x)</code> 放入 x；<code>st.top()</code> 查看栈顶；<code>st.pop()</code> 删除栈顶。<code>st.empty()</code> 判断是否为空，<code>st.size()</code> 取得元素个数。</p>
+<p><b>查看与删除仍是两件事。</b>假设栈顶是 6，你想把它取走并记到变量 x 中，应先在非空时读取 top()，把 6 保存下来，再执行 pop()。pop() 只负责删除，不会把被删的 6 当作返回值交给你。</p>
+<pre><code>// 只展示查看并保存这个局部动作
+if (!st.empty()) {
+    int x = st.top();
+    // 此时栈没有变化。若题目要求取走，还需要哪个动作？
+}</code></pre>
+<div class="practice"><h3>停下来，轮到你完成</h3><p>用标准库重新表达第 2 站的操作序列，并把每个调用对应到“放入、查看、取出”。若需要输出取出的值，自己安排查看与删除的先后。</p>
+<details class="hint"><summary>尝试后仍卡住 · 提示一</summary><p>输出的是删除前的栈顶，不是删除动作本身。</p></details>
+<details class="hint"><summary>只在需要时 · 提示二</summary><p>先判空，才能查看那个元素。</p></details>
+<div class="tests"><h3>三类自测</h3><ul><li>最小：只查看，栈大小不变。</li><li>区分：保存旧栈顶后删除，再看新栈顶。</li><li>边界：空栈请求必须在 top()/pop() 之前被挡住。</li></ul></div>
+<details class="coach"><summary>家长／教练核对 · 请先让孩子尝试</summary><p>检查孩子是否把 pop 当成有返回值、把查看当删除。无需背标准库内部实现。本讲不给可直接提交的完整题解。</p></details></div>
+<div class="journal"><h3>我的过程与证据</h3><label for="stage-4">这一站，我目前：</label><select id="stage-4" data-stage="4"><option value="">尚未自评</option><option value="hand">能解释并手推</option><option value="help">有提示时能完成</option><option value="independent">能独立实现并自测</option><option value="transfer">能在新情境中迁移</option></select>
+<label for="note-4">记录手推、变量、测试或待复盘问题；改对后由我自己写反思。</label><textarea id="note-4" data-note="4" placeholder="未完成时：我试了什么？卡在哪里？&#10;改对后：我错在哪里？为什么会错？下次怎样防？"></textarea><p class="muted">阅读、点实验或展开提示不会自动改变自评。笔记仅保存在当前浏览器，换设备前请导出。</p><div class="print-only print-stage">尚未自评</div><div class="print-only print-note"></div></div>
+<nav class="lesson-footer" aria-label="前后站"><a href="#lesson-3">← 上一站</a><a href="#lesson-5">下一站 →</a></nav></section><section class="lesson" id="lesson-5" aria-labelledby="heading-5">
+<header><div class="eyebrow">05 / 13 · 本学期基础</div><h2 id="heading-5">括号匹配：最近打开的，必须先关上</h2><p class="goal">这一站带走：用栈保存尚未匹配的左括号。</p><p class="prereq">先修：数组、循环、条件判断</p></header>
+<p>先看 <code>[()]</code>。读到左方括号 [ 时，它还在等右方括号；随后读到左圆括号 (，又打开了里面的一层。读到 ) 时，应先关上最近打开的圆括号，之后的 ] 才能关上外面的方括号。</p>
+<p>所以，我们可以把<b>尚未配对的左括号</b>放进栈：每读到一个左括号就入栈。读到右括号时，先看栈顶是不是与它同类的左括号。相同就删除栈顶，表示这一对已经配好；不同就说明关闭顺序或类型不对。若栈本来就是空的，这个右括号也没有对象可配。</p>
+<p>字符串读完后，还要再检查一次：栈里若仍有左括号，表示还有括号没有关闭。例如 <code>(()</code> 的右括号可以配对，但读完仍留下一个左括号，因此整串仍不合法。</p>
+<aside class="callout">每次查看栈时，都把里面的内容读成“还在等右括号的左括号”。已经配好的一对要移除，之后才能处理更外面的一层。</aside>
+<div class="practice"><h3>停下来，轮到你完成</h3><p>手推 ([)] 与 ([])，找出第一次不同的匹配动作；随后独立写判断器，并列出它判失败的全部原因。</p>
+<details class="hint"><summary>尝试后仍卡住 · 提示一</summary><p>读到右圆括号时，栈顶究竟是哪种左括号？</p></details>
+<details class="hint"><summary>只在需要时 · 提示二</summary><p>扫描结束后，还有待关闭的任务吗？</p></details>
+<div class="tests"><h3>三类自测</h3><ul><li>最小：空串（若允许）与 ()。</li><li>区分：([)]、([])。</li><li>边界：)(、(()、单个右括号。</li></ul></div>
+<details class="coach"><summary>家长／教练核对 · 请先让孩子尝试</summary><p>([]) 合法，([)] 在右圆括号处失败。三类失败：右括号无对象、类型不配、结束仍有左括号。输入限定括号字符；含其他字符时另定规则。</p></details></div>
+<div class="journal"><h3>我的过程与证据</h3><label for="stage-5">这一站，我目前：</label><select id="stage-5" data-stage="5"><option value="">尚未自评</option><option value="hand">能解释并手推</option><option value="help">有提示时能完成</option><option value="independent">能独立实现并自测</option><option value="transfer">能在新情境中迁移</option></select>
+<label for="note-5">记录手推、变量、测试或待复盘问题；改对后由我自己写反思。</label><textarea id="note-5" data-note="5" placeholder="未完成时：我试了什么？卡在哪里？&#10;改对后：我错在哪里？为什么会错？下次怎样防？"></textarea><p class="muted">阅读、点实验或展开提示不会自动改变自评。笔记仅保存在当前浏览器，换设备前请导出。</p><div class="print-only print-stage">尚未自评</div><div class="print-only print-note"></div></div>
+<nav class="lesson-footer" aria-label="前后站"><a href="#lesson-4">← 上一站</a><a href="#lesson-6">下一站 →</a></nav></section><section class="lesson" id="lesson-6" aria-labelledby="heading-6">
+<header><div class="eyebrow">06 / 13 · 本学期基础</div><h2 id="heading-6">接回递归与撤销：谁还没有完成？</h2><p class="goal">这一站带走：复用栈模型解释暂停和恢复。</p><p class="prereq">先修：栈；函数调用与局部变量</p></header>
+<p>函数调用时，也会出现“最近开始的任务先完成”。假设 A 执行到一半调用 B，B 又调用 C：此时 A 在等 B，B 在等 C。C 完成后，应先回到 B 刚才暂停的地方；B 完成后，才能回到 A 继续。</p>
+<p>可以给每次调用画一张工作单，上面记下参数、局部变量，以及调用结束后从哪里继续。A 的工作单先放下，B 放在它上面，C 最后放上去。C 完成就拿走 C 的单子，露出仍在等待的 B。这正好符合栈的取出顺序，叫作<b>调用栈</b>。</p>
+<p>画图软件的撤销也需要这样的记录。例如把圆从位置 2 移到位置 5，若想撤销，记录中需要保留旧位置 2；只记“移动过圆”还不够。栈解决的是先恢复哪一条记录，记录里保存的信息则决定能否真正恢复旧画面。</p>
+<p>继续阅读：<a href="../递归探险/递归探险指南.html#lesson-4">递归中的调用栈</a>；<a href="../链表探险/链表探险指南.html#lesson-23">链表删除与撤销</a>。</p>
+<div class="practice"><h3>停下来，轮到你完成</h3><p>画出 A 调 B、B 调 C 的三张工作单，给每张写上“尚未完成什么”；再解释为什么 C 返回不是整个程序结束。</p>
+<details class="hint"><summary>尝试后仍卡住 · 提示一</summary><p>函数返回的接收者是谁？</p></details>
+<details class="hint"><summary>只在需要时 · 提示二</summary><p>名字相同的递归调用，局部数据也是同一份吗？</p></details>
+<div class="tests"><h3>三类自测</h3><ul><li>最小：一次普通调用后继续输出。</li><li>区分：三层调用后依次返回。</li><li>边界：递归在第一层就满足停止条件。</li></ul></div>
+<details class="coach"><summary>家长／教练核对 · 请先让孩子尝试</summary><p>先区分普通调用规则与递归的同名调用。孩子能独立追踪后再接回原递归题；不要求重复整套递归课程。</p></details></div>
+<div class="journal"><h3>我的过程与证据</h3><label for="stage-6">这一站，我目前：</label><select id="stage-6" data-stage="6"><option value="">尚未自评</option><option value="hand">能解释并手推</option><option value="help">有提示时能完成</option><option value="independent">能独立实现并自测</option><option value="transfer">能在新情境中迁移</option></select>
+<label for="note-6">记录手推、变量、测试或待复盘问题；改对后由我自己写反思。</label><textarea id="note-6" data-note="6" placeholder="未完成时：我试了什么？卡在哪里？&#10;改对后：我错在哪里？为什么会错？下次怎样防？"></textarea><p class="muted">阅读、点实验或展开提示不会自动改变自评。笔记仅保存在当前浏览器，换设备前请导出。</p><div class="print-only print-stage">尚未自评</div><div class="print-only print-note"></div></div>
+<nav class="lesson-footer" aria-label="前后站"><a href="#lesson-5">← 上一站</a><a href="#lesson-7">下一站 →</a></nav></section><section class="lesson" id="lesson-7" aria-labelledby="heading-7">
+<header><div class="eyebrow">07 / 13 · 本学期基础</div><h2 id="heading-7">队列：轮到最早等待的人</h2><p class="goal">这一站带走：用队首和队尾保存先来先服务的过程。</p><p class="prereq">先修：数组、循环、条件判断</p></header>
+<p>排队时，新来的人站在<b>队尾</b>，下一位被叫到的人在<b>队首</b>。A、B、C 依次加入后，先服务 A；此时若 D 来了，剩下的顺序是 B、C、D。查看队首只是看看下一位是谁，出队才把这一位从队伍中移除。</p>
+<p>用数组 q 保存队伍时，可以不搬动后面的人，而是用两个整数记录位置：<code>head</code> 指向第一位等待者，<code>tail</code> 指向下一位加入时要写的空格。开始都为 0；加入一人就写 q[tail]，然后 tail 加 1；服务完一人就让 head 加 1。</p>
+<p>例如 A、B、C 入队后，head=0、tail=3；A 出队后，head=1、tail 仍是 3。此时等待者在下标 1、2，共 tail−head=2 人。已经服务过的下标 0 不再算入队伍。若三人都出队，就有 head=tail=3，表示队伍已空。</p>
+<p>把这段有效位置写成 <code>[head,tail)</code>，意思是从 head 开始，到 tail 之前为止。这个简单版本不回头使用旧格子，因此容量要够放入所有曾经入队的元素。怎样重复使用旧格子，第 9 站再学。</p>
+<details><summary>如果学过链表：队列和链表有什么关系？</summary><p>队列说的是“谁先取出”：队尾加入，队首取出。链表说的是“数据怎样连接”：每个结点记下后一个结点在哪里。刚才我们用数组实现了队列，也可以用链表实现同样的入队、出队规则。两者回答的是不同问题，还没学链表可以跳过这段。</p></details>
+<div class="practice"><h3>停下来，轮到你完成</h3><p>按“进 A、进 B、出一位、进 C、出一位、出一位”追踪两个下标；然后解释为什么队列空时 head 可以不等于 0。</p>
+<details class="hint"><summary>尝试后仍卡住 · 提示一</summary><p>把已服务区域划掉，不必搬动后面的所有元素。</p></details>
+<details class="hint"><summary>只在需要时 · 提示二</summary><p>空代表有效区间没有元素，不代表数组从未使用。</p></details>
+<div class="tests"><h3>三类自测</h3><ul><li>最小：入一位再出一位。</li><li>区分：边出边进，避免每次搬动整队。</li><li>边界：取空队、清空后再加入。</li></ul></div>
+<details class="coach"><summary>家长／教练核对 · 请先让孩子尝试</summary><p>服务顺序 A、B、C；最终 head=tail=3。简单不回绕数组要按总入队次数分配容量，而非只按最大同时等待人数。</p></details></div>
+<div class="journal"><h3>我的过程与证据</h3><label for="stage-7">这一站，我目前：</label><select id="stage-7" data-stage="7"><option value="">尚未自评</option><option value="hand">能解释并手推</option><option value="help">有提示时能完成</option><option value="independent">能独立实现并自测</option><option value="transfer">能在新情境中迁移</option></select>
+<label for="note-7">记录手推、变量、测试或待复盘问题；改对后由我自己写反思。</label><textarea id="note-7" data-note="7" placeholder="未完成时：我试了什么？卡在哪里？&#10;改对后：我错在哪里？为什么会错？下次怎样防？"></textarea><p class="muted">阅读、点实验或展开提示不会自动改变自评。笔记仅保存在当前浏览器，换设备前请导出。</p><div class="print-only print-stage">尚未自评</div><div class="print-only print-note"></div></div>
+<nav class="lesson-footer" aria-label="前后站"><a href="#lesson-6">← 上一站</a><a href="#lesson-8">下一站 →</a></nav></section><section class="lesson" id="lesson-8" aria-labelledby="heading-8">
+<header><div class="eyebrow">08 / 13 · 本学期基础</div><h2 id="heading-8">普通 queue 与优先队列，不能互相冒充</h2><p class="goal">这一站带走：把先进先出的完整模拟落到代码。</p><p class="prereq">先修：数组、循环、条件判断</p></header>
+<p>第 7 站用数组和两个下标实现了排队。也可以让 C++ 标准库代管这些存储细节：包含 <code>&lt;queue&gt;</code> 后，用 <code>std::queue&lt;int&gt; waiting;</code> 声明一个整数队列。</p>
+<p><code>waiting.push(x)</code> 让 x 入队，<code>waiting.front()</code> 查看队首，<code>waiting.back()</code> 查看队尾，<code>waiting.pop()</code> 删除队首。<code>waiting.empty()</code> 判断是否为空，<code>waiting.size()</code> 取得人数。查看和删除都需要先确认非空；与栈一样，pop() 只删除，不返回被删的值。</p>
+<p><b>普通队列不按数值大小插队。</b>8、2、5 依次入队，普通队列先取 8，因为它最早到。若题目要求先取最小值，就应使用按这个优先级工作的工具，叫优先队列。《贪心探险》里会进一步讲它。</p>
+<p>现在用普通队列完成一个小模拟器：第一行给出操作次数 q，接着每行是一条 <code>IN x</code>、<code>OUT</code> 或 <code>FRONT</code>。IN x 加入 x；OUT 输出并删除队首；FRONT 只输出队首。初始队列为空，空队遇到 OUT 或 FRONT 都输出 EMPTY。这里 q 记录操作次数，waiting 保存等待中的数据。</p>
+<div class="practice"><h3>停下来，轮到你完成</h3><p>自己实现这个排队模拟器。写之前说明每种操作是否改变等待人数，运行时核对输出顺序而不是数值大小。</p>
+<details class="hint"><summary>尝试后仍卡住 · 提示一</summary><p>OUT 需要两个动作：先保存谁，再删除谁？</p></details>
+<details class="hint"><summary>只在需要时 · 提示二</summary><p>FRONT 执行两次，中间没有修改，结果应否改变？</p></details>
+<div class="tests"><h3>三类自测</h3><ul><li>最小：一条 FRONT，输出 EMPTY。</li><li>区分：IN 8、IN 2、FRONT、OUT、FRONT。</li><li>边界：全部出完、再次 OUT、之后再 IN 0。</li></ul></div>
+<details class="coach"><summary>家长／教练核对 · 请先让孩子尝试</summary><p>区分例输出 8、8、2。入队 0 后不是空；若用了按值排序的容器，区分例会立即暴露顺序错误。</p></details></div>
+<div class="journal"><h3>我的过程与证据</h3><label for="stage-8">这一站，我目前：</label><select id="stage-8" data-stage="8"><option value="">尚未自评</option><option value="hand">能解释并手推</option><option value="help">有提示时能完成</option><option value="independent">能独立实现并自测</option><option value="transfer">能在新情境中迁移</option></select>
+<label for="note-8">记录手推、变量、测试或待复盘问题；改对后由我自己写反思。</label><textarea id="note-8" data-note="8" placeholder="未完成时：我试了什么？卡在哪里？&#10;改对后：我错在哪里？为什么会错？下次怎样防？"></textarea><p class="muted">阅读、点实验或展开提示不会自动改变自评。笔记仅保存在当前浏览器，换设备前请导出。</p><div class="print-only print-stage">尚未自评</div><div class="print-only print-note"></div></div>
+<nav class="lesson-footer" aria-label="前后站"><a href="#lesson-7">← 上一站</a><a href="#lesson-9">下一站 →</a></nav></section><section class="lesson" id="lesson-9" aria-labelledby="heading-9">
+<header><div class="eyebrow">09 / 13 · 基础稳定后选学</div><h2 id="heading-9">循环队列：把用过的格子再利用</h2><p class="goal">这一站带走：按排队顺序取人，同时重复使用数组的旧格子。</p><p class="prereq">先修：数组队列；取余</p></header>
+<p>有 3 个数组格子，编号 0、1、2。放满三个人后，即使最早的那个人已经离开，第 7 站的 tail 也还在向右走。我们希望再次利用空出来的格子，于是把 0、1、2 想象成一个圈：走过 2 后，下一格回到 0。这叫<b>循环队列</b>。</p>
+<p>容量记为 C，从位置 pos 走到下一格，可写成 <code>(pos+1)%C</code>。head 仍指向第一位等待者，tail 仍指向下一次写入位置。注意，尾部绕回 0，只是存储位置变了；新加入的人仍排在所有等待者之后。</p>
+<p>这个版本再用 <code>size</code> 记录人数：size=0 表示空，size=C 表示满。为什么需要它？以 C=3 为例，开始 head=tail=0；连续放满三人后 tail 绕回 0，head 也仍是 0。两次下标相同，一次却空、一次却满，人数才能把它们区分开。</p>
+<p>因此，加入前先确认 size&lt;C，再写入并移动 tail、增加人数；出队前先确认 size&gt;0，再移动 head、减少人数。本讲只用这一套人数约定。</p>
+<div class="practice"><h3>停下来，轮到你完成</h3><p>用容量 C=3 的三个格子手推：入 A、B、C，出 A，再入 D；画出格子里的物理位置和真实排队顺序。</p>
+<details class="hint"><summary>尝试后仍卡住 · 提示一</summary><p>尾部回到格子 0，不意味着新来的 D 可以抢到队首。</p></details>
+<details class="hint"><summary>只在需要时 · 提示二</summary><p>真实顺序从 head 开始，连续走 size 格。</p></details>
+<div class="tests"><h3>三类自测</h3><ul><li>最小：C=1，一次加入就满。</li><li>区分：容量 3 回绕后，应按 B、C、D 取出。</li><li>边界：队满拒绝加入；队空拒绝取出。</li></ul></div>
+<details class="coach"><summary>家长／教练核对 · 请先让孩子尝试</summary><p>保持 0≤size≤C，所有物理下标 0～C−1。只在学校需要数组循环队列时学，使用 std::queue 不要求先实现本节。</p></details></div>
+<div class="journal"><h3>我的过程与证据</h3><label for="stage-9">这一站，我目前：</label><select id="stage-9" data-stage="9"><option value="">尚未自评</option><option value="hand">能解释并手推</option><option value="help">有提示时能完成</option><option value="independent">能独立实现并自测</option><option value="transfer">能在新情境中迁移</option></select>
+<label for="note-9">记录手推、变量、测试或待复盘问题；改对后由我自己写反思。</label><textarea id="note-9" data-note="9" placeholder="未完成时：我试了什么？卡在哪里？&#10;改对后：我错在哪里？为什么会错？下次怎样防？"></textarea><p class="muted">阅读、点实验或展开提示不会自动改变自评。笔记仅保存在当前浏览器，换设备前请导出。</p><div class="print-only print-stage">尚未自评</div><div class="print-only print-note"></div></div>
+<nav class="lesson-footer" aria-label="前后站"><a href="#lesson-8">← 上一站</a><a href="#lesson-10">下一站 →</a></nav></section><section class="lesson" id="lesson-10" aria-labelledby="heading-10">
+<header><div class="eyebrow">10 / 13 · 基础稳定后选学</div><h2 id="heading-10">队列接搜索：为什么近的一层先出来？</h2><p class="goal">这一站带走：理解等步长 BFS 中的待处理顺序。</p><p class="prereq">先修：普通队列；二维数组与网格边界</p></header>
+<p>在网格上找最少要走几步，可以先找“一步能到哪里”，再找“两步能到哪里”。下面每次只能上下左右走一格，不能进入障碍；每一步的花费相同。</p>
+<div class="table-scroll"><table><thead><tr><th></th><th>列 1</th><th>列 2</th><th>列 3</th></tr></thead><tbody><tr><td>行 1</td><td>起点</td><td>空地</td><td>障碍</td></tr><tr><td>行 2</td><td>空地</td><td>空地</td><td>终点</td></tr></tbody></table></div>
+<p>先把起点放进队列，记距离为 0。取出起点后，把它旁边能走且还没发现的格子加入队尾，记距离为 1。接下来取出一个距离为 1 的格子，再把从它新发现的邻居记为距离 2，加入队尾。</p>
+<p>为什么距离为 1 的格子能先处理完？因为它们先进入队列，而新发现的距离为 2 的格子只能排在队尾，不能插到它们前面。于是搜索会一层一层向外走，这叫<b>广度优先搜索，简称 BFS</b>。</p>
+<p>一个格子可能从两个方向到达。第一次发现它时就标记“已发现”，随后再从别处遇见它，就不重复入队。这里队列保存的是“已发现、还没检查邻居的格子”。只有每一步花费相同时，按层数先到才能直接说明步数最少。</p>
+<div class="practice"><h3>停下来，轮到你完成</h3><p>在纸上走上面的网格，每次记录“本轮取出谁、新发现谁、队列里还等着谁”。解释同一个格子从两个方向都能到时如何避免重复入队。</p>
+<details class="hint"><summary>尝试后仍卡住 · 提示一</summary><p>队列保存的是已发现但还没展开邻居的格子。</p></details>
+<details class="hint"><summary>只在需要时 · 提示二</summary><p>标记应该在决定入队的这一刻，还是等它以后出来？</p></details>
+<div class="tests"><h3>三类自测</h3><ul><li>最小：起点就是终点，步数 0。</li><li>区分：同一格可由两个已发现格到达。</li><li>边界：终点不可达；起点四周都是障碍。</li></ul></div>
+<details class="coach"><summary>家长／教练核对 · 请先让孩子尝试</summary><p>示例最少 3 步。此站是后续搜索入口，不将完整 BFS 当作当前队列必需一次掌握的附加任务。实现需补二维边界与邻居枚举。</p></details></div>
+<div class="journal"><h3>我的过程与证据</h3><label for="stage-10">这一站，我目前：</label><select id="stage-10" data-stage="10"><option value="">尚未自评</option><option value="hand">能解释并手推</option><option value="help">有提示时能完成</option><option value="independent">能独立实现并自测</option><option value="transfer">能在新情境中迁移</option></select>
+<label for="note-10">记录手推、变量、测试或待复盘问题；改对后由我自己写反思。</label><textarea id="note-10" data-note="10" placeholder="未完成时：我试了什么？卡在哪里？&#10;改对后：我错在哪里？为什么会错？下次怎样防？"></textarea><p class="muted">阅读、点实验或展开提示不会自动改变自评。笔记仅保存在当前浏览器，换设备前请导出。</p><div class="print-only print-stage">尚未自评</div><div class="print-only print-note"></div></div>
+<nav class="lesson-footer" aria-label="前后站"><a href="#lesson-9">← 上一站</a><a href="#lesson-11">下一站 →</a></nav></section><section class="lesson" id="lesson-11" aria-labelledby="heading-11">
+<header><div class="eyebrow">11 / 13 · 基础稳定后选学</div><h2 id="heading-11">单调栈：把还在等答案的位置记下来</h2><p class="goal">这一站带走：从具体目标理解删掉哪些候选。</p><p class="prereq">先修：栈与下标；时间复杂度</p></header>
+<p>任务是：对每个数，找它右边<b>第一个严格比它大</b>的数的位置。看 [3,1,4]：读到 3 时，右边还没读，先记下它的位置；接着的 1 不比 3 大，3 还要等，1 也开始等待。</p>
+<p>把这些等待的位置依次放进栈，最新的 1 在栈顶。读到 4 时，4 比 1 大，1 的答案就找到了，可以把 1 的位置出栈。露出的 3 也小于 4，它同样找到了答案。两者在之前都没有遇到更大的数，因此这次找到的是“第一个”。</p>
+<p>一般地，读到新数后，反复比较它与栈顶位置对应的数：新数更大，就记录那个位置的答案并出栈；直到栈空或新数不再更大，才把新位置入栈。栈里保留下来的数从底到顶不会变大，这种保持大小顺序的栈叫<b>单调栈</b>。</p>
+<p>我们保存下标，是为了知道“给哪个位置填写答案”，也能据此读取数值。相等不算严格更大，不能因此出栈。读到末尾仍在栈里的位置，说明右边没有更大值，按题目要求记录“没有”。每个位置只入栈一次、最多出栈一次，总操作量随 n 成比例，记作 O(n)。</p>
+<p><a href="../贪心探险/贪心探险指南.html#lesson-17">“删数字”也会用到单调栈</a>，但它删除元素的理由不同。先讲清正在找什么，再决定何时出栈。</p>
+<div class="practice"><h3>停下来，轮到你完成</h3><p>对 [2,2,3,1] 手推每次弹出的下标与答案，并解释为什么两个 2 遇见彼此时不能结算。</p>
+<details class="hint"><summary>尝试后仍卡住 · 提示一</summary><p>栈顶还在等待的是“更大”还是“大于等于”？</p></details>
+<details class="hint"><summary>只在需要时 · 提示二</summary><p>若它在此前见过更大的值，为何至今还没被弹出？</p></details>
+<div class="tests"><h3>三类自测</h3><ul><li>最小：一个元素，无答案。</li><li>区分：[2,2,3,1]。</li><li>边界：全相等、严格下降、严格上升。</li></ul></div>
+<details class="coach"><summary>家长／教练核对 · 请先让孩子尝试</summary><p>按 0 下标，结果为 [2,2,−1,−1]。每次弹出解释“第一次”的证据比维护单调外观更关键。</p></details></div>
+<div class="journal"><h3>我的过程与证据</h3><label for="stage-11">这一站，我目前：</label><select id="stage-11" data-stage="11"><option value="">尚未自评</option><option value="hand">能解释并手推</option><option value="help">有提示时能完成</option><option value="independent">能独立实现并自测</option><option value="transfer">能在新情境中迁移</option></select>
+<label for="note-11">记录手推、变量、测试或待复盘问题；改对后由我自己写反思。</label><textarea id="note-11" data-note="11" placeholder="未完成时：我试了什么？卡在哪里？&#10;改对后：我错在哪里？为什么会错？下次怎样防？"></textarea><p class="muted">阅读、点实验或展开提示不会自动改变自评。笔记仅保存在当前浏览器，换设备前请导出。</p><div class="print-only print-stage">尚未自评</div><div class="print-only print-note"></div></div>
+<nav class="lesson-footer" aria-label="前后站"><a href="#lesson-10">← 上一站</a><a href="#lesson-12">下一站 →</a></nav></section><section class="lesson" id="lesson-12" aria-labelledby="heading-12">
+<header><div class="eyebrow">12 / 13 · 基础稳定后选学</div><h2 id="heading-12">单调队列：只留下还可能成为窗口最大值的数</h2><p class="goal">这一站带走：在滑动窗口最大值中维护候选。</p><p class="prereq">先修：普通队列；双指针固定窗口；双端操作</p></header>
+<p>长度为 k 的窗口向右移动，每次要找窗口里的最大值。先看一个局部过程：旧数 2 还在窗口里，右边新来了 5。以后只要窗口仍包含这个 2，也一定包含更靠右的 5；而 5 更大、离开窗口也更晚。因此只求最大值时，可以不再把 2 当候选。</p>
+<p>另一个删除理由是“离开窗口”。例如窗口左端已经移过某个数的位置，即使它很大，也不能再算在当前窗口里。我们既要比较大小，又要检查位置，因此用一列候选<b>下标</b>记录可能的最大值。</p>
+<p>这列下标需要两端都能删除：从前端去掉已经离开窗口的旧下标；新数到来时，从后端反复去掉值不大于它的候选，再把新下标放到后端。这样的工具叫<b>双端队列 deque</b>。普通 queue 只能从队首删除，不能完成这里的后端删除。</p>
+<p>处理完后，候选值从前到后递减，因此队首就是当前最大值；要等窗口凑满 k 项，才输出本窗口答案。若当前右端下标是 r，窗口左端就是 r−k+1，比这个下标更小的位置已经离开。每次删除时，都应能说清是“出了窗口”，还是“被后来的更大或相等值替代”。</p>
+<p>这里只要求最大值；相等时保留较新的位置足够。如果题目还要求最早出现的位置，相等时的处理就要重新考虑。</p>
+<div class="practice"><h3>停下来，轮到你完成</h3><p>手推 [4,1,3,2]、k=2，区分每次删掉的是“过期”还是“被后来者取代”；解释为何不能只存数值而完全忘记位置。</p>
+<details class="hint"><summary>尝试后仍卡住 · 提示一</summary><p>当 4 不再出现在窗口里，值再大也不能作答案。</p></details>
+<details class="hint"><summary>只在需要时 · 提示二</summary><p>新值与旧值相等时，谁能在未来保留更久？</p></details>
+<div class="tests"><h3>三类自测</h3><ul><li>最小：k=1。</li><li>区分：[4,1,3,2]、k=2。</li><li>边界：全相等、严格下降、k=n。</li></ul></div>
+<details class="coach"><summary>家长／教练核对 · 请先让孩子尝试</summary><p>窗口最大值为 [4,3,3]。每个下标入队一次、出队至多一次，总 O(n)。此站接背包和 DP 的队列优化，基础未稳可跳过。</p></details></div>
+<div class="journal"><h3>我的过程与证据</h3><label for="stage-12">这一站，我目前：</label><select id="stage-12" data-stage="12"><option value="">尚未自评</option><option value="hand">能解释并手推</option><option value="help">有提示时能完成</option><option value="independent">能独立实现并自测</option><option value="transfer">能在新情境中迁移</option></select>
+<label for="note-12">记录手推、变量、测试或待复盘问题；改对后由我自己写反思。</label><textarea id="note-12" data-note="12" placeholder="未完成时：我试了什么？卡在哪里？&#10;改对后：我错在哪里？为什么会错？下次怎样防？"></textarea><p class="muted">阅读、点实验或展开提示不会自动改变自评。笔记仅保存在当前浏览器，换设备前请导出。</p><div class="print-only print-stage">尚未自评</div><div class="print-only print-note"></div></div>
+<nav class="lesson-footer" aria-label="前后站"><a href="#lesson-11">← 上一站</a><a href="#lesson-13">下一站 →</a></nav></section><section class="lesson" id="lesson-13" aria-labelledby="heading-13">
+<header><div class="eyebrow">13 / 13 · 本学期基础</div><h2 id="heading-13">独立验收：容器里存的究竟是什么？</h2><p class="goal">这一站带走：从题意重建对象、顺序和边界。</p><p class="prereq">先修：数组、循环、条件判断</p></header>
+<p>任务 A：给只含六种括号字符的字符串，输出是否合法嵌套。长度 0～200000；若测试空串，使用能读取空行的输入方式。任务 B：按第 8 站规则处理不超过 200000 条排队操作，值可以是 0 或负数。</p><p>先选择一个任务。写出容器中每个元素的现实含义、加入条件、删除条件，以及每次读取前的保护。完成后换另一个任务，只做模型与手推即可；不把一天变成两套必须写完的作业。</p><aside class="callout">三个检查问题：谁先处理？当前还有谁没处理？结束时留下的对象意味着什么？</aside>
+<div class="practice"><h3>停下来，轮到你完成</h3><p>独立完成选定任务，保留一次关键反例的逐步记录。改对后，由你自己写“我错在哪里、为什么错、下次怎样检查”。</p>
+<details class="hint"><summary>尝试后仍卡住 · 提示一</summary><p>不要先看容器名称，先说下一次取谁。</p></details>
+<details class="hint"><summary>只在需要时 · 提示二</summary><p>把空容器、一个元素、最后一个元素被取走分别运行一遍。</p></details>
+<div class="tests"><h3>三类自测</h3><ul><li>最小：空输入或一条操作。</li><li>区分：交叉括号；排队值顺序与到达顺序不同。</li><li>边界：连续取空、全部嵌套、全部入队后再全部出队。</li></ul></div>
+<details class="coach"><summary>家长／教练核对 · 请先让孩子尝试</summary><p>验收须同时包含正确模型、独立实现和边界验证。若仍需提示，记录具体提示即可，不把提示后的完成登记为完全独立。</p></details></div>
+<div class="journal"><h3>我的过程与证据</h3><label for="stage-13">这一站，我目前：</label><select id="stage-13" data-stage="13"><option value="">尚未自评</option><option value="hand">能解释并手推</option><option value="help">有提示时能完成</option><option value="independent">能独立实现并自测</option><option value="transfer">能在新情境中迁移</option></select>
+<label for="note-13">记录手推、变量、测试或待复盘问题；改对后由我自己写反思。</label><textarea id="note-13" data-note="13" placeholder="未完成时：我试了什么？卡在哪里？&#10;改对后：我错在哪里？为什么会错？下次怎样防？"></textarea><p class="muted">阅读、点实验或展开提示不会自动改变自评。笔记仅保存在当前浏览器，换设备前请导出。</p><div class="print-only print-stage">尚未自评</div><div class="print-only print-note"></div></div>
+<nav class="lesson-footer" aria-label="前后站"><a href="#lesson-12">← 上一站</a><a href="#home">回到学习路线</a></nav></section><footer class="footer">2026-10-16 整理 · 对照家长提供的秋季学期清单补齐材料。例子与任务为本地原创教学设计；不替代实际学习证据。</footer></div></main><script type="application/json" id="guide-config">{"title": "栈与队列探险指南", "key": "stack-queue-adventure-v1", "count": 13}</script><script>// Small, deterministic models shared by the learning labs and independent checks.
+(function(root){
+function prefix(a,l,r){
+ const s=Array(a.length+1).fill(null);s[0]=0;
+ const out=[{s:[...s],at:0,text:'S[0]=0：前零项的总和为零。先预测下一格。'}];
+ for(let i=1;i<=a.length;i++){s[i]=s[i-1]+a[i-1];out.push({s:[...s],at:i,text:`登记 S[${i}]：前 ${i-1} 项共 ${s[i-1]}，加第 ${i} 项 ${a[i-1]}，得到 ${s[i]}。`});}
+ out.push({s:[...s],at:-1,result:s[r]-s[l-1],text:`查询第 ${l}～${r} 项：S[${r}] − S[${l-1}] = ${s[r]} − ${s[l-1]} = ${s[r]-s[l-1]}。扣掉的是区间开始前的部分。`});return out;
+}
+function difference(n,ops){
+ const d=Array(n+2).fill(0),a=Array(n).fill(null);let running=0;
+ const out=[{d:[...d],a:[...a],at:-1,text:'增量差分从全零开始；原数组也设为全零。'}];
+ for(const [l,r,v] of ops){d[l]+=v;out.push({d:[...d],a:[...a],at:l,text:`第 ${l}～${r} 项加 ${v}：先在 d[${l}] 登记 ${v}，从这里开始生效。`});d[r+1]-=v;out.push({d:[...d],a:[...a],at:r+1,text:`在 d[${r+1}] 登记 ${-v}：从区间后一格停止本次影响。`});}
+ for(let i=1;i<=n;i++){running+=d[i];a[i-1]=running;out.push({d:[...d],a:[...a],at:i,text:`恢复第 ${i} 格：累计增量为 ${running}。d[${i}]=${d[i]} 是变化，不是这一格的最终值。`});}return out;
+}
+function pair(a,target){
+ let l=0,r=a.length-1;const out=[{l,r,text:`从两端开始，目标和 ${target}。先预测和，再决定谁能被安全排除。`}];
+ while(l<r){const sum=a[l]+a[r];if(sum===target){out.push({l,r,found:[l,r],text:`${a[l]} + ${a[r]} = ${target}，找到两个不同位置 ${l} 与 ${r}。`});return out;}
+ if(sum<target){const old=l;l++;out.push({l,r,text:`刚才下标 ${old} 与 ${r} 的和为 ${sum}，太小；固定 ${old} 配最大的候选也不够，所以排除左端 ${old}。`});}
+ else{const old=r;r--;out.push({l,r,text:`刚才下标 ${l} 与 ${old} 的和为 ${sum}，太大；固定 ${old} 配最小的候选也超出，所以排除右端 ${old}。`});}}
+ out.push({l,r,found:null,text:'剩余不足两个不同位置，所有可排除的配对已有依据：没有找到。'});return out;
+}
+function windowSteps(a,k){
+ let l=0,sum=0,best=0;const out=[{l,r:-1,sum,best,text:'窗口为空。每次先加入右端，必要时收缩左端，再记录合法长度。'}];
+ for(let r=0;r<a.length;r++){
+  sum+=a[r];out.push({l,r,sum,best,text:`右端加入 a[${r}]=${a[r]}，当前和 ${sum}；先检查是否合法。`});
+  while(l<=r&&sum>k){const old=l;sum-=a[l++];out.push({l,r,sum,best,text:`和超过 ${k}，移出 a[${old}]=${a[old]}；新左端 ${l}，当前和 ${sum}。`});}
+  best=Math.max(best,r-l+1);out.push({l,r,sum,best,text:`当前合法长度 ${r-l+1}，已见最大长度 ${best}。${a.some(x=>x<0)?'注意：含负数时“旧起点永远无用”的依据失效；本实验故意展示错误规则。':''}`});
+ }return out;
+}
+function containers(mode){
+ const ops=[['push','A'],['push','B'],['peek'],['pop'],['push','C'],['pop'],['pop'],['pop']],q=[],out=[{q:[],text:'容器为空。先预测每一步会查看或取出谁。'}];
+ for(const [op,x] of ops){let message='';if(op==='push'){q.push(x);message=`加入 ${x}。`;}else if(!q.length){message='容器为空：本次请求停止，不读取或移除不存在的元素。';}else{const at=mode==='stack'?q.length-1:0;const value=q[at];message=op==='peek'?`查看 ${value}，内容没有改变。`:`取出 ${value}，它不再等待。`;if(op==='pop')q.splice(at,1);}out.push({q:[...q],text:message});}return out;
+}
+const api={prefix,difference,pair,windowSteps,containers};root.HandoutModels=api;if(typeof module!=='undefined')module.exports=api;
+})(typeof window==='undefined'?globalThis:window);
+
+(function(){'use strict';
+const $=s=>document.querySelector(s),$$=s=>Array.from(document.querySelectorAll(s)),config=JSON.parse($('#guide-config').textContent),key=config.key;
+let state={notes:{},stages:{}},all=false;
+const validStages=['','hand','help','independent','transfer'];
+function clean(input){const output={notes:{},stages:{}};if(!input||typeof input!=='object')return output;for(let i=1;i<=config.count;i++){if(typeof input.notes?.[i]==='string')output.notes[i]=input.notes[i].slice(0,50000);if(validStages.includes(input.stages?.[i]))output.stages[i]=input.stages[i];}return output;}
+let loadFailed=false;
+try{const raw=localStorage.getItem(key);if(raw)state=clean(JSON.parse(raw));}catch(e){loadFailed=true;}
+function status(t){$('#save-status').textContent=t;}
+function progress(){const n=Object.values(state.stages).filter(x=>x==='independent'||x==='transfer').length;$('#progress-fill').style.width=`${n/config.count*100}%`;$('#progress-label').textContent=`自评独立完成或迁移：${n} / ${config.count} 站`;}
+function save(){try{localStorage.setItem(key,JSON.stringify(state));status('笔记已保存在当前浏览器；换设备前请导出。');}catch(e){status('此浏览器无法保存笔记，请用“导出笔记”备份。');}progress();}
+function apply(){for(let i=1;i<=config.count;i++){$(`#note-${i}`).value=state.notes[i]||'';$(`#stage-${i}`).value=state.stages[i]||'';}progress();}
+function fitAnchorOffset(){document.documentElement.style.scrollPaddingTop=($('.toolbar').getBoundingClientRect().height+20)+'px';}
+fitAnchorOffset();new ResizeObserver(fitAnchorOffset).observe($('.toolbar'));
+apply();if(loadFailed)status('旧笔记无法读取，请先导出当前草稿或导入备份；不要依赖自动保存。');
+$$('[data-note]').forEach(e=>e.addEventListener('input',()=>{state.notes[e.dataset.note]=e.value;save();}));
+$$('[data-stage]').forEach(e=>e.addEventListener('change',()=>{state.stages[e.dataset.stage]=e.value;save();}));
+function go(){let id=location.hash.slice(1)||'home';if(!document.getElementById(id)||!/^home$|^lesson-\d+$/.test(id))id='home';$$('.lesson,#home').forEach(e=>e.hidden=e.id!==id);$$('.toc a').forEach(e=>e.classList.toggle('active',e.getAttribute('href')==='#'+id));document.body.classList.remove('nav-open');$('#menu').setAttribute('aria-expanded','false');if(!all){window.scrollTo(0,0);requestAnimationFrame(()=>{fitAnchorOffset();window.scrollTo(0,0);});}}
+window.addEventListener('hashchange',go);go();
+$('#menu').addEventListener('click',()=>{const open=document.body.classList.toggle('nav-open');$('#menu').setAttribute('aria-expanded',String(open));});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.body.classList.remove('nav-open');$('#menu').setAttribute('aria-expanded','false');}});
+$('#all').addEventListener('click',()=>{all=!all;document.body.classList.toggle('all-mode',all);$('#all').textContent=all?'恢复分站阅读':'展开全文';if(!all)go();});
+function preparePrint(){$$('.journal').forEach(e=>{e.querySelector('.print-note').textContent=e.querySelector('textarea').value||'我的手推与反思：\n\n\n';e.querySelector('.print-stage').textContent='自评：'+e.querySelector('select').selectedOptions[0].textContent;});}
+window.addEventListener('beforeprint',preparePrint);$('#print').addEventListener('click',()=>{preparePrint();window.print();});
+$('#export').addEventListener('click',()=>{const data={type:key,version:1,exportedAt:new Date().toISOString(),...state};const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download=config.title+'-学习笔记.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);status('已导出笔记；反思与自评保留你的原记录。');});
+$('#import').addEventListener('click',()=>$('#import-file').click());
+$('#import-file').addEventListener('change',async e=>{const file=e.target.files[0];if(!file)return;try{if(file.size>5e6)throw Error('文件过大');const raw=JSON.parse(await file.text());if(raw.type!==key)throw Error('不是这份讲义的笔记');const incoming=clean(raw);for(let i=1;i<=config.count;i++){const a=state.notes[i]||'',b=incoming.notes[i]||'';if(b&&!a)state.notes[i]=b;else if(b&&a!==b&&!a.includes(b))state.notes[i]=a+'\n\n—— 导入的另一份记录 ——\n'+b;if(!state.stages[i]&&incoming.stages[i])state.stages[i]=incoming.stages[i];}apply();save();status('导入完成；冲突笔记两份保留，已有自评优先。');}catch(err){status('未导入：'+err.message+'。原笔记保留。');}e.target.value='';});
+const M=window.HandoutModels;
+function tiles(a,start=0,active=[],range=[]){return '<div class="tiles">'+a.map((x,i)=>`<div class="tile ${active.includes(i+start)?'active':''} ${range.includes(i+start)?'in-range':''}"><small>${i+start}</small>${x===null?'·':String(x)}</div>`).join('')+'</div>';}
+function mount(el,title,intro,options,make,render){el.innerHTML=`<h3>${title}</h3><p>${intro}</p>`+(options?`<label>情境 <select class="lab-select">${options.map((o,i)=>`<option value="${i}">${o}</option>`).join('')}</select></label>`:'')+'<div class="lab-controls"><button class="prev" type="button">上一步</button><button class="next primary" type="button">下一步</button><button class="reset" type="button">从头观察</button><span class="step"></span></div><div class="lab-view"></div><p class="event" aria-live="polite"></p>';
+ let index=0,choice=0,steps=make(0);function draw(){el.querySelector('.lab-view').innerHTML=render(steps[index],choice);el.querySelector('.event').textContent=steps[index].text;el.querySelector('.step').textContent=`${index} / ${steps.length-1} 步`;el.querySelector('.prev').disabled=index===0;el.querySelector('.next').disabled=index===steps.length-1;}el.querySelector('.prev').onclick=()=>{index--;draw();};el.querySelector('.next').onclick=()=>{index++;draw();};el.querySelector('.reset').onclick=()=>{index=0;draw();};const select=el.querySelector('select');if(select)select.onchange=()=>{choice=+select.value;steps=make(choice);index=0;draw();};draw();}
+$$('[data-lab]').forEach(el=>{switch(el.dataset.lab){
+case 'prefix':{const queries=[[2,4],[1,5],[5,5]];mount(el,'实验 · 累计表留下中间一段','原数组 [3,1,4,1,5]；每次只登记一格，最后再查询。',['第 2～4 项','整个区间','最后一项'],c=>M.prefix([3,1,4,1,5],...queries[c]),(s,c)=>'<p>原数组（编号从 1 开始）</p>'+tiles([3,1,4,1,5],1,[],Array.from({length:queries[c][1]-queries[c][0]+1},(_,i)=>i+queries[c][0]))+'<p>累计表 S（含第 0 格）</p>'+tiles(s.s,0,[s.at]));break;}
+case 'difference':{const options=[[[2,4,3]],[[2,4,3],[3,5,-1]],[[1,5,2]]];mount(el,'实验 · 从端点标记恢复整排增量','先标记全部修改，再逐项恢复。保留第 6 格，只用于停止边界，不输出到答案。',['第 2～4 格加 3','重叠修改：再把 3～5 格减 1','全段加 2'],c=>M.difference(5,options[c]),s=>'<p>差分 d[1…6]：只记录变化</p>'+tiles(s.d.slice(1),1,[s.at])+'<p>恢复后的 5 格</p>'+tiles(s.a,1,[s.at]));break;}
+case 'pair':{const targets=[8,20,2];mount(el,'实验 · 每次移动都要有理由','数组已升序排列为 [1,2,4,6,9]，橙色边框标出当前端点。',['目标和 8','目标和 20','目标和 2'],c=>M.pair([1,2,4,6,9],targets[c]),s=>tiles([1,2,4,6,9],0,[s.l,s.r])+'<p>l='+s.l+'；r='+s.r+'；只有 l&lt;r 才能用两个不同位置。</p>');break;}
+case 'window':{const arrays=[[2,1,3,1,1],[0,0,0],[5,-4]],limits=[4,0,1];mount(el,'实验 · 加入、收缩、记录是三个动作','先手推，再点下一步。第三个情境故意违反非负前提，用来观察漏解。',['非负数组，K=4','全零，K=0','反例：含负数，K=1'],c=>M.windowSteps(arrays[c],limits[c]),(s,c)=>tiles(arrays[c],0,[s.l,s.r],Array.from({length:Math.max(0,s.r-s.l+1)},(_,i)=>s.l+i))+`<p>窗口 [${s.l},${s.r}] · sum=${s.sum} · 当前记录 best=${s.best}</p>`+(c===2?'<p>此规则在本例会漏掉完整两项；用全部子段枚举核验。</p>':''));break;}
+case 'containers':mount(el,'实验 · 同样的操作，不同的处理顺序','固定操作：进 A、进 B、查看、取出、进 C、取出、取出、再取出。',['栈：后进先出','队列：先进先出'],c=>M.containers(c===0?'stack':'queue'),(s,c)=>'<p>'+(c===0?'左边是栈底，右边是栈顶。':'左边是队首，右边是队尾。')+'</p>'+(s.q.length?tiles(s.q,0,[c===0?s.q.length-1:0]):'<p>当前为空</p>')+'<p>当前元素数：'+s.q.length+'</p>');break;
+}});
+})();
+</script></body></html>

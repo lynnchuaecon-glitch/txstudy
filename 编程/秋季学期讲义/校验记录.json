@@ -1,0 +1,283 @@
+{
+  "date": "2026-10-16",
+  "status": "passed",
+  "materials": {
+    "newGuides": 3,
+    "newStations": 37,
+    "integratedPracticeTopics": [
+      9,
+      10,
+      19,
+      20,
+      26,
+      27
+    ],
+    "standaloneSupplement": false,
+    "interactiveLabs": 5
+  },
+  "models": {
+    "randomCases": 700,
+    "independentComparisons": 2808,
+    "result": "passed",
+    "intentionalNegativeWindowCounterexample": "错误规则为1；枚举正确答案为2，用于说明非负前提"
+  },
+  "links": {
+    "checked": 528,
+    "missing": 0,
+    "scope": "three new guides, five edited existing guides, level-five and index"
+  },
+  "browser": {
+    "date": "2026-10-16",
+    "guides": [
+      {
+        "file": "前缀和差分探险/前缀和与差分探险指南.html",
+        "stations": 12,
+        "labs": 2,
+        "result": "passed"
+      },
+      {
+        "file": "双指针探险/双指针探险指南.html",
+        "stations": 12,
+        "labs": 2,
+        "result": "passed"
+      },
+      {
+        "file": "栈与队列探险/栈与队列探险指南.html",
+        "stations": 13,
+        "labs": 1,
+        "result": "passed"
+      }
+    ],
+    "pageErrors": [],
+    "index": "passed",
+    "offline": "passed",
+    "noJavaScript": "full text readable",
+    "notes": "persistence, export, safe merge, wrong-guide rejection passed",
+    "print": "all lessons, notes, expanded hints only",
+    "artifacts": "/Users/lynnchua/孩子错题库/tmp/autumn-handouts-qa"
+  },
+  "visualReview": [
+    "桌面首页与总入口",
+    "窗口实验",
+    "手机栈队列正文",
+    "修复手机工具栏遮挡章节标题后复核"
+  ],
+  "learnerRecords": "未写入孩子的真实浏览器笔记；测试在独立浏览器上下文运行。",
+  "files": [
+    {
+      "path": "编程/秋季学期讲义/秋季学期讲义总入口.html",
+      "bytes": 14580,
+      "sha256": "ef7fc14ccba553d51f31b22c87dbe481190e8d360fba2b74d4b7906ec65e4f34"
+    },
+    {
+      "path": "编程/栈与队列探险/栈与队列探险指南.html",
+      "bytes": 75040,
+      "sha256": "cd11104536ca9d93e1cdffabdb2c2e0c409a052f4a4f34220e23174ebd0427c0"
+    },
+    {
+      "path": "编程/双指针探险/双指针探险指南.html",
+      "bytes": 68520,
+      "sha256": "a938ee55c3922b3e47c039b59a775620b18527589167996188e493a8f6001dbd"
+    },
+    {
+      "path": "编程/前缀和差分探险/前缀和与差分探险指南.html",
+      "bytes": 69511,
+      "sha256": "42507d2440b3d6d6985e939f68ce98cdd346f04148e800025b9cbc4ffeb3b2a3"
+    },
+    {
+      "path": "编程/五级/GESP五级小题学习讲义.html",
+      "bytes": 230837,
+      "sha256": "94c98de45681d1d4931751cd4a2a88fafe0277535ff2292f5801b0003adcc199"
+    },
+    {
+      "path": "编程/二分探险/二分探险指南.html",
+      "bytes": 149199,
+      "sha256": "cef5decb9cac7abec9b410a07354e46b726c80e0f889ddd8b42d512bf426ffc1"
+    },
+    {
+      "path": "编程/链表探险/链表探险指南.html",
+      "bytes": 163600,
+      "sha256": "d113ffa9db99b2983eb24d6345c914960a39845deea632a39239163ad81b2bf2"
+    },
+    {
+      "path": "编程/递归探险/递归探险指南.html",
+      "bytes": 219916,
+      "sha256": "725e835858d208829f15cbc2f8fd05e0a5b006970f256ea9df4c1e2a5924a244"
+    },
+    {
+      "path": "编程/贪心探险/贪心探险指南.html",
+      "bytes": 164125,
+      "sha256": "e1808d6ea32d229c6a4349cce47bc2a2ae33449b98516a0747d10a86dd45d689"
+    },
+    {
+      "path": "编程/背包探险/背包探险指南.html",
+      "bytes": 149744,
+      "sha256": "ca8c3ac578681c25beae8ecd16af773c36c8cdcb2107e84f059ce7ff2ab42864"
+    },
+    {
+      "path": "output/pdf/GESP五级小题学习讲义.pdf",
+      "bytes": 3191866,
+      "sha256": "4a45a314f7a61d21e24e282688f455d634c938be051a92f8d60fd616f5e1f2cb"
+    }
+  ],
+  "integration": {
+    "pages": 93,
+    "topics": [
+      9,
+      10,
+      19,
+      20,
+      26,
+      27
+    ],
+    "overflow": [],
+    "mobile": [
+      {
+        "id": "lesson9-practice",
+        "overflow": false,
+        "height": 975.96875
+      },
+      {
+        "id": "lesson10-practice",
+        "overflow": false,
+        "height": 1020.75
+      },
+      {
+        "id": "lesson19-practice",
+        "overflow": false,
+        "height": 998.359375
+      },
+      {
+        "id": "lesson20-practice",
+        "overflow": false,
+        "height": 1043.140625
+      },
+      {
+        "id": "lesson26-practice",
+        "overflow": false,
+        "height": 998.359375
+      },
+      {
+        "id": "lesson27-practice",
+        "overflow": false,
+        "height": 1020.75
+      }
+    ],
+    "pageErrors": [],
+    "pdf": "output/pdf/GESP五级小题学习讲义.pdf",
+    "pdfVisualReview": {
+      "inspectedPages": [
+        23,
+        27,
+        49,
+        52,
+        65,
+        68,
+        86,
+        88
+      ],
+      "result": "passed",
+      "totalPages": 93,
+      "otherPageText": "unchanged from preceding 93-page PDF"
+    }
+  },
+  "readabilityReview": {
+    "scope": "37 new stations and 6 integrated practice pages fully read; existing guides sampled",
+    "rewrittenNewStations": 32,
+    "rewrittenIntegratedPages": 6,
+    "existingGuidePassages": {
+      "递归": 19,
+      "二分": 21,
+      "链表": 18,
+      "贪心": 13,
+      "背包": 22
+    },
+    "browser": {
+      "results": [
+        {
+          "folder": "栈与队列探险",
+          "stations": [
+            1,
+            7,
+            8,
+            11
+          ],
+          "desktop": "passed",
+          "mobile": "passed"
+        },
+        {
+          "folder": "前缀和差分探险",
+          "stations": [
+            6,
+            7,
+            11
+          ],
+          "desktop": "passed",
+          "mobile": "passed"
+        },
+        {
+          "folder": "双指针探险",
+          "stations": [
+            4,
+            7,
+            9
+          ],
+          "desktop": "passed",
+          "mobile": "passed"
+        },
+        {
+          "folder": "递归探险",
+          "stations": [
+            19
+          ],
+          "desktop": "passed",
+          "mobile": "passed"
+        },
+        {
+          "folder": "二分探险",
+          "stations": [
+            21
+          ],
+          "desktop": "passed",
+          "mobile": "passed"
+        },
+        {
+          "folder": "链表探险",
+          "stations": [
+            18
+          ],
+          "desktop": "passed",
+          "mobile": "passed"
+        },
+        {
+          "folder": "贪心探险",
+          "stations": [
+            13
+          ],
+          "desktop": "passed",
+          "mobile": "passed"
+        },
+        {
+          "folder": "背包探险",
+          "stations": [
+            22
+          ],
+          "desktop": "passed",
+          "mobile": "passed"
+        }
+      ],
+      "errors": [],
+      "existingScripts": "unchanged"
+    },
+    "pdfChangedPages": [
+      23,
+      27,
+      49,
+      52,
+      65,
+      68,
+      86,
+      88
+    ]
+  }
+}

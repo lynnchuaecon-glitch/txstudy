@@ -4,6 +4,7 @@ from collections import Counter
 import json
 import re
 from 五级讲义展开 import make_expansions
+from 五级专题补充 import make_supplements
 
 ROOT = Path(__file__).resolve().parent
 PAGES = []
@@ -24,23 +25,32 @@ def lines(n=3):
 def page(title, body, label='孩子学习页', parent=False, ident=None):
     ident = ident or f'p{len(PAGES)+1}'
     # 比较符号不能被浏览器误当成标签；只保留本稿明确使用的排版标签。
-    body = re.sub(r'<(?!/?(?:div|span|b|p|h3|ol|li|table|thead|tbody|tr|th|td|code|pre|br)(?:\s|/?>))', '&lt;', body)
+    body = re.sub(r'<(?!/?(?:a|div|span|b|p|h3|ol|li|table|thead|tbody|tr|th|td|code|pre|br)(?:\s|/?>))', '&lt;', body)
     PAGES.append(dict(title=title, body=body, label=label, parent=parent, ident=ident))
 
 EXPANSIONS = make_expansions(table, box, code)
+SUPPLEMENTS = make_supplements(table)
 
 def lesson(num, title, goal, body, task, source, key, hint, extra=''):
     LESSONS.append(dict(num=num,title=title,key=key,hint=hint))
     group_start = len(PAGES)
     topic_name = title.split('：', 1)[0]
-    topic_pages = len(EXPANSIONS.get(num, [])) + 1
+    topic_pages = len(EXPANSIONS.get(num, [])) + 1 + int(num in SUPPLEMENTS)
     for step, part in enumerate(EXPANSIONS.get(num, []), 1):
         page(part['title'], part['body']+box('接着往下读',part['carry'],'intro'),
              f'第 {step}/{topic_pages} 页 · 例子讲解', ident=f'lesson{num}-step{step}')
     page(title, box('这一节要弄懂什么',goal,'intro')+body+box(f'独立任务 T{num:02d}',task,'task')+lines(3)+
          f'<div class="source">回到原卷：{source}。先独立做，再说依据。{extra}</div>'+
          '<div class="check">□ 能解释变量角色　□ 能手推或举反例　□ 隔天换题仍会</div>',
-         f'第 {topic_pages}/{topic_pages} 页 · 整理与练习',ident=f'lesson{num}')
+         f'第 {len(EXPANSIONS.get(num, []))+1}/{topic_pages} 页 · 整理与练习',ident=f'lesson{num}')
+    if num in SUPPLEMENTS:
+        s = SUPPLEMENTS[num]
+        page(s['title'], box('接着本专题，自己完成一次',s['goal'],'intro')+s['body']+
+             box(f'专题 {num:02d} · 独立实现',s['task'],'task')+
+             '<h3>三类自测</h3><ol>'+''.join('<li>'+x+'</li>' for x in s['tests'])+'</ol>'+
+             lines(2)+'<div class="check">□ 能说明依据　□ 独立实现　□ 关键、最小与边界测试通过</div>'+
+             '<p class="small">尝试后需要提示时，请家长查看原讲义末尾的“专题实现与自测核对”。反思仍由你自己写。</p>',
+             f'第 {topic_pages}/{topic_pages} 页 · 独立实现与自测',ident=f'lesson{num}-practice')
     for step, p in enumerate(PAGES[group_start:], 1):
         p.update(topic=num, topic_name=topic_name, topic_step=step, topic_pages=topic_pages)
         p['title'] = f'{num:02d}.{step}　{p["title"]}'
@@ -68,7 +78,7 @@ page('GESP C++ 五级 · 小题学习讲义', '''
 <div class="stats"><div><b>9</b><span>套试卷</span></div><div><b>225</b><span>道真题索引</span></div><div><b>28</b><span>个主题课</span></div><div><b>25</b><span>道自编验收题</span></div></div>
 '''+box('给孩子','先跟着例子弄懂发生了什么，再读方法整理，最后自己做 T 任务。一个专题可能跨几页，不必一次学完；能解释一步为什么成立，比赶到下一页更重要。','intro')+
 box('给家长','这是一份五级知识学习稿，不是孩子的错题诊断。尚无五级作答记录，所有掌握状态均待验证。先让孩子尝试，家长参考放在末尾，不替她写反思。')+'''
-<div class="cover-meta">材料范围：2406、2409、2412、2503、2506、2509、2512、2603、2606 五级卷<br>考纲依据：所提供《考纲.pdf》PDF 第 22–24 页<br>修订日期：2026 年 10 月 9 日 · 版本 2.1 · 详细讲解版（专题编号）<br>使用形式：可打印讲义 + 可折叠家长附录的网页</div>
+<div class="cover-meta">材料范围：2406、2409、2412、2503、2506、2509、2512、2603、2606 五级卷<br>考纲依据：所提供《考纲.pdf》PDF 第 22–24 页<br>修订日期：2026 年 10 月 16 日 · 版本 2.2 · 实现与自测并入对应专题<br>使用形式：可打印讲义 + 可折叠家长附录的网页</div>
 ''',label='使用说明',ident='cover')
 
 page('怎么学，以及学到什么程度', '''
@@ -452,6 +462,14 @@ for start in range(0,28,7):
     for x in LESSONS[start:start+7]:
         body+=f'<div class="parent-key"><h3>T{x["num"]:02d} · {x["title"]}</h3><p><b>应看到的证据：</b>{x["key"]}</p><p class="small"><b>卡住时：</b>{x["hint"]}</p></div>'
     page(f'家长核对 · T{start+1:02d}–T{min(start+7,28):02d}',body,label='家长参考',parent=True,ident=f'keys{start}')
+
+for start in range(0,6,2):
+    nums=sorted(SUPPLEMENTS)[start:start+2]
+    body='<p class="small">仅在孩子已经尝试本专题的“独立实现与自测”页后查阅。先判断核心卡点，再按需要给一层提示，不一次念完。</p>'
+    for num in nums:
+        s=SUPPLEMENTS[num]
+        body+=f'<div class="parent-key"><h3>专题 {num:02d} · {s["title"]}</h3><p><b>提示一：</b>{s["hints"][0]}</p><p><b>提示二：</b>{s["hints"][1]}</p><p><b>核对与验收：</b>{s["coach"]}</p></div>'
+    page('家长核对 · 专题实现与自测 '+ '、'.join(f'{n:02d}' for n in nums),body,label='对应专题的补充核对',parent=True,ident=f'practice-keys-{start//2+1}')
 
 page('家长核对 · 迁移验收单选',
 '''<p>单选15题、判断10题，每题2分可计50分。但本套是配套学习验收，未经难度标定，不能用分数直接预测考试是否通过。未学完时按专题选题。</p>'''+
