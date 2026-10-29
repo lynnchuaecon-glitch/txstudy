@@ -1,0 +1,47 @@
+{
+  "crc": "passed",
+  "html": [
+    {
+      "file": "打开书架.html",
+      "bytes": 526391,
+      "zip_matches": true,
+      "duplicate_ids": false,
+      "external_runtime_dependencies": []
+    },
+    {
+      "file": "桃花源记/桃花源记·水墨学习绘本.html",
+      "bytes": 4235030,
+      "zip_matches": true,
+      "duplicate_ids": false,
+      "external_runtime_dependencies": []
+    },
+    {
+      "file": "卖油翁/卖油翁·水墨学习绘本.html",
+      "bytes": 3304291,
+      "zip_matches": true,
+      "duplicate_ids": false,
+      "external_runtime_dependencies": []
+    },
+    {
+      "file": "岳阳楼记/岳阳楼记·水墨学习绘本.html",
+      "bytes": 4168392,
+      "zip_matches": true,
+      "duplicate_ids": false,
+      "external_runtime_dependencies": []
+    },
+    {
+      "file": "田忌赛马/田忌赛马·水墨学习绘本.html",
+      "bytes": 3000352,
+      "zip_matches": true,
+      "duplicate_ids": false,
+      "external_runtime_dependencies": []
+    },
+    {
+      "file": "捕蛇者说/捕蛇者说·水墨学习绘本.html",
+      "bytes": 4253252,
+      "zip_matches": true,
+      "duplicate_ids": false,
+      "external_runtime_dependencies": []
+    }
+  ]
+}

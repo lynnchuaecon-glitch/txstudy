@@ -1,0 +1,125 @@
+{
+  "books": 13,
+  "checks": [
+    {
+      "title": "桃花源记",
+      "scenes": 8,
+      "words": 60,
+      "selfContained": true,
+      "uniqueIds": true,
+      "jsSyntax": true,
+      "referenceMatch": "checked in earlier volumes"
+    },
+    {
+      "title": "卖油翁",
+      "scenes": 6,
+      "words": 35,
+      "selfContained": true,
+      "uniqueIds": true,
+      "jsSyntax": true,
+      "referenceMatch": "checked in earlier volumes"
+    },
+    {
+      "title": "岳阳楼记",
+      "scenes": 8,
+      "words": 55,
+      "selfContained": true,
+      "uniqueIds": true,
+      "jsSyntax": true,
+      "referenceMatch": "checked in earlier volumes"
+    },
+    {
+      "title": "田忌赛马",
+      "scenes": 6,
+      "words": 30,
+      "selfContained": true,
+      "uniqueIds": true,
+      "jsSyntax": true,
+      "referenceMatch": "checked in earlier volumes"
+    },
+    {
+      "title": "捕蛇者说",
+      "scenes": 8,
+      "words": 71,
+      "selfContained": true,
+      "uniqueIds": true,
+      "jsSyntax": true,
+      "referenceMatch": "checked in earlier volumes"
+    },
+    {
+      "title": "塞翁失马",
+      "scenes": 5,
+      "words": 25,
+      "selfContained": true,
+      "uniqueIds": true,
+      "jsSyntax": true,
+      "referenceMatch": "checked in earlier volumes"
+    },
+    {
+      "title": "陋室铭",
+      "scenes": 5,
+      "words": 18,
+      "selfContained": true,
+      "uniqueIds": true,
+      "jsSyntax": true,
+      "referenceMatch": "checked in earlier volumes"
+    },
+    {
+      "title": "狼",
+      "scenes": 6,
+      "words": 38,
+      "selfContained": true,
+      "uniqueIds": true,
+      "jsSyntax": true,
+      "referenceMatch": "checked in earlier volumes"
+    },
+    {
+      "title": "小石潭记",
+      "scenes": 6,
+      "words": 38,
+      "selfContained": true,
+      "uniqueIds": true,
+      "jsSyntax": true,
+      "referenceMatch": "checked in earlier volumes"
+    },
+    {
+      "title": "马说",
+      "scenes": 5,
+      "words": 29,
+      "selfContained": true,
+      "uniqueIds": true,
+      "jsSyntax": true,
+      "referenceMatch": "checked in earlier volumes"
+    },
+    {
+      "title": "爱莲说",
+      "scenes": 4,
+      "words": 19,
+      "selfContained": true,
+      "uniqueIds": true,
+      "jsSyntax": true,
+      "referenceMatch": true
+    },
+    {
+      "title": "邹忌讽齐王纳谏",
+      "scenes": 6,
+      "words": 38,
+      "selfContained": true,
+      "uniqueIds": true,
+      "jsSyntax": true,
+      "referenceMatch": true
+    },
+    {
+      "title": "扁鹊见蔡桓公",
+      "scenes": 6,
+      "words": 29,
+      "selfContained": true,
+      "uniqueIds": true,
+      "jsSyntax": true,
+      "referenceMatch": true
+    }
+  ],
+  "archiveFiles": 15,
+  "zipCRC": "pass",
+  "note": "新三册原文与人工核对的参考全文逐字比较，标点采用本册约定。所有册脚本语法、资源内嵌及阅读包一致性通过。"
+}

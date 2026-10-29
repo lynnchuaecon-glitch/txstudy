@@ -1,0 +1,35 @@
+{
+  "date": "2026-10-29",
+  "browser": "Codex in-app browser, localhost preview of final standalone files",
+  "shelf_checks": [
+    "author search 欧阳修 returns 卖油翁 only",
+    "author plus 东晋 returns empty state",
+    "clear filters restores both books",
+    "处世智慧 returns 卖油翁 only",
+    "shelf → 卖油翁 → 桃花源记 → 卖油翁 → shelf works"
+  ],
+  "maiyouweng_checks": [
+    "all six scene images load",
+    "first and last scene boundaries correct",
+    "自矜 popup shows zì jīn, definition and original sentence",
+    "pinyin toggle and large font toggle work",
+    "translation disclosure opens",
+    "full text has two paragraphs",
+    "original ending supplement expands",
+    "glossary shows 35 entries; definition search 罢了 returns correct 尔",
+    "last scene navigates to read-after page with empty notes"
+  ],
+  "taohuayuan_regression": [
+    "8th scene loads with 08 / 08; next goes to after",
+    "full text has five paragraphs",
+    "next-book link opens 卖油翁"
+  ],
+  "responsive_checks": {
+    "1280": "shelf and story screenshot reviewed; measured story scrollWidth 1280",
+    "768": "iframe rendering of shelf and story reviewed",
+    "390": "iframe rendering of shelf and story, including original text below image, reviewed"
+  },
+  "console_errors_and_warnings": [],
+  "offline_package": "ZIP CRC passes; packaged shelf and both books byte-match final HTML; all book images and reader CSS/JS embedded",
+  "scope": "UI checks use local HTTP. Direct file-mode navigation is not available to the browser automation. OS print dialog and personal-note export were not exercised in this integration pass. No child reflections were filled."
+}

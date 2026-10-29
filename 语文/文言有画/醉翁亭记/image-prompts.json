@@ -1,0 +1,56 @@
+[
+  {
+    "book": "醉翁亭记",
+    "id": "01",
+    "prompt": "Use case: illustration-story. One full-bleed landscape painting, 1536x1024, for a classical Chinese family reading picture book. Refined Chinese ink wash with restrained gongbi details, warm ivory xuan paper, atmospheric empty space, muted sage green, gray ink, pale ochre. Elegant natural brushwork, not cartoon, not photo or 3D, no panels. No text, calligraphy, seals, labels, borders, watermarks, or modern objects. Coherent anatomy. Northern Song Langya mountain landscape, layered green wooded hills, winding path following a clear spring to a small rustic pavilion over the water on right, eaves spreading like wings. Tiny walkers on path. Left landscape softly open for cover text, no modern reconstruction.",
+    "mode": "built-in image_gen",
+    "path": "/Users/lynnchua/.codex/generated_images/01a18793-fdc3-7f83-aff1-c3c158af5b62/exec-6b15cf81-063d-4b11-873a-8a6b9b232c8f.png",
+    "project_original": "/Users/lynnchua/孩子错题库/语文/文言有画/醉翁亭记/assets/01.png",
+    "web_asset": "/Users/lynnchua/孩子错题库/语文/文言有画/醉翁亭记/assets/01.jpg"
+  },
+  {
+    "book": "醉翁亭记",
+    "id": "02",
+    "prompt": "Use case: illustration-story. One full-bleed landscape painting, 1536x1024, for a classical Chinese family reading picture book. Refined Chinese ink wash with restrained gongbi details, warm ivory xuan paper, atmospheric empty space, muted sage green, gray ink, pale ochre. Elegant natural brushwork, not cartoon, not photo or 3D, no panels. No text, calligraphy, seals, labels, borders, watermarks, or modern objects. Coherent anatomy. Northern Song Ouyang Xiu with gray hair and short gray beard in plain blue-gray scholar robe and black soft hat, seated with two adult guests in a rustic pavilion looking at mountains and spring. Small wine jug and modest cups secondary, scenery central, quiet contentment.",
+    "mode": "built-in image_gen",
+    "path": "/Users/lynnchua/.codex/generated_images/01a18793-fdc3-7f83-aff1-c3c158af5b62/exec-913b2a95-201d-4a96-9525-46989f243b4f.png",
+    "project_original": "/Users/lynnchua/孩子错题库/语文/文言有画/醉翁亭记/assets/02.png",
+    "web_asset": "/Users/lynnchua/孩子错题库/语文/文言有画/醉翁亭记/assets/02.jpg"
+  },
+  {
+    "book": "醉翁亭记",
+    "id": "03",
+    "prompt": "Use case: illustration-story. One full-bleed landscape painting, 1536x1024, for a classical Chinese family reading picture book. Refined Chinese ink wash with restrained gongbi details, warm ivory xuan paper, atmospheric empty space, muted sage green, gray ink, pale ochre. Elegant natural brushwork, not cartoon, not photo or 3D, no panels. No text, calligraphy, seals, labels, borders, watermarks, or modern objects. Coherent anatomy. A single poetic mountain landscape changing gently through natural space from spring flowers near stream to summer dense trees, autumn distant ridge and wintry pale rock and low water, like a continuous seasonal handscroll without panels or borders. Warm xuan paper. No labels.",
+    "mode": "built-in image_gen",
+    "path": "/Users/lynnchua/.codex/generated_images/01a18793-fdc3-7f83-aff1-c3c158af5b62/exec-774e8080-dfdf-4b45-af04-b929ada5c9a3.png",
+    "project_original": "/Users/lynnchua/孩子错题库/语文/文言有画/醉翁亭记/assets/03.png",
+    "web_asset": "/Users/lynnchua/孩子错题库/语文/文言有画/醉翁亭记/assets/03.jpg"
+  },
+  {
+    "book": "醉翁亭记",
+    "id": "04",
+    "prompt": "Use case: illustration-story. One full-bleed landscape painting, 1536x1024, for a classical Chinese family reading picture book. Refined Chinese ink wash with restrained gongbi details, warm ivory xuan paper, atmospheric empty space, muted sage green, gray ink, pale ochre. Elegant natural brushwork, not cartoon, not photo or 3D, no panels. No text, calligraphy, seals, labels, borders, watermarks, or modern objects. Coherent anatomy. Northern Song villagers enjoying a wooded mountain path: an old person with walking stick accompanied by a child, a porter singing with balanced baskets, other walkers resting under a tree. Everyone in simple period clothing, loose and cheerful gestures, dignified everyday life.",
+    "mode": "built-in image_gen",
+    "path": "/Users/lynnchua/.codex/generated_images/01a18793-fdc3-7f83-aff1-c3c158af5b62/exec-ab4fd22d-bfd1-468a-b409-660ef56f2d38.png",
+    "project_original": "/Users/lynnchua/孩子错题库/语文/文言有画/醉翁亭记/assets/04.png",
+    "web_asset": "/Users/lynnchua/孩子错题库/语文/文言有画/醉翁亭记/assets/04.jpg"
+  },
+  {
+    "book": "醉翁亭记",
+    "id": "05",
+    "prompt": "Use case: illustration-story. One full-bleed landscape painting, 1536x1024, for a classical Chinese family reading picture book. Refined Chinese ink wash with restrained gongbi details, warm ivory xuan paper, atmospheric empty space, muted sage green, gray ink, pale ochre. Elegant natural brushwork, not cartoon, not photo or 3D, no panels. No text, calligraphy, seals, labels, borders, watermarks, or modern objects. Coherent anatomy. Northern Song outdoor feast beside a small mountain pavilion: guests seated around rustic tables with simple vegetables and fish, two adults playing weiqi, Ouyang Xiu gray-haired in blue-gray robe reclining peacefully among them. Joyful community, no exaggerated drunkenness, no children drinking.",
+    "mode": "built-in image_gen",
+    "path": "/Users/lynnchua/.codex/generated_images/01a18793-fdc3-7f83-aff1-c3c158af5b62/exec-47687479-37b6-48c2-8504-414dadaca494.png",
+    "project_original": "/Users/lynnchua/孩子错题库/语文/文言有画/醉翁亭记/assets/05.png",
+    "web_asset": "/Users/lynnchua/孩子错题库/语文/文言有画/醉翁亭记/assets/05.jpg"
+  },
+  {
+    "book": "醉翁亭记",
+    "id": "06",
+    "prompt": "Use case: illustration-story. One full-bleed landscape painting, 1536x1024, for a classical Chinese family reading picture book. Refined Chinese ink wash with restrained gongbi details, warm ivory xuan paper, atmospheric empty space, muted sage green, gray ink, pale ochre. Elegant natural brushwork, not cartoon, not photo or 3D, no panels. No text, calligraphy, seals, labels, borders, watermarks, or modern objects. Coherent anatomy. Northern Song evening mountain forest, Ouyang Xiu in blue-gray robe and adult guests returning along a path into the distance, small birds reappearing in trees in foreground, warm fading sunlight, empty pavilion barely visible. Two kinds of joy in one quiet landscape.",
+    "mode": "built-in image_gen",
+    "path": "/Users/lynnchua/.codex/generated_images/01a18793-fdc3-7f83-aff1-c3c158af5b62/exec-767cbc6a-bf3b-4483-ba02-ab38030c2f00.png",
+    "project_original": "/Users/lynnchua/孩子错题库/语文/文言有画/醉翁亭记/assets/06.png",
+    "web_asset": "/Users/lynnchua/孩子错题库/语文/文言有画/醉翁亭记/assets/06.jpg"
+  }
+]

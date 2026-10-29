@@ -1,0 +1,35 @@
+{
+  "booksTotal": 19,
+  "newBooks": [
+    {
+      "title": "促织",
+      "scenes": 10,
+      "words": 86,
+      "hanCharacters": 1485,
+      "referenceMatchedAfterDeclaredVariants": true,
+      "textGroupsComplete": true,
+      "annotationsResolved": true,
+      "textSHA256": "3574709e4d749f2621d19c29095333fd15425a377b923a3c5f4bbcb9a785730d"
+    },
+    {
+      "title": "滕王阁序",
+      "scenes": 9,
+      "words": 92,
+      "hanCharacters": 773,
+      "referenceMatchedAfterDeclaredVariants": true,
+      "textGroupsComplete": true,
+      "annotationsResolved": true,
+      "textSHA256": "c6b89c19ea2e5c02d7ae23fa0786407c266498ff2c18d49bd2a9ae860d227136"
+    },
+    {
+      "title": "醉翁亭记",
+      "scenes": 6,
+      "words": 40,
+      "hanCharacters": 402,
+      "referenceMatchedAfterDeclaredVariants": true,
+      "textGroupsComplete": true,
+      "annotationsResolved": true,
+      "textSHA256": "be03ca4d393ac9c84b2935425d0caacffa306c86fd17b013987b2cac467efd97"
+    }
+  ]
+}

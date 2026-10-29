@@ -1,0 +1,52 @@
+[
+  {
+    "title": "桃花源记",
+    "sceneCount": 8,
+    "words": 60,
+    "hanCharacters": 320,
+    "paragraphs": 5,
+    "exactReferenceMatch": "previously checked",
+    "embeddedImages": 8,
+    "storageKey": "wenyan-youhua.taohuayuan.v1"
+  },
+  {
+    "title": "卖油翁",
+    "sceneCount": 6,
+    "words": 35,
+    "hanCharacters": 133,
+    "paragraphs": 2,
+    "exactReferenceMatch": "previously checked",
+    "embeddedImages": 6,
+    "storageKey": "wenyan-youhua.maiyouweng.v1"
+  },
+  {
+    "title": "岳阳楼记",
+    "sceneCount": 8,
+    "words": 55,
+    "hanCharacters": 368,
+    "paragraphs": 6,
+    "exactReferenceMatch": true,
+    "embeddedImages": 8,
+    "storageKey": "wenyan-youhua.yueyanglouji.v1"
+  },
+  {
+    "title": "田忌赛马",
+    "sceneCount": 6,
+    "words": 30,
+    "hanCharacters": 137,
+    "paragraphs": 1,
+    "exactReferenceMatch": true,
+    "embeddedImages": 6,
+    "storageKey": "wenyan-youhua.tianjisaima.v1"
+  },
+  {
+    "title": "捕蛇者说",
+    "sceneCount": 8,
+    "words": 71,
+    "hanCharacters": 469,
+    "paragraphs": 5,
+    "exactReferenceMatch": true,
+    "embeddedImages": 8,
+    "storageKey": "wenyan-youhua.bushezheshuo.v1"
+  }
+]

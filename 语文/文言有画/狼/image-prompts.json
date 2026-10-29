@@ -1,0 +1,53 @@
+{
+  "tool": "built-in image_gen",
+  "images": [
+    {
+      "book": "狼",
+      "id": "01",
+      "prompt": "Use case: illustration-story. Asset type: one full-bleed landscape 1536x1024 illustration in the children's classical Chinese reading series 文言有画. Traditional Chinese ink wash with fine restrained gongbi figures on warm ivory xuan paper, expressive natural brushwork, atmospheric negative space, muted sage green, gray ink and pale ochre. Painterly artwork, no photography, no 3D, no cartoon panels. No text, letters, labels, seals or watermark; no modern objects. Coherent natural anatomy and clear literary scene; human figures small within landscape. Rural Qing-era China at dusk, a lone adult butcher wearing plain gray-brown jacket, dark cloth cap and carrying a shoulder pole with two small baskets walks along an empty country path. EXACTLY TWO gray wolves follow at a clear distance behind, not attacking. Low field grasses and misty trees, broad landscape, suspense through spacing, no blood or meat visible.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-977059bf-e54d-487d-87e8-dbef4515458e.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/狼/assets/01.png",
+      "web_asset": "assets/01.jpg"
+    },
+    {
+      "book": "狼",
+      "id": "02",
+      "prompt": "Use case: illustration-story. Asset type: one full-bleed landscape 1536x1024 illustration in the children's classical Chinese reading series 文言有画. Traditional Chinese ink wash with fine restrained gongbi figures on warm ivory xuan paper, expressive natural brushwork, atmospheric negative space, muted sage green, gray ink and pale ochre. Painterly artwork, no photography, no 3D, no cartoon panels. No text, letters, labels, seals or watermark; no modern objects. Coherent natural anatomy and clear literary scene; human figures small within landscape. Same adult butcher in gray-brown jacket and dark cloth cap walks along the dusk path after tossing one small pale clean bone behind him. EXACTLY TWO gray wolves: one stops by the bone, the other continues following him. Clear spatial relationship and quiet tension, baskets on shoulder pole nearly empty, no attack, no blood.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-e3f7fd00-e126-43b4-94d8-2c2bf41d67b6.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/狼/assets/02.png",
+      "web_asset": "assets/02.jpg"
+    },
+    {
+      "book": "狼",
+      "id": "03",
+      "prompt": "Use case: illustration-story. Asset type: one full-bleed landscape 1536x1024 illustration in the children's classical Chinese reading series 文言有画. Traditional Chinese ink wash with fine restrained gongbi figures on warm ivory xuan paper, expressive natural brushwork, atmospheric negative space, muted sage green, gray ink and pale ochre. Painterly artwork, no photography, no 3D, no cartoon panels. No text, letters, labels, seals or watermark; no modern objects. Coherent natural anatomy and clear literary scene; human figures small within landscape. The butcher in gray-brown jacket has reached a harvested wheat threshing yard and stands backed against a large mound of stacked firewood covered with rough straw matting. Shoulder pole and baskets set down beside him. He holds a short plain cleaver low and defensively, blade pointed down. EXACTLY TWO gray wolves face him from several steps away. No contact or attack, no gore.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-fe4ef258-2dca-4c4a-b879-c9caacbad6e4.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/狼/assets/03.png",
+      "web_asset": "assets/03.jpg"
+    },
+    {
+      "book": "狼",
+      "id": "04",
+      "prompt": "Use case: illustration-story. Asset type: one full-bleed landscape 1536x1024 illustration in the children's classical Chinese reading series 文言有画. Traditional Chinese ink wash with fine restrained gongbi figures on warm ivory xuan paper, expressive natural brushwork, atmospheric negative space, muted sage green, gray ink and pale ochre. Painterly artwork, no photography, no 3D, no cartoon panels. No text, letters, labels, seals or watermark; no modern objects. Coherent natural anatomy and clear literary scene; human figures small within landscape. At the same straw-covered firewood mound, one gray wolf sits dog-like at a distance in front with eyes almost closed, while a second gray wolf slips away around the far side of the mound, partly disappearing. The butcher stands alert with his back to the mound, plain cleaver held down at his side. Capture the deceptive pause before any violence, no attack, no dead animal.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-d82451da-6c6d-47fe-acc5-075aed498a98.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/狼/assets/04.png",
+      "web_asset": "assets/04.jpg"
+    },
+    {
+      "book": "狼",
+      "id": "05",
+      "prompt": "Use case: illustration-story. Asset type: one full-bleed landscape 1536x1024 illustration in the children's classical Chinese reading series 文言有画. Traditional Chinese ink wash with fine restrained gongbi figures on warm ivory xuan paper, expressive natural brushwork, atmospheric negative space, muted sage green, gray ink and pale ochre. Painterly artwork, no photography, no 3D, no cartoon panels. No text, letters, labels, seals or watermark; no modern objects. Coherent natural anatomy and clear literary scene; human figures small within landscape. A slightly elevated view of the BACK of a straw-covered firewood mound: a gray wolf has pushed its head and forebody into a small tunnel under the wood, leaving only its hindquarters and tail visible. Adult butcher in gray-brown clothes has just turned around the edge and notices it, shoulders alert, his lowered tool unobtrusive. No blood, no dismemberment, no action blow. Emphasize discovery and layout.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-a04d84ae-46ea-4fbb-b5fa-704111fe785a.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/狼/assets/05.png",
+      "web_asset": "assets/05.jpg"
+    },
+    {
+      "book": "狼",
+      "id": "06",
+      "prompt": "Use case: illustration-story. Asset type: one full-bleed landscape 1536x1024 illustration in the children's classical Chinese reading series 文言有画. Traditional Chinese ink wash with fine restrained gongbi figures on warm ivory xuan paper, expressive natural brushwork, atmospheric negative space, muted sage green, gray ink and pale ochre. Painterly artwork, no photography, no 3D, no cartoon panels. No text, letters, labels, seals or watermark; no modern objects. Coherent natural anatomy and clear literary scene; human figures small within landscape. A wide empty rural threshing yard at fading dusk after the danger has passed: adult butcher in gray-brown jacket and dark cloth cap walks away toward distant village lights carrying his shoulder pole and baskets. Straw-covered firewood mound left behind, wind in sparse grasses. No wolves or dead bodies visible. A reflective quiet ending, the literary narrator's pause after suspense.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-c975e572-5aee-4899-8375-42d5a67f7f9b.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/狼/assets/06.png",
+      "web_asset": "assets/06.jpg"
+    }
+  ]
+}

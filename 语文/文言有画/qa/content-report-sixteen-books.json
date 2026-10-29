@@ -1,0 +1,145 @@
+{
+  "bookCount": 16,
+  "newIllustrations": 24,
+  "zipMembers": 18,
+  "zipCRC": "pass",
+  "books": [
+    {
+      "title": "桃花源记",
+      "scenes": 8,
+      "words": 60,
+      "idsUnique": true,
+      "embeddedImages": 8,
+      "scriptSyntax": "pass"
+    },
+    {
+      "title": "卖油翁",
+      "scenes": 6,
+      "words": 35,
+      "idsUnique": true,
+      "embeddedImages": 6,
+      "scriptSyntax": "pass"
+    },
+    {
+      "title": "岳阳楼记",
+      "scenes": 8,
+      "words": 55,
+      "idsUnique": true,
+      "embeddedImages": 8,
+      "scriptSyntax": "pass"
+    },
+    {
+      "title": "田忌赛马",
+      "scenes": 6,
+      "words": 30,
+      "idsUnique": true,
+      "embeddedImages": 6,
+      "scriptSyntax": "pass"
+    },
+    {
+      "title": "捕蛇者说",
+      "scenes": 8,
+      "words": 71,
+      "idsUnique": true,
+      "embeddedImages": 8,
+      "scriptSyntax": "pass"
+    },
+    {
+      "title": "塞翁失马",
+      "scenes": 5,
+      "words": 25,
+      "idsUnique": true,
+      "embeddedImages": 5,
+      "scriptSyntax": "pass"
+    },
+    {
+      "title": "陋室铭",
+      "scenes": 5,
+      "words": 18,
+      "idsUnique": true,
+      "embeddedImages": 5,
+      "scriptSyntax": "pass"
+    },
+    {
+      "title": "狼",
+      "scenes": 6,
+      "words": 38,
+      "idsUnique": true,
+      "embeddedImages": 6,
+      "scriptSyntax": "pass"
+    },
+    {
+      "title": "小石潭记",
+      "scenes": 6,
+      "words": 38,
+      "idsUnique": true,
+      "embeddedImages": 6,
+      "scriptSyntax": "pass"
+    },
+    {
+      "title": "马说",
+      "scenes": 5,
+      "words": 29,
+      "idsUnique": true,
+      "embeddedImages": 5,
+      "scriptSyntax": "pass"
+    },
+    {
+      "title": "爱莲说",
+      "scenes": 4,
+      "words": 19,
+      "idsUnique": true,
+      "embeddedImages": 4,
+      "scriptSyntax": "pass"
+    },
+    {
+      "title": "邹忌讽齐王纳谏",
+      "scenes": 6,
+      "words": 38,
+      "idsUnique": true,
+      "embeddedImages": 6,
+      "scriptSyntax": "pass"
+    },
+    {
+      "title": "扁鹊见蔡桓公",
+      "scenes": 6,
+      "words": 29,
+      "idsUnique": true,
+      "embeddedImages": 6,
+      "scriptSyntax": "pass"
+    },
+    {
+      "title": "谏太宗十思疏",
+      "scenes": 8,
+      "words": 47,
+      "idsUnique": true,
+      "embeddedImages": 8,
+      "scriptSyntax": "pass",
+      "referenceTextMatch": true,
+      "characters": 545,
+      "allWordEntriesUsed": true
+    },
+    {
+      "title": "曹刿论战",
+      "scenes": 6,
+      "words": 44,
+      "idsUnique": true,
+      "embeddedImages": 6,
+      "scriptSyntax": "pass",
+      "referenceTextMatch": true,
+      "characters": 318,
+      "allWordEntriesUsed": true
+    },
+    {
+      "title": "逍遥游",
+      "scenes": 10,
+      "words": 68,
+      "idsUnique": true,
+      "embeddedImages": 10,
+      "scriptSyntax": "pass",
+      "referenceTextMatch": true,
+      "characters": 812,
+      "allWordEntriesUsed": true
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "books": [
+    {
+      "title": "桃花源记",
+      "scenes": 8,
+      "words": 60,
+      "paragraphs": 5,
+      "fulltext_checked": false,
+      "portable_assets_embedded": true,
+      "unique_dom_ids": true,
+      "javascript_syntax": true
+    },
+    {
+      "title": "卖油翁",
+      "scenes": 6,
+      "words": 35,
+      "paragraphs": 2,
+      "fulltext_checked": false,
+      "portable_assets_embedded": true,
+      "unique_dom_ids": true,
+      "javascript_syntax": true
+    },
+    {
+      "title": "岳阳楼记",
+      "scenes": 8,
+      "words": 55,
+      "paragraphs": 5,
+      "fulltext_checked": false,
+      "portable_assets_embedded": true,
+      "unique_dom_ids": true,
+      "javascript_syntax": true
+    },
+    {
+      "title": "田忌赛马",
+      "scenes": 6,
+      "words": 30,
+      "paragraphs": 1,
+      "fulltext_checked": false,
+      "portable_assets_embedded": true,
+      "unique_dom_ids": true,
+      "javascript_syntax": true
+    },
+    {
+      "title": "捕蛇者说",
+      "scenes": 8,
+      "words": 71,
+      "paragraphs": 5,
+      "fulltext_checked": false,
+      "portable_assets_embedded": true,
+      "unique_dom_ids": true,
+      "javascript_syntax": true
+    },
+    {
+      "title": "塞翁失马",
+      "scenes": 5,
+      "words": 25,
+      "paragraphs": 4,
+      "fulltext_checked": true,
+      "portable_assets_embedded": true,
+      "unique_dom_ids": true,
+      "javascript_syntax": true
+    },
+    {
+      "title": "陋室铭",
+      "scenes": 5,
+      "words": 18,
+      "paragraphs": 1,
+      "fulltext_checked": true,
+      "portable_assets_embedded": true,
+      "unique_dom_ids": true,
+      "javascript_syntax": true
+    },
+    {
+      "title": "狼",
+      "scenes": 6,
+      "words": 38,
+      "paragraphs": 5,
+      "fulltext_checked": true,
+      "portable_assets_embedded": true,
+      "unique_dom_ids": true,
+      "javascript_syntax": true
+    },
+    {
+      "title": "小石潭记",
+      "scenes": 6,
+      "words": 38,
+      "paragraphs": 5,
+      "fulltext_checked": true,
+      "portable_assets_embedded": true,
+      "unique_dom_ids": true,
+      "javascript_syntax": true
+    },
+    {
+      "title": "马说",
+      "scenes": 5,
+      "words": 29,
+      "paragraphs": 3,
+      "fulltext_checked": true,
+      "portable_assets_embedded": true,
+      "unique_dom_ids": true,
+      "javascript_syntax": true
+    }
+  ],
+  "zip_crc_and_content_match": true,
+  "zip_entries": 12
+}

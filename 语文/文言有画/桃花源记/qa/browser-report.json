@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-29",
+  "functional_surface": "Single-file HTML served from loopback HTTP",
+  "scenes_verified": 8,
+  "all_scene_images_loaded": true,
+  "desktop_viewport": 1280,
+  "narrow_viewport": 479,
+  "additional_visual_widths": [
+    390,
+    768
+  ],
+  "overflow_on_checked_main_views": false,
+  "checked": [
+    "page links and page numbers",
+    "keyboard left/right",
+    "pinyin toggle",
+    "word definition dialog",
+    "image enlargement dialog",
+    "glossary search",
+    "five original paragraphs",
+    "browser-local reflection persistence; test input removed"
+  ],
+  "inline_resources": {
+    "images": 8,
+    "external_scripts": 0,
+    "external_stylesheets": 0
+  },
+  "browser_errors": [],
+  "verification_note": "Direct file: navigation is disallowed by the browser URL policy. Single-file behavior was verified over an existing local HTTP preview; resource self-containment was independently checked. Print stylesheet is included but the system print dialog was not exercised."
+}

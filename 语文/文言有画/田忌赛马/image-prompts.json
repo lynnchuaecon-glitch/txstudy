@@ -1,0 +1,53 @@
+{
+  "tool": "built-in image_gen",
+  "images": [
+    {
+      "book": "田忌赛马",
+      "id": "01",
+      "prompt": "Use case: illustration-story. Create one full-bleed landscape 1536x1024 illustration for a Chinese classical prose picture book for children, series 文言有画. Traditional Chinese ink wash and restrained gongbi figure painting on warm ivory xuan paper, expressive brush strokes and fine ink contours, subtle mineral gray-green, pale ochre, soft muted colors, atmospheric blank space, painterly not photography, no 3D, no comic panels. Entire image is artwork with no text, no letters, no calligraphy, no seals, no watermark. No modern objects. Natural coherent anatomy, readable story action, contemplative and dignified. Warring States China in the state of Qi: General Tian Ji, dignified adult with short beard, dark russet robe and simple tied hair, welcomes strategist Sun Bin, slender adult in blue-gray robe seated comfortably on a plain low wooden couch with lower legs covered by robe, into a shaded courtyard. Grooms lead horses on distant raceground outside. Respectful thoughtful meeting, no injury depiction, no modern wheelchair, no text.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a185c6-86c0-7e61-a350-cb3ce56192fa/exec-642502c9-4b8d-426d-9811-f4748cff905f.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/田忌赛马/assets/01.png",
+      "web_asset": "assets/01.jpg"
+    },
+    {
+      "book": "田忌赛马",
+      "id": "02",
+      "prompt": "Use case: illustration-story. Create one full-bleed landscape 1536x1024 illustration for a Chinese classical prose picture book for children, series 文言有画. Traditional Chinese ink wash and restrained gongbi figure painting on warm ivory xuan paper, expressive brush strokes and fine ink contours, subtle mineral gray-green, pale ochre, soft muted colors, atmospheric blank space, painterly not photography, no 3D, no comic panels. Entire image is artwork with no text, no letters, no calligraphy, no seals, no watermark. No modern objects. Natural coherent anatomy, readable story action, contemplative and dignified. Warring States Qi horse grounds. Strategist Sun Bin, slender adult in blue-gray robe seated on a plain wooden low seat under tree shade, quietly studies several horses of different builds led by grooms across open ground; General Tian Ji in dark russet robe stands beside him watching. Focus on attentive observation and relationships, not winning. Horses natural and elegant, no numerical labels or modern tack.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a185c6-86c0-7e61-a350-cb3ce56192fa/exec-929e26b4-1b81-41d1-a2ee-ade0bda131f2.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/田忌赛马/assets/02.png",
+      "web_asset": "assets/02.jpg"
+    },
+    {
+      "book": "田忌赛马",
+      "id": "03",
+      "prompt": "Use case: illustration-story. Create one full-bleed landscape 1536x1024 illustration for a Chinese classical prose picture book for children, series 文言有画. Traditional Chinese ink wash and restrained gongbi figure painting on warm ivory xuan paper, expressive brush strokes and fine ink contours, subtle mineral gray-green, pale ochre, soft muted colors, atmospheric blank space, painterly not photography, no 3D, no comic panels. Entire image is artwork with no text, no letters, no calligraphy, no seals, no watermark. No modern objects. Natural coherent anatomy, readable story action, contemplative and dignified. Close quiet planning conversation in Warring States Qi: seated blue-gray robed Sun Bin speaking with calm assurance to Tian Ji in dark russet robe leaning slightly forward listening, horse paddock softly visible beyond bamboo fence, warm pale afternoon light. A plain empty low table between them, no coins or wagering display, no writing. Strategy begins with trust and observation.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a185c6-86c0-7e61-a350-cb3ce56192fa/exec-80a85b35-45d7-4a2e-951f-d5647d6f0fe8.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/田忌赛马/assets/03.png",
+      "web_asset": "assets/03.jpg"
+    },
+    {
+      "book": "田忌赛马",
+      "id": "04",
+      "prompt": "Use case: illustration-story. Create one full-bleed landscape 1536x1024 illustration for a Chinese classical prose picture book for children, series 文言有画. Traditional Chinese ink wash and restrained gongbi figure painting on warm ivory xuan paper, expressive brush strokes and fine ink contours, subtle mineral gray-green, pale ochre, soft muted colors, atmospheric blank space, painterly not photography, no 3D, no comic panels. Entire image is artwork with no text, no letters, no calligraphy, no seals, no watermark. No modern objects. Natural coherent anatomy, readable story action, contemplative and dignified. Warring States military courtyard. Seated strategist Sun Bin in blue-gray robe moves a few plain wooden horse-shaped tokens across an unmarked mat on a low table while Tian Ji in dark russet watches thoughtfully. Over-the-shoulder diagonal composition showing deliberate rearrangement, actual grazing horses distant behind courtyard. No visible numbers, arrows, labels or writing; the art evokes arranging opponents, not an exact quantitative diagram.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a185c6-86c0-7e61-a350-cb3ce56192fa/exec-aa8a3a4d-55ee-4988-9ba9-f0a33a88c3c1.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/田忌赛马/assets/04.png",
+      "web_asset": "assets/04.jpg"
+    },
+    {
+      "book": "田忌赛马",
+      "id": "05",
+      "prompt": "Use case: illustration-story. Create one full-bleed landscape 1536x1024 illustration for a Chinese classical prose picture book for children, series 文言有画. Traditional Chinese ink wash and restrained gongbi figure painting on warm ivory xuan paper, expressive brush strokes and fine ink contours, subtle mineral gray-green, pale ochre, soft muted colors, atmospheric blank space, painterly not photography, no 3D, no comic panels. Entire image is artwork with no text, no letters, no calligraphy, no seals, no watermark. No modern objects. Natural coherent anatomy, readable story action, contemplative and dignified. A horse race on broad earth track in Warring States Qi: two fine horses galloping left to right, one slightly ahead of the other, riders small and dressed in simple ancient cloth with tied hair, muted russet and muted slate blue saddlecloths, hooves lift delicate ink dust, spectators tiny under pavilion in distance. Natural horses with four legs each, no modern jockey helmets, no finish banner, no injury or whipping. Painterly scene is a literary illustration not a reconstruction of exact chariot-racing rules.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a185c6-86c0-7e61-a350-cb3ce56192fa/exec-99039bae-5afe-4263-8824-fd6f3de8df55.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/田忌赛马/assets/05.png",
+      "web_asset": "assets/05.jpg"
+    },
+    {
+      "book": "田忌赛马",
+      "id": "06",
+      "prompt": "Use case: illustration-story. Create one full-bleed landscape 1536x1024 illustration for a Chinese classical prose picture book for children, series 文言有画. Traditional Chinese ink wash and restrained gongbi figure painting on warm ivory xuan paper, expressive brush strokes and fine ink contours, subtle mineral gray-green, pale ochre, soft muted colors, atmospheric blank space, painterly not photography, no 3D, no comic panels. Entire image is artwork with no text, no letters, no calligraphy, no seals, no watermark. No modern objects. Natural coherent anatomy, readable story action, contemplative and dignified. Ancient Qi hall with simple timber pillars and open landscape beyond. Tian Ji in dark russet robe respectfully introduces blue-gray-robed Sun Bin, seated on a simple wooden couch, to King Wei in an understated dark green formal robe seated at a low desk. King listens attentively as Sun Bin gestures toward an unmarked rolled military map. Warm thoughtful recognition of wisdom, no grand gold throne, no writing or modern objects.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a185c6-86c0-7e61-a350-cb3ce56192fa/exec-71128d5d-2186-4241-b5a9-dd3d3a759da1.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/田忌赛马/assets/06.png",
+      "web_asset": "assets/06.jpg"
+    }
+  ]
+}

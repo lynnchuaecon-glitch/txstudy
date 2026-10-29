@@ -1,0 +1,22 @@
+[
+  {
+    "title": "桃花源记",
+    "scenes": 8,
+    "glossary": 60,
+    "paragraphs": 5,
+    "hanCharacters": 320,
+    "exactTextCheck": "previously verified 320-character text retained",
+    "embeddedImages": 8,
+    "storageKey": "wenyan-youhua.taohuayuan.v1"
+  },
+  {
+    "title": "卖油翁",
+    "scenes": 6,
+    "glossary": 35,
+    "paragraphs": 2,
+    "hanCharacters": 133,
+    "exactTextCheck": "matches independently transcribed course text",
+    "embeddedImages": 6,
+    "storageKey": "wenyan-youhua.maiyouweng.v1"
+  }
+]

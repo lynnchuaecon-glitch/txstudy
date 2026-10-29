@@ -1,0 +1,18 @@
+{
+  "title": "木兰诗",
+  "scenes": 9,
+  "paragraphs": 7,
+  "widths": [
+    1440,
+    390,
+    320
+  ],
+  "shelfBooks": 20,
+  "adjacentLinks": "passed",
+  "interactionChecks": "passed",
+  "blankNotesAndIsolatedPersistence": "passed",
+  "verseLineBreaks": "passed",
+  "fulltextMatchesSource": true,
+  "errors": [],
+  "externalRequests": []
+}

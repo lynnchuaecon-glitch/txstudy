@@ -1,0 +1,27 @@
+{
+  "books": [
+    {
+      "title": "促织",
+      "scenes": 10,
+      "interactions": "passed"
+    },
+    {
+      "title": "滕王阁序",
+      "scenes": 9,
+      "interactions": "passed"
+    },
+    {
+      "title": "醉翁亭记",
+      "scenes": 6,
+      "interactions": "passed"
+    }
+  ],
+  "widths": [
+    1440,
+    390,
+    320
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "previousBooksChecked": 16
+}

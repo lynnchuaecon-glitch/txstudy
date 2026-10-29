@@ -1,0 +1,62 @@
+[
+  {
+    "book": "邹忌讽齐王纳谏",
+    "id": "01",
+    "prompt": "Use case: illustration-story. One full-bleed landscape 1536x1024 illustration for the children's classical Chinese reading series 文言有画. Traditional Chinese ink wash with restrained fine gongbi figures on warm ivory xuan paper, natural expressive brushwork, atmospheric negative space, muted sage green, gray ink and pale ochre with restrained floral pink. Painterly artwork, no photography, no 3D, no cartoon panels. No text, letters, labels, seals or watermark; no modern objects. Clear coherent natural anatomy, people small within architecture or landscape. Warring States China. Zou Ji is a tall handsome adult scholar, slender face, small neat black beard, long hair tied under a simple dark crown, wearing muted teal cross-collar robe with dark belt. In a modest study he holds a small round polished bronze mirror and turns to his adult wife in a fully clothed ochre robe. Warm morning light, considerate conversation. An uninscribed rolled mat and low table. Subject composition on right, light open courtyard on left.",
+    "output_hint": "Generated images are saved to /Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8 as /Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-bf492d78-e3db-4bd2-9f9b-e55f990935c8.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "mode": "built-in image_gen",
+    "generated_original": "/Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-bf492d78-e3db-4bd2-9f9b-e55f990935c8.png",
+    "project_original": "/Users/lynnchua/孩子错题库/语文/文言有画/邹忌讽齐王纳谏/assets/01.png",
+    "web_asset": "/Users/lynnchua/孩子错题库/语文/文言有画/邹忌讽齐王纳谏/assets/01.jpg"
+  },
+  {
+    "book": "邹忌讽齐王纳谏",
+    "id": "02",
+    "prompt": "Use case: illustration-story. One full-bleed landscape 1536x1024 illustration for the children's classical Chinese reading series 文言有画. Traditional Chinese ink wash with restrained fine gongbi figures on warm ivory xuan paper, natural expressive brushwork, atmospheric negative space, muted sage green, gray ink and pale ochre with restrained floral pink. Painterly artwork, no photography, no 3D, no cartoon panels. No text, letters, labels, seals or watermark; no modern objects. Clear coherent natural anatomy, people small within architecture or landscape. Warring States China. Zou Ji, same tall handsome adult with small neat black beard, dark small crown, muted teal robe and dark belt, sits facing an adult male visitor in pale brown robe across a low wooden table in a quiet courtyard. Visitor leans forward politely, Zou Ji listens thoughtfully. No scroll text, no modern furniture. Fine restrained gestures.",
+    "output_hint": "Generated images are saved to /Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8 as /Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-6b39b60f-b183-41a3-a387-b4b659990947.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "mode": "built-in image_gen",
+    "generated_original": "/Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-6b39b60f-b183-41a3-a387-b4b659990947.png",
+    "project_original": "/Users/lynnchua/孩子错题库/语文/文言有画/邹忌讽齐王纳谏/assets/02.png",
+    "web_asset": "/Users/lynnchua/孩子错题库/语文/文言有画/邹忌讽齐王纳谏/assets/02.jpg"
+  },
+  {
+    "book": "邹忌讽齐王纳谏",
+    "id": "03",
+    "prompt": "Use case: illustration-story. One full-bleed landscape 1536x1024 illustration for the children's classical Chinese reading series 文言有画. Traditional Chinese ink wash with restrained fine gongbi figures on warm ivory xuan paper, natural expressive brushwork, atmospheric negative space, muted sage green, gray ink and pale ochre with restrained floral pink. Painterly artwork, no photography, no 3D, no cartoon panels. No text, letters, labels, seals or watermark; no modern objects. Clear coherent natural anatomy, people small within architecture or landscape. Warring States China at dusk. Zou Ji, a tall handsome man with small neat black beard, tied hair under dark small crown, muted teal robe and dark belt, sits alone beside a low couch and round bronze mirror lying on a table, head slightly bowed in reflection. Through an open doorway in misty evening distance a graceful adult guest in ivory robe departs. Oil lamp unlit or soft ancient lamp; contemplative, not unhappy or ashamed.",
+    "output_hint": "Generated images are saved to /Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8 as /Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-6b8b0ed6-55c6-4e6d-a14f-cabf8d6aefd5.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "mode": "built-in image_gen",
+    "generated_original": "/Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-6b8b0ed6-55c6-4e6d-a14f-cabf8d6aefd5.png",
+    "project_original": "/Users/lynnchua/孩子错题库/语文/文言有画/邹忌讽齐王纳谏/assets/03.png",
+    "web_asset": "/Users/lynnchua/孩子错题库/语文/文言有画/邹忌讽齐王纳谏/assets/03.jpg"
+  },
+  {
+    "book": "邹忌讽齐王纳谏",
+    "id": "04",
+    "prompt": "Use case: illustration-story. One full-bleed landscape 1536x1024 illustration for the children's classical Chinese reading series 文言有画. Traditional Chinese ink wash with restrained fine gongbi figures on warm ivory xuan paper, natural expressive brushwork, atmospheric negative space, muted sage green, gray ink and pale ochre with restrained floral pink. Painterly artwork, no photography, no 3D, no cartoon panels. No text, letters, labels, seals or watermark; no modern objects. Clear coherent natural anatomy, people small within architecture or landscape. Warring States Chinese audience hall. Zou Ji in muted teal cross-collar robe, dark belt and small dark crown, with small neat black beard, stands on right below a modest raised seat, calmly telling a story with open palms to King Wei of Qi. King in deep ochre robe and restrained black ancient crown listens attentively. Broad unoccupied palace floor on left, wooden pillars and distant courtyard, no Qing architecture, no grand fantasy throne.",
+    "output_hint": "Generated images are saved to /Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8 as /Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-af425ef5-1fbb-4be4-bbe7-650d8e223d68.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "mode": "built-in image_gen",
+    "generated_original": "/Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-af425ef5-1fbb-4be4-bbe7-650d8e223d68.png",
+    "project_original": "/Users/lynnchua/孩子错题库/语文/文言有画/邹忌讽齐王纳谏/assets/04.png",
+    "web_asset": "/Users/lynnchua/孩子错题库/语文/文言有画/邹忌讽齐王纳谏/assets/04.jpg"
+  },
+  {
+    "book": "邹忌讽齐王纳谏",
+    "id": "05",
+    "prompt": "Use case: illustration-story. One full-bleed landscape 1536x1024 illustration for the children's classical Chinese reading series 文言有画. Traditional Chinese ink wash with restrained fine gongbi figures on warm ivory xuan paper, natural expressive brushwork, atmospheric negative space, muted sage green, gray ink and pale ochre with restrained floral pink. Painterly artwork, no photography, no 3D, no cartoon panels. No text, letters, labels, seals or watermark; no modern objects. Clear coherent natural anatomy, people small within architecture or landscape. Warring States Chinese audience hall opened to visitors. King Wei in deep ochre robe and simple dark ancient crown sits listening attentively, a minister in muted gray speaks before him, two other people hold closed bamboo slips waiting respectfully. Wide-open doors reveal a busy courtyard with several small figures. Visual focus on a ruler making room to listen, not on soldiers or riches.",
+    "output_hint": "Generated images are saved to /Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8 as /Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-c54363d5-3132-4d44-88f6-58517169e58b.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "mode": "built-in image_gen",
+    "generated_original": "/Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-c54363d5-3132-4d44-88f6-58517169e58b.png",
+    "project_original": "/Users/lynnchua/孩子错题库/语文/文言有画/邹忌讽齐王纳谏/assets/05.png",
+    "web_asset": "/Users/lynnchua/孩子错题库/语文/文言有画/邹忌讽齐王纳谏/assets/05.jpg"
+  },
+  {
+    "book": "邹忌讽齐王纳谏",
+    "id": "06",
+    "prompt": "Use case: illustration-story. One full-bleed landscape 1536x1024 illustration for the children's classical Chinese reading series 文言有画. Traditional Chinese ink wash with restrained fine gongbi figures on warm ivory xuan paper, natural expressive brushwork, atmospheric negative space, muted sage green, gray ink and pale ochre with restrained floral pink. Painterly artwork, no photography, no 3D, no cartoon panels. No text, letters, labels, seals or watermark; no modern objects. Clear coherent natural anatomy, people small within architecture or landscape. Warring States Qi palace courtyard in calm daylight. Four small groups of foreign envoys in distinct muted gray, brown, sage and ivory robes approach an open hall from the foreground, attendants welcome them. No weapons, battles, flags with writing, or triumphant spectacle. Open airy landscape composition, restrained ceremonial respectful mood, distant hall and trees.",
+    "output_hint": "Generated images are saved to /Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8 as /Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-7dd5a3ca-9c5d-4568-9e5c-65c4b4844e51.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "mode": "built-in image_gen",
+    "generated_original": "/Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-7dd5a3ca-9c5d-4568-9e5c-65c4b4844e51.png",
+    "project_original": "/Users/lynnchua/孩子错题库/语文/文言有画/邹忌讽齐王纳谏/assets/06.png",
+    "web_asset": "/Users/lynnchua/孩子错题库/语文/文言有画/邹忌讽齐王纳谏/assets/06.jpg"
+  }
+]

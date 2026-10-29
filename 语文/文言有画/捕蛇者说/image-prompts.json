@@ -1,0 +1,69 @@
+{
+  "tool": "built-in image_gen",
+  "images": [
+    {
+      "book": "捕蛇者说",
+      "id": "01",
+      "prompt": "Use case: illustration-story. Create one full-bleed landscape 1536x1024 illustration for a Chinese classical prose picture book for children, series 文言有画. Traditional Chinese ink wash and restrained gongbi figure painting on warm ivory xuan paper, expressive brush strokes and fine ink contours, subtle mineral gray-green, pale ochre, soft muted colors, atmospheric blank space, painterly not photography, no 3D, no comic panels. Entire image is artwork with no text, no letters, no calligraphy, no seals, no watermark. No modern objects. Natural coherent anatomy, readable story action, contemplative and dignified. Tang-era Yongzhou woodland: a single slender dark snake with pale whitish irregular markings rests quietly in the lower right among mossy rocks, bamboo leaves and roots; background misty green hills and a distant modest village. Snake not lunging, mouth closed, not gigantic, no dead animals or injured people. Literary imagination of the text, NOT a scientific species identification plate. Calm serious ink painting with ample breathing room.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a185c6-86c0-7e61-a350-cb3ce56192fa/exec-15bed8a8-a5e0-42b2-a5e1-8f9bce20885a.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/捕蛇者说/assets/01.png",
+      "web_asset": "assets/01.jpg"
+    },
+    {
+      "book": "捕蛇者说",
+      "id": "02",
+      "prompt": "Use case: illustration-story. Create one full-bleed landscape 1536x1024 illustration for a Chinese classical prose picture book for children, series 文言有画. Traditional Chinese ink wash and restrained gongbi figure painting on warm ivory xuan paper, expressive brush strokes and fine ink contours, subtle mineral gray-green, pale ochre, soft muted colors, atmospheric blank space, painterly not photography, no 3D, no comic panels. Entire image is artwork with no text, no letters, no calligraphy, no seals, no watermark. No modern objects. Natural coherent anatomy, readable story action, contemplative and dignified. Tang-era Yongzhou village at a poor but cared-for earthen cottage. Jiang, a lean middle-aged male villager with weathered face in faded gray-brown patched robe, sits in the doorway speaking with restrained sadness, a closed earthenware jar beside him; two old walking staffs lean against the wall as visual reminders of generations, no ghosts or dead bodies. Bamboo and misty fields outside. Dignified intimate ink portrait scene.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a185c6-86c0-7e61-a350-cb3ce56192fa/exec-2891a803-0adb-4e41-aa99-47ae1ac7395c.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/捕蛇者说/assets/02.png",
+      "web_asset": "assets/02.jpg"
+    },
+    {
+      "book": "捕蛇者说",
+      "id": "03",
+      "prompt": "Use case: illustration-story. Create one full-bleed landscape 1536x1024 illustration for a Chinese classical prose picture book for children, series 文言有画. Traditional Chinese ink wash and restrained gongbi figure painting on warm ivory xuan paper, expressive brush strokes and fine ink contours, subtle mineral gray-green, pale ochre, soft muted colors, atmospheric blank space, painterly not photography, no 3D, no comic panels. Entire image is artwork with no text, no letters, no calligraphy, no seals, no watermark. No modern objects. Natural coherent anatomy, readable story action, contemplative and dignified. Tang-era literary encounter outside a humble Yongzhou cottage. Writer Liu Zongyuan imagined as an adult scholar in muted blue-green robe and plain soft cap sits at the SAME level as lean villager Jiang in gray-brown robe, listening and gently offering help with an open hand. Jiang responds earnestly, closed earthenware jar near doorway. Quiet respectful conversation, not an interrogation, no writing.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a185c6-86c0-7e61-a350-cb3ce56192fa/exec-e8c84d6e-a66c-46e9-97bf-8ee510e060d4.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/捕蛇者说/assets/03.png",
+      "web_asset": "assets/03.jpg"
+    },
+    {
+      "book": "捕蛇者说",
+      "id": "04",
+      "prompt": "Use case: illustration-story. Create one full-bleed landscape 1536x1024 illustration for a Chinese classical prose picture book for children, series 文言有画. Traditional Chinese ink wash and restrained gongbi figure painting on warm ivory xuan paper, expressive brush strokes and fine ink contours, subtle mineral gray-green, pale ochre, soft muted colors, atmospheric blank space, painterly not photography, no 3D, no comic panels. Entire image is artwork with no text, no letters, no calligraphy, no seals, no watermark. No modern objects. Natural coherent anatomy, readable story action, contemplative and dignified. Closer view of lean middle-aged villager Jiang in worn gray-brown robe at cottage doorway, eyes slightly wet, one hand raised in worried explanation to seated blue-green-robed scholar seen at left edge. An unexpected offer has made him more anxious. A closed clay jar in shadows behind him, simple hearth and sparse possessions, no melodramatic tears or horror. Humane dignified traditional ink painting.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a185c6-86c0-7e61-a350-cb3ce56192fa/exec-dd0d746d-ab75-4e70-80f0-c7a06d388be2.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/捕蛇者说/assets/04.png",
+      "web_asset": "assets/04.jpg"
+    },
+    {
+      "book": "捕蛇者说",
+      "id": "05",
+      "prompt": "Use case: illustration-story. Create one full-bleed landscape 1536x1024 illustration for a Chinese classical prose picture book for children, series 文言有画. Traditional Chinese ink wash and restrained gongbi figure painting on warm ivory xuan paper, expressive brush strokes and fine ink contours, subtle mineral gray-green, pale ochre, soft muted colors, atmospheric blank space, painterly not photography, no 3D, no comic panels. Entire image is artwork with no text, no letters, no calligraphy, no seals, no watermark. No modern objects. Natural coherent anatomy, readable story action, contemplative and dignified. A Tang-era rural Yongzhou village with several empty earthen cottages and overgrown plots, a small family of adult villagers walking away along a wet path carrying simple bundles, one adult looks back. Wind, mist and light rain suggest hardship, sparse grain stalks by field. No corpses, no blood, no emaciation closeups. Spacious restrained landscape that lets absence and departing people tell the sorrow.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a185c6-86c0-7e61-a350-cb3ce56192fa/exec-f02206ef-bff6-4c0f-a62c-14a096435edb.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/捕蛇者说/assets/05.png",
+      "web_asset": "assets/05.jpg"
+    },
+    {
+      "book": "捕蛇者说",
+      "id": "06",
+      "prompt": "Use case: illustration-story. Create one full-bleed landscape 1536x1024 illustration for a Chinese classical prose picture book for children, series 文言有画. Traditional Chinese ink wash and restrained gongbi figure painting on warm ivory xuan paper, expressive brush strokes and fine ink contours, subtle mineral gray-green, pale ochre, soft muted colors, atmospheric blank space, painterly not photography, no 3D, no comic panels. Entire image is artwork with no text, no letters, no calligraphy, no seals, no watermark. No modern objects. Natural coherent anatomy, readable story action, contemplative and dignified. Tang-era rural lane. Two stern local tax clerks in dark plain robes stand noisily at an earthen house gate holding a rolled blank register, villagers retreat into doorways, a hen flutters and a small dog hides behind a basket. Show disturbance through posture and movement, no weapons raised, no beatings or gore. View from behind a wooden doorway emphasizes families longing for quiet. Restrained traditional ink painting.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a185c6-86c0-7e61-a350-cb3ce56192fa/exec-2b83ecb5-1dba-45ae-8c60-f314188ac8a6.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/捕蛇者说/assets/06.png",
+      "web_asset": "assets/06.jpg"
+    },
+    {
+      "book": "捕蛇者说",
+      "id": "07",
+      "prompt": "Use case: illustration-story. Create one full-bleed landscape 1536x1024 illustration for a Chinese classical prose picture book for children, series 文言有画. Traditional Chinese ink wash and restrained gongbi figure painting on warm ivory xuan paper, expressive brush strokes and fine ink contours, subtle mineral gray-green, pale ochre, soft muted colors, atmospheric blank space, painterly not photography, no 3D, no comic panels. Entire image is artwork with no text, no letters, no calligraphy, no seals, no watermark. No modern objects. Natural coherent anatomy, readable story action, contemplative and dignified. Inside a humble Tang-era cottage after disturbance outside has passed. Lean villager Jiang in gray-brown robe kneels next to a CLOSED wide earthenware jar, resting a hand near its lid and exhaling with weary relief; a plain small bowl of grain on a low table, soft evening light through bamboo window. The snake is not visible. No demonstration of handling or catching snakes. Relief remains fragile, not a cheerful wealthy home.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a185c6-86c0-7e61-a350-cb3ce56192fa/exec-73aadcf7-d16d-48f3-ab1d-4dec3645a702.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/捕蛇者说/assets/07.png",
+      "web_asset": "assets/07.jpg"
+    },
+    {
+      "book": "捕蛇者说",
+      "id": "08",
+      "prompt": "Use case: illustration-story. Create one full-bleed landscape 1536x1024 illustration for a Chinese classical prose picture book for children, series 文言有画. Traditional Chinese ink wash and restrained gongbi figure painting on warm ivory xuan paper, expressive brush strokes and fine ink contours, subtle mineral gray-green, pale ochre, soft muted colors, atmospheric blank space, painterly not photography, no 3D, no comic panels. Entire image is artwork with no text, no letters, no calligraphy, no seals, no watermark. No modern objects. Natural coherent anatomy, readable story action, contemplative and dignified. A Tang-era writer in muted blue-green robe at a simple desk, pausing with brush above blank paper and looking thoughtfully toward a distant village through an open door, layered misty hills and small cottages outside. Closed inkstone and a single lamp nearby. A sober compassionate ending: words will carry ordinary people’s suffering to those who should listen. No writing, no seals, no dramatic heroic pose.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a185c6-86c0-7e61-a350-cb3ce56192fa/exec-474bbeb5-3af0-431b-8d88-73756f38b523.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/捕蛇者说/assets/08.png",
+      "web_asset": "assets/08.jpg"
+    }
+  ]
+}

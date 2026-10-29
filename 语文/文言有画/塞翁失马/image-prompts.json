@@ -1,0 +1,45 @@
+{
+  "tool": "built-in image_gen",
+  "images": [
+    {
+      "book": "塞翁失马",
+      "id": "01",
+      "prompt": "Use case: illustration-story. Asset type: one full-bleed landscape 1536x1024 illustration in the children's classical Chinese reading series 文言有画. Traditional Chinese ink wash with fine restrained gongbi figures on warm ivory xuan paper, expressive natural brushwork, atmospheric negative space, muted sage green, gray ink and pale ochre. Painterly artwork, no photography, no 3D, no cartoon panels. No text, letters, labels, seals or watermark; no modern objects. Coherent natural anatomy and clear literary scene; human figures small within landscape. A northern frontier village in ancient China, low earthen cottage on the LEFT and broad hills fading into pale mist. A chestnut horse alone walks away toward distant open border country on the RIGHT, no rider, no saddle. In cottage doorway a white-bearded elderly man in muted brown robe watches. A plain wooden fence with empty gate. This depicts a lost horse, no war, no danger.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-19b19c19-0cdf-4e62-bfd7-a405d30dc947.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/塞翁失马/assets/01.png",
+      "web_asset": "assets/01.jpg"
+    },
+    {
+      "book": "塞翁失马",
+      "id": "02",
+      "prompt": "Use case: illustration-story. Asset type: one full-bleed landscape 1536x1024 illustration in the children's classical Chinese reading series 文言有画. Traditional Chinese ink wash with fine restrained gongbi figures on warm ivory xuan paper, expressive natural brushwork, atmospheric negative space, muted sage green, gray ink and pale ochre. Painterly artwork, no photography, no 3D, no cartoon panels. No text, letters, labels, seals or watermark; no modern objects. Coherent natural anatomy and clear literary scene; human figures small within landscape. In the same ancient frontier village an elderly white-bearded man in muted brown robe stands calmly at his small earthen cottage gate. Two neighbors in gray and pale green simple robes have come to console him, one gently opens his hand. The horse paddock behind is empty. Restrained expressions, quiet uncertainty, warm evening light.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-c3c10171-8829-4029-94ac-2f89640ff685.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/塞翁失马/assets/02.png",
+      "web_asset": "assets/02.jpg"
+    },
+    {
+      "book": "塞翁失马",
+      "id": "03",
+      "prompt": "Use case: illustration-story. Asset type: one full-bleed landscape 1536x1024 illustration in the children's classical Chinese reading series 文言有画. Traditional Chinese ink wash with fine restrained gongbi figures on warm ivory xuan paper, expressive natural brushwork, atmospheric negative space, muted sage green, gray ink and pale ochre. Painterly artwork, no photography, no 3D, no cartoon panels. No text, letters, labels, seals or watermark; no modern objects. Coherent natural anatomy and clear literary scene; human figures small within landscape. The chestnut horse returns to the frontier cottage accompanied by two elegant gray horses, entering an open wooden paddock. The white-bearded elderly man in brown robe watches calmly, two neighbors in simple robes approach in cheerful surprise. Soft spring light over open grassland. Three anatomically natural horses.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-f8a6c67e-cea5-4f04-a513-b9b62183650c.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/塞翁失马/assets/03.png",
+      "web_asset": "assets/03.jpg"
+    },
+    {
+      "book": "塞翁失马",
+      "id": "04",
+      "prompt": "Use case: illustration-story. Asset type: one full-bleed landscape 1536x1024 illustration in the children's classical Chinese reading series 文言有画. Traditional Chinese ink wash with fine restrained gongbi figures on warm ivory xuan paper, expressive natural brushwork, atmospheric negative space, muted sage green, gray ink and pale ochre. Painterly artwork, no photography, no 3D, no cartoon panels. No text, letters, labels, seals or watermark; no modern objects. Coherent natural anatomy and clear literary scene; human figures small within landscape. At a simple ancient frontier cottage an elderly white-bearded father in muted brown robe sits beside his young adult son, who rests on a low bench with one leg supported on a stool and a plain cloth wrap; two neighbors quietly offer concern. Horses visible far behind a fence. Gentle non-graphic aftermath of a riding accident, no fall, no pain close-up, no blood.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-1489096a-0396-4dff-b628-60f9cded4285.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/塞翁失马/assets/04.png",
+      "web_asset": "assets/04.jpg"
+    },
+    {
+      "book": "塞翁失马",
+      "id": "05",
+      "prompt": "Use case: illustration-story. Asset type: one full-bleed landscape 1536x1024 illustration in the children's classical Chinese reading series 文言有画. Traditional Chinese ink wash with fine restrained gongbi figures on warm ivory xuan paper, expressive natural brushwork, atmospheric negative space, muted sage green, gray ink and pale ochre. Painterly artwork, no photography, no 3D, no cartoon panels. No text, letters, labels, seals or watermark; no modern objects. Coherent natural anatomy and clear literary scene; human figures small within landscape. Ancient frontier village under subdued autumn light. An elderly white-bearded father in brown robe sits close beside his young adult son, who uses a wooden crutch and keeps one foot resting, outside their small cottage. They look soberly toward a distant line of tiny soldiers carrying bows along the hills. Emphasize fragile survival and family care, not celebration. No battle, no bodies, no injury detail.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-d8326cb0-da1f-4a27-a8b1-9082123a6875.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/塞翁失马/assets/05.png",
+      "web_asset": "assets/05.jpg"
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+[
+  {
+    "book": "逍遥游",
+    "id": "01",
+    "prompt": "Use case: illustration-story. Asset type: one full-bleed landscape 1536x1024 painting for the children's classical Chinese reading series 文言有画. Refined traditional Chinese ink wash with restrained gongbi detail on warm ivory xuan paper, expressive natural brushwork, atmospheric open space, muted sage green, gray ink and pale ochre. Match a calm sophisticated illustrated classic, not cartoon, not photo, not 3D, not comic panels. No text, calligraphy, letters, labels, seals or watermarks; no modern objects. Natural coherent anatomy. Vast mythic northern sea. A colossal dark fish Kun is suggested below translucent water, while a magnificent giant Peng bird rises above mist on the right, wings like enormous clouds. Literary transformation suggested by connecting sea spray and clouds, not a hybrid deformed animal. Fish and bird are fantastic metaphorical scale, not scientific depiction. Huge open pale water and sky at left for cover, majestic quiet wonder.",
+    "mode": "built-in image_gen",
+    "generated_original": "/Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-6742437d-a326-4cde-abfe-cfb3891e94f4.png",
+    "project_original": "/Users/lynnchua/孩子错题库/语文/文言有画/逍遥游/assets/01.png",
+    "web_asset": "/Users/lynnchua/孩子错题库/语文/文言有画/逍遥游/assets/01.jpg"
+  },
+  {
+    "book": "逍遥游",
+    "id": "02",
+    "prompt": "Use case: illustration-story. Asset type: one full-bleed landscape 1536x1024 painting for the children's classical Chinese reading series 文言有画. Refined traditional Chinese ink wash with restrained gongbi detail on warm ivory xuan paper, expressive natural brushwork, atmospheric open space, muted sage green, gray ink and pale ochre. Match a calm sophisticated illustrated classic, not cartoon, not photo, not 3D, not comic panels. No text, calligraphy, letters, labels, seals or watermarks; no modern objects. Natural coherent anatomy. Mythic giant Peng bird lifting high above a vast sea on a broad spiral of wind and sea mist, immense wings stretching like clouds. Sweeping natural brush strokes suggest powerful upward air and tiny floating dust in sunlight. No literal wild horses; no arrows, no scientific graph. The image imagines literary exaggerated scale, pale horizon.",
+    "mode": "built-in image_gen",
+    "generated_original": "/Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-0d89b07c-60a2-4211-a668-e75a5897fd00.png",
+    "project_original": "/Users/lynnchua/孩子错题库/语文/文言有画/逍遥游/assets/02.png",
+    "web_asset": "/Users/lynnchua/孩子错题库/语文/文言有画/逍遥游/assets/02.jpg"
+  },
+  {
+    "book": "逍遥游",
+    "id": "03",
+    "prompt": "Use case: illustration-story. Asset type: one full-bleed landscape 1536x1024 painting for the children's classical Chinese reading series 文言有画. Refined traditional Chinese ink wash with restrained gongbi detail on warm ivory xuan paper, expressive natural brushwork, atmospheric open space, muted sage green, gray ink and pale ochre. Match a calm sophisticated illustrated classic, not cartoon, not photo, not 3D, not comic panels. No text, calligraphy, letters, labels, seals or watermarks; no modern objects. Natural coherent anatomy. A very small leaf floating in a shallow puddle on a stone courtyard floor next to a plain overturned ceramic cup. A second upright cup rests on the shallow wet stone and cannot float. In the misty background beyond the courtyard, a large wooden boat floats on a deep river, linking tiny and large by continuous landscape. Careful believable water, leaf and cups, no labels or panel borders.",
+    "mode": "built-in image_gen",
+    "generated_original": "/Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-84ae3875-0298-4658-a4d4-e80605cf6a4d.png",
+    "project_original": "/Users/lynnchua/孩子错题库/语文/文言有画/逍遥游/assets/03.png",
+    "web_asset": "/Users/lynnchua/孩子错题库/语文/文言有画/逍遥游/assets/03.jpg"
+  },
+  {
+    "book": "逍遥游",
+    "id": "04",
+    "prompt": "Use case: illustration-story. Asset type: one full-bleed landscape 1536x1024 painting for the children's classical Chinese reading series 文言有画. Refined traditional Chinese ink wash with restrained gongbi detail on warm ivory xuan paper, expressive natural brushwork, atmospheric open space, muted sage green, gray ink and pale ochre. Match a calm sophisticated illustrated classic, not cartoon, not photo, not 3D, not comic panels. No text, calligraphy, letters, labels, seals or watermarks; no modern objects. Natural coherent anatomy. A cicada and a tiny gray dove among elm branches at the right foreground, both small, against a vast pale sky where the silhouette of a huge mythic Peng bird rides deep cloud currents in the distance. Two scales and different fields of view; no anthropomorphic smiling faces, no dialogue, no comparison chart. Restrained green and ink foliage.",
+    "mode": "built-in image_gen",
+    "generated_original": "/Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-c0781ede-cf72-4b80-b2f2-be308447dd89.png",
+    "project_original": "/Users/lynnchua/孩子错题库/语文/文言有画/逍遥游/assets/04.png",
+    "web_asset": "/Users/lynnchua/孩子错题库/语文/文言有画/逍遥游/assets/04.jpg"
+  },
+  {
+    "book": "逍遥游",
+    "id": "05",
+    "prompt": "Use case: illustration-story. Asset type: one full-bleed landscape 1536x1024 painting for the children's classical Chinese reading series 文言有画. Refined traditional Chinese ink wash with restrained gongbi detail on warm ivory xuan paper, expressive natural brushwork, atmospheric open space, muted sage green, gray ink and pale ochre. Match a calm sophisticated illustrated classic, not cartoon, not photo, not 3D, not comic panels. No text, calligraphy, letters, labels, seals or watermarks; no modern objects. Natural coherent anatomy. Three tiny ancient travelers appear at different distances along one winding road: a nearby traveler at the edge of a field with a small food bundle; another farther along beside a pack basket; the farthest traveler and pack animal near a mountain pass. A plain mortar for pounding grain beside a roadside cottage. One continuous poetic landscape evokes differing journey lengths and provisions; not three panels, no labels.",
+    "mode": "built-in image_gen",
+    "generated_original": "/Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-0f352625-311b-4f08-8da8-6e49d08fa1e3.png",
+    "project_original": "/Users/lynnchua/孩子错题库/语文/文言有画/逍遥游/assets/05.png",
+    "web_asset": "/Users/lynnchua/孩子错题库/语文/文言有画/逍遥游/assets/05.jpg"
+  },
+  {
+    "book": "逍遥游",
+    "id": "06",
+    "prompt": "Use case: illustration-story. Asset type: one full-bleed landscape 1536x1024 painting for the children's classical Chinese reading series 文言有画. Refined traditional Chinese ink wash with restrained gongbi detail on warm ivory xuan paper, expressive natural brushwork, atmospheric open space, muted sage green, gray ink and pale ochre. Match a calm sophisticated illustrated classic, not cartoon, not photo, not 3D, not comic panels. No text, calligraphy, letters, labels, seals or watermarks; no modern objects. Natural coherent anatomy. Immense ancient tree Chun at right stretches its broad branches into mist, tiny mushrooms in morning dew and a cicada on a low twig in left foreground. An elderly robed person very small beneath the giant tree gives a human timescale. Imaginary long-lived tree as in Zhuangzi, no numbers or lifespan charts; quiet atmosphere of different spans of life.",
+    "mode": "built-in image_gen",
+    "generated_original": "/Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-cb1d55ea-19ad-41e9-be23-3dc93417a990.png",
+    "project_original": "/Users/lynnchua/孩子错题库/语文/文言有画/逍遥游/assets/06.png",
+    "web_asset": "/Users/lynnchua/孩子错题库/语文/文言有画/逍遥游/assets/06.jpg"
+  },
+  {
+    "book": "逍遥游",
+    "id": "07",
+    "prompt": "Use case: illustration-story. Asset type: one full-bleed landscape 1536x1024 painting for the children's classical Chinese reading series 文言有画. Refined traditional Chinese ink wash with restrained gongbi detail on warm ivory xuan paper, expressive natural brushwork, atmospheric open space, muted sage green, gray ink and pale ochre. Match a calm sophisticated illustrated classic, not cartoon, not photo, not 3D, not comic panels. No text, calligraphy, letters, labels, seals or watermarks; no modern objects. Natural coherent anatomy. Magnificent mythic Peng bird viewed from below, massive back and spreading wings compared with a distant mountain ridge. Bird climbs through curling wind above layers of clouds, then faces toward a far open southern sea. Wondrous literary fantasy with believable bird anatomy and natural feathers, never a dragon, no human rider, no map or labels.",
+    "mode": "built-in image_gen",
+    "generated_original": "/Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-e959baef-d4b1-43c0-bb9b-b05d63a892a0.png",
+    "project_original": "/Users/lynnchua/孩子错题库/语文/文言有画/逍遥游/assets/07.png",
+    "web_asset": "/Users/lynnchua/孩子错题库/语文/文言有画/逍遥游/assets/07.jpg"
+  },
+  {
+    "book": "逍遥游",
+    "id": "08",
+    "prompt": "Use case: illustration-story. Asset type: one full-bleed landscape 1536x1024 painting for the children's classical Chinese reading series 文言有画. Refined traditional Chinese ink wash with restrained gongbi detail on warm ivory xuan paper, expressive natural brushwork, atmospheric open space, muted sage green, gray ink and pale ochre. Match a calm sophisticated illustrated classic, not cartoon, not photo, not 3D, not comic panels. No text, calligraphy, letters, labels, seals or watermarks; no modern objects. Natural coherent anatomy. Tiny quail-like bird fluttering just above tangled reeds and mugwort in the right foreground, few wingspreads off the ground. Beyond its small clearing opens a vast pale sky with an almost invisible distant huge bird silhouette above clouds. Viewpoint is low among plants, showing how local surroundings can feel like the whole world. Quiet gentle scene, no ridicule or cartoon expression.",
+    "mode": "built-in image_gen",
+    "generated_original": "/Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-0542ba66-63df-472d-9712-2150738cf849.png",
+    "project_original": "/Users/lynnchua/孩子错题库/语文/文言有画/逍遥游/assets/08.png",
+    "web_asset": "/Users/lynnchua/孩子错题库/语文/文言有画/逍遥游/assets/08.jpg"
+  },
+  {
+    "book": "逍遥游",
+    "id": "09",
+    "prompt": "Use case: illustration-story. Asset type: one full-bleed landscape 1536x1024 painting for the children's classical Chinese reading series 文言有画. Refined traditional Chinese ink wash with restrained gongbi detail on warm ivory xuan paper, expressive natural brushwork, atmospheric open space, muted sage green, gray ink and pale ochre. Match a calm sophisticated illustrated classic, not cartoon, not photo, not 3D, not comic panels. No text, calligraphy, letters, labels, seals or watermarks; no modern objects. Natural coherent anatomy. Warring States philosophical scene. A serene plain-robed thinker with tied hair in pale gray walks calmly along a hillside path. In the distant court pavilion a few officials in muted blue and brown discuss and gesture, separated from the thinker by open air and trees. Evokes Song Rongzi not being driven by praise or blame, no literal words, no signs or crowd aggression.",
+    "mode": "built-in image_gen",
+    "generated_original": "/Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-59221d79-5b2c-44c1-b6c7-c84861726c5a.png",
+    "project_original": "/Users/lynnchua/孩子错题库/语文/文言有画/逍遥游/assets/09.png",
+    "web_asset": "/Users/lynnchua/孩子错题库/语文/文言有画/逍遥游/assets/09.jpg"
+  },
+  {
+    "book": "逍遥游",
+    "id": "10",
+    "prompt": "Use case: illustration-story. Asset type: one full-bleed landscape 1536x1024 painting for the children's classical Chinese reading series 文言有画. Refined traditional Chinese ink wash with restrained gongbi detail on warm ivory xuan paper, expressive natural brushwork, atmospheric open space, muted sage green, gray ink and pale ochre. Match a calm sophisticated illustrated classic, not cartoon, not photo, not 3D, not comic panels. No text, calligraphy, letters, labels, seals or watermarks; no modern objects. Natural coherent anatomy. Poetic fantasy inspired by Liezi riding the wind: a very small plain-robed human figure gently borne above a sweeping misty valley by air currents, robe moving naturally, without wings or machine. Beyond lies immense open sky, clouds, mountains and sea fading into ivory, making the wind itself visible through brushwork. Meditative rather than superhero, no spectacle, no text, spacious ending that raises the question of dependence.",
+    "mode": "built-in image_gen",
+    "generated_original": "/Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-6fd18a95-3985-450b-bfdc-4142e376d363.png",
+    "project_original": "/Users/lynnchua/孩子错题库/语文/文言有画/逍遥游/assets/10.png",
+    "web_asset": "/Users/lynnchua/孩子错题库/语文/文言有画/逍遥游/assets/10.jpg"
+  }
+]

@@ -1,0 +1,11 @@
+.race-lab label {display:block;margin:1em 0 .5em;font-size:14px;color:var(--ink)}
+.race-lab select {font:inherit;font-size:14px;color:var(--ink);padding:10px;background:#faf7ef;border:1px solid #bdbbad;border-radius:0;max-width:100%}
+.race-model {font-size:14px;line-height:1.9;color:#777a6c}
+.race-table-wrap {overflow-x:auto}
+.race-table {border-collapse:collapse;width:100%;font-size:16px}
+.race-table th,.race-table td {border-bottom:1px solid #d6d2c6;padding:12px 8px;text-align:left;font-weight:400}
+.race-table thead th {color:#7f6658;background:#eeeade}
+.race-actions {display:flex;gap:12px;flex-wrap:wrap;margin:20px 0}
+.race-result {border-left:2px solid #758677;padding:12px 18px;background:#eeeede;line-height:1.9}
+.race-result ol {padding-left:1.4em}.race-lab .sr-only {position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;margin:0}
+@media(max-width:480px){.race-table{font-size:13px}.race-table th,.race-table td{padding:10px 4px}.race-table select{font-size:13px;padding:8px 4px}.race-result{padding:10px}}

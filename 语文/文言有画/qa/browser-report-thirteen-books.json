@@ -1,0 +1,221 @@
+{
+  "books": [
+    {
+      "title": "邹忌讽齐王纳谏",
+      "mobileCover": {
+        "images": true,
+        "overflow": false
+      },
+      "scenes": [
+        {
+          "foldsClosed": true,
+          "image": true,
+          "overflow": false,
+          "position": "01 / 06",
+          "title": "镜前一问，先听到赞美"
+        },
+        {
+          "foldsClosed": true,
+          "image": true,
+          "overflow": false,
+          "position": "02 / 06",
+          "title": "三次回答，足够作结论吗"
+        },
+        {
+          "foldsClosed": true,
+          "image": true,
+          "overflow": false,
+          "position": "03 / 06",
+          "title": "亲眼看过，回头想为什么"
+        },
+        {
+          "foldsClosed": true,
+          "image": true,
+          "overflow": false,
+          "position": "04 / 06",
+          "title": "把家中小事，讲到朝廷上"
+        },
+        {
+          "foldsClosed": true,
+          "image": true,
+          "overflow": false,
+          "position": "05 / 06",
+          "title": "一句“善”，怎样变成行动"
+        },
+        {
+          "foldsClosed": true,
+          "image": true,
+          "overflow": false,
+          "position": "06 / 06",
+          "title": "没有写战场，为什么说战胜"
+        }
+      ],
+      "fulltext": {
+        "overflow": false,
+        "paragraphs": 4
+      },
+      "glossary": {
+        "count": "38 则字词 · 拼音、意思与原文相伴",
+        "overflow": false
+      },
+      "after": {
+        "blank": true,
+        "overflow": false
+      }
+    },
+    {
+      "title": "扁鹊见蔡桓公",
+      "mobileCover": {
+        "images": true,
+        "overflow": false
+      },
+      "scenes": [
+        {
+          "foldsClosed": true,
+          "image": true,
+          "overflow": false,
+          "position": "01 / 06",
+          "title": "他指出小病，桓侯听见了什么"
+        },
+        {
+          "foldsClosed": true,
+          "image": true,
+          "overflow": false,
+          "position": "02 / 06",
+          "title": "十日之后，话变深了一层"
+        },
+        {
+          "foldsClosed": true,
+          "image": true,
+          "overflow": false,
+          "position": "03 / 06",
+          "title": "又一个十日，重复里藏着变化"
+        },
+        {
+          "foldsClosed": true,
+          "image": true,
+          "overflow": false,
+          "position": "04 / 06",
+          "title": "这一次，他为什么转身离开"
+        },
+        {
+          "foldsClosed": true,
+          "image": true,
+          "overflow": false,
+          "position": "05 / 06",
+          "title": "他没有再说的话，终于说给使者"
+        },
+        {
+          "foldsClosed": true,
+          "image": true,
+          "overflow": false,
+          "position": "06 / 06",
+          "title": "终于寻找时，人已远去"
+        }
+      ],
+      "fulltext": {
+        "overflow": false,
+        "paragraphs": 5
+      },
+      "glossary": {
+        "count": "29 则字词 · 拼音、意思与原文相伴",
+        "overflow": false
+      },
+      "after": {
+        "blank": true,
+        "overflow": false
+      }
+    },
+    {
+      "title": "爱莲说",
+      "scenes": [
+        {
+          "foldsClosed": true,
+          "image": true,
+          "overflow": false,
+          "position": "01 / 04",
+          "title": "花很多，喜欢却各不相同"
+        },
+        {
+          "foldsClosed": true,
+          "image": true,
+          "overflow": false,
+          "position": "02 / 04",
+          "title": "一枝莲，怎样从泥中站起"
+        },
+        {
+          "foldsClosed": true,
+          "image": true,
+          "overflow": false,
+          "position": "03 / 04",
+          "title": "花的名字，接上人的品格"
+        },
+        {
+          "foldsClosed": true,
+          "image": true,
+          "overflow": false,
+          "position": "04 / 04",
+          "title": "最后一问，留给谁来回答"
+        }
+      ],
+      "mobileCover": {
+        "images": true,
+        "overflow": false
+      },
+      "全文": {
+        "blank": true,
+        "overflow": false
+      },
+      "字词": {
+        "blank": true,
+        "overflow": false
+      },
+      "读后": {
+        "blank": true,
+        "overflow": false
+      }
+    }
+  ],
+  "notes": [
+    "通过 localhost 验证交互；单文件资源内嵌与 ZIP 内容另作静态检查。"
+  ],
+  "pinyinOff": "false",
+  "largeText": {
+    "active": "true",
+    "overflow": false
+  },
+  "artDialog": {
+    "image": true,
+    "open": true
+  },
+  "desktop": [
+    {
+      "overflow": false,
+      "title": "莲的姿态 · 爱莲说 · 文言有画",
+      "width": 1280
+    },
+    {
+      "coverTitleWidth": 324.40625,
+      "overflow": false,
+      "title": "邹忌讽齐王纳谏 · 文言有画",
+      "width": 1280
+    },
+    {
+      "overflow": false,
+      "title": "一句“善”，怎样变成行动"
+    },
+    {
+      "overflow": false,
+      "title": "扁鹊见蔡桓公 · 文言有画",
+      "width": 1280
+    },
+    {
+      "overflow": false,
+      "title": "他没有再说的话，终于说给使者"
+    }
+  ],
+  "shelfAuthorSearch": "显示 1 / 13 册",
+  "shelfTopicSearch": "显示 2 / 13 册",
+  "shelfCount": "显示 13 / 13 册",
+  "console": []
+}

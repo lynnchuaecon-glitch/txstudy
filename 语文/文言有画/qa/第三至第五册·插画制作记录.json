@@ -1,0 +1,182 @@
+{
+  "tool": "built-in image_gen",
+  "description": "第三至第五册，22幅国画风格插画的提示词与原图、网页图路径。",
+  "images": [
+    {
+      "book": "岳阳楼记",
+      "id": "01",
+      "prompt": "Use case: illustration-story. Create one full-bleed landscape 1536x1024 illustration for a Chinese classical prose picture book for children, series 文言有画. Traditional Chinese ink wash and restrained gongbi figure painting on warm ivory xuan paper, expressive brush strokes and fine ink contours, subtle mineral gray-green, pale ochre, soft muted colors, atmospheric blank space, painterly not photography, no 3D, no comic panels. Entire image is artwork with no text, no letters, no calligraphy, no seals, no watermark. No modern objects. Natural coherent anatomy, readable story action, contemplative and dignified. Northern Song China, Yueyang Tower by the vast Dongting Lake undergoing careful restoration: elegant modest timber pavilion with layered upturned tiled roofs on the LEFT in a wide shore landscape, several tiny adult carpenters fitting timber at its base, two local officials looking at rolled plans, villagers returning along a path; distant water and mountains, calm spring daylight. Architecture is literary imagination, not a photographic copy of a modern tourist landmark.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a185c6-86c0-7e61-a350-cb3ce56192fa/exec-a00b92e2-56e4-4ee3-b8a4-95ba7d6de1c5.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/岳阳楼记/assets/01.png",
+      "web_asset": "assets/01.jpg"
+    },
+    {
+      "book": "岳阳楼记",
+      "id": "02",
+      "prompt": "Use case: illustration-story. Create one full-bleed landscape 1536x1024 illustration for a Chinese classical prose picture book for children, series 文言有画. Traditional Chinese ink wash and restrained gongbi figure painting on warm ivory xuan paper, expressive brush strokes and fine ink contours, subtle mineral gray-green, pale ochre, soft muted colors, atmospheric blank space, painterly not photography, no 3D, no comic panels. Entire image is artwork with no text, no letters, no calligraphy, no seals, no watermark. No modern objects. Natural coherent anatomy, readable story action, contemplative and dignified. Vast Dongting Lake seen from near an ancient tower: a small edge of wooden balcony in foreground left, immense shimmering gray blue water joining a broad river channel far away, layered remote mountains, distant boats like ink dots, mist and light across a very wide horizon. The lake seems to embrace hills and swallow the river. Majestic spacious Chinese shanshui composition, no people dominant.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a185c6-86c0-7e61-a350-cb3ce56192fa/exec-b96a0cd9-46e7-42e5-84a2-9a7b344be7ef.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/岳阳楼记/assets/02.png",
+      "web_asset": "assets/02.jpg"
+    },
+    {
+      "book": "岳阳楼记",
+      "id": "03",
+      "prompt": "Use case: illustration-story. Create one full-bleed landscape 1536x1024 illustration for a Chinese classical prose picture book for children, series 文言有画. Traditional Chinese ink wash and restrained gongbi figure painting on warm ivory xuan paper, expressive brush strokes and fine ink contours, subtle mineral gray-green, pale ochre, soft muted colors, atmospheric blank space, painterly not photography, no 3D, no comic panels. Entire image is artwork with no text, no letters, no calligraphy, no seals, no watermark. No modern objects. Natural coherent anatomy, readable story action, contemplative and dignified. Dongting Lake in prolonged rain: dark layered ink clouds, slanting fine rain, wind-whipped reeds and powerful gray waves, distant mountains almost swallowed in haze, two tiny merchant sailing boats sheltered near shore with lowered sails. Serious wind and water, no sinking people or violence. A corner of timber tower shelters foreground. Stormy but beautiful traditional ink painting.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a185c6-86c0-7e61-a350-cb3ce56192fa/exec-39a7a873-e5ff-41d6-8e77-cccb4be4112b.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/岳阳楼记/assets/03.png",
+      "web_asset": "assets/03.jpg"
+    },
+    {
+      "book": "岳阳楼记",
+      "id": "04",
+      "prompt": "Use case: illustration-story. Create one full-bleed landscape 1536x1024 illustration for a Chinese classical prose picture book for children, series 文言有画. Traditional Chinese ink wash and restrained gongbi figure painting on warm ivory xuan paper, expressive brush strokes and fine ink contours, subtle mineral gray-green, pale ochre, soft muted colors, atmospheric blank space, painterly not photography, no 3D, no comic panels. Entire image is artwork with no text, no letters, no calligraphy, no seals, no watermark. No modern objects. Natural coherent anatomy, readable story action, contemplative and dignified. Inside an ancient Song timber tower at dusky rainy evening. A solitary displaced adult scholar in pale gray-blue long robe and simple dark cloth cap stands in profile by wooden railing looking across a bleak misty lake, shoulders slightly bowed, travel bundle resting beside him, an empty interior and dark mountain silhouettes. Show homesickness gently, no exaggerated crying.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a185c6-86c0-7e61-a350-cb3ce56192fa/exec-1cf1c8c4-9fd0-4170-8311-731a5875386b.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/岳阳楼记/assets/04.png",
+      "web_asset": "assets/04.jpg"
+    },
+    {
+      "book": "岳阳楼记",
+      "id": "05",
+      "prompt": "Use case: illustration-story. Create one full-bleed landscape 1536x1024 illustration for a Chinese classical prose picture book for children, series 文言有画. Traditional Chinese ink wash and restrained gongbi figure painting on warm ivory xuan paper, expressive brush strokes and fine ink contours, subtle mineral gray-green, pale ochre, soft muted colors, atmospheric blank space, painterly not photography, no 3D, no comic panels. Entire image is artwork with no text, no letters, no calligraphy, no seals, no watermark. No modern objects. Natural coherent anatomy, readable story action, contemplative and dignified. The SAME Dongting Lake transformed by clear spring weather: vast luminous pale jade water reflecting blue-gray sky, several white gulls circling and resting on a sandbar, reeds and orchids with tiny pale flowers on foreground shore, a few fish visible beneath clear shallow water. Low mountains afar, calm, fresh, spacious Chinese ink wash, entirely natural landscape.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a185c6-86c0-7e61-a350-cb3ce56192fa/exec-8525e282-e537-4df1-9821-4fdebfe40d94.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/岳阳楼记/assets/05.png",
+      "web_asset": "assets/05.jpg"
+    },
+    {
+      "book": "岳阳楼记",
+      "id": "06",
+      "prompt": "Use case: illustration-story. Create one full-bleed landscape 1536x1024 illustration for a Chinese classical prose picture book for children, series 文言有画. Traditional Chinese ink wash and restrained gongbi figure painting on warm ivory xuan paper, expressive brush strokes and fine ink contours, subtle mineral gray-green, pale ochre, soft muted colors, atmospheric blank space, painterly not photography, no 3D, no comic panels. Entire image is artwork with no text, no letters, no calligraphy, no seals, no watermark. No modern objects. Natural coherent anatomy, readable story action, contemplative and dignified. A clear moonlit Dongting Lake, round luminous moon high above, slender golden silver ripples stretch across moving water while a sheltered still inlet holds a round softened moon reflection, distant small fishing boats with adult fishers call to one another across water, edge of a timber tower at left. Poetic serene restrained ink and pale gold, not fantasy, no giant moons or neon.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a185c6-86c0-7e61-a350-cb3ce56192fa/exec-a181d87f-0920-4675-99ed-8d560df2a14b.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/岳阳楼记/assets/06.png",
+      "web_asset": "assets/06.jpg"
+    },
+    {
+      "book": "岳阳楼记",
+      "id": "07",
+      "prompt": "Use case: illustration-story. Create one full-bleed landscape 1536x1024 illustration for a Chinese classical prose picture book for children, series 文言有画. Traditional Chinese ink wash and restrained gongbi figure painting on warm ivory xuan paper, expressive brush strokes and fine ink contours, subtle mineral gray-green, pale ochre, soft muted colors, atmospheric blank space, painterly not photography, no 3D, no comic panels. Entire image is artwork with no text, no letters, no calligraphy, no seals, no watermark. No modern objects. Natural coherent anatomy, readable story action, contemplative and dignified. A symbolic Northern Song literary scene of concern for ordinary people: an adult scholar-official in muted green robe stands on a gentle bank listening attentively to a farmer holding a bundle of seedlings; behind them several villagers work quietly in small fields and a modest waterside settlement, remote lake and mountain landscape. Eye-level humane relationship, no ruler throne, no heroic preaching. Refined ink wash conveys thoughtfulness beyond personal fortune.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a185c6-86c0-7e61-a350-cb3ce56192fa/exec-b5da6327-d438-4967-9eea-2bd39e2d3d98.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/岳阳楼记/assets/07.png",
+      "web_asset": "assets/07.jpg"
+    },
+    {
+      "book": "岳阳楼记",
+      "id": "08",
+      "prompt": "Use case: illustration-story. Create one full-bleed landscape 1536x1024 illustration for a Chinese classical prose picture book for children, series 文言有画. Traditional Chinese ink wash and restrained gongbi figure painting on warm ivory xuan paper, expressive brush strokes and fine ink contours, subtle mineral gray-green, pale ochre, soft muted colors, atmospheric blank space, painterly not photography, no 3D, no comic panels. Entire image is artwork with no text, no letters, no calligraphy, no seals, no watermark. No modern objects. Natural coherent anatomy, readable story action, contemplative and dignified. An adult Northern Song writer seen from behind at a plain wooden desk by an open window, brush poised over a paper scroll with NO visible writing, one small oil lamp, dawn light opens beyond the window across distant fields and river; soft light suggests a mind looking far beyond its room. Quiet spacious literary composition, muted green robe and simple cloth cap, no claims of being physically at Yueyang Tower.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a185c6-86c0-7e61-a350-cb3ce56192fa/exec-dc39c386-4162-47f9-a787-475b669bec4a.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/岳阳楼记/assets/08.png",
+      "web_asset": "assets/08.jpg"
+    },
+    {
+      "book": "田忌赛马",
+      "id": "01",
+      "prompt": "Use case: illustration-story. Create one full-bleed landscape 1536x1024 illustration for a Chinese classical prose picture book for children, series 文言有画. Traditional Chinese ink wash and restrained gongbi figure painting on warm ivory xuan paper, expressive brush strokes and fine ink contours, subtle mineral gray-green, pale ochre, soft muted colors, atmospheric blank space, painterly not photography, no 3D, no comic panels. Entire image is artwork with no text, no letters, no calligraphy, no seals, no watermark. No modern objects. Natural coherent anatomy, readable story action, contemplative and dignified. Warring States China in the state of Qi: General Tian Ji, dignified adult with short beard, dark russet robe and simple tied hair, welcomes strategist Sun Bin, slender adult in blue-gray robe seated comfortably on a plain low wooden couch with lower legs covered by robe, into a shaded courtyard. Grooms lead horses on distant raceground outside. Respectful thoughtful meeting, no injury depiction, no modern wheelchair, no text.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a185c6-86c0-7e61-a350-cb3ce56192fa/exec-642502c9-4b8d-426d-9811-f4748cff905f.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/田忌赛马/assets/01.png",
+      "web_asset": "assets/01.jpg"
+    },
+    {
+      "book": "田忌赛马",
+      "id": "02",
+      "prompt": "Use case: illustration-story. Create one full-bleed landscape 1536x1024 illustration for a Chinese classical prose picture book for children, series 文言有画. Traditional Chinese ink wash and restrained gongbi figure painting on warm ivory xuan paper, expressive brush strokes and fine ink contours, subtle mineral gray-green, pale ochre, soft muted colors, atmospheric blank space, painterly not photography, no 3D, no comic panels. Entire image is artwork with no text, no letters, no calligraphy, no seals, no watermark. No modern objects. Natural coherent anatomy, readable story action, contemplative and dignified. Warring States Qi horse grounds. Strategist Sun Bin, slender adult in blue-gray robe seated on a plain wooden low seat under tree shade, quietly studies several horses of different builds led by grooms across open ground; General Tian Ji in dark russet robe stands beside him watching. Focus on attentive observation and relationships, not winning. Horses natural and elegant, no numerical labels or modern tack.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a185c6-86c0-7e61-a350-cb3ce56192fa/exec-929e26b4-1b81-41d1-a2ee-ade0bda131f2.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/田忌赛马/assets/02.png",
+      "web_asset": "assets/02.jpg"
+    },
+    {
+      "book": "田忌赛马",
+      "id": "03",
+      "prompt": "Use case: illustration-story. Create one full-bleed landscape 1536x1024 illustration for a Chinese classical prose picture book for children, series 文言有画. Traditional Chinese ink wash and restrained gongbi figure painting on warm ivory xuan paper, expressive brush strokes and fine ink contours, subtle mineral gray-green, pale ochre, soft muted colors, atmospheric blank space, painterly not photography, no 3D, no comic panels. Entire image is artwork with no text, no letters, no calligraphy, no seals, no watermark. No modern objects. Natural coherent anatomy, readable story action, contemplative and dignified. Close quiet planning conversation in Warring States Qi: seated blue-gray robed Sun Bin speaking with calm assurance to Tian Ji in dark russet robe leaning slightly forward listening, horse paddock softly visible beyond bamboo fence, warm pale afternoon light. A plain empty low table between them, no coins or wagering display, no writing. Strategy begins with trust and observation.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a185c6-86c0-7e61-a350-cb3ce56192fa/exec-80a85b35-45d7-4a2e-951f-d5647d6f0fe8.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/田忌赛马/assets/03.png",
+      "web_asset": "assets/03.jpg"
+    },
+    {
+      "book": "田忌赛马",
+      "id": "04",
+      "prompt": "Use case: illustration-story. Create one full-bleed landscape 1536x1024 illustration for a Chinese classical prose picture book for children, series 文言有画. Traditional Chinese ink wash and restrained gongbi figure painting on warm ivory xuan paper, expressive brush strokes and fine ink contours, subtle mineral gray-green, pale ochre, soft muted colors, atmospheric blank space, painterly not photography, no 3D, no comic panels. Entire image is artwork with no text, no letters, no calligraphy, no seals, no watermark. No modern objects. Natural coherent anatomy, readable story action, contemplative and dignified. Warring States military courtyard. Seated strategist Sun Bin in blue-gray robe moves a few plain wooden horse-shaped tokens across an unmarked mat on a low table while Tian Ji in dark russet watches thoughtfully. Over-the-shoulder diagonal composition showing deliberate rearrangement, actual grazing horses distant behind courtyard. No visible numbers, arrows, labels or writing; the art evokes arranging opponents, not an exact quantitative diagram.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a185c6-86c0-7e61-a350-cb3ce56192fa/exec-aa8a3a4d-55ee-4988-9ba9-f0a33a88c3c1.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/田忌赛马/assets/04.png",
+      "web_asset": "assets/04.jpg"
+    },
+    {
+      "book": "田忌赛马",
+      "id": "05",
+      "prompt": "Use case: illustration-story. Create one full-bleed landscape 1536x1024 illustration for a Chinese classical prose picture book for children, series 文言有画. Traditional Chinese ink wash and restrained gongbi figure painting on warm ivory xuan paper, expressive brush strokes and fine ink contours, subtle mineral gray-green, pale ochre, soft muted colors, atmospheric blank space, painterly not photography, no 3D, no comic panels. Entire image is artwork with no text, no letters, no calligraphy, no seals, no watermark. No modern objects. Natural coherent anatomy, readable story action, contemplative and dignified. A horse race on broad earth track in Warring States Qi: two fine horses galloping left to right, one slightly ahead of the other, riders small and dressed in simple ancient cloth with tied hair, muted russet and muted slate blue saddlecloths, hooves lift delicate ink dust, spectators tiny under pavilion in distance. Natural horses with four legs each, no modern jockey helmets, no finish banner, no injury or whipping. Painterly scene is a literary illustration not a reconstruction of exact chariot-racing rules.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a185c6-86c0-7e61-a350-cb3ce56192fa/exec-99039bae-5afe-4263-8824-fd6f3de8df55.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/田忌赛马/assets/05.png",
+      "web_asset": "assets/05.jpg"
+    },
+    {
+      "book": "田忌赛马",
+      "id": "06",
+      "prompt": "Use case: illustration-story. Create one full-bleed landscape 1536x1024 illustration for a Chinese classical prose picture book for children, series 文言有画. Traditional Chinese ink wash and restrained gongbi figure painting on warm ivory xuan paper, expressive brush strokes and fine ink contours, subtle mineral gray-green, pale ochre, soft muted colors, atmospheric blank space, painterly not photography, no 3D, no comic panels. Entire image is artwork with no text, no letters, no calligraphy, no seals, no watermark. No modern objects. Natural coherent anatomy, readable story action, contemplative and dignified. Ancient Qi hall with simple timber pillars and open landscape beyond. Tian Ji in dark russet robe respectfully introduces blue-gray-robed Sun Bin, seated on a simple wooden couch, to King Wei in an understated dark green formal robe seated at a low desk. King listens attentively as Sun Bin gestures toward an unmarked rolled military map. Warm thoughtful recognition of wisdom, no grand gold throne, no writing or modern objects.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a185c6-86c0-7e61-a350-cb3ce56192fa/exec-71128d5d-2186-4241-b5a9-dd3d3a759da1.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/田忌赛马/assets/06.png",
+      "web_asset": "assets/06.jpg"
+    },
+    {
+      "book": "捕蛇者说",
+      "id": "01",
+      "prompt": "Use case: illustration-story. Create one full-bleed landscape 1536x1024 illustration for a Chinese classical prose picture book for children, series 文言有画. Traditional Chinese ink wash and restrained gongbi figure painting on warm ivory xuan paper, expressive brush strokes and fine ink contours, subtle mineral gray-green, pale ochre, soft muted colors, atmospheric blank space, painterly not photography, no 3D, no comic panels. Entire image is artwork with no text, no letters, no calligraphy, no seals, no watermark. No modern objects. Natural coherent anatomy, readable story action, contemplative and dignified. Tang-era Yongzhou woodland: a single slender dark snake with pale whitish irregular markings rests quietly in the lower right among mossy rocks, bamboo leaves and roots; background misty green hills and a distant modest village. Snake not lunging, mouth closed, not gigantic, no dead animals or injured people. Literary imagination of the text, NOT a scientific species identification plate. Calm serious ink painting with ample breathing room.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a185c6-86c0-7e61-a350-cb3ce56192fa/exec-15bed8a8-a5e0-42b2-a5e1-8f9bce20885a.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/捕蛇者说/assets/01.png",
+      "web_asset": "assets/01.jpg"
+    },
+    {
+      "book": "捕蛇者说",
+      "id": "02",
+      "prompt": "Use case: illustration-story. Create one full-bleed landscape 1536x1024 illustration for a Chinese classical prose picture book for children, series 文言有画. Traditional Chinese ink wash and restrained gongbi figure painting on warm ivory xuan paper, expressive brush strokes and fine ink contours, subtle mineral gray-green, pale ochre, soft muted colors, atmospheric blank space, painterly not photography, no 3D, no comic panels. Entire image is artwork with no text, no letters, no calligraphy, no seals, no watermark. No modern objects. Natural coherent anatomy, readable story action, contemplative and dignified. Tang-era Yongzhou village at a poor but cared-for earthen cottage. Jiang, a lean middle-aged male villager with weathered face in faded gray-brown patched robe, sits in the doorway speaking with restrained sadness, a closed earthenware jar beside him; two old walking staffs lean against the wall as visual reminders of generations, no ghosts or dead bodies. Bamboo and misty fields outside. Dignified intimate ink portrait scene.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a185c6-86c0-7e61-a350-cb3ce56192fa/exec-2891a803-0adb-4e41-aa99-47ae1ac7395c.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/捕蛇者说/assets/02.png",
+      "web_asset": "assets/02.jpg"
+    },
+    {
+      "book": "捕蛇者说",
+      "id": "03",
+      "prompt": "Use case: illustration-story. Create one full-bleed landscape 1536x1024 illustration for a Chinese classical prose picture book for children, series 文言有画. Traditional Chinese ink wash and restrained gongbi figure painting on warm ivory xuan paper, expressive brush strokes and fine ink contours, subtle mineral gray-green, pale ochre, soft muted colors, atmospheric blank space, painterly not photography, no 3D, no comic panels. Entire image is artwork with no text, no letters, no calligraphy, no seals, no watermark. No modern objects. Natural coherent anatomy, readable story action, contemplative and dignified. Tang-era literary encounter outside a humble Yongzhou cottage. Writer Liu Zongyuan imagined as an adult scholar in muted blue-green robe and plain soft cap sits at the SAME level as lean villager Jiang in gray-brown robe, listening and gently offering help with an open hand. Jiang responds earnestly, closed earthenware jar near doorway. Quiet respectful conversation, not an interrogation, no writing.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a185c6-86c0-7e61-a350-cb3ce56192fa/exec-e8c84d6e-a66c-46e9-97bf-8ee510e060d4.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/捕蛇者说/assets/03.png",
+      "web_asset": "assets/03.jpg"
+    },
+    {
+      "book": "捕蛇者说",
+      "id": "04",
+      "prompt": "Use case: illustration-story. Create one full-bleed landscape 1536x1024 illustration for a Chinese classical prose picture book for children, series 文言有画. Traditional Chinese ink wash and restrained gongbi figure painting on warm ivory xuan paper, expressive brush strokes and fine ink contours, subtle mineral gray-green, pale ochre, soft muted colors, atmospheric blank space, painterly not photography, no 3D, no comic panels. Entire image is artwork with no text, no letters, no calligraphy, no seals, no watermark. No modern objects. Natural coherent anatomy, readable story action, contemplative and dignified. Closer view of lean middle-aged villager Jiang in worn gray-brown robe at cottage doorway, eyes slightly wet, one hand raised in worried explanation to seated blue-green-robed scholar seen at left edge. An unexpected offer has made him more anxious. A closed clay jar in shadows behind him, simple hearth and sparse possessions, no melodramatic tears or horror. Humane dignified traditional ink painting.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a185c6-86c0-7e61-a350-cb3ce56192fa/exec-dd0d746d-ab75-4e70-80f0-c7a06d388be2.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/捕蛇者说/assets/04.png",
+      "web_asset": "assets/04.jpg"
+    },
+    {
+      "book": "捕蛇者说",
+      "id": "05",
+      "prompt": "Use case: illustration-story. Create one full-bleed landscape 1536x1024 illustration for a Chinese classical prose picture book for children, series 文言有画. Traditional Chinese ink wash and restrained gongbi figure painting on warm ivory xuan paper, expressive brush strokes and fine ink contours, subtle mineral gray-green, pale ochre, soft muted colors, atmospheric blank space, painterly not photography, no 3D, no comic panels. Entire image is artwork with no text, no letters, no calligraphy, no seals, no watermark. No modern objects. Natural coherent anatomy, readable story action, contemplative and dignified. A Tang-era rural Yongzhou village with several empty earthen cottages and overgrown plots, a small family of adult villagers walking away along a wet path carrying simple bundles, one adult looks back. Wind, mist and light rain suggest hardship, sparse grain stalks by field. No corpses, no blood, no emaciation closeups. Spacious restrained landscape that lets absence and departing people tell the sorrow.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a185c6-86c0-7e61-a350-cb3ce56192fa/exec-f02206ef-bff6-4c0f-a62c-14a096435edb.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/捕蛇者说/assets/05.png",
+      "web_asset": "assets/05.jpg"
+    },
+    {
+      "book": "捕蛇者说",
+      "id": "06",
+      "prompt": "Use case: illustration-story. Create one full-bleed landscape 1536x1024 illustration for a Chinese classical prose picture book for children, series 文言有画. Traditional Chinese ink wash and restrained gongbi figure painting on warm ivory xuan paper, expressive brush strokes and fine ink contours, subtle mineral gray-green, pale ochre, soft muted colors, atmospheric blank space, painterly not photography, no 3D, no comic panels. Entire image is artwork with no text, no letters, no calligraphy, no seals, no watermark. No modern objects. Natural coherent anatomy, readable story action, contemplative and dignified. Tang-era rural lane. Two stern local tax clerks in dark plain robes stand noisily at an earthen house gate holding a rolled blank register, villagers retreat into doorways, a hen flutters and a small dog hides behind a basket. Show disturbance through posture and movement, no weapons raised, no beatings or gore. View from behind a wooden doorway emphasizes families longing for quiet. Restrained traditional ink painting.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a185c6-86c0-7e61-a350-cb3ce56192fa/exec-2b83ecb5-1dba-45ae-8c60-f314188ac8a6.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/捕蛇者说/assets/06.png",
+      "web_asset": "assets/06.jpg"
+    },
+    {
+      "book": "捕蛇者说",
+      "id": "07",
+      "prompt": "Use case: illustration-story. Create one full-bleed landscape 1536x1024 illustration for a Chinese classical prose picture book for children, series 文言有画. Traditional Chinese ink wash and restrained gongbi figure painting on warm ivory xuan paper, expressive brush strokes and fine ink contours, subtle mineral gray-green, pale ochre, soft muted colors, atmospheric blank space, painterly not photography, no 3D, no comic panels. Entire image is artwork with no text, no letters, no calligraphy, no seals, no watermark. No modern objects. Natural coherent anatomy, readable story action, contemplative and dignified. Inside a humble Tang-era cottage after disturbance outside has passed. Lean villager Jiang in gray-brown robe kneels next to a CLOSED wide earthenware jar, resting a hand near its lid and exhaling with weary relief; a plain small bowl of grain on a low table, soft evening light through bamboo window. The snake is not visible. No demonstration of handling or catching snakes. Relief remains fragile, not a cheerful wealthy home.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a185c6-86c0-7e61-a350-cb3ce56192fa/exec-73aadcf7-d16d-48f3-ab1d-4dec3645a702.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/捕蛇者说/assets/07.png",
+      "web_asset": "assets/07.jpg"
+    },
+    {
+      "book": "捕蛇者说",
+      "id": "08",
+      "prompt": "Use case: illustration-story. Create one full-bleed landscape 1536x1024 illustration for a Chinese classical prose picture book for children, series 文言有画. Traditional Chinese ink wash and restrained gongbi figure painting on warm ivory xuan paper, expressive brush strokes and fine ink contours, subtle mineral gray-green, pale ochre, soft muted colors, atmospheric blank space, painterly not photography, no 3D, no comic panels. Entire image is artwork with no text, no letters, no calligraphy, no seals, no watermark. No modern objects. Natural coherent anatomy, readable story action, contemplative and dignified. A Tang-era writer in muted blue-green robe at a simple desk, pausing with brush above blank paper and looking thoughtfully toward a distant village through an open door, layered misty hills and small cottages outside. Closed inkstone and a single lamp nearby. A sober compassionate ending: words will carry ordinary people’s suffering to those who should listen. No writing, no seals, no dramatic heroic pose.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a185c6-86c0-7e61-a350-cb3ce56192fa/exec-474bbeb5-3af0-431b-8d88-73756f38b523.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/捕蛇者说/assets/08.png",
+      "web_asset": "assets/08.jpg"
+    }
+  ]
+}

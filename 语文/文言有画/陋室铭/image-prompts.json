@@ -1,0 +1,45 @@
+{
+  "tool": "built-in image_gen",
+  "images": [
+    {
+      "book": "陋室铭",
+      "id": "01",
+      "prompt": "Use case: illustration-story. Asset type: one full-bleed landscape 1536x1024 illustration in the children's classical Chinese reading series 文言有画. Traditional Chinese ink wash with fine restrained gongbi figures on warm ivory xuan paper, expressive natural brushwork, atmospheric negative space, muted sage green, gray ink and pale ochre. Painterly artwork, no photography, no 3D, no cartoon panels. No text, letters, labels, seals or watermark; no modern objects. Coherent natural anatomy and clear literary scene; human figures small within landscape. A poetic imaginary Chinese landscape with a modest low green mountain on one side and a clear quiet pool on the other. A tiny reclusive scholar sits near a simple hut on the mountain; a faint sinuous dragon is only suggested by a pale ink curve in distant water mist, gracious not frightening. Suggest the opening mountain and water metaphors without a grand tall peak or deep ocean. Spacious contemplative ink painting.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-d1a92178-e740-498c-8c67-8e913ecddf27.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/陋室铭/assets/01.png",
+      "web_asset": "assets/01.jpg"
+    },
+    {
+      "book": "陋室铭",
+      "id": "02",
+      "prompt": "Use case: illustration-story. Asset type: one full-bleed landscape 1536x1024 illustration in the children's classical Chinese reading series 文言有画. Traditional Chinese ink wash with fine restrained gongbi figures on warm ivory xuan paper, expressive natural brushwork, atmospheric negative space, muted sage green, gray ink and pale ochre. Painterly artwork, no photography, no 3D, no cartoon panels. No text, letters, labels, seals or watermark; no modern objects. Coherent natural anatomy and clear literary scene; human figures small within landscape. A humble Tang-era scholar's single-room cottage centered on the RIGHT, moss grows up its three low stone steps, green grass casts soft green light through a partly lifted bamboo curtain. A modest scholar in muted blue-green robe is quietly visible near a plain desk. Warm light, refined simplicity, no palace, no luxurious furniture. The LEFT half has atmospheric garden space for a cover overlay.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-3527e50f-b269-465f-839f-4de31418c547.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/陋室铭/assets/02.png",
+      "web_asset": "assets/02.jpg"
+    },
+    {
+      "book": "陋室铭",
+      "id": "03",
+      "prompt": "Use case: illustration-story. Asset type: one full-bleed landscape 1536x1024 illustration in the children's classical Chinese reading series 文言有画. Traditional Chinese ink wash with fine restrained gongbi figures on warm ivory xuan paper, expressive natural brushwork, atmospheric negative space, muted sage green, gray ink and pale ochre. Painterly artwork, no photography, no 3D, no cartoon panels. No text, letters, labels, seals or watermark; no modern objects. Coherent natural anatomy and clear literary scene; human figures small within landscape. Inside the same modest Tang-era cottage, three adult scholars in plain muted blue-green and gray robes sit at a low wooden table laughing in quiet conversation. Open doorway reveals mossy steps and garden. Books and a simple teapot, no ostentatious decoration, relaxed equal companionship, fine restrained brush figures.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-b754c5c1-d712-48c5-80b3-f9a6e6986bc7.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/陋室铭/assets/03.png",
+      "web_asset": "assets/03.jpg"
+    },
+    {
+      "book": "陋室铭",
+      "id": "04",
+      "prompt": "Use case: illustration-story. Asset type: one full-bleed landscape 1536x1024 illustration in the children's classical Chinese reading series 文言有画. Traditional Chinese ink wash with fine restrained gongbi figures on warm ivory xuan paper, expressive natural brushwork, atmospheric negative space, muted sage green, gray ink and pale ochre. Painterly artwork, no photography, no 3D, no cartoon panels. No text, letters, labels, seals or watermark; no modern objects. Coherent natural anatomy and clear literary scene; human figures small within landscape. Same modest Tang-era room, adult scholar in muted blue-green robe sits by an open window gently playing a plain unadorned Chinese seven-string guqin horizontally on a low table. A closed sutra volume without legible writing rests nearby; green garden beyond. Quiet focused moment, natural fingers, no orchestral performers, no official paper piles.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-34c3c7ed-5b95-4fc8-ba47-b089ffb9c90a.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/陋室铭/assets/04.png",
+      "web_asset": "assets/04.jpg"
+    },
+    {
+      "book": "陋室铭",
+      "id": "05",
+      "prompt": "Use case: illustration-story. Asset type: one full-bleed landscape 1536x1024 illustration in the children's classical Chinese reading series 文言有画. Traditional Chinese ink wash with fine restrained gongbi figures on warm ivory xuan paper, expressive natural brushwork, atmospheric negative space, muted sage green, gray ink and pale ochre. Painterly artwork, no photography, no 3D, no cartoon panels. No text, letters, labels, seals or watermark; no modern objects. Coherent natural anatomy and clear literary scene; human figures small within landscape. A wide poetic paired landscape recalling ancient scholars' humble residences: a small thatched cottage among Nanyang-like fields on left and a simple timber pavilion beside distant Sichuan hills on right, separated naturally by broad pale mist. One small scholar silhouette near each residence. No panels or split-screen border, no portraits asserting historical likeness, dignified simplicity and lots of breathing space.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-27c9e0db-f5cb-4ce9-9487-6be8e6e0ec1a.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/陋室铭/assets/05.png",
+      "web_asset": "assets/05.jpg"
+    }
+  ]
+}

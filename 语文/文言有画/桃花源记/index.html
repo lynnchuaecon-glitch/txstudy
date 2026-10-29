@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f4efe4">
+  <meta name="description" content="文言有画第一册：以八幅国风水墨插画读陶渊明《桃花源记》。完整原文、重点字词注音释义、按需展开的白话与家庭共读。">
+  <title>桃花源记 · 文言有画</title>
+  <link rel="stylesheet" href="../shared/reader.css">
+<script defer src="book-data.js"></script>
+<script defer src="../catalog.js"></script>
+<script defer src="../shared/reader.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">跳到正文</a>
+  <header class="masthead">
+    <a class="brand" href="#cover"><span class="seal" aria-hidden="true">有<br>画</span><span>文言有画<small>给孩子的经典学习绘本</small></span></a>
+    <nav aria-label="绘本导航">
+      <a href="#scene-1" data-nav="scene">读绘本</a>
+      <a href="#text" data-nav="text">全文</a>
+      <a href="#words" data-nav="words">字词</a>
+      <a href="#after" data-nav="after">读后</a>
+    </nav>
+    <span class="issue">第一册 <i>／</i> 陶渊明</span>
+  </header>
+  <main id="main" tabindex="-1">
+    <section id="cover" class="view" aria-labelledby="cover-title">
+      <div class="cover-art"><img src="assets/01.jpg" alt="渔人驾着小舟，沿溪走入两岸盛开的桃花林。" width="1536" height="1024"><div class="cover-copy"><p class="eyebrow">一卷山水 · 一次相逢</p><h1 id="cover-title">桃花<br>源记<span class="title-seal">壹</span></h1><p class="author">〔东晋〕 陶渊明</p><p class="cover-line">循一溪花影，<br>寻一处心安。</p><a class="primary" href="#scene-1">随渔人入画 <span aria-hidden="true">→</span></a></div><span class="cover-side" aria-hidden="true">芳草鲜美　落英缤纷</span></div>
+      <div class="cover-intro"><p><span class="small-seal">慢读</span>先看一幅画，再读一段文。<br><span class="intro-sub">不急着把每个字都记住，让文字先在心里长出风景。</span></p><a href="#contents">八幕画卷 <span aria-hidden="true">↓</span></a></div>
+      <section id="contents" class="contents"><div class="section-label"><span>画卷目录</span><span>从任意一幕，走进故事</span></div><div id="scene-cards" class="scene-cards"></div></section>
+      <details class="parent-note"><summary>给一起读书的大人</summary><div><p>第一回可读前三幕，跟随渔人看景；第二回读第四至六幕，看看人与人的相处；第三回走到结尾，聊聊为什么记得住这片田园。每回在一个愿意停留的地方收尾，不必逐题作答。</p><p>先让孩子看、说、想，再按需打开“读成白话”“字里有画”。每幕的共读任务只选一个。最后请她自己选一句、画一画、说理由，不预先替她写感想。</p><p>本册含完整《桃花源记》，为绘本阅读分成八幕，原文五段结构保留在“全文”页。水墨插画由 AI 创作，是依文字展开的艺术想象，人物服饰、建筑与具体地貌均非历史实景复原。</p><a href="#sources">查看原文版本与资料说明 →</a></div></details>
+    </section>
+
+    <section id="reader" class="view" hidden aria-labelledby="scene-title">
+      <div class="reader-heading"><div><p id="scene-kicker" class="eyebrow"></p><h1 id="scene-title" tabindex="-1"></h1></div><div class="read-settings"><button class="pinyin-toggle quiet" aria-pressed="true">注音 · 开</button><button class="size-toggle quiet" aria-pressed="false">大字</button><button id="contents-toggle" class="quiet">选一幕</button></div></div>
+      <nav id="scene-selector" class="scene-selector" aria-label="八幕目录" hidden></nav>
+      <div class="spread">
+        <div class="picture-page"><button id="art-button" class="art-button" aria-label="放大查看本幕水墨画"><img id="scene-image" src="assets/01.jpg" alt="" width="1536" height="1024"><span class="zoom-label">展开画卷 ⤢</span></button><div class="picture-caption"><span id="picture-number"></span><p id="picture-caption"></p><span class="caption-line"></span></div><div class="observe"><span class="eyebrow">停一停 · 你来发现</span><p id="scene-question"></p></div></div>
+        <article class="text-page"><div class="text-label"><span>原文</span><span>点有细线的字词，读音释义即现</span></div><p id="scene-text" class="original"></p><div class="focus-words" id="focus-words"></div><div class="reading-folds"><details><summary>读成白话 <span>帮助理解</span></summary><p id="scene-translation"></p></details><details><summary>字里有画 <span>慢慢品味</span></summary><p id="scene-beauty"></p></details><details><summary>共读提示 <span>给大人</span></summary><p id="scene-parent"></p></details></div></article>
+      </div>
+      <div class="page-turn"><a id="prev-page" class="turn" href="#cover">← 封面</a><div><div class="page-dots" id="page-dots"></div><span id="page-position"></span></div><a id="next-page" class="turn" href="#scene-2">下一幕 →</a></div>
+      <p class="reader-footnote">水墨插画为艺术想象 · 可用键盘 ← → 翻页</p>
+    </section>
+
+    <section id="fulltext" class="view paper-view" hidden aria-labelledby="fulltext-title"><header class="section-head"><p class="eyebrow">把八幕，连成一篇</p><h1 id="fulltext-title">桃花源记</h1><p>〔东晋〕陶渊明</p></header><div class="page-tools"><button class="pinyin-toggle quiet" aria-pressed="true">注音 · 开</button><button class="size-toggle quiet" aria-pressed="false">大字</button><button id="print-button" class="quiet">打印全文</button><a href="#sources">版本说明</a></div><div id="fulltext-body" class="fulltext-body"></div><div class="text-end">文止于此，想象未止。</div></section>
+
+    <section id="glossary" class="view paper-view" hidden aria-labelledby="glossary-title"><header class="section-head"><p class="eyebrow">把字词，放回句子里</p><h1 id="glossary-title">字词小笺</h1><p>认一个字，也看它在这一句里做什么。</p></header><div class="word-filters"><label for="word-search">找字词</label><input id="word-search" type="search" placeholder="输入字词、拼音或释义…" autocomplete="off"><label for="word-scene">范围</label><select id="word-scene"><option value="all">全篇</option></select></div><p id="word-count" class="muted" aria-live="polite"></p><div id="word-list" class="word-list"></div><section class="language-note"><h2>同一个字，也会换一种意思</h2><div class="comparison"><div><h3>舍</h3><p>便舍船：<b>shě</b>，离开船。<br>屋舍俨然：<b>shè</b>，房屋。</p></div><div><h3>寻</h3><p>寻向所志：寻找。<br>寻病终：不久。</p></div><div><h3>乃</h3><p>乃大惊：于是、就。<br>乃不知有汉：竟然。</p></div></div></section></section>
+
+    <section id="after" class="view" hidden aria-labelledby="after-title"><div class="after-hero"><img src="assets/08.jpg" alt="空舟停在渡口，溪水与远山渐渐隐入留白。" width="1536" height="1024"><div><p class="eyebrow">合上书，还能带走什么</p><h1 id="after-title">心里的一方桃源</h1><p>一片好风景，<br>也可以是一种好好生活的愿望。</p></div></div><div class="after-body"><div class="after-intro"><h2>先留一句自己的话。</h2><p>这里没有需要背下来的感想。可以写，也可以对家人说；选一个你最想聊的就好。</p></div><div class="reflection"><label for="my-line">我想留住的一句原文</label><textarea id="my-line" rows="2" placeholder="从文中挑一句，写在这里。"></textarea><label for="my-thought">这句话让我看见、想到，或疑惑的是……</label><textarea id="my-thought" rows="4" placeholder="用你自己的话说，也可以先在纸上画。"></textarea><div class="note-actions"><p id="save-status" role="status">只保存在当前浏览器中。</p><button id="export-note" class="quiet">把我的话带走 ↓</button></div></div><details class="wide-detail"><summary>想聊得更深一点：桃花源的好，只在风景里吗？</summary><div><p>回到“往来种作”“怡然自乐”“设酒杀鸡作食”“先世避秦时乱”。挑其中一处，想一想：它让这里的生活与什么不同？</p><details><summary>聊过之后，再读一种理解</summary><p>桃花源吸引人的，还有可以安稳劳动、彼此善待、老少自在的生活。结合“避秦时乱”，可以把它读成对远离战乱、安宁生活的向往。这是一条有文字依据的理解路径；你也可以从自己在意的细节出发。</p></details></div></details><details class="wide-detail"><summary>走近写下故事的人：陶渊明</summary><div><p>陶渊明生活在东晋末年至刘宋初年，是写田园生活的著名诗人。读这篇文字时，不妨留意：他写出了好田、池塘、村人的劳动，也写出了老人和孩子的自在。</p><p>《桃花源记》原是《桃花源诗》的序文，本册先读“记”。故事写得像一次见闻，却又让去过的人再也寻不到路。我们可以把它当作文学中的理想世界来读，不能用这些插画证明桃花源真实存在。</p><a href="#sources">相关资料 →</a></div></details><div class="offline-task"><span class="small-seal">纸上</span><div><h2>给自己的桃源，画一扇门。</h2><p>门里有什么？人们怎样相处？画完后，选一句《桃花源记》陪着它。愿意的话，下次讲给一个没读过这篇文章的人听。</p></div></div><a class="primary" href="#scene-1">回到那条溪水 →</a></div></section>
+
+    <section id="sources" class="view paper-view" hidden aria-labelledby="sources-title"><header class="section-head"><p class="eyebrow">卷末 · 资料与制作</p><h1 id="sources-title">文字有来处，画面有想象。</h1></header><div class="source-copy"><h2>原文与版本</h2><p>正文采用通行的五段全文，绘本分幕只拆分阅读位置，不删改内容。“渔人甚异之”后用逗号；“良田、美池、桑竹之属”使用顿号；“遂与外人间隔”采用“间隔”，其他版本或作“隔绝”。</p><p>校核来源：<a href="https://felc.gdufs.edu.cn/info/1933/7487.htm" target="_blank" rel="noopener noreferrer">广东外语外贸大学英语语言文化学院：《桃花源记》及林语堂的英语译文</a>（用于古文原文核对）；<a href="https://www.gushiwen.cn/shiwenv_73add8822103.aspx" target="_blank" rel="noopener noreferrer">古文岛：《桃花源记》原文与注释</a>（辅助核对字义、异文与读音）。本册未采用页面中的现代英文译文。查阅日期：2026 年 10 月 29 日。</p><h2>释义与共读</h2><p>重点词按文中语境解释，保留“要 yāo”“语 yù”“妻子 qī zǐ”“衣着 yī zhuó”等易误读处。白话解读与赏读提示为本册重新组织的阅读辅助，不要求孩子记诵或照搬。文学解释与想象分开呈现，迷路原因等原文未交代处保留开放性。</p><h2>八幅画与一套绘本</h2><p>八幅插画使用内置 image_gen 工具生成，以宣纸肌理、淡墨山水、浅绛与桃花色为共同视觉语言。画面依文意创作，不是古代原作、遗址照片或考据复原。“无人问津”的空渡口是借“津”字展开的意象。</p><p>文言有画 · 第一册《桃花源记》。以后每册可延续“原文—水墨分幕—字词小笺—自己的发现”的结构，依文章调整节奏，不预设孩子的感受。</p><h2>离线与记录</h2><p>单文件版已嵌入全部图片、样式和交互，保存 HTML 后可直接用浏览器打开，无需联网。来源链接需要网络。阅读进度、注音偏好和孩子主动填写的话仅尝试保存在当前浏览器；受隐私模式或文件打开方式影响可能无法持久保存，请用“把我的话带走”导出重要内容。</p><a class="primary" href="#cover">回到封面 →</a></div></section>
+  </main>
+  <footer class="site-footer"><span>文言有画 · 第一册</span><span>留白处，等你的想象。</span><a href="#sources">资料与说明</a></footer>
+  <dialog id="word-dialog" class="word-dialog" aria-labelledby="word-title"><button class="dialog-close" aria-label="关闭字词解释">×</button><p class="eyebrow">字词小笺</p><p id="word-pronunciation" class="word-pronunciation"></p><h2 id="word-title"></h2><p id="word-definition"></p><p id="word-context" class="word-context"></p></dialog>
+  <dialog id="art-dialog" class="art-dialog" aria-label="水墨画大图"><button class="dialog-close" aria-label="关闭大图">×</button><img id="large-art" src="assets/01.jpg" alt=""><p id="large-art-caption"></p></dialog>
+  <noscript><p class="noscript">请启用浏览器 JavaScript，以翻阅绘本和展开字词。插画均已保存在本地。</p></noscript>
+</body>
+</html>

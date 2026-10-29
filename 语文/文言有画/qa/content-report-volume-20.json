@@ -1,0 +1,18 @@
+{
+  "title": "木兰诗",
+  "scenes": 9,
+  "stanzas": 7,
+  "hanCharacters": 330,
+  "dictionaryEntries": 50,
+  "originalTextMatches": true,
+  "normalizedVariants": [
+    "贴→帖",
+    "忽略标点与空白"
+  ],
+  "reference": "https://www.gushiji.org/shiwen/71131",
+  "annotationsAndFocus": "passed",
+  "zipIntegrity": "passed",
+  "zipHTMLFiles": 21,
+  "imageReview": "nine-scene contact sheet inspected; matches narrative",
+  "htmlBytes": 5346694
+}

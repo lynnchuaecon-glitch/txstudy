@@ -1,0 +1,506 @@
+{
+  "checked": "2026-10-29",
+  "desktop": [
+    {
+      "book": "塞翁失马",
+      "cover": {
+        "heading": "塞翁\n失马\n陆",
+        "images": true,
+        "scenes": 5
+      },
+      "scenes": [
+        {
+          "foldsClosed": true,
+          "image": true,
+          "overflow": false,
+          "question": "如果故事只读到这里，你知道了什么？又有哪些后来会怎样的事，现在还不知道？",
+          "text": "近塞上sài shàng之人，有善术shàn shù者。马无故亡wáng而入胡hú。",
+          "title": "一匹马，走出了边塞"
+        },
+        {
+          "foldsClosed": true,
+          "image": true,
+          "overflow": false,
+          "question": "老人说的是“以后一定会好”，还是“现在还不能断定”？你从问句中的哪些字听出来？",
+          "text": "人皆吊diào之。其父fǔ曰：“此何遽hé jù不为wéi福乎？”",
+          "title": "大家来安慰，他却留了一个问号"
+        },
+        {
+          "foldsClosed": true,
+          "image": true,
+          "overflow": false,
+          "question": "前一幕是“吊”，这一幕变成“贺”。如果把邻人的这两个动作互换，故事还说得通吗？",
+          "text": "居jū数月，其马将jiàng胡hú骏马jùn mǎ而归。人皆贺hè之。其父fǔ曰：“此何遽hé jù不能为wéi祸乎？”",
+          "title": "失去的马，带回了新伙伴"
+        },
+        {
+          "foldsClosed": true,
+          "image": true,
+          "overflow": false,
+          "question": "把“好马回家”和“儿子受伤”接起来：中间是哪一个人的行动，让故事有了新的变化？",
+          "text": "家富fù良马，其子好骑hào qí，堕duò而折其髀zhé qí bì。人皆吊diào之。其父fǔ曰：“此何遽hé jù不为wéi福乎？”",
+          "title": "好马多了，担心也来了"
+        },
+        {
+          "foldsClosed": true,
+          "image": true,
+          "overflow": false,
+          "question": "回看失马、得马、受伤和保全性命：哪一次后来的变化，让你改了先前的判断？请说出两件事之间的联系。",
+          "text": "居jū一年，胡人大入塞dà rù sài，丁壮dīng zhuàng者引弦yǐn xián而战。近塞之人，死者十九shí jiǔ。此cǐ独以跛bǒ之故gù，父子fù zǐ相保xiāng bǎo。",
+          "title": "故事走远了，判断也变了"
+        }
+      ],
+      "popup": true,
+      "translation": true,
+      "paragraphs": 4,
+      "emptyNotes": true
+    },
+    {
+      "book": "陋室铭",
+      "cover": {
+        "heading": "陋室\n铭\n柒",
+        "images": true,
+        "scenes": 5
+      },
+      "scenes": [
+        {
+          "foldsClosed": true,
+          "image": true,
+          "overflow": false,
+          "question": "这两句话都先说“不在”，再说“有……则……”。作者是在换哪一种判断好坏的办法？",
+          "text": "山不在高，有仙则名míng。水不在深，有龙则灵líng。",
+          "title": "山水出名，靠的是什么"
+        },
+        {
+          "foldsClosed": true,
+          "image": true,
+          "overflow": false,
+          "question": "如果只留下“绿”和“青”，删掉“上阶”“入帘”，你在脑中的画面会少掉什么？",
+          "text": "斯sī是陋室，惟wéi吾德馨dé xīn。苔痕tái hén上阶绿，草色入帘青。",
+          "title": "一间小屋，一阶青苔"
+        },
+        {
+          "foldsClosed": true,
+          "image": true,
+          "overflow": false,
+          "question": "从来访的人，作者想让我们看出自己喜欢怎样的交往？请用句中的一组对照说明。",
+          "text": "谈笑有鸿儒hóng rú，往来无白丁bái dīng。",
+          "title": "来往之间，也有屋主的心意"
+        },
+        {
+          "foldsClosed": true,
+          "image": true,
+          "overflow": false,
+          "question": "“调素琴”也有音乐，为什么又说“无丝竹之乱耳”？请从“乱”这个字想想，两种体验可能有什么不同。",
+          "text": "可以调素琴tiáo sù qín，阅金经jīn jīng。无丝竹sī zhú之乱耳luàn ěr，无案牍àn dú之劳形láo xíng。",
+          "title": "同是声音，为什么一喜一避"
+        },
+        {
+          "foldsClosed": true,
+          "image": true,
+          "overflow": false,
+          "question": "最后一句怎样回应开头的“斯是陋室”？选前面一个细节，说明作者为何敢这样问。",
+          "text": "南阳诸葛庐zhū gě lú，西蜀子云亭zǐ yún tíng。孔子云yún：“何陋之有hé lòu zhī yǒu？”",
+          "title": "一句反问，回到小屋的价值"
+        }
+      ],
+      "popup": true,
+      "translation": true,
+      "paragraphs": 1,
+      "emptyNotes": true
+    },
+    {
+      "book": "狼",
+      "cover": {
+        "heading": "狼\n捌",
+        "images": true,
+        "scenes": 6
+      },
+      "scenes": [
+        {
+          "foldsClosed": true,
+          "image": true,
+          "overflow": false,
+          "question": "“晚归”“肉尽”“两狼”“甚远”中，哪个细节让你最担心？请说说它给屠户带来了什么处境。",
+          "text": "一屠tú晚归，担中肉尽，止zhǐ有剩骨。途中两狼，缀行zhuì xíng甚远。",
+          "title": "黄昏路上，多了两个影子"
+        },
+        {
+          "foldsClosed": true,
+          "image": true,
+          "overflow": false,
+          "question": "用两个小物件代表狼，演一遍投骨的过程。哪一处证据说明“有一只停下”并没有让屠户脱身？",
+          "text": "屠惧，投以骨tóu yǐ gǔ。一狼得骨止zhǐ，一狼仍从cóng。复投之，后狼止zhǐ而前狼又至。骨已尽矣，而两狼之并驱bìng qū如故rú gù。",
+          "title": "骨头没有了，脚步却没停"
+        },
+        {
+          "foldsClosed": true,
+          "image": true,
+          "overflow": false,
+          "question": "屠户先担心“前后受其敌”，后来为什么“奔倚其下”？请把他的担心和选位置的动作连起来解释。",
+          "text": "屠大窘jiǒng，恐前后受其敌dí。顾gù野有麦场，场主积薪jī xīn其中，苫蔽shàn bì成丘。屠乃奔倚yǐ其下，弛担chí dàn持刀。狼不敢前，眈眈dān dān相向。",
+          "title": "从退让，转到寻找立足处"
+        },
+        {
+          "foldsClosed": true,
+          "image": true,
+          "overflow": false,
+          "question": "“目似瞑”为什么只说“似”？如果改成“已经睡着了”，读者对后面的事会有什么不同的期待？",
+          "text": "少时shǎo shí，一狼径去jìng qù，其一犬坐quǎn zuò于前。久之，目似瞑míng，意yì暇xiá甚。屠暴bào起，以刀劈狼首，又数刀毙bì之。",
+          "title": "看似松懈的那一刻"
+        },
+        {
+          "foldsClosed": true,
+          "image": true,
+          "overflow": false,
+          "question": "发现柴堆后的狼，让你怎样重新解释前一幕“径去”和“犬坐”的动作？请把两只狼的行动接成同一个计划。",
+          "text": "方fāng欲行，转视积薪后，一狼洞dòng其中，意yì将隧入suì rù以攻其后也。身已半入，止zhǐ露尻尾kāo wěi。屠自后断其股gǔ，亦毙bì之。乃悟nǎi wù前狼假寐jiǎ mèi，盖gài以诱敌dí。",
+          "title": "转到背后，才看懂前面"
+        },
+        {
+          "foldsClosed": true,
+          "image": true,
+          "overflow": false,
+          "question": "这一幕是在继续讲屠户的动作，还是讲述者在发表看法？选前文一处情节，看看它怎样支持这句评价。",
+          "text": "狼亦黠xiá矣，而顷刻qǐng kè两毙bì，禽兽之变诈biàn zhà几何jǐ hé哉？止zhǐ增笑耳。",
+          "title": "故事结束，讲述者开口"
+        }
+      ],
+      "popup": true,
+      "translation": true,
+      "paragraphs": 5,
+      "emptyNotes": true
+    },
+    {
+      "book": "小石潭记",
+      "cover": {
+        "heading": "小石\n潭记\n玖",
+        "images": true,
+        "scenes": 6
+      },
+      "scenes": [
+        {
+          "foldsClosed": true,
+          "image": true,
+          "overflow": false,
+          "question": "如果把“闻水声”直接改成“看见小潭”，你跟着作者发现小潭的过程会少掉什么？",
+          "text": "从小丘西行xī xíng百二十步，隔篁竹huáng zhú，闻水声，如鸣珮环pèi huán，心乐之lè zhī。伐竹取道qǔ dào，下见小潭，水尤清冽qīng liè。",
+          "title": "还没见到水，先听见一串清响"
+        },
+        {
+          "foldsClosed": true,
+          "image": true,
+          "overflow": false,
+          "question": "“为坻，为屿，为嵁，为岩”写了好几种形状。它们与“全石以为底”是什么关系？试着用一张小图表示。",
+          "text": "全石以为底quán shí yǐ wéi dǐ，近岸，卷juǎn石底以出，为坻chí，为屿yǔ，为嵁kān，为岩。青树翠蔓cuì màn，蒙络摇缀méng luò yáo zhuì，参差披拂cēn cī pī fú。",
+          "title": "水边的石，向上翻出了形状"
+        },
+        {
+          "foldsClosed": true,
+          "image": true,
+          "overflow": false,
+          "question": "这一段没有直接说“水很清”。请选两个具体细节，让没看到画的人也能想象水有多清。",
+          "text": "潭中鱼可kě百许xǔ头，皆若空游kōng yóu无所依。日光下澈chè，影布石上。佁然yǐ rán不动，俶尔chù ěr远逝，往来翕忽xī hū，似与游者相乐xiāng lè。",
+          "title": "写鱼的轻，读出水的清"
+        },
+        {
+          "foldsClosed": true,
+          "image": true,
+          "overflow": false,
+          "question": "“斗折蛇行”和“犬牙差互”各写什么？用手画两条线或一张小图，分清水流与岸边的形状。",
+          "text": "潭西南而望，斗折蛇行dǒu zhé shé xíng，明灭míng miè可见kě jiàn。其岸势犬牙差互quǎn yá cī hù，不可知其源。",
+          "title": "顺着水流看，远处又藏起来"
+        },
+        {
+          "foldsClosed": true,
+          "image": true,
+          "overflow": false,
+          "question": "前面“心乐之”“相乐”，这里却“不可久居”。请挑出本幕两个词，说明环境怎样改变了游者的感受。",
+          "text": "坐潭上，四面竹树环合，寂寥jì liáo无人，凄神寒骨qī shén hán gǔ，悄怆幽邃qiǎo chuàng yōu suì。以其境过清qīng，不可久居jū，乃记之而去qù。",
+          "title": "同一座潭，心里慢慢凉下来"
+        },
+        {
+          "foldsClosed": true,
+          "image": true,
+          "overflow": false,
+          "question": "前面“心乐之”“相乐”，这里却“不可久居”。请挑出本幕两个词，说明环境怎样改变了游者的感受。",
+          "text": "坐潭上，四面竹树环合，寂寥jì liáo无人，凄神寒骨qī shén hán gǔ，悄怆幽邃qiǎo chuàng yōu suì。以其境过清qīng，不可久居jū，乃记之而去qù。",
+          "title": "同一座潭，心里慢慢凉下来"
+        }
+      ],
+      "popup": true,
+      "translation": true,
+      "paragraphs": 5,
+      "emptyNotes": true
+    },
+    {
+      "book": "马说",
+      "cover": {
+        "heading": "马说\n拾",
+        "images": true,
+        "scenes": 5
+      },
+      "scenes": [
+        {
+          "foldsClosed": true,
+          "image": true,
+          "overflow": false,
+          "question": "“千里马常有”与“然后有千里马”放在一起，该怎样读才不矛盾？试着区分马本身与它被人认识这两件事。",
+          "text": "世有伯乐bó lè，然后有千里马qiān lǐ mǎ。千里马常有，而伯乐不常有。",
+          "title": "有好马，还需要有人识得"
+        },
+        {
+          "foldsClosed": true,
+          "image": true,
+          "overflow": false,
+          "question": "“不以千里称”能证明这匹马没有本领吗？结合前一句，说明“没有被称道”和“没有能力”的区别。",
+          "text": "故虽suī有名马，只辱于奴隶人nú lì rén之手，骈死pián sǐ于槽枥cáo lì之间，不以千里称chēng也。",
+          "title": "在同一座马厩里，被悄悄埋没"
+        },
+        {
+          "foldsClosed": true,
+          "image": true,
+          "overflow": false,
+          "question": "请把“不知其能千里”“食不饱”“力不足”“才美不外见”接成一条有理由的链。只看最后的表现，会漏掉什么？",
+          "text": "马之千里者，一食yī shí或huò尽粟sù一石dàn。食sì马者不知其能千里而食sì也。是shì马也，虽有千里之能，食shí不饱，力不足，才美cái měi不外见xiàn，且qiě欲与常马等děng不可得，安ān求其能千里也？",
+          "title": "没有足够的粮，怎样跑得远"
+        },
+        {
+          "foldsClosed": true,
+          "image": true,
+          "overflow": false,
+          "question": "这三个分句各指出了哪一种“不懂”？如果只把问题归结为“马不肯跑”，哪几处原文会反驳这种说法？",
+          "text": "策cè之不以其道dào，食sì之不能尽其材jìn qí cái，鸣之而不能通其意tōng qí yì，",
+          "title": "驱使、喂养、倾听，都没有做对"
+        },
+        {
+          "foldsClosed": true,
+          "image": true,
+          "overflow": false,
+          "question": "“天下无马”是谁说的？作者最后怎样回应？请从前面找一个事实，说明你为什么接受或质疑这个回应。",
+          "text": "执zhí策cè而临lín之，曰：“天下无马！”呜呼！其qí真无马邪yé？其qí真不知马也！",
+          "title": "马就在眼前，谁却说没有"
+        }
+      ],
+      "popup": true,
+      "translation": true,
+      "paragraphs": 3,
+      "emptyNotes": true
+    }
+  ],
+  "mobile": [
+    {
+      "book": "马说",
+      "views": [
+        {
+          "scrollWidth": 390,
+          "title": "有好马，还需要有人识得",
+          "width": 390
+        },
+        {
+          "scrollWidth": 390,
+          "title": "在同一座马厩里，被悄悄埋没",
+          "width": 390
+        },
+        {
+          "scrollWidth": 390,
+          "title": "没有足够的粮，怎样跑得远",
+          "width": 390
+        },
+        {
+          "scrollWidth": 390,
+          "title": "没有足够的粮，怎样跑得远",
+          "width": 390
+        },
+        {
+          "scrollWidth": 390,
+          "title": "马就在眼前，谁却说没有",
+          "width": 390
+        },
+        {
+          "scrollWidth": 390,
+          "view": "fulltext",
+          "width": 390
+        },
+        {
+          "scrollWidth": 390,
+          "view": "words",
+          "width": 390
+        }
+      ]
+    },
+    {
+      "book": "小石潭记",
+      "views": [
+        {
+          "scrollWidth": 390,
+          "title": "还没见到水，先听见一串清响",
+          "width": 390
+        },
+        {
+          "scrollWidth": 390,
+          "title": "水边的石，向上翻出了形状",
+          "width": 390
+        },
+        {
+          "scrollWidth": 390,
+          "title": "写鱼的轻，读出水的清",
+          "width": 390
+        },
+        {
+          "scrollWidth": 390,
+          "title": "顺着水流看，远处又藏起来",
+          "width": 390
+        },
+        {
+          "scrollWidth": 390,
+          "title": "同一座潭，心里慢慢凉下来",
+          "width": 390
+        },
+        {
+          "scrollWidth": 390,
+          "title": "同一座潭，心里慢慢凉下来",
+          "width": 390
+        },
+        {
+          "scrollWidth": 390,
+          "view": "fulltext",
+          "width": 390
+        },
+        {
+          "scrollWidth": 390,
+          "view": "words",
+          "width": 390
+        }
+      ]
+    },
+    {
+      "book": "狼",
+      "views": [
+        {
+          "scrollWidth": 390,
+          "title": "",
+          "width": 390
+        },
+        {
+          "scrollWidth": 390,
+          "title": "骨头没有了，脚步却没停",
+          "width": 390
+        },
+        {
+          "scrollWidth": 390,
+          "title": "从退让，转到寻找立足处",
+          "width": 390
+        },
+        {
+          "scrollWidth": 390,
+          "title": "看似松懈的那一刻",
+          "width": 390
+        },
+        {
+          "scrollWidth": 390,
+          "title": "转到背后，才看懂前面",
+          "width": 390
+        },
+        {
+          "scrollWidth": 390,
+          "title": "故事结束，讲述者开口",
+          "width": 390
+        },
+        {
+          "scrollWidth": 390,
+          "view": "fulltext",
+          "width": 390
+        },
+        {
+          "scrollWidth": 390,
+          "view": "words",
+          "width": 390
+        }
+      ]
+    },
+    {
+      "book": "陋室铭",
+      "views": [
+        {
+          "scrollWidth": 390,
+          "title": "山水出名，靠的是什么",
+          "width": 390
+        },
+        {
+          "scrollWidth": 390,
+          "title": "一间小屋，一阶青苔",
+          "width": 390
+        },
+        {
+          "scrollWidth": 390,
+          "title": "来往之间，也有屋主的心意",
+          "width": 390
+        },
+        {
+          "scrollWidth": 390,
+          "title": "同是声音，为什么一喜一避",
+          "width": 390
+        },
+        {
+          "scrollWidth": 390,
+          "title": "一句反问，回到小屋的价值",
+          "width": 390
+        },
+        {
+          "scrollWidth": 390,
+          "view": "fulltext",
+          "width": 390
+        },
+        {
+          "scrollWidth": 390,
+          "view": "words",
+          "width": 390
+        }
+      ]
+    },
+    {
+      "book": "塞翁失马",
+      "views": [
+        {
+          "scrollWidth": 390,
+          "title": "一匹马，走出了边塞",
+          "width": 390
+        },
+        {
+          "scrollWidth": 390,
+          "title": "一匹马，走出了边塞",
+          "width": 390
+        },
+        {
+          "scrollWidth": 390,
+          "title": "失去的马，带回了新伙伴",
+          "width": 390
+        },
+        {
+          "scrollWidth": 390,
+          "title": "好马多了，担心也来了",
+          "width": 390
+        },
+        {
+          "scrollWidth": 390,
+          "title": "故事走远了，判断也变了",
+          "width": 390
+        },
+        {
+          "scrollWidth": 390,
+          "view": "fulltext",
+          "width": 390
+        },
+        {
+          "scrollWidth": 390,
+          "view": "words",
+          "width": 390
+        }
+      ]
+    }
+  ],
+  "shelfSearch": "柳宗元 => 捕蛇者说、小石潭记",
+  "consoleErrors": [],
+  "file_url_browser_check": "浏览器策略不支持 file 协议。页面交互在本机 HTTP 预览验证；离线性由内嵌资源检查与 ZIP 逐文件、CRC 检查验证。"
+}

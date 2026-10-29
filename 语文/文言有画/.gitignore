@@ -1,0 +1,13 @@
+# Operating-system files and Python caches
+.DS_Store
+__pycache__/
+*.py[cod]
+
+# Rebuildable distribution archive
+/文言有画·离线阅读包.zip
+
+# Local visual checks and intermediate image-generation responses
+**/qa/**/*.png
+**/qa/**/*.jpg
+**/qa/**/*.html
+/qa/generated-*/

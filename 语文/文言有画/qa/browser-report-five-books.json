@@ -1,0 +1,190 @@
+{
+  "date": "2026-10-29",
+  "tool": "cua_repl in-app browser",
+  "environment": "localhost standalone HTML; desktop 1280px; iframe widths 390px and 768px",
+  "scenes": {
+    "yueyanglouji": [
+      {
+        "heading": "一座楼，重新站起",
+        "loaded": true,
+        "scene": "01 / 08",
+        "viewport": 1280,
+        "width": 1280
+      },
+      {
+        "heading": "一湖水，装下万千",
+        "loaded": true,
+        "scene": "02 / 08",
+        "viewport": 1280,
+        "width": 1280
+      },
+      {
+        "heading": "风雨里，天地低沉",
+        "loaded": true,
+        "scene": "03 / 08",
+        "viewport": 1280,
+        "width": 1280
+      },
+      {
+        "heading": "登楼的人，想起故乡",
+        "loaded": true,
+        "scene": "04 / 08",
+        "viewport": 1280,
+        "width": 1280
+      },
+      {
+        "heading": "春光里，万物舒展",
+        "loaded": true,
+        "scene": "05 / 08",
+        "viewport": 1280,
+        "width": 1280
+      },
+      {
+        "heading": "一轮月，两种光影",
+        "loaded": true,
+        "scene": "06 / 08",
+        "viewport": 1280,
+        "width": 1280
+      },
+      {
+        "heading": "看景之外，还看见人",
+        "loaded": true,
+        "scene": "07 / 08",
+        "viewport": 1280,
+        "width": 1280
+      },
+      {
+        "heading": "先忧后乐，写给天下",
+        "loaded": true,
+        "scene": "08 / 08",
+        "viewport": 1280,
+        "width": 1280
+      }
+    ],
+    "tianjisaima": [
+      {
+        "loaded": true,
+        "scene": "01 / 06",
+        "width": 1280
+      },
+      {
+        "loaded": true,
+        "scene": "02 / 06",
+        "width": 1280
+      },
+      {
+        "loaded": true,
+        "scene": "03 / 06",
+        "width": 1280
+      },
+      {
+        "loaded": true,
+        "scene": "04 / 06",
+        "width": 1280
+      },
+      {
+        "loaded": true,
+        "scene": "05 / 06",
+        "width": 1280
+      },
+      {
+        "loaded": true,
+        "scene": "06 / 06",
+        "width": 1280
+      }
+    ],
+    "bushezheshuo": [
+      {
+        "loaded": true,
+        "scene": "01 / 08",
+        "width": 1280
+      },
+      {
+        "loaded": true,
+        "scene": "02 / 08",
+        "width": 1280
+      },
+      {
+        "loaded": true,
+        "scene": "03 / 08",
+        "width": 1280
+      },
+      {
+        "loaded": true,
+        "scene": "04 / 08",
+        "width": 1280
+      },
+      {
+        "loaded": true,
+        "scene": "05 / 08",
+        "width": 1280
+      },
+      {
+        "loaded": true,
+        "scene": "06 / 08",
+        "width": 1280
+      },
+      {
+        "loaded": true,
+        "scene": "07 / 08",
+        "width": 1280
+      },
+      {
+        "loaded": true,
+        "scene": "08 / 08",
+        "width": 1280
+      }
+    ]
+  },
+  "race": [
+    {
+      "config": {
+        "order": [
+          "high",
+          "middle",
+          "low"
+        ],
+        "mode": "close"
+      },
+      "result": "三场合计：田忌 0 胜、3 负。\n\n第1场：田忌上等 6 ＜ 对方上等 7，田忌负。\n第2场：田忌中等 4 ＜ 对方中等 5，田忌负。\n第3场：田忌下等 2 ＜ 对方下等 3，田忌负。\n\n结果和预测一样吗？请指着具体的两匹马，解释哪一场关系改变了。也可以换一种马力差距再试。"
+    },
+    {
+      "config": {
+        "order": [
+          "low",
+          "high",
+          "middle"
+        ],
+        "mode": "close"
+      },
+      "result": "三场合计：田忌 2 胜、1 负。\n\n第1场：田忌下等 2 ＜ 对方上等 7，田忌负。\n第2场：田忌上等 6 ＞ 对方中等 5，田忌胜。\n第3场：田忌中等 4 ＞ 对方下等 3，田忌胜。\n\n结果和预测一样吗？请指着具体的两匹马，解释哪一场关系改变了。也可以换一种马力差距再试。"
+    },
+    {
+      "config": {
+        "order": [
+          "low",
+          "high",
+          "middle"
+        ],
+        "mode": "wide"
+      },
+      "result": "三场合计：田忌 0 胜、3 负。\n\n第1场：田忌下等 2 ＜ 对方上等 9，田忌负。\n第2场：田忌上等 6 ＜ 对方中等 8，田忌负。\n第3场：田忌中等 4 ＜ 对方下等 7，田忌负。\n\n这组条件下，对方最慢的马也比田忌最快的马快。只改变配对，能改变这个关系吗？"
+    }
+  ],
+  "checks": {
+    "newFullTextsMatchIndependentReferences": true,
+    "newSceneImagesLoaded": 22,
+    "shelfSearchAndFilters": true,
+    "shelfEmptyState": true,
+    "shelfReset": true,
+    "nextPreviousAndReturnNavigation": true,
+    "annotations": true,
+    "foldedTranslations": true,
+    "firstTwoBooksRegression": true
+  },
+  "limitations": [
+    "未在实体手机上测试；窄屏检查使用 iframe。",
+    "未自动化直接 file: 导航；离线 HTML 依赖与压缩包内容已另外做静态核验。",
+    "本轮未触发系统打印对话框或导出读书札记。"
+  ]
+}

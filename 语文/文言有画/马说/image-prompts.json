@@ -1,0 +1,45 @@
+{
+  "tool": "built-in image_gen",
+  "images": [
+    {
+      "book": "马说",
+      "id": "01",
+      "prompt": "Use case: illustration-story. Asset type: one full-bleed landscape 1536x1024 illustration in the children's classical Chinese reading series 文言有画. Traditional Chinese ink wash with fine restrained gongbi figures on warm ivory xuan paper, expressive natural brushwork, atmospheric negative space, muted sage green, gray ink and pale ochre. Painterly artwork, no photography, no 3D, no cartoon panels. No text, letters, labels, seals or watermark; no modern objects. Coherent natural anatomy and clear literary scene; human figures small within landscape. An attentive ancient Chinese horse judge in modest muted blue-green robe stands a respectful distance from a beautiful dark bay horse in a grassy field, studying its stance and eyes. Horse natural, strong but not magical, full body seen; broad pale hills in background. Tang literary allegory, no wings, no halo, no writing. Recognition through careful looking, ample left negative space.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-6adcd703-f355-4235-acfc-05559fa70f57.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/马说/assets/01.png",
+      "web_asset": "assets/01.jpg"
+    },
+    {
+      "book": "马说",
+      "id": "02",
+      "prompt": "Use case: illustration-story. Asset type: one full-bleed landscape 1536x1024 illustration in the children's classical Chinese reading series 文言有画. Traditional Chinese ink wash with fine restrained gongbi figures on warm ivory xuan paper, expressive natural brushwork, atmospheric negative space, muted sage green, gray ink and pale ochre. Painterly artwork, no photography, no 3D, no cartoon panels. No text, letters, labels, seals or watermark; no modern objects. Coherent natural anatomy and clear literary scene; human figures small within landscape. A strong dark bay horse stands overlooked among two ordinary horses in a modest dim ancient Chinese stable, a weathered wooden trough in foreground, rough timber and straw. A stable worker in gray-brown clothes walks past without looking at it. The horse looks alert yet subdued, not skeletal. No dead animal, no violence, no glowing chosen-horse symbolism.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-f58b4a8d-1773-4a3b-8c10-8dcbe0b81d31.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/马说/assets/02.png",
+      "web_asset": "assets/02.jpg"
+    },
+    {
+      "book": "马说",
+      "id": "03",
+      "prompt": "Use case: illustration-story. Asset type: one full-bleed landscape 1536x1024 illustration in the children's classical Chinese reading series 文言有画. Traditional Chinese ink wash with fine restrained gongbi figures on warm ivory xuan paper, expressive natural brushwork, atmospheric negative space, muted sage green, gray ink and pale ochre. Painterly artwork, no photography, no 3D, no cartoon panels. No text, letters, labels, seals or watermark; no modern objects. Coherent natural anatomy and clear literary scene; human figures small within landscape. Same dark bay horse lowers its head toward a wooden feeding trough with only a sparse small amount of grain, while a stable worker in plain gray-brown clothes puts down an equally small scoop and turns away. Several ordinary horses in distant stable bays. Focus on the mismatch between need and provision, no comparison chart or numbers, no starvation horror.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-3bef5701-c7c8-482b-b278-c3f9360d3d53.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/马说/assets/03.png",
+      "web_asset": "assets/03.jpg"
+    },
+    {
+      "book": "马说",
+      "id": "04",
+      "prompt": "Use case: illustration-story. Asset type: one full-bleed landscape 1536x1024 illustration in the children's classical Chinese reading series 文言有画. Traditional Chinese ink wash with fine restrained gongbi figures on warm ivory xuan paper, expressive natural brushwork, atmospheric negative space, muted sage green, gray ink and pale ochre. Painterly artwork, no photography, no 3D, no cartoon panels. No text, letters, labels, seals or watermark; no modern objects. Coherent natural anatomy and clear literary scene; human figures small within landscape. Same dark bay horse in ancient stable courtyard raises its head as if neighing; a gray-brown-clothed keeper stands nearby holding a thin riding switch lowered, looking away and failing to listen. Trough is sparse, horse dignified. No whipping, no contact, no wounds. The scene embodies unheard signals and inadequate care, quietly critical.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-2025ed50-4fa1-45e8-9d30-87d4c81efafc.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/马说/assets/04.png",
+      "web_asset": "assets/04.jpg"
+    },
+    {
+      "book": "马说",
+      "id": "05",
+      "prompt": "Use case: illustration-story. Asset type: one full-bleed landscape 1536x1024 illustration in the children's classical Chinese reading series 文言有画. Traditional Chinese ink wash with fine restrained gongbi figures on warm ivory xuan paper, expressive natural brushwork, atmospheric negative space, muted sage green, gray ink and pale ochre. Painterly artwork, no photography, no 3D, no cartoon panels. No text, letters, labels, seals or watermark; no modern objects. Coherent natural anatomy and clear literary scene; human figures small within landscape. Wide ancient stable doorway, gray-brown-clothed keeper stands in foreground gesturing dismissively toward the empty distant road while a fine dark bay horse is clearly visible behind him inside the stable. A plain switch held down in his other hand, no striking. Viewer's attention naturally goes to the ignored horse. Pale dawn outside, thoughtful irony, no text or speech bubbles.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-7cdd1148-e8fa-4816-9e04-0db8f0c1b673.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/马说/assets/05.png",
+      "web_asset": "assets/05.jpg"
+    }
+  ]
+}

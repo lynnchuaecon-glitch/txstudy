@@ -1,0 +1,12 @@
+<details class="wide-detail race-lab" id="race-lab"><summary>动手试一试：同样的马，怎样安排？</summary><div>
+<p>先排好三场，预测结果，再展开比较。每匹马只能出场一次，赢得至少两场的一方获胜。</p>
+<p class="race-model">这里用数字表示马力，数字越大跑得越快；数字是示意，原文没有给出具体速度。假设马力不变、对方顺序固定、每场只有胜负，暂不考虑赛道与临场发挥。</p>
+<label for="race-condition">先选一种马力差距</label><select id="race-condition"><option value="close">双方接近，等级之间有交错</option><option value="wide">对方的下等马也更快</option></select>
+<p id="race-strengths">田忌：上 6、中 4、下 2。对方：上 7、中 5、下 3。</p>
+<div class="race-table-wrap"><table class="race-table"><thead><tr><th scope="col">场次</th><th scope="col">对方出场</th><th scope="col">你为田忌安排</th></tr></thead><tbody>
+<tr><th scope="row">第一场</th><td id="opponent-1">上等 · 7</td><td><label class="sr-only" for="race-pair1">第一场田忌的马</label><select id="race-pair1"><option value="">先选一匹</option><option value="high">上等 · 6</option><option value="middle">中等 · 4</option><option value="low">下等 · 2</option></select></td></tr>
+<tr><th scope="row">第二场</th><td id="opponent-2">中等 · 5</td><td><label class="sr-only" for="race-pair2">第二场田忌的马</label><select id="race-pair2"><option value="">先选一匹</option><option value="high">上等 · 6</option><option value="middle">中等 · 4</option><option value="low">下等 · 2</option></select></td></tr>
+<tr><th scope="row">第三场</th><td id="opponent-3">下等 · 3</td><td><label class="sr-only" for="race-pair3">第三场田忌的马</label><select id="race-pair3"><option value="">先选一匹</option><option value="high">上等 · 6</option><option value="middle">中等 · 4</option><option value="low">下等 · 2</option></select></td></tr>
+</tbody></table></div>
+<p>这次你预测田忌能赢几场？先说理由，再点下面的按钮。</p><div class="race-actions"><button type="button" class="quiet" id="race-run">看看这一排</button><button type="button" class="quiet" id="race-reset">重新安排</button></div><div id="race-result" class="race-result" role="status" aria-live="polite">还没开始。先安排三匹马。</div>
+</div></details>

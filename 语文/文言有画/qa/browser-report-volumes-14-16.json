@@ -1,0 +1,246 @@
+{
+  "testedAt": "2026-10-29",
+  "viewports": [
+    {
+      "width": 390,
+      "height": 844
+    },
+    {
+      "width": 1280,
+      "height": 900
+    }
+  ],
+  "mobileScenes": [
+    {
+      "book": "谏太宗十思疏",
+      "foldsClosed": true,
+      "image": true,
+      "position": "01 / 08",
+      "scrollWidth": 390,
+      "title": "树要长，先看根在哪里",
+      "width": 390
+    },
+    {
+      "book": "谏太宗十思疏",
+      "foldsClosed": true,
+      "image": true,
+      "position": "02 / 08",
+      "scrollWidth": 390,
+      "title": "站得高，更要看脚下",
+      "width": 390
+    },
+    {
+      "book": "谏太宗十思疏",
+      "foldsClosed": true,
+      "image": true,
+      "position": "03 / 08",
+      "scrollWidth": 390,
+      "title": "为什么开始认真，后来却变了",
+      "width": 390
+    },
+    {
+      "book": "谏太宗十思疏",
+      "foldsClosed": true,
+      "image": true,
+      "position": "04 / 08",
+      "scrollWidth": 390,
+      "title": "表面恭顺，是否就是心服",
+      "width": 390
+    },
+    {
+      "book": "谏太宗十思疏",
+      "foldsClosed": true,
+      "image": true,
+      "position": "05 / 08",
+      "scrollWidth": 390,
+      "title": "想要更多时，先想到什么",
+      "width": 390
+    },
+    {
+      "book": "谏太宗十思疏",
+      "foldsClosed": true,
+      "image": true,
+      "position": "06 / 08",
+      "scrollWidth": 390,
+      "title": "居高能谦，游乐有度",
+      "width": 390
+    },
+    {
+      "book": "谏太宗十思疏",
+      "foldsClosed": true,
+      "image": true,
+      "position": "07 / 08",
+      "scrollWidth": 390,
+      "title": "听得进意见，管得住喜怒",
+      "width": 390
+    },
+    {
+      "book": "谏太宗十思疏",
+      "foldsClosed": true,
+      "image": true,
+      "position": "08 / 08",
+      "scrollWidth": 390,
+      "title": "人人尽其所长，君主做什么",
+      "width": 390
+    },
+    {
+      "book": "曹刿论战",
+      "foldsClosed": true,
+      "image": true,
+      "position": "01 / 06",
+      "scrollWidth": 390,
+      "title": "战前，他想问一个什么问题",
+      "width": 390
+    },
+    {
+      "book": "曹刿论战",
+      "foldsClosed": true,
+      "image": true,
+      "position": "02 / 06",
+      "scrollWidth": 390,
+      "title": "分衣食、敬神灵，足够吗",
+      "width": 390
+    },
+    {
+      "book": "曹刿论战",
+      "foldsClosed": true,
+      "image": true,
+      "position": "03 / 06",
+      "scrollWidth": 390,
+      "title": "他认可的，是怎样一种尽责",
+      "width": 390
+    },
+    {
+      "book": "曹刿论战",
+      "foldsClosed": true,
+      "image": true,
+      "position": "04 / 06",
+      "scrollWidth": 390,
+      "title": "别人三鼓，他为什么还等",
+      "width": 390
+    },
+    {
+      "book": "曹刿论战",
+      "foldsClosed": true,
+      "image": true,
+      "position": "05 / 06",
+      "scrollWidth": 390,
+      "title": "已经胜了，为什么还不追",
+      "width": 390
+    },
+    {
+      "book": "曹刿论战",
+      "foldsClosed": true,
+      "image": true,
+      "position": "06 / 06",
+      "scrollWidth": 390,
+      "title": "战后的解释，怎样补上前面的空白",
+      "width": 390
+    },
+    {
+      "book": "逍遥游",
+      "foldsClosed": true,
+      "image": true,
+      "position": "01 / 10",
+      "scrollWidth": 390,
+      "title": "海里的大鱼，怎样打开想象",
+      "width": 390
+    },
+    {
+      "book": "逍遥游",
+      "foldsClosed": true,
+      "image": true,
+      "position": "02 / 10",
+      "scrollWidth": 390,
+      "title": "飞得那么高，看到的就是真相吗",
+      "width": 390
+    },
+    {
+      "book": "逍遥游",
+      "foldsClosed": true,
+      "image": true,
+      "position": "03 / 10",
+      "scrollWidth": 390,
+      "title": "小草能浮，杯子为什么不行",
+      "width": 390
+    },
+    {
+      "book": "逍遥游",
+      "foldsClosed": true,
+      "image": true,
+      "position": "04 / 10",
+      "scrollWidth": 390,
+      "title": "小鸟的经验，能解释鹏的远行吗",
+      "width": 390
+    },
+    {
+      "book": "逍遥游",
+      "foldsClosed": true,
+      "image": true,
+      "position": "05 / 10",
+      "scrollWidth": 390,
+      "title": "去多远，为什么会改变准备",
+      "width": 390
+    },
+    {
+      "book": "逍遥游",
+      "foldsClosed": true,
+      "image": true,
+      "position": "06 / 10",
+      "scrollWidth": 390,
+      "title": "一日、一季、千年，怎样互相看见",
+      "width": 390
+    },
+    {
+      "book": "逍遥游",
+      "foldsClosed": true,
+      "image": true,
+      "position": "07 / 10",
+      "scrollWidth": 390,
+      "title": "鲲鹏再来一次，多看见了什么",
+      "width": 390
+    },
+    {
+      "book": "逍遥游",
+      "foldsClosed": true,
+      "image": true,
+      "position": "08 / 10",
+      "scrollWidth": 390,
+      "title": "在蓬蒿间飞，就到尽头了吗",
+      "width": 390
+    },
+    {
+      "book": "逍遥游",
+      "foldsClosed": true,
+      "image": true,
+      "position": "09 / 10",
+      "scrollWidth": 390,
+      "title": "别人的称赞，能不能决定自己",
+      "width": 390
+    },
+    {
+      "book": "逍遥游",
+      "foldsClosed": true,
+      "image": true,
+      "position": "10 / 10",
+      "scrollWidth": 390,
+      "title": "乘风已很自由，为何还说有所待",
+      "width": 390
+    }
+  ],
+  "extraChecks": [
+    "书架搜索与主题筛选",
+    "三册全文各三段",
+    "字词弹窗与同字异义检索",
+    "慎始而敬终注音含而",
+    "数数然读音",
+    "大字和注音开关",
+    "大图弹窗",
+    "白话折叠",
+    "读后记录为空",
+    "相邻篇目导航与末册边界",
+    "逍遥游节选范围",
+    "三册桌面封面、《逍遥游》桌面正文"
+  ],
+  "consoleErrors": []
+}

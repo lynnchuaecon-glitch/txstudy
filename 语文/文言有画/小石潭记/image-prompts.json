@@ -1,0 +1,53 @@
+{
+  "tool": "built-in image_gen",
+  "images": [
+    {
+      "book": "小石潭记",
+      "id": "01",
+      "prompt": "Use case: illustration-story. Asset type: one full-bleed landscape 1536x1024 illustration in the children's classical Chinese reading series 文言有画. Traditional Chinese ink wash with fine restrained gongbi figures on warm ivory xuan paper, expressive natural brushwork, atmospheric negative space, muted sage green, gray ink and pale ochre. Painterly artwork, no photography, no 3D, no cartoon panels. No text, letters, labels, seals or watermark; no modern objects. Coherent natural anatomy and clear literary scene; human figures small within landscape. Tang-era southern China bamboo forest, a slender scholar in muted blue-green robe and plain soft cap pauses on a narrow descending path and listens toward an unseen stream behind dense bamboo. Two distant companions follow quietly. Green bamboo blades and pale air, water not yet visible. Composition evokes hearing before seeing, no text or cut-down trees in foreground.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-0b03bd6f-7671-4ad4-8abe-cf1e30a0d9b3.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/小石潭记/assets/01.png",
+      "web_asset": "assets/01.jpg"
+    },
+    {
+      "book": "小石潭记",
+      "id": "02",
+      "prompt": "Use case: illustration-story. Asset type: one full-bleed landscape 1536x1024 illustration in the children's classical Chinese reading series 文言有画. Traditional Chinese ink wash with fine restrained gongbi figures on warm ivory xuan paper, expressive natural brushwork, atmospheric negative space, muted sage green, gray ink and pale ochre. Painterly artwork, no photography, no 3D, no cartoon panels. No text, letters, labels, seals or watermark; no modern objects. Coherent natural anatomy and clear literary scene; human figures small within landscape. A small crystal-clear woodland pool with a continuous pale stone bed visible below, irregular stone shelves roll up out of the water by the bank forming small rocky islets and ledges. Emerald vines drape and interlace from surrounding trees and bamboo. No buildings, no large waterfall, no figures needed. The pool occupies the right center, left bank spacious and atmospheric, intended as book cover.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-c4566efb-3113-46b8-b786-96748c60afef.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/小石潭记/assets/02.png",
+      "web_asset": "assets/02.jpg"
+    },
+    {
+      "book": "小石潭记",
+      "id": "03",
+      "prompt": "Use case: illustration-story. Asset type: one full-bleed landscape 1536x1024 illustration in the children's classical Chinese reading series 文言有画. Traditional Chinese ink wash with fine restrained gongbi figures on warm ivory xuan paper, expressive natural brushwork, atmospheric negative space, muted sage green, gray ink and pale ochre. Painterly artwork, no photography, no 3D, no cartoon panels. No text, letters, labels, seals or watermark; no modern objects. Coherent natural anatomy and clear literary scene; human figures small within landscape. Close natural overhead view into a small crystal-clear stone-bottom pool: a handful of tiny freshwater fish swim above pale smooth rock, each casting a separate soft shadow beneath in direct sunlight. Very subtle water surface, almost as if fish hover in air; physical fish remain submerged, no flying fish and no colorful koi. Some fish still, some turning, delicate ink ripples at edges.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-86585b36-0b5c-4c1c-b4ff-c0144d30a4ef.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/小石潭记/assets/03.png",
+      "web_asset": "assets/03.jpg"
+    },
+    {
+      "book": "小石潭记",
+      "id": "04",
+      "prompt": "Use case: illustration-story. Asset type: one full-bleed landscape 1536x1024 illustration in the children's classical Chinese reading series 文言有画. Traditional Chinese ink wash with fine restrained gongbi figures on warm ivory xuan paper, expressive natural brushwork, atmospheric negative space, muted sage green, gray ink and pale ochre. Painterly artwork, no photography, no 3D, no cartoon panels. No text, letters, labels, seals or watermark; no modern objects. Coherent natural anatomy and clear literary scene; human figures small within landscape. From a small woodland pool looking toward a winding narrow stream flowing from the southwest through irregular interlocking stone banks. Zigzag stream alternately visible in sunlight and hidden by rocks, dense green vines and bamboo; distant source concealed. No literal snake, dog, stars, arrows, map labels, or giant waterfall. Literary landscape showing a hidden winding watercourse.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-1557ce46-8693-4e0d-92b1-b49eb39e9e03.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/小石潭记/assets/04.png",
+      "web_asset": "assets/04.jpg"
+    },
+    {
+      "book": "小石潭记",
+      "id": "05",
+      "prompt": "Use case: illustration-story. Asset type: one full-bleed landscape 1536x1024 illustration in the children's classical Chinese reading series 文言有画. Traditional Chinese ink wash with fine restrained gongbi figures on warm ivory xuan paper, expressive natural brushwork, atmospheric negative space, muted sage green, gray ink and pale ochre. Painterly artwork, no photography, no 3D, no cartoon panels. No text, letters, labels, seals or watermark; no modern objects. Coherent natural anatomy and clear literary scene; human figures small within landscape. At the same small stone pool, a Tang-era scholar in muted blue-green robe sits quietly on a rock, surrounded on all sides by dense bamboo and trees. His small figure dwarfed by deep shade and cool gray-green reflected light, a few companions only faintly visible farther away. Atmosphere shifts from bright curiosity to still loneliness without weather theatrics, no rain, no ghosts.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-4c79e575-2127-4908-97cd-83da1feb4f08.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/小石潭记/assets/05.png",
+      "web_asset": "assets/05.jpg"
+    },
+    {
+      "book": "小石潭记",
+      "id": "06",
+      "prompt": "Use case: illustration-story. Asset type: one full-bleed landscape 1536x1024 illustration in the children's classical Chinese reading series 文言有画. Traditional Chinese ink wash with fine restrained gongbi figures on warm ivory xuan paper, expressive natural brushwork, atmospheric negative space, muted sage green, gray ink and pale ochre. Painterly artwork, no photography, no 3D, no cartoon panels. No text, letters, labels, seals or watermark; no modern objects. Coherent natural anatomy and clear literary scene; human figures small within landscape. Six travelers leave a quiet southern Chinese bamboo pool along a narrow woodland path, four adult men in simple Tang-era robes and two younger male companions, varied muted blue-green, gray and ochre clothing. Main blue-green-robed writer glances back at the pool. Elegant small figures, no soldiers, no modern objects, warm pale mist beyond deep bamboo.",
+      "generated_path": "/Users/lynnchua/.codex/generated_images/01a1864f-ca17-7352-9b69-0354621d54d8/exec-1b4e5bfb-63e7-4f06-871d-d2bf8be6a229.png",
+      "workspace_original": "/Users/lynnchua/孩子错题库/语文/文言有画/小石潭记/assets/06.png",
+      "web_asset": "assets/06.jpg"
+    }
+  ]
+}
